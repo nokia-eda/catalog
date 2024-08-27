@@ -1,0 +1,91 @@
+apiVersion: core.eda.nokia.com/v1
+kind: Manifest
+metadata:
+  name: connect
+spec:
+  image: ghcr.io/nokia-eda/connect:v1.0.0
+  group: connect.eda.nokia.com
+  version: v1
+  title: Cloud Connect
+  author: Nokia
+  description: Cloud Connect bridges the hypervisor world with the fabric world, allowing automatic fabric configuration based on the state of the cloud environment.
+  supportedEndpoints:
+    - "srl:0.0.0"
+  supportedCoreVersions:
+    - "v0.0.0-0"
+  appInfo:
+    readme: app-meta/README.md
+  components:
+    - crd:
+        path: eda-connect-plugin-controller/config/crd/bases/connect.eda.nokia.com_connectpluginactionables.yaml
+        schema: eda-connect-plugin-controller/openapiv3/eda_oas_connect.eda.nokia.com_connectpluginactionables.json
+        api:
+          expose: readWrite
+        ui:
+          category: Connect
+          name: Plugin Actionable
+          panel: system_administration
+        kubernetes:
+          exportPolicy: all
+          importPolicy: all
+    - crd:
+        path: eda-connect-plugin-controller/config/crd/bases/connect.eda.nokia.com_connectaudits.yaml
+        schema: eda-connect-plugin-controller/openapiv3/eda_oas_connect.eda.nokia.com_connectaudits.json
+        api:
+          expose: readWrite
+        ui:
+          category: Connect
+          name: Audit
+          panel: system_administration
+        kubernetes:
+          exportPolicy: all
+          importPolicy: all
+    - crd:
+        path: eda-connect-plugin-controller/config/crd/bases/connect.eda.nokia.com_connectpluginheartbeats.yaml
+        schema: eda-connect-plugin-controller/openapiv3/eda_oas_connect.eda.nokia.com_connectpluginheartbeats.json
+        api:
+          expose: readWrite
+        ui:
+          category: Connect
+          name: Plugin Heartbeat
+          panel: system_administration
+        kubernetes:
+          exportPolicy: all
+          importPolicy: all
+    - crd:
+        path: eda-connect-plugin-controller/config/crd/bases/connect.eda.nokia.com_connectplugins.yaml
+        schema: eda-connect-plugin-controller/openapiv3/eda_oas_connect.eda.nokia.com_connectplugins.json
+        api:
+          expose: readWrite
+        ui:
+          category: Connect
+          name: Plugin
+          panel: system_administration
+        kubernetes:
+          exportPolicy: all
+          importPolicy: all
+    - crd:
+        path: eda-connect-interface-controller/config/crd/bases/connect.eda.nokia.com_connectinterfaces.yaml
+        schema: eda-connect-interface-controller/openapiv3/eda_oas_connect.eda.nokia.com_connectinterfaces.json
+        api:
+          expose: readWrite
+        ui:
+          category: Connect
+          name: Connect Interface
+          panel: system_administration
+        kubernetes:
+          exportPolicy: all
+          importPolicy: all
+    - cr:
+        path: eda-connect-interface-controller/appstore-crs/crs.yaml
+    - cr:
+        path: eda-connect-plugin-controller/appstore-crs/crs.yaml
+    - cr:
+        path: connect-plugin-cluster-role.yaml
+  dependencies:
+    - container:
+        name: connect-plugin-controller
+        image: eda.nokia.com/nokia-eda/eda-connect-plugin-controller:v1.0.0
+    - container:
+        name: connect-interface-controller
+        image: eda.nokia.com/nokia-eda/eda-connect-interface-controller:v1.0.0
