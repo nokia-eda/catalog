@@ -1,0 +1,95 @@
+apiVersion: core.eda.nokia.com/v1
+kind: Manifest
+metadata:
+  name: demo
+spec:
+  group: demo.eda.nokia.com
+  version: v1alpha1
+  title: Demo
+  description: |
+    This application provides demonstration examples
+  image: ghcr.io/nokia-eda/apps/demo:24.8.1-rc
+  gitReference: d94df842f5925fd648a74a81e4e8e6f6e35d72ab
+  gitPathPrefix: /
+  author: Nokia
+  appInfo:
+    readme: README.md
+    documentation: DOCUMENTATION.md
+    license: LICENSE
+    screenshots:
+      - png/screenshot1.png
+      - png/screenshot2.png
+  supportedEndpoints:
+    - "srl:0.0.0"
+    - "srl:23.7.1" # specific release
+    - "srl:23.10.*" # any release in a minor
+    - "srl:24.*" # any release in a major
+    - "sros:23.7.r1"
+  supportedCoreVersions:
+    - "v1.0.0"
+  components:
+    - crd:
+        path: demo/crds/demo.eda.nokia.com_simplevrfs.yaml
+        schema: demo/openapiv3/eda_oas_demo.eda.nokia.com_simplevrfs.json
+        api:
+          expose: readWrite
+        ui:
+          category: Demo
+          name: Simple VRFs
+    - crd:
+        path: demo/crds/demo.eda.nokia.com_labels.yaml
+        schema: demo/openapiv3/eda_oas_demo.eda.nokia.com_labels.json
+        api:
+          expose: readWrite
+        ui:
+          category: Demo
+          name: Labels
+          panel: system_administration
+    - crd:
+        path: demo/crds/demo.eda.nokia.com_oesextensions.yaml
+        schema: demo/openapiv3/eda_oas_demo.eda.nokia.com_oesextensions.json
+        api:
+          expose: readWrite
+        ui:
+          category: Demo
+          name: OAS Extension
+    - crd:
+        path: demo/crds/demo.eda.nokia.com_overlays.yaml
+        schema: demo/openapiv3/eda_oas_demo.eda.nokia.com_overlays.json
+        # ui:
+        #   category: Demo
+        #   name: Overlay
+        api:
+          expose: readWrite
+    - script:
+        path: demo/vrf-demo.py
+        type: config
+        trigger:
+          kind: SimpleVRF
+          #group:
+          #version:
+    - script:
+        path: demo/overlay_intent.py
+        type: state
+        trigger:
+          kind: Overlay
+    - view:
+        path: demo/ui/dashboard.json
+        ui:
+          category: Demo
+          name: Extra Views
+          panel: system_administration
+    - view:
+        path: demo/ui/oas_extension.json
+        ui:
+          category: Demo
+          name: OAS Extension
+    - cr:
+        path: demo/workflows/interfacebounce/core_v1_flowdefinition.yaml
+    - cr:
+        path: demo/workflows/interfaceupcheck/core_v1_flowdefinition.yaml
+  dependencies:
+    - file:
+        path: common/
+    - file:
+        path: utils/
