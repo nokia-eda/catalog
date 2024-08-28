@@ -12,9 +12,10 @@ spec:
   supportedEndpoints:
     - "srl:0.0.0"
   supportedCoreVersions:
-    - "v0.0.0-0"
+    - "v1.0.0"
   appInfo:
     readme: app-meta/README.md
+    license: app-meta/eda-license.txt
   components:
     - crd:
         path: eda-connect-plugin-controller/config/crd/bases/connect.eda.nokia.com_connectpluginactionables.yaml
