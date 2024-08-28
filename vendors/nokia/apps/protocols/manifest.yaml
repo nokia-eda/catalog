@@ -1,0 +1,261 @@
+apiVersion: core.eda.nokia.com/v1
+kind: Manifest
+metadata:
+  name: protocols
+spec:
+  group: protocols.eda.nokia.com
+  version: v1alpha1
+  title: Protocols
+  description: |
+    This application provides resources related to routing protocols for various Network Operating Systems.
+  image: ghcr.io/nokia-eda/apps/protocols:24.8.1-rc
+  gitReference: d94df842f5925fd648a74a81e4e8e6f6e35d72ab
+  gitPathPrefix: /
+  author: Nokia
+  appInfo:
+    readme: README.md
+    documentation: DOCUMENTATION.md
+    license: LICENSE
+    screenshots:
+      - png/screenshot1.png
+      - png/screenshot2.png
+  supportedEndpoints:
+    - "srl:0.0.0"
+    - "srl:23.7.1" # specific release
+    - "srl:23.10.*" # any release in a minor
+    - "srl:24.*" # any release in a major
+    - "sros:23.7.r1"
+  supportedCoreVersions:
+    - "v1.0.0"
+  components:
+    - crd:
+        path: protocols/crds/protocols.eda.nokia.com_defaultbgpgroups.yaml
+        schema: protocols/openapiv3/eda_oas_protocols.eda.nokia.com_defaultbgpgroups.json
+        ui:
+          category: Default Routing
+          name: Default BGP Groups
+        api:
+          expose: readWrite
+    - crd:
+        path: protocols/crds/protocols.eda.nokia.com_defaultbgpgroupdeployments.yaml
+        schema: protocols/openapiv3/eda_oas_protocols.eda.nokia.com_defaultbgpgroupdeployments.json
+        api:
+          expose: none
+    - crd:
+        path: protocols/crds/protocols.eda.nokia.com_defaultbgppeers.yaml
+        schema: protocols/openapiv3/eda_oas_protocols.eda.nokia.com_defaultbgppeers.json
+        ui:
+          category: Default Routing
+          name: Default BGP Peers
+        api:
+          expose: readWrite
+    - crd:
+        path: protocols/crds/protocols.eda.nokia.com_defaultstaticroutes.yaml
+        schema: protocols/openapiv3/eda_oas_protocols.eda.nokia.com_defaultstaticroutes.json
+        ui:
+          category: Default Routing
+          name: Default Static Routes
+        api:
+          expose: readWrite
+    - crd:
+        path: protocols/crds/protocols.eda.nokia.com_defaultaggregateroutes.yaml
+        schema: protocols/openapiv3/eda_oas_protocols.eda.nokia.com_defaultaggregateroutes.json
+        ui:
+          category: Default Routing
+          name: Default Aggregate Routes
+        api:
+          expose: readWrite
+    - crd:
+        path: protocols/crds/protocols.eda.nokia.com_defaultroutereflectors.yaml
+        schema: protocols/openapiv3/eda_oas_protocols.eda.nokia.com_defaultroutereflectors.json
+        ui:
+          category: Default Routing
+          name: Default Route Reflectors
+        api:
+          expose: readWrite
+    - crd:
+        path: protocols/crds/protocols.eda.nokia.com_defaultroutereflectorclients.yaml
+        schema: protocols/openapiv3/eda_oas_protocols.eda.nokia.com_defaultroutereflectorclients.json
+        ui:
+          category: Default Routing
+          name: Default Route Reflector Clients
+        api:
+          expose: readWrite
+    - crd:
+        path: protocols/crds/protocols.eda.nokia.com_bgpgroups.yaml
+        schema: protocols/openapiv3/eda_oas_protocols.eda.nokia.com_bgpgroups.json
+        ui:
+          category: Overlay Routing
+          name: BGP Groups
+        api:
+          expose: readWrite
+    - crd:
+        path: protocols/crds/protocols.eda.nokia.com_bgpgroupdeployments.yaml
+        schema: protocols/openapiv3/eda_oas_protocols.eda.nokia.com_bgpgroupdeployments.json
+        api:
+          expose: none
+    - crd:
+        path: protocols/crds/protocols.eda.nokia.com_bgpgroupstates.yaml
+        schema: protocols/openapiv3/eda_oas_protocols.eda.nokia.com_bgpgroupstates.json
+        api:
+          expose: none
+    - crd:
+        path: protocols/crds/protocols.eda.nokia.com_bgppeers.yaml
+        schema: protocols/openapiv3/eda_oas_protocols.eda.nokia.com_bgppeers.json
+        ui:
+          category: Overlay Routing
+          name: BGP Peers
+        api:
+          expose: readWrite
+    - crd:
+        path: protocols/crds/protocols.eda.nokia.com_staticroutes.yaml
+        schema: protocols/openapiv3/eda_oas_protocols.eda.nokia.com_staticroutes.json
+        ui:
+          category: Overlay Routing
+          name: Static Routes
+        api:
+          expose: readWrite
+    - crd:
+        path: protocols/crds/protocols.eda.nokia.com_aggregateroutes.yaml
+        schema: protocols/openapiv3/eda_oas_protocols.eda.nokia.com_aggregateroutes.json
+        ui:
+          category: Overlay Routing
+          name: Aggregate Routes
+        api:
+          expose: readWrite
+    - crd:
+        path: protocols/crds/protocols.eda.nokia.com_bgppeerstates.yaml
+        schema: protocols/openapiv3/eda_oas_protocols.eda.nokia.com_bgppeerstates.json
+        api:
+          expose: readWrite
+    - crd:
+        path: protocols/crds/protocols.eda.nokia.com_routereflectors.yaml
+        schema: protocols/openapiv3/eda_oas_protocols.eda.nokia.com_routereflectors.json
+        ui:
+          category: Overlay Routing
+          name: Route Reflectors
+        api:
+          expose: readWrite
+    - crd:
+        path: protocols/crds/protocols.eda.nokia.com_routereflectorclients.yaml
+        schema: protocols/openapiv3/eda_oas_protocols.eda.nokia.com_routereflectorclients.json
+        ui:
+          category: Overlay Routing
+          name: Route Reflector Clients
+        api:
+          expose: readWrite
+    - crd:
+        path: protocols/crds/protocols.eda.nokia.com_routereflectorstates.yaml
+        schema: protocols/openapiv3/eda_oas_protocols.eda.nokia.com_routereflectorstates.json
+        api:
+          expose: readWrite
+    - crd:
+        path: protocols/crds/protocols.eda.nokia.com_routereflectorclientstates.yaml
+        schema: protocols/openapiv3/eda_oas_protocols.eda.nokia.com_routereflectorclientstates.json
+        api:
+          expose: readWrite
+    - script:
+        path: protocols/defaultbgpgroup_intent.py
+        type: config
+        trigger:
+          kind: DefaultBGPGroup
+    - script:
+        path: protocols/defaultbgpgroupdeployment_intent.py
+        type: config
+        trigger:
+          kind: DefaultBGPGroupDeployment
+    - script:
+        path: protocols/defaultbgppeer_intent.py
+        type: config
+        trigger:
+          kind: DefaultBGPPeer
+    - script:
+        path: protocols/defaultstaticroute_intent.py
+        type: config
+        trigger:
+          kind: DefaultStaticRoute
+    - script:
+        path: protocols/defaultaggregateroute_intent.py
+        type: config
+        trigger:
+          kind: DefaultAggregateRoute
+    - script:
+        path: protocols/defaultroutereflector_intent.py
+        type: config
+        trigger:
+          kind: DefaultRouteReflector
+    - script:
+        path: protocols/defaultroutereflectorclient_intent.py
+        type: config
+        trigger:
+          kind: DefaultRouteReflectorClient
+    - script:
+        path: protocols/bgpgroup_intent.py
+        type: config
+        trigger:
+          kind: BGPGroup
+    - script:
+        path: protocols/bgpgroupdeployment_intent.py
+        type: config
+        trigger:
+          kind: BGPGroupDeployment
+    - script:
+        path: protocols/bgpgroupstate_intent.py
+        type: state
+        trigger:
+          kind: BGPGroupState
+    - script:
+        path: protocols/bgppeer_intent.py
+        type: config
+        trigger:
+          kind: BGPPeer
+    - script:
+        path: protocols/bgppeerstate_intent.py
+        type: state
+        trigger:
+          kind: BGPPeerState
+    - script:
+        path: protocols/staticroute_intent.py
+        type: config
+        trigger:
+          kind: StaticRoute
+    - script:
+        path: protocols/aggregateroute_intent.py
+        type: config
+        trigger:
+          kind: AggregateRoute
+    - script:
+        path: protocols/routereflector_intent.py
+        type: config
+        trigger:
+          kind: RouteReflector
+    - script:
+        path: protocols/routereflectorclient_intent.py
+        type: config
+        trigger:
+          kind: RouteReflectorClient
+    - script:
+        path: protocols/routereflectorstate_intent.py
+        type: state
+        trigger:
+          kind: RouteReflectorState
+    - script:
+        path: protocols/routereflectorclientstate_intent.py
+        type: state
+        trigger:
+          kind: RouteReflectorClientState
+    - cr:
+        path: protocols/workflows/checkdefaultbgppeers/core_v1_flowdefinition.yaml
+  dependencies:
+    - file:
+        path: protocols/pysrc/
+    - file:
+        path: common/
+    - file:
+        path: utils/
+    - file:
+        path: interfaces/
+    - file:
+        path: routing/
+    - file:
+        path: services/
