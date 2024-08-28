@@ -1,0 +1,108 @@
+apiVersion: core.eda.nokia.com/v1
+kind: Manifest
+metadata:
+  name: routing
+spec:
+  group: routing.eda.nokia.com
+  version: v1alpha1
+  title: Routing
+  description: |
+    This application provides underlay routing resources for various Network Operating Systems.
+  image: ghcr.io/nokia-eda/apps/routing:24.8.1-rc
+  gitReference: d94df842f5925fd648a74a81e4e8e6f6e35d72ab
+  gitPathPrefix: /
+  author: Nokia
+  appInfo:
+    readme: README.md
+    documentation: DOCUMENTATION.md
+    license: LICENSE
+    screenshots:
+      - png/screenshot1.png
+      - png/screenshot2.png
+  supportedEndpoints:
+    - "srl:0.0.0"
+    - "srl:23.7.1" # specific release
+    - "srl:23.10.*" # any release in a minor
+    - "srl:24.*" # any release in a major
+    - "sros:23.7.r1"
+  supportedCoreVersions:
+    - "v1.0.0"
+  components:
+    - crd:
+        path: routing/crds/routing.eda.nokia.com_defaultinterfaces.yaml
+        schema: routing/openapiv3/eda_oas_routing.eda.nokia.com_defaultinterfaces.json
+        ui:
+          category: Default Routing
+          name: Default Interfaces
+        api:
+          expose: readWrite
+    - crd:
+        path: routing/crds/routing.eda.nokia.com_defaultinterfacestates.yaml
+        schema: routing/openapiv3/eda_oas_routing.eda.nokia.com_defaultinterfacestates.json
+        api:
+          expose: none
+    - crd:
+        path: routing/crds/routing.eda.nokia.com_defaultrouters.yaml
+        schema: routing/openapiv3/eda_oas_routing.eda.nokia.com_defaultrouters.json
+        ui:
+          category: Default Routing
+          name: Default Routers
+        api:
+          expose: readWrite
+    - crd:
+        path: routing/crds/routing.eda.nokia.com_defaultrouterstates.yaml
+        schema: routing/openapiv3/eda_oas_routing.eda.nokia.com_defaultrouterstates.json
+        api:
+          expose: none
+    - crd:
+        path: routing/crds/routing.eda.nokia.com_drains.yaml
+        schema: routing/openapiv3/eda_oas_routing.eda.nokia.com_drains.json
+        ui:
+          category: Maintenance
+          name: Drains
+        api:
+          expose: readWrite
+    - crd:
+        path: routing/crds/routing.eda.nokia.com_drainstates.yaml
+        schema: routing/openapiv3/eda_oas_routing.eda.nokia.com_drainstates.json
+        api:
+          expose: none
+    - script:
+        path: routing/defaultinterface_intent.py
+        type: config
+        trigger:
+          kind: DefaultInterface
+    - script:
+        path: routing/defaultrouter_intent.py
+        type: config
+        trigger:
+          kind: DefaultRouter
+    - script:
+        path: routing/defaultinterfacestate_intent.py
+        type: state
+        trigger:
+          kind: DefaultInterfaceState
+    - script:
+        path: routing/defaultrouterstate_intent.py
+        type: state
+        trigger:
+          kind: DefaultRouterState
+    - script:
+        path: routing/drain_intent.py
+        type: config
+        trigger:
+          kind: Drain
+    - script:
+        path: routing/drainstate_intent.py
+        type: state
+        trigger:
+          kind: DrainState
+  dependencies:
+    - file:
+        path: routing/pysrc/
+    - file:
+        path: common/
+    - file:
+        path: utils/
+    - file:
+        path: interfaces/
