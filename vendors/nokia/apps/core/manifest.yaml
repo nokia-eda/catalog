@@ -1,0 +1,269 @@
+apiVersion: core.eda.nokia.com/v1
+kind: Manifest
+metadata:
+  name: core
+spec:
+  group: core.eda.nokia.com
+  version: v1
+  title: Core
+  description: |
+    This application provides core resources consumed by EDA components.
+  image: ghcr.io/nokia-eda/apps/core:24.8.1-rc
+  gitReference: d94df842f5925fd648a74a81e4e8e6f6e35d72ab
+  gitPathPrefix: /
+  author: Nokia
+  appInfo:
+    readme: README.md
+    documentation: DOCUMENTATION.md
+    license: LICENSE
+    screenshots:
+      - png/screenshot1.png
+      - png/screenshot2.png
+  supportedEndpoints:
+    - "srl:0.0.0"
+    - "srl:23.7.1" # specific release
+    - "srl:23.10.*" # any release in a minor
+    - "srl:24.*" # any release in a major
+    - "sros:23.7.r1"
+  supportedCoreVersions:
+    - "v1.0.0"
+  components:
+    - crd:
+        path: core/crds/core.eda.nokia.com_deviations.yaml
+        schema: core/openapiv3/eda_oas_core.eda.nokia.com_deviations.json
+        ui:
+          category: Configuration
+          name: Deviations
+        api:
+          expose: read
+    - crd:
+        path: core/crds/core.eda.nokia.com_deviationactions.yaml
+        schema: core/openapiv3/eda_oas_core.eda.nokia.com_deviationactions.json
+        api:
+          expose: readWrite
+    - crd:
+        path: core/crds/core.eda.nokia.com_indexallocationpools.yaml
+        schema: core/openapiv3/eda_oas_core.eda.nokia.com_indexallocationpools.json
+        ui:
+          category: Allocations
+          name: Indices
+        api:
+          expose: readWrite
+    - crd:
+        path: core/crds/core.eda.nokia.com_ipallocationpools.yaml
+        schema: core/openapiv3/eda_oas_core.eda.nokia.com_ipallocationpools.json
+        ui:
+          category: Allocations
+          name: IP Addresses
+        api:
+          expose: readWrite
+    - crd:
+        path: core/crds/core.eda.nokia.com_subnetallocationpools.yaml
+        schema: core/openapiv3/eda_oas_core.eda.nokia.com_subnetallocationpools.json
+        ui:
+          category: Allocations
+          name: Subnets
+        api:
+          expose: readWrite
+    - crd:
+        path: core/crds/core.eda.nokia.com_ipinsubnetallocationpools.yaml
+        schema: core/openapiv3/eda_oas_core.eda.nokia.com_ipinsubnetallocationpools.json
+        ui:
+          category: Allocations
+          name: IP Addresses + Masks
+        api:
+          expose: readWrite
+    - crd:
+        path: core/crds/core.eda.nokia.com_nodeconfigs.yaml
+        schema: core/openapiv3/eda_oas_core.eda.nokia.com_nodeconfigs.json
+        api:
+          expose: none
+    - crd:
+        path: core/crds/core.eda.nokia.com_nodeprofiles.yaml
+        schema: core/openapiv3/eda_oas_core.eda.nokia.com_nodeprofiles.json
+        ui:
+          category: Node Management
+          name: Node Profiles
+          panel: system_administration
+        api:
+          expose: readWrite
+    - crd:
+        path: core/crds/core.eda.nokia.com_nodeusers.yaml
+        schema: core/openapiv3/eda_oas_core.eda.nokia.com_nodeusers.json
+        ui:
+          category: Node Management
+          name: Node Users
+          panel: system_administration
+        api:
+          expose: readWrite
+    - crd:
+        path: core/crds/core.eda.nokia.com_nodeuserstates.yaml
+        schema: core/openapiv3/eda_oas_core.eda.nokia.com_nodeuserstates.json
+    - crd:
+        path: core/crds/core.eda.nokia.com_nodegroups.yaml
+        schema: core/openapiv3/eda_oas_core.eda.nokia.com_nodegroups.json
+        ui:
+          category: Node Management
+          name: Node Groups
+          panel: system_administration
+        api:
+          expose: readWrite
+    - crd:
+        path: core/crds/core.eda.nokia.com_nodegroupdeployments.yaml
+        schema: core/openapiv3/eda_oas_core.eda.nokia.com_nodegroupdeployments.json
+    - crd:
+        path: core/crds/core.eda.nokia.com_targetnodes.yaml
+        schema: core/openapiv3/eda_oas_core.eda.nokia.com_targetnodes.json
+    - crd:
+        path: core/crds/core.eda.nokia.com_httpproxies.yaml
+        schema: core/openapiv3/eda_oas_core.eda.nokia.com_httpproxies.json
+        ui:
+          category: Proxies
+          name: HTTP/S Proxies
+          panel: system_administration
+        api:
+          expose: readWrite
+    - crd:
+        path: core/crds/core.eda.nokia.com_udpproxies.yaml
+        schema: core/openapiv3/eda_oas_core.eda.nokia.com_udpproxies.json
+        ui:
+          category: Proxies
+          name: UDP Proxies
+          panel: system_administration
+        api:
+          expose: readWrite
+    - crd:
+        path: core/crds/core.eda.nokia.com_toponodes.yaml
+        schema: core/openapiv3/eda_oas_core.eda.nokia.com_toponodes.json
+        ui:
+          category: Topology
+          name: Nodes
+        api:
+          expose: readWrite
+    - crd:
+        path: core/crds/core.eda.nokia.com_topolinks.yaml
+        schema: core/openapiv3/eda_oas_core.eda.nokia.com_topolinks.json
+        ui:
+          category: Topology
+          name: Links
+        api:
+          expose: readWrite
+    - crd:
+        path: core/crds/core.eda.nokia.com_topologystates.yaml
+        schema: core/openapiv3/eda_oas_core.eda.nokia.com_topologystates.json
+        # ui:
+        #   category: Core
+        #   name: Topology State
+        api:
+          expose: readWrite
+    - crd:
+        path: core/crds/core.eda.nokia.com_edgeinterfaces.yaml
+        schema: core/openapiv3/eda_oas_core.eda.nokia.com_edgeinterfaces.json
+        # ui:
+        #   category: Topology
+        #   name: Edge Interfaces
+        api:
+          expose: readWrite
+    - crd:
+        path: core/crds/core.eda.nokia.com_roles.yaml
+        schema: core/openapiv3/eda_oas_core.eda.nokia.com_roles.json
+        # ui:
+        #   category: Core
+        #   name: Roles
+        # api:
+        #   expose: readWrite
+    - crd:
+        path: core/crds/core.eda.nokia.com_clusterroles.yaml
+        schema: core/openapiv3/eda_oas_core.eda.nokia.com_clusterroles.json
+        ui:
+          name: Cluster Roles
+          panel: system_administration
+        api:
+          expose: readWrite
+    - script:
+        path: core/topologystate_intent.py
+        type: state
+        trigger:
+          kind: TopologyState
+    - script:
+        path: core/topolink_intent.py
+        type: state
+        trigger:
+          kind: TopoLink
+    - script:
+        path: core/nodeuser_intent.py
+        type: config
+        trigger:
+          kind: NodeUser
+    - script:
+        path: core/nodeuserstate_intent.py
+        type: state
+        trigger:
+          kind: NodeUserState
+    - script:
+        path: core/nodegroupdeployment_intent.py
+        type: config
+        trigger:
+          kind: NodeGroupDeployment
+    - crd:
+        path: core/crds/core.eda.nokia.com_configlets.yaml
+        schema: core/openapiv3/eda_oas_core.eda.nokia.com_configlets.json
+        ui:
+          category: Configuration
+          name: Configlets
+        api:
+          expose: readWrite
+    - crd:
+        path: core/crds/core.eda.nokia.com_configletstates.yaml
+        schema: core/openapiv3/eda_oas_core.eda.nokia.com_configletstates.json
+        api:
+          expose: none
+    - crd:
+        path: core/crds/core.eda.nokia.com_flowdefinitions.yaml
+        schema: core/openapiv3/eda_oas_core.eda.nokia.com_flowdefinitions.json
+        api:
+          expose: readWrite
+        kubernetes:
+          exportPolicy: all # needed for flowengine
+        ui:
+          category: Workflows
+          name: Definitions
+          panel: system_administration
+    - crd:
+        path: core/crds/core.eda.nokia.com_flows.yaml
+        schema: core/openapiv3/eda_oas_core.eda.nokia.com_flows.json
+        api:
+          expose: readWrite
+        kubernetes:
+          exportPolicy: all # needed for flowengine
+          # ui:
+          #   category: Workflows
+          #   name: Workflows
+    - crd:
+        path: core/crds/core.eda.nokia.com_waitforinputs.yaml
+        schema: core/openapiv3/eda_oas_core.eda.nokia.com_waitforinputs.json
+        api:
+          expose: readWrite
+    - script:
+        path: core/configlet.py
+        type: config
+        trigger:
+          kind: Configlet
+    - script:
+        path: core/configlet.py
+        type: state
+        trigger:
+          kind: ConfigletState
+    - view:
+        path: core/ui/cluster-dashboard-v1.json
+        ui:
+          category: Core
+          name: Core
+          panel: system_administration
+  dependencies:
+    - file:
+        path: core/pysrc/
+    - file:
+        path: common/
+    - file:
+        path: utils/
