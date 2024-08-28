@@ -3,7 +3,7 @@ kind: Manifest
 metadata:
   name: connect
 spec:
-  image: ghcr.io/nokia-eda/connect:v1.0.0
+  image: ghcr.io/nokia-eda/apps/connect:v1.0.0
   group: connect.eda.nokia.com
   version: v1
   title: Cloud Connect
