@@ -1,0 +1,77 @@
+apiVersion: core.eda.nokia.com/v1
+kind: Manifest
+metadata:
+  name: system
+spec:
+  group: system.eda.nokia.com
+  version: v1alpha1
+  title: System
+  description: |
+    This application provides system monitoring functionality for various Network Operating Systems.
+
+    It supports thresholding of CPU, memory, and disk utilization.
+  image: ghcr.io/nokia-eda/apps/system:24.8.1-rc
+  author: Nokia
+  gitReference: d94df842f5925fd648a74a81e4e8e6f6e35d72ab
+  gitPathPrefix: /
+  supportedEndpoints:
+    - "srl:0.0.0"
+    - "srl:23.7.1"
+    - "srl:23.10.*"
+    - "srl:24.*"
+    - "sros:23.7.r1"
+  supportedCoreVersions:
+    - "v1.0.0"
+  appInfo:
+    readme: README.md
+    documentation: DOCUMENTATION.md
+    license: LICENSE
+    screenshots:
+      - png/screenshot1.png
+      - png/screenshot2.png
+  components:
+    - crd:
+        path: system/crds/system.eda.nokia.com_monitors.yaml
+        schema: system/openapiv3/eda_oas_system.eda.nokia.com_monitors.json
+        api:
+          expose: readWrite
+        ui:
+          category: Components
+          name: Monitoring
+    - crd:
+        path: system/crds/system.eda.nokia.com_monitorstates.yaml
+        schema: system/openapiv3/eda_oas_system.eda.nokia.com_monitorstates.json
+        api:
+          expose: readWrite
+    - crd:
+        path: system/crds/system.eda.nokia.com_monitoraggregatestates.yaml
+        schema: system/openapiv3/eda_oas_system.eda.nokia.com_monitoraggregatestates.json
+        api:
+          expose: readWrite
+    - script:
+        path: system/monitor_intent.py
+        type: config
+        trigger:
+          kind: Monitor
+    - script:
+        path: system/monitor_intent.py
+        type: state
+        trigger:
+          kind: MonitorState
+    - script:
+        path: system/monitoraggregatestate_intent.py
+        type: state
+        trigger:
+          kind: MonitorAggregateState
+    - view:
+        path: system/ui/resource-monitor-dashboard-v1.json
+        ui:
+          category: Components
+          name: Monitoring
+  dependencies:
+    - file:
+        path: system/pysrc/
+    - file:
+        path: common/
+    - file:
+        path: utils/
