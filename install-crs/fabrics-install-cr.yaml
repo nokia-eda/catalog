@@ -1,0 +1,11 @@
+apiVersion: appstore.eda.nokia.com/v1
+kind: AppInstall
+metadata:
+  name: fabrics.nokia
+spec:
+  app: fabrics
+  catalog: eda-catalog-builtin-apps
+  vendor: nokia
+  version:
+    value: v1.0.0+24.8.1-rc
+    type: semver

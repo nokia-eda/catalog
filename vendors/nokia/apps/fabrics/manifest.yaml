@@ -1,0 +1,154 @@
+apiVersion: core.eda.nokia.com/v1
+kind: Manifest
+metadata:
+  name: fabrics
+spec:
+  group: fabrics.eda.nokia.com
+  version: v1alpha1
+  title: Fabrics
+  description: |
+    This application provides automation resources relating to datacenter fabrics.
+  image: ghcr.io/nokia-eda/apps/fabrics:24.8.1-rc
+  gitReference: d94df842f5925fd648a74a81e4e8e6f6e35d72ab
+  gitPathPrefix: /
+  author: Nokia
+  appInfo:
+    readme: README.md
+    documentation: DOCUMENTATION.md
+    license: LICENSE
+    screenshots:
+      - png/screenshot1.png
+      - png/screenshot2.png
+  supportedEndpoints:
+    - "srl:0.0.0"
+    - "srl:23.7.1" # specific release
+    - "srl:23.10.*" # any release in a minor
+    - "srl:24.*" # any release in a major
+    - "sros:23.7.r1"
+  supportedCoreVersions:
+    - "v1.0.0"
+  components:
+    - crd:
+        path: fabrics/crds/fabrics.eda.nokia.com_fabrics.yaml
+        schema: fabrics/openapiv3/eda_oas_fabrics.eda.nokia.com_fabrics.json
+        ui:
+          category: Fabrics
+          name: Fabrics
+        api:
+          expose: readWrite
+    - crd:
+        path: fabrics/crds/fabrics.eda.nokia.com_isls.yaml
+        schema: fabrics/openapiv3/eda_oas_fabrics.eda.nokia.com_isls.json
+        ui:
+          category: Fabrics
+          name: ISLs
+        api:
+          expose: readWrite
+    - crd:
+        path: fabrics/crds/fabrics.eda.nokia.com_islstates.yaml
+        schema: fabrics/openapiv3/eda_oas_fabrics.eda.nokia.com_islstates.json
+        api:
+          expose: none
+    - crd:
+        path: fabrics/crds/fabrics.eda.nokia.com_fabricstates.yaml
+        schema: fabrics/openapiv3/eda_oas_fabrics.eda.nokia.com_fabricstates.json
+        api:
+          expose: none
+    - script:
+        path: fabrics/fabric_intent.py
+        type: config
+        trigger:
+          kind: Fabric
+    - script:
+        path: fabrics/fabricstate_intent.py
+        type: state
+        trigger:
+          kind: FabricState
+    - script:
+        path: fabrics/isl_intent.py
+        type: config
+        trigger:
+          kind: ISL
+    - script:
+        path: fabrics/islstate_intent.py
+        type: state
+        trigger:
+          kind: ISLState
+    - view:
+        path: fabrics/ui/fabric-dashboard-v0.4.json
+        ui:
+          category: Fabrics
+          name: Fabrics
+  dependencies:
+    - file:
+        path: fabrics/pysrc/
+    - file:
+        path: common/
+    - file:
+        path: utils/
+        #--- Protocols
+    - file:
+        path: protocols/
+        # - file:
+        #     path: protocols/pysrc/
+        # - file:
+        #     path: protocols/bgpgroupdeployment_intent.py
+        # - file:
+        #     path: protocols/bgpgroup_intent.py
+        # - file:
+        #     path: protocols/bgpgroupstate_intent.py
+        # - file:
+        #     path: protocols/bgppeer_intent.py
+        # - file:
+        #     path: protocols/bgppeerstate_intent.py
+        # - file:
+        #     path: protocols/defaultbgpgroupdeployment_intent.py
+        # - file:
+        #     path: protocols/defaultbgpgroup_intent.py
+        # - file:
+        #     path: protocols/defaultbgppeer_intent.py
+        # - file:
+        #     path: protocols/defaultroutereflectorclient_intent.py
+        # - file:
+        #     path: protocols/defaultroutereflector_intent.py
+        # - file:
+        #     path: protocols/routereflectorclient_intent.py
+        # - file:
+        #     path: protocols/routereflectorclientstate_intent.py
+        # - file:
+        #     path: protocols/routereflector_intent.py
+        # - file:
+        #     path: protocols/routereflectorstate_intent.py
+    - file:
+        path: routingpolicies/
+        # - file:
+        #     path: routingpolicies/pysrc/
+        # - file:
+        #     path: routingpolicies/policy_intent.py
+        # - file:
+        #     path: routingpolicies/policydeployment_intent.py
+        # - file:
+        #     path: routingpolicies/prefixset_intent.py
+        # - file:
+        #     path: routingpolicies/prefixsetdeployment_intent.py
+      #--- Routing Policies
+    - file:
+        path: routing/
+        # - file:
+        #     path: routing/pysrc/
+        # - file:
+        #     path: routing/defaultinterface_intent.py
+        # - file:
+        #     path: routing/defaultrouter_intent.py
+        # - file:
+        #     path: routing/defaultinterfacestate_intent.py
+        # - file:
+        #     path: routing/defaultrouterstate_intent.py
+      #--- Routing
+    - file:
+        path: interfaces/
+        # - file:
+        #     path: interfaces/pysrc/
+        # - file:
+        #     path: interfaces/interface_intent.py
+      #--- Interfaces
