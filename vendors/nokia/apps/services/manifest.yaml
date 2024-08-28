@@ -1,0 +1,271 @@
+apiVersion: core.eda.nokia.com/v1
+kind: Manifest
+metadata:
+  name: services
+spec:
+  group: services.eda.nokia.com
+  version: v1alpha1
+  title: Services
+  description: |
+    This application provides EVPN services for various Network Operating Systems.
+  image: ghcr.io/nokia-eda/apps/services:24.8.1-rc
+  gitReference: d94df842f5925fd648a74a81e4e8e6f6e35d72ab
+  gitPathPrefix: /
+  author: Nokia
+  appInfo:
+    readme: README.md
+    documentation: DOCUMENTATION.md
+    license: LICENSE
+    screenshots:
+      - png/screenshot1.png
+      - png/screenshot2.png
+  supportedEndpoints:
+    - "srl:0.0.0"
+    - "srl:23.7.1" # specific release
+    - "srl:23.10.*" # any release in a minor
+    - "srl:24.*" # any release in a major
+    - "sros:23.7.r1"
+  supportedCoreVersions:
+    - "v1.0.0"
+  components:
+    - crd:
+        path: services/crds/services.eda.nokia.com_vlans.yaml
+        schema: services/openapiv3/eda_oas_services.eda.nokia.com_vlans.json
+        ui:
+          category: Virtual Networks
+          name: VLANs
+        api:
+          expose: readWrite
+    - crd:
+        path: services/crds/services.eda.nokia.com_vlanstates.yaml
+        schema: services/openapiv3/eda_oas_services.eda.nokia.com_vlanstates.json
+        api:
+          expose: none
+    - crd:
+        path: services/crds/services.eda.nokia.com_virtualnetworks.yaml
+        schema: services/openapiv3/eda_oas_services.eda.nokia.com_virtualnetworks.json
+        ui:
+          category: Virtual Networks
+          name: Virtual Networks
+        api:
+          expose: readWrite
+    - crd:
+        path: services/crds/services.eda.nokia.com_virtualnetworkstates.yaml
+        schema: services/openapiv3/eda_oas_services.eda.nokia.com_virtualnetworkstates.json
+        api:
+          expose: none
+    - crd:
+        path: services/crds/services.eda.nokia.com_routers.yaml
+        schema: services/openapiv3/eda_oas_services.eda.nokia.com_routers.json
+        ui:
+          category: Virtual Networks
+          name: Routers
+        api:
+          expose: readWrite
+    - crd:
+        path: services/crds/services.eda.nokia.com_routerstates.yaml
+        schema: services/openapiv3/eda_oas_services.eda.nokia.com_routerstates.json
+        api:
+          expose: none
+    - crd:
+        path: services/crds/services.eda.nokia.com_routerdeployments.yaml
+        schema: services/openapiv3/eda_oas_services.eda.nokia.com_routerdeployments.json
+        api:
+          expose: none
+    - crd:
+        path: services/crds/services.eda.nokia.com_bridgedomains.yaml
+        schema: services/openapiv3/eda_oas_services.eda.nokia.com_bridgedomains.json
+        ui:
+          category: Virtual Networks
+          name: Bridge Domains
+        kubernetes:
+          exportPolicy: all # needed for connect controllers
+        api:
+          expose: readWrite
+    - crd:
+        path: services/crds/services.eda.nokia.com_bridgedomainstates.yaml
+        schema: services/openapiv3/eda_oas_services.eda.nokia.com_bridgedomainstates.json
+        api:
+          expose: none
+    - crd:
+        path: services/crds/services.eda.nokia.com_bridgedomaindeployments.yaml
+        schema: services/openapiv3/eda_oas_services.eda.nokia.com_bridgedomaindeployments.json
+        api:
+          expose: none
+    - crd:
+        path: services/crds/services.eda.nokia.com_bridgeinterfaces.yaml
+        schema: services/openapiv3/eda_oas_services.eda.nokia.com_bridgeinterfaces.json
+        ui:
+          category: Virtual Networks
+          name: Bridge Interfaces
+        api:
+          expose: readWrite
+    - crd:
+        path: services/crds/services.eda.nokia.com_bridgeinterfacestates.yaml
+        schema: services/openapiv3/eda_oas_services.eda.nokia.com_bridgeinterfacestates.json
+        api:
+          expose: none
+    - crd:
+        path: services/crds/services.eda.nokia.com_routedinterfaces.yaml
+        schema: services/openapiv3/eda_oas_services.eda.nokia.com_routedinterfaces.json
+        ui:
+          category: Virtual Networks
+          name: Routed Interfaces
+        api:
+          expose: readWrite
+    - crd:
+        path: services/crds/services.eda.nokia.com_routedinterfacestates.yaml
+        schema: services/openapiv3/eda_oas_services.eda.nokia.com_routedinterfacestates.json
+        api:
+          expose: none
+    - crd:
+        path: services/crds/services.eda.nokia.com_irbinterfaces.yaml
+        schema: services/openapiv3/eda_oas_services.eda.nokia.com_irbinterfaces.json
+        ui:
+          category: Virtual Networks
+          name: IRB Interfaces
+        api:
+          expose: readWrite
+    - crd:
+        path: services/crds/services.eda.nokia.com_irbinterfacestates.yaml
+        schema: services/openapiv3/eda_oas_services.eda.nokia.com_irbinterfacestates.json
+        api:
+          expose: none
+    - crd:
+        path: services/crds/services.eda.nokia.com_dhcprelays.yaml
+        schema: services/openapiv3/eda_oas_services.eda.nokia.com_dhcprelays.json
+        ui:
+          category: DHCP
+          name: DHCP Relay
+        api:
+          expose: readWrite
+    - crd:
+        path: services/crds/services.eda.nokia.com_stateconfigs.yaml
+        schema: services/openapiv3/eda_oas_services.eda.nokia.com_stateconfigs.json
+        api:
+          expose: none
+    - script:
+        path: services/stateconfig_intent.py
+        type: state
+        trigger:
+          kind: StateConfig
+    - script:
+        path: services/vlan_intent.py
+        type: config
+        trigger:
+          kind: VLAN
+    - script:
+        path: services/vlanstate_intent.py
+        type: state
+        trigger:
+          kind: VLANState
+    - script:
+        path: services/virtualnetwork_intent.py
+        type: config
+        trigger:
+          kind: VirtualNetwork
+    - script:
+        path: services/virtualnetworkstate_intent.py
+        type: state
+        trigger:
+          kind: VirtualNetworkState
+    - script:
+        path: services/router_intent.py
+        type: config
+        trigger:
+          kind: Router
+    - script:
+        path: services/routerstate_intent.py
+        type: state
+        trigger:
+          kind: RouterState
+    - script:
+        path: services/routerdeployment_intent.py
+        type: config
+        trigger:
+          kind: RouterDeployment
+    - script:
+        path: services/bridgedomain_intent.py
+        type: config
+        trigger:
+          kind: BridgeDomain
+    - script:
+        path: services/bridgedomainstate_intent.py
+        type: state
+        trigger:
+          kind: BridgeDomainState
+    - script:
+        path: services/bridgedomaindeployment_intent.py
+        type: config
+        trigger:
+          kind: BridgeDomainDeployment
+    - script:
+        path: services/bridgeinterface_intent.py
+        type: config
+        trigger:
+          kind: BridgeInterface
+    - script:
+        path: services/bridgeinterfacestate_intent.py
+        type: state
+        trigger:
+          kind: BridgeInterfaceState
+    - script:
+        path: services/routedinterface_intent.py
+        type: config
+        trigger:
+          kind: RoutedInterface
+    - script:
+        path: services/routedinterfacestate_intent.py
+        type: state
+        trigger:
+          kind: RoutedInterfaceState
+    - script:
+        path: services/irbinterface_intent.py
+        type: config
+        trigger:
+          kind: IRBInterface
+    - script:
+        path: services/irbinterfacestate_intent.py
+        type: state
+        trigger:
+          kind: IRBInterfaceState
+    - script:
+        path: services/dhcprelay_intent.py
+        type: config
+        trigger:
+          kind: DHCPRelay
+    - view:
+        path: services/ui/vlan-dashboard-v0.1.json
+        ui:
+          category: Virtual Networks
+          name: VLANs
+    - view:
+        path: services/ui/router-dashboard-v0.1.json
+        ui:
+          category: Virtual Networks
+          name: Routers
+    - view:
+        path: services/ui/vnet-dashboard-v0.1.json
+        ui:
+          category: Virtual Networks
+          name: Virtual Networks
+    - view:
+        path: services/ui/bridgedomain-dashboard-v0.1.json
+        ui:
+          category: Virtual Networks
+          name: Bridge Domains
+    - cr:
+        path: services/workflows/edgeping/core_v1_flowdefinition.yaml
+  dependencies:
+    - file:
+        path: services/pysrc/
+    - file:
+        path: common/
+    - file:
+        path: utils/
+    - file:
+        path: filters/
+    - file:
+        path: qos/
+    - file:
+        path: interfaces/
