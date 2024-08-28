@@ -1,0 +1,68 @@
+apiVersion: core.eda.nokia.com/v1
+kind: Manifest
+metadata:
+  name: appstore
+spec:
+  group: appstore.eda.nokia.com
+  version: v1
+  title: App Store
+  description: |
+    This application provides appstore resources.
+  image: ghcr.io/nokia-eda/apps/appstore:24.8.1-rc
+  gitReference: d94df842f5925fd648a74a81e4e8e6f6e35d72ab
+  gitPathPrefix: /
+  author: Nokia
+  appInfo:
+    readme: README.md
+    documentation: DOCUMENTATION.md
+    license: LICENSE
+    screenshots:
+      - png/screenshot1.png
+      - png/screenshot2.png
+  supportedEndpoints:
+    - "srl:0.0.0"
+    - "srl:23.7.1" # specific release
+    - "srl:23.10.*" # any release in a minor
+    - "srl:24.*" # any release in a major
+    - "sros:23.7.r1"
+  supportedCoreVersions:
+    - "v1.0.0"
+  components:
+    - crd:
+        path: appstore/crd/appstore.eda.nokia.com_catalogs.yaml
+        schema: appstore/openapiv3/eda_oas_appstore.eda.nokia.com_catalogs.json
+        ui:
+          category: App Management
+          name: Catalogs
+          panel: system_administration
+        api:
+          expose: readWrite
+        kubernetes:
+          importPolicy: all
+          exportPolicy: all # Appstore listens to kubernetes API for now
+    - crd:
+        path: appstore/crd/appstore.eda.nokia.com_appinstalls.yaml
+        schema: appstore/openapiv3/eda_oas_appstore.eda.nokia.com_appinstalls.json
+        ui: # For 24.8 i think we need to expose this as it will give info when something goes wrong
+          category: App Management
+          name: Installs
+          panel: system_administration
+        api:
+          expose: readWrite
+        kubernetes:
+          importPolicy: all
+          exportPolicy: all # Appstore listens to kubernetes API for now
+    - crd:
+        path: appstore/crd/appstore.eda.nokia.com_registries.yaml
+        schema: appstore/openapiv3/eda_oas_appstore.eda.nokia.com_registries.json
+        ui:
+          category: App Management
+          name: Registries
+          panel: system_administration
+        api:
+          expose: readWrite
+        kubernetes:
+          importPolicy: all
+          exportPolicy: all # Appstore listens to kubernetes API for now
+    - cr:
+        path: appstore/crs/api-proxy.yaml
