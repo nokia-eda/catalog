@@ -1,0 +1,54 @@
+apiVersion: core.eda.nokia.com/v1
+kind: Manifest
+metadata:
+  name: siteinfo
+spec:
+  group: siteinfo.eda.nokia.com
+  version: v1alpha1
+  title: Site Information
+  description: "This application provides resources describing the environment at a given site. \n\nThis includes managing DNS, host and domain names, banners and MOTD messages, and other site-specific information.\n"
+  image: ghcr.io/nokia-eda/apps/siteinfo:24.8.1-rc
+  author: Nokia
+  gitReference: d94df842f5925fd648a74a81e4e8e6f6e35d72ab
+  gitPathPrefix: /
+  supportedEndpoints:
+    - "srl:0.0.0"
+    - "srl:24.7.1"
+  supportedCoreVersions:
+    - "v1.0.0"
+  appInfo:
+    readme: README.md
+    documentation: DOCUMENTATION.md
+    license: LICENSE
+    screenshots:
+      - png/screenshot1.png
+      - png/screenshot2.png
+  components:
+    - crd:
+        path: siteinfo/crds/siteinfo.eda.nokia.com_banners.yaml
+        schema: siteinfo/openapiv3/eda_oas_siteinfo.eda.nokia.com_banners.json
+        api:
+          expose: readWrite
+        ui:
+          category: Site Profiles
+          name: Banners
+    - crd:
+        path: siteinfo/crds/siteinfo.eda.nokia.com_bannerstates.yaml
+        schema: siteinfo/openapiv3/eda_oas_siteinfo.eda.nokia.com_bannerstates.json
+    - script:
+        path: siteinfo/banner_intent.py
+        type: config
+        trigger:
+          kind: Banner
+    - script:
+        path: siteinfo/bannerstate_intent.py
+        type: state
+        trigger:
+          kind: BannerState
+  dependencies:
+    - file:
+        path: siteinfo/pysrc/
+    - file:
+        path: common/
+    - file:
+        path: utils/
