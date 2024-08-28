@@ -1,0 +1,83 @@
+apiVersion: core.eda.nokia.com/v1
+kind: Manifest
+metadata:
+  name: components
+spec:
+  group: components.eda.nokia.com
+  version: v1alpha1
+  title: Components
+  description: |
+    This application provides functionality relating to hardware components for various Network Operating Systems.
+
+    It discovers hardware components and their properties, publishing these in a normalized format, and performing any alarming as necessary.
+  image: ghcr.io/nokia-eda/apps/components:24.8.1-rc
+  gitReference: d94df842f5925fd648a74a81e4e8e6f6e35d72ab
+  gitPathPrefix: /
+  author: Nokia
+  supportedEndpoints:
+    - "srl:0.0.0"
+    - "srl:23.7.1" # specific release
+    - "srl:23.10.*" # any release in a minor
+    - "srl:24.*" # any release in a major
+    - "sros:23.7.r1"
+  supportedCoreVersions:
+    - "v1.0.0"
+  appInfo:
+    readme: README.md
+    documentation: DOCUMENTATION.md
+    license: LICENSE
+    screenshots:
+      - png/screenshot1.png
+      - png/screenshot2.png
+  components:
+    - crd:
+        path: components/crds/components.eda.nokia.com_discoveries.yaml
+        schema: components/openapiv3/eda_oas_components.eda.nokia.com_discoveries.json
+        ui:
+          category: Components
+          name: Discovery
+        api:
+          expose: readWrite
+    - crd:
+        path: components/crds/components.eda.nokia.com_discoverystates.yaml
+        schema: components/openapiv3/eda_oas_components.eda.nokia.com_discoverystates.json
+    - crd:
+        path: components/crds/components.eda.nokia.com_discoveryaggregatestates.yaml
+        schema: components/openapiv3/eda_oas_components.eda.nokia.com_discoveryaggregatestates.json
+    - crd:
+        path: components/crds/components.eda.nokia.com_components.yaml
+        schema: components/openapiv3/eda_oas_components.eda.nokia.com_components.json
+        ui:
+          category: Components
+          name: Components
+        api:
+          expose: read
+    - script:
+        path: components/discovery.py
+        type: config
+        trigger:
+          kind: Discovery
+          #group:
+          #version:
+    - script:
+        path: components/discovery.py
+        type: state
+        trigger:
+          kind: DiscoveryState
+    - script:
+        path: components/discoveryaggregatestate.py
+        type: state
+        trigger:
+          kind: DiscoveryAggregateState
+          #group:
+          #version:
+    - view:
+        path: components/ui/components-dashboard-v1.json
+        ui:
+          category: Components
+          name: Components
+  dependencies:
+    - file:
+        path: common/
+    - file:
+        path: utils/
