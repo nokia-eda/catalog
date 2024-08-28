@@ -1,0 +1,99 @@
+apiVersion: core.eda.nokia.com/v1
+kind: Manifest
+metadata:
+  name: filters
+spec:
+  group: filters.eda.nokia.com
+  version: v1alpha1
+  title: Filters
+  description: |
+    This application provides resources relating to filtering for various Network Operating Systems.
+  image: ghcr.io/nokia-eda/apps/filters:24.8.1-rc
+  gitReference: d94df842f5925fd648a74a81e4e8e6f6e35d72ab
+  gitPathPrefix: /
+  author: Nokia
+  appInfo:
+    readme: README.md
+    documentation: DOCUMENTATION.md
+    license: LICENSE
+    screenshots:
+      - png/screenshot1.png
+      - png/screenshot2.png
+  supportedEndpoints:
+    - "srl:0.0.0"
+    - "srl:23.7.1" # specific release
+    - "srl:23.10.*" # any release in a minor
+    - "srl:24.*" # any release in a major
+    - "sros:23.7.r1"
+  supportedCoreVersions:
+    - "v1.0.0"
+  components:
+    - crd:
+        path: filters/crds/filters.eda.nokia.com_filters.yaml
+        schema: filters/openapiv3/eda_oas_filters.eda.nokia.com_filters.json
+        ui:
+          category: Filters
+          name: Filters
+        api:
+          expose: readWrite
+    - crd:
+        path: filters/crds/filters.eda.nokia.com_controlplanefilters.yaml
+        schema: filters/openapiv3/eda_oas_filters.eda.nokia.com_controlplanefilters.json
+        ui:
+          category: Filters
+          name: Control Plane Filters
+        api:
+          expose: readWrite
+    # - crd:
+    #     path: filters/crds/filters.eda.nokia.com_ipfilterstates.yaml
+    #     schema: filters/openapiv3/eda_oas_filters.eda.nokia.com_ipfilterstates.json
+    #     expose: none
+    - crd:
+        path: filters/crds/filters.eda.nokia.com_filterdeployments.yaml
+        schema: filters/openapiv3/eda_oas_filters.eda.nokia.com_filterdeployments.json
+        api:
+          expose: none
+    - crd:
+        path: filters/crds/filters.eda.nokia.com_mirrorfilterdeployments.yaml
+        schema: filters/openapiv3/eda_oas_filters.eda.nokia.com_mirrorfilterdeployments.json
+        api:
+          expose: none
+    - crd:
+        path: filters/crds/filters.eda.nokia.com_mirrorfilters.yaml
+        schema: filters/openapiv3/eda_oas_filters.eda.nokia.com_mirrorfilters.json
+        api:
+          expose: none
+    - script:
+        path: filters/filterdeployment_intent.py
+        type: config
+        trigger:
+          kind: FilterDeployment
+          #group:
+          #version:
+    - script:
+        path: filters/filter_intent.py
+        type: config
+        trigger:
+          kind: Filter
+    - script:
+        path: filters/controlplanefilter_intent.py
+        type: config
+        trigger:
+          kind: ControlPlaneFilter
+    - script:
+        path: filters/mirrorfilter_intent.py
+        type: config
+        trigger:
+          kind: MirrorFilter
+    - script:
+        path: filters/mirrorfilterdeployment_intent.py
+        type: config
+        trigger:
+          kind: MirrorFilterDeployment
+  dependencies:
+    - file:
+        path: filters/pysrc/
+    - file:
+        path: common/
+    - file:
+        path: utils/
