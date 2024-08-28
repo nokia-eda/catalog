@@ -1,0 +1,101 @@
+apiVersion: core.eda.nokia.com/v1
+kind: Manifest
+metadata:
+  name: interfaces
+spec:
+  group: interfaces.eda.nokia.com
+  version: v1alpha1
+  title: Interface
+  description: |
+    This application provides interface configuration and state for various Network Operating Systems.
+
+    It also supports alarming driven by interface operational state and the population of a normalized table to support queries across supported endpoints.
+  image: ghcr.io/nokia-eda/apps/interfaces:24.8.1-rc
+  author: Nokia
+  gitReference: d94df842f5925fd648a74a81e4e8e6f6e35d72ab
+  gitPathPrefix: /
+  supportedEndpoints:
+    - "srl:0.0.0"
+    - "srl:23.7.1" # specific release
+    - "srl:23.10.*" # any release in a minor
+    - "srl:24.*" # any release in a major
+    - "sros:23.7.r1"
+  supportedCoreVersions:
+    - "v1.0.0"
+  appInfo:
+    readme: README.md
+    documentation: DOCUMENTATION.md
+    license: LICENSE
+    screenshots:
+      - png/screenshot1.png
+      - png/screenshot2.png
+  components:
+    - crd:
+        path: interfaces/crds/interfaces.eda.nokia.com_interfaces.yaml
+        schema: interfaces/openapiv3/eda_oas_interfaces.eda.nokia.com_interfaces.json
+        api:
+          expose: readWrite
+        ui:
+          category: Topology
+          name: Interfaces
+        kubernetes:
+          exportPolicy: all # needed for connect controllers
+    - crd:
+        path: interfaces/crds/interfaces.eda.nokia.com_breakouts.yaml
+        schema: interfaces/openapiv3/eda_oas_interfaces.eda.nokia.com_breakouts.json
+        api:
+          expose: readWrite
+        ui:
+          category: Topology
+          name: Breakouts
+        kubernetes:
+          exportPolicy: all # needed for connect controllers      
+    - crd:
+        path: interfaces/crds/interfaces.eda.nokia.com_interfacestates.yaml
+        schema: interfaces/openapiv3/eda_oas_interfaces.eda.nokia.com_interfacestates.json
+        api:
+          expose: readWrite
+          # no ui section means do not present in the UI
+    - script:
+        path: interfaces/breakout_intent.py
+        type: config
+        trigger:
+          kind: Breakout
+    - script:
+        path: interfaces/interface_intent.py
+        type: config
+        trigger:
+          kind: Interface
+          #group:
+          #version:
+    - script:
+        path: interfaces/interface_intent.py
+        type: state
+        trigger:
+          kind: InterfaceState
+          #group:
+          #version:
+  # - view:
+  #    path: ui/dashboard.json
+  #    ui:
+  #      category: Topology
+  #      name: Interface
+  # - cr:
+  #     path: crs/create_interface_if1.yaml
+  # - cr:
+  #     path: crs/create_interface_if2.yaml
+  # - view:
+  #     path: ui/create.json
+  #     ui:
+  #       category: Topology
+  #       name: Interface
+  # - artifact:
+  #     path: image/interface_controller.img
+
+  dependencies:
+    - file:
+        path: interfaces/pysrc/
+    - file:
+        path: common/
+    - file:
+        path: utils/
