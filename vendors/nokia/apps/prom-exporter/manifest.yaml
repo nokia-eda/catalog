@@ -17,7 +17,7 @@ spec:
     - "srl:24.*" # any release in a major
     - "sros:23.7.r1"
   supportedCoreVersions:
-    - "v0.0.0-0"
+    - "v1.0.0"
   appInfo:
     readme: README.md
     documentation: DOCUMENTATION.md
