@@ -6,11 +6,11 @@ This EDA App creates and delivers custom notifications from a variety of sources
 
 ## Getting started
 
-After installing the App from the app store, you can configure your notification sources and destinations. 
-You have the option to choose between two sources—Alarm or Query—and can send notifications to multiple destinations. 
+After installing the App from the app store, you can configure your notification sources and destinations.
+You have the option to choose between two sources—Alarm or Query—and can send notifications to multiple destinations.
 The full list of supported providers is available [here](https://containrrr.dev/shoutrrr/v0.8).
 
-Sources are defined using the Notifier Custom Resource (CR), while destinations (referred to as Providers) are set up using the Provider CR. 
+Sources are defined using the Notifier Custom Resource (CR), while destinations (referred to as Providers) are set up using the Provider CR.
 You can mix and match sources, as well as send notifications to multiple destinations
 
 ## Examples
@@ -133,7 +133,7 @@ spec:
       - .db.cr-status.interfaces_eda_nokia_com.v1alpha1.interface.name
       - interface
       - node
-      template: "A new LLDP neighbor has appeared on interface {{index . \".db.cr-status.interfaces_eda_nokia_com.v1alpha1.interface.name\"}}: host name {{index . \"node\"}}, interface name {{index . \"interface\"}}"
+      template: "A new LLDP neighbor has appeared on interface {{ index . \".db.cr-status.interfaces_eda_nokia_com.v1alpha1.interface.name\" }}: host name {{ index . \"node\" }}, interface name {{ index . \"interface\" }}"
   providers:
   - discord
 ```
@@ -174,7 +174,7 @@ spec:
       fields:
       - .node.name
       - .node.srl.interface.name
-      template: "Hello, {{.node.name}} has an interface down: {{.node.srl.interface.name}}}}"
+      template: "🚨 {{ index . \".node.name\" }} has an interface down: {{ index . \"name\" }} 🚨"
   providers:
   - discord
   - teams
