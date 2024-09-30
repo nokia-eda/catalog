@@ -8,7 +8,7 @@ spec:
   title: Mirror
   description: |
     This application provides the ping workflow, along with mirroring services for interfaces, subinterfaces and ipfilters.
-  image: ghcr.io/nokia-eda/apps/oam:24.8.1-rc
+  image: ghcr.io/nokia-eda/apps/oam:24.8.2
   gitReference: d94df842f5925fd648a74a81e4e8e6f6e35d72ab
   gitPathPrefix: /
   author: Nokia
