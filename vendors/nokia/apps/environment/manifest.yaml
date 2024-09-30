@@ -10,14 +10,14 @@ spec:
     This application provides workflows for environment configuration.
 
     It deploys CLI plugins and environment files to targets.
-  image: ghcr.io/nokia-eda/apps/environment:24.8.1-rc
+  image: ghcr.io/nokia-eda/apps/environment:24.8.2
   gitReference: d94df842f5925fd648a74a81e4e8e6f6e35d72ab
   author: Nokia
   supportedEndpoints:
     - "srl:0.0.0"
     - "srl:24.*"
   supportedCoreVersions:
-    - "v1.0.0"
+    - "v1.0.1"
   appInfo:
     readme: README.md
     documentation: DOCUMENTATION.md
