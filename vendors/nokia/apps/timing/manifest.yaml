@@ -8,7 +8,7 @@ spec:
   title: Timing
   description: |
     This application provides underlay timing resources for various Network Operating Systems.
-  image: ghcr.io/nokia-eda/apps/timing:24.8.1-rc
+  image: ghcr.io/nokia-eda/apps/timing:24.8.2
   gitReference: d94df842f5925fd648a74a81e4e8e6f6e35d72ab
   gitPathPrefix: /
   author: Nokia
@@ -26,7 +26,7 @@ spec:
     - "srl:24.*" # any release in a major
     - "sros:23.7.r1"
   supportedCoreVersions:
-    - "v1.0.0"
+    - "v1.0.1"
   components:
     - crd:
         path: timing/crds/timing.eda.nokia.com_ntpclients.yaml
