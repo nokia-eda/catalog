@@ -7,7 +7,7 @@ spec:
   version: v1alpha1
   title: Site Information
   description: "This application provides resources describing the environment at a given site. \n\nThis includes managing DNS, host and domain names, banners and MOTD messages, and other site-specific information.\n"
-  image: ghcr.io/nokia-eda/apps/siteinfo:24.8.1-rc
+  image: ghcr.io/nokia-eda/apps/siteinfo:24.8.2
   author: Nokia
   gitReference: d94df842f5925fd648a74a81e4e8e6f6e35d72ab
   gitPathPrefix: /
@@ -15,7 +15,7 @@ spec:
     - "srl:0.0.0"
     - "srl:24.7.1"
   supportedCoreVersions:
-    - "v1.0.0"
+    - "v1.0.1"
   appInfo:
     readme: README.md
     documentation: DOCUMENTATION.md
