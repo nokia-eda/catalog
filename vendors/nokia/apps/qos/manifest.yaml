@@ -8,7 +8,7 @@ spec:
   title: QoS
   description: |
     This application provides resources relating to QOS for various Network Operating Systems.
-  image: ghcr.io/nokia-eda/apps/qos:24.8.1-rc
+  image: ghcr.io/nokia-eda/apps/qos:24.8.2
   gitReference: d94df842f5925fd648a74a81e4e8e6f6e35d72ab
   gitPathPrefix: /
   author: Nokia
@@ -26,7 +26,7 @@ spec:
     - "srl:24.*" # any release in a major
     - "sros:23.7.r1"
   supportedCoreVersions:
-    - "v1.0.0"
+    - "v1.0.1"
   components:
     - crd:
         path: qos/crds/qos.eda.nokia.com_classifiers.yaml
