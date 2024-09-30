@@ -10,7 +10,7 @@ spec:
     This application provides system monitoring functionality for various Network Operating Systems.
 
     It supports thresholding of CPU, memory, and disk utilization.
-  image: ghcr.io/nokia-eda/apps/system:24.8.1-rc
+  image: ghcr.io/nokia-eda/apps/system:24.8.2
   author: Nokia
   gitReference: d94df842f5925fd648a74a81e4e8e6f6e35d72ab
   gitPathPrefix: /
@@ -21,7 +21,7 @@ spec:
     - "srl:24.*"
     - "sros:23.7.r1"
   supportedCoreVersions:
-    - "v1.0.0"
+    - "v1.0.1"
   appInfo:
     readme: README.md
     documentation: DOCUMENTATION.md
