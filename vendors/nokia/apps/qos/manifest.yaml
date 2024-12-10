@@ -8,85 +8,80 @@ spec:
   title: QoS
   description: |
     This application provides resources relating to QOS for various Network Operating Systems.
-  image: ghcr.io/nokia-eda/apps/qos:24.8.2
-  gitReference: d94df842f5925fd648a74a81e4e8e6f6e35d72ab
+  image: ghcr.io/nokia-eda/apps/qos:24.12.1
+  gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
   author: Nokia
   appInfo:
-    readme: README.md
-    documentation: DOCUMENTATION.md
     license: LICENSE
-    screenshots:
-      - png/screenshot1.png
-      - png/screenshot2.png
+    categories:
+      - "networking"
   supportedEndpoints:
     - "srl:0.0.0"
-    - "srl:23.7.1" # specific release
-    - "srl:23.10.*" # any release in a minor
     - "srl:24.*" # any release in a major
     - "sros:23.7.r1"
   supportedCoreVersions:
-    - "v1.0.1"
+    - "v2.0.0"
   components:
     - crd:
-        path: qos/crds/qos.eda.nokia.com_classifiers.yaml
-        schema: qos/openapiv3/eda_oas_qos.eda.nokia.com_classifiers.json
+        path: qos/crds/qos.eda.nokia.com_ingresspolicys.yaml
+        schema: qos/openapiv3/eda_oas_qos.eda.nokia.com_ingresspolicys.json
         ui:
           category: QoS
-          name: Classifiers
+          name: Ingress Policies
         api:
           expose: readWrite
     - crd:
-        path: qos/crds/qos.eda.nokia.com_dot1prewritepolicys.yaml
-        schema: qos/openapiv3/eda_oas_qos.eda.nokia.com_dot1prewritepolicys.json
+        path: qos/crds/qos.eda.nokia.com_egresspolicys.yaml
+        schema: qos/openapiv3/eda_oas_qos.eda.nokia.com_egresspolicys.json
         ui:
           category: QoS
-          name: Dot1p Rewrites
+          name: Egress Policies
         api:
           expose: readWrite
     - crd:
-        path: qos/crds/qos.eda.nokia.com_dscprewritepolicys.yaml
-        schema: qos/openapiv3/eda_oas_qos.eda.nokia.com_dscprewritepolicys.json
+        path: qos/crds/qos.eda.nokia.com_policydeployments.yaml
+        schema: qos/openapiv3/eda_oas_qos.eda.nokia.com_policydeployments.json
         ui:
           category: QoS
-          name: DSCP Rewrites
+          name: Policy Deployment
         api:
           expose: readWrite
     - crd:
-        path: qos/crds/qos.eda.nokia.com_classifierdeployments.yaml
-        schema: qos/openapiv3/eda_oas_qos.eda.nokia.com_classifierdeployments.json
+        path: qos/crds/qos.eda.nokia.com_forwardingclasss.yaml
+        schema: qos/openapiv3/eda_oas_qos.eda.nokia.com_forwardingclasss.json
+        ui:
+          category: QoS
+          name: Forwarding Class
         api:
-          expose: none
+          expose: readWrite
+        kubernetes:
+          importPolicy: all
     - crd:
-        path: qos/crds/qos.eda.nokia.com_rewritepolicydeployments.yaml
-        schema: qos/openapiv3/eda_oas_qos.eda.nokia.com_rewritepolicydeployments.json
+        path: qos/crds/qos.eda.nokia.com_queues.yaml
+        schema: qos/openapiv3/eda_oas_qos.eda.nokia.com_queues.json
+        ui:
+          category: QoS
+          name: Queue
         api:
-          expose: none
+          expose: readWrite
+        kubernetes:
+          importPolicy: all
     - script:
-        path: qos/classifier_intent.py
+        path: qos/ingresspolicy_intent.py
         type: config
         trigger:
-          kind: Classifier
+          kind: IngressPolicy
     - script:
-        path: qos/classifierdeployment_intent.py
+        path: qos/egresspolicy_intent.py
         type: config
         trigger:
-          kind: ClassifierDeployment
+          kind: EgressPolicy
     - script:
-        path: qos/dot1prewritepolicy_intent.py
+        path: qos/policydeployment_intent.py
         type: config
         trigger:
-          kind: Dot1pRewritePolicy
-    - script:
-        path: qos/dscprewritepolicy_intent.py
-        type: config
-        trigger:
-          kind: DSCPRewritePolicy
-    - script:
-        path: qos/rewritepolicydeployment_intent.py
-        type: config
-        trigger:
-          kind: RewritePolicyDeployment
+          kind: PolicyDeployment
   dependencies:
     - file:
         path: qos/pysrc/
@@ -96,3 +91,5 @@ spec:
         path: utils/
     - file:
         path: filters/
+    - file:
+        path: interfaces/
