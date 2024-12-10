@@ -8,26 +8,41 @@ spec:
   title: Protocols
   description: |
     This application provides resources related to routing protocols for various Network Operating Systems.
-  image: ghcr.io/nokia-eda/apps/protocols:24.8.2
-  gitReference: d94df842f5925fd648a74a81e4e8e6f6e35d72ab
+  image: ghcr.io/nokia-eda/apps/protocols:24.12.1
+  gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
   author: Nokia
   appInfo:
-    readme: README.md
-    documentation: DOCUMENTATION.md
     license: LICENSE
-    screenshots:
-      - png/screenshot1.png
-      - png/screenshot2.png
+    categories:
+      - "networking"
   supportedEndpoints:
     - "srl:0.0.0"
-    - "srl:23.7.1" # specific release
-    - "srl:23.10.*" # any release in a minor
     - "srl:24.*" # any release in a major
     - "sros:23.7.r1"
   supportedCoreVersions:
-    - "v1.0.1"
+    - "v2.0.0"
   components:
+    - view:
+        path: protocols/ui/defaultbgppeer_dashboard_v1.0.json
+        ui:
+          category: Default Routing
+          name: Default BGP Peers
+    - view:
+        path: protocols/ui/defaultbgpgroup_dashboard_v1.0.json
+        ui:
+          category: Default Routing
+          name: Default BGP Groups
+    - view:
+        path: protocols/ui/defaultroutereflector_dashboard_v1.0.json
+        ui:
+          category: Default Routing
+          name: Default Route Reflectors
+    - view:
+        path: protocols/ui/defaultroutereflectorclient_dashboard_v1.0.json
+        ui:
+          category: Default Routing
+          name: Default Route Reflector Clients
     - crd:
         path: protocols/crds/protocols.eda.nokia.com_defaultbgpgroups.yaml
         schema: protocols/openapiv3/eda_oas_protocols.eda.nokia.com_defaultbgpgroups.json
@@ -259,3 +274,5 @@ spec:
         path: routing/
     - file:
         path: services/
+    - file:
+        path: security/
