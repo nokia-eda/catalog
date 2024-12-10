@@ -10,25 +10,20 @@ spec:
     This application provides interface configuration and state for various Network Operating Systems.
 
     It also supports alarming driven by interface operational state and the population of a normalized table to support queries across supported endpoints.
-  image: ghcr.io/nokia-eda/apps/interfaces:24.8.2
+  image: ghcr.io/nokia-eda/apps/interfaces:24.12.1
   author: Nokia
-  gitReference: d94df842f5925fd648a74a81e4e8e6f6e35d72ab
+  gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
   supportedEndpoints:
     - "srl:0.0.0"
-    - "srl:23.7.1" # specific release
-    - "srl:23.10.*" # any release in a minor
     - "srl:24.*" # any release in a major
     - "sros:23.7.r1"
   supportedCoreVersions:
-    - "v1.0.1"
+    - "v2.0.0"
   appInfo:
-    readme: README.md
-    documentation: DOCUMENTATION.md
     license: LICENSE
-    screenshots:
-      - png/screenshot1.png
-      - png/screenshot2.png
+    categories:
+      - "networking"
   components:
     - crd:
         path: interfaces/crds/interfaces.eda.nokia.com_interfaces.yaml
