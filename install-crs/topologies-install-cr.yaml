@@ -1,0 +1,15 @@
+apiVersion: core.eda.nokia.com/v1
+kind: Workflow
+metadata:
+  name: topologies-nokia-install
+  namespace: eda-system
+spec:
+  type: app-installer
+  input:
+    operation: install
+    app: topologies
+    catalog: eda-catalog-builtin-apps
+    vendor: nokia
+    version:
+      value: v2.0.0+24.12.1
+      type: semver
