@@ -1,12 +1,12 @@
 apiVersion: core.eda.nokia.com/v1
 kind: Workflow
 metadata:
-  name: protocols-nokia-install
+  name: protocols-nokia-delete
   namespace: eda-system
 spec:
   type: app-installer
   input:
-    operation: install
+    operation: delete
     app: protocols
     catalog: eda-catalog-builtin-apps
     vendor: nokia
