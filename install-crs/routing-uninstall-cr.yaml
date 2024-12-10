@@ -1,12 +1,12 @@
 apiVersion: core.eda.nokia.com/v1
 kind: Workflow
 metadata:
-  name: routing-nokia-install
+  name: routing-nokia-delete
   namespace: eda-system
 spec:
   type: app-installer
   input:
-    operation: install
+    operation: delete
     app: routing
     catalog: eda-catalog-builtin-apps
     vendor: nokia
