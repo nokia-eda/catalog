@@ -1,0 +1,122 @@
+apiVersion: core.eda.nokia.com/v1
+kind: Manifest
+metadata:
+  name: topologies
+spec:
+  group: topologies.eda.nokia.com
+  version: v1alpha1
+  title: Topologies
+  description: |
+    This application provides physical topology support
+  image: ghcr.io/nokia-eda/apps/topologies:24.12.1
+  gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
+  gitPathPrefix: /
+  author: Nokia
+  appInfo:
+    license: LICENSE
+    categories:
+      - "networking"
+  supportedEndpoints:
+    - "srl:0.0.0"
+    - "srl:24.*" # any release in a major
+  supportedCoreVersions:
+    - "v2.0.0"
+  components:
+    - crd:
+        path: topologies/crds/topologies.eda.nokia.com_topolinkmonitors.yaml
+        schema: topologies/openapiv3/eda_oas_topologies.eda.nokia.com_topolinkmonitors.json
+        namespaced: false
+        api:
+          expose: none
+    - crd:
+        path: topologies/crds/topologies.eda.nokia.com_topolinkstates.yaml
+        schema: topologies/openapiv3/eda_oas_topologies.eda.nokia.com_topolinkstates.json
+        api:
+          expose: none
+    - crd:
+        path: topologies/crds/topologies.eda.nokia.com_topologies.yaml
+        schema: topologies/openapiv3/eda_oas_topologies.eda.nokia.com_topologies.json
+        namespaced: false
+        api:
+          expose: readWrite
+    - crd:
+        path: topologies/crds/topologies.eda.nokia.com_topologygroupings.yaml
+        schema: topologies/openapiv3/eda_oas_topologies.eda.nokia.com_topologygroupings.json
+        namespaced: false
+        api:
+          expose: readWrite
+    - crd:
+        path: topologies/crds/topologies.eda.nokia.com_cpuutiloverlays.yaml
+        schema: topologies/openapiv3/eda_oas_topologies.eda.nokia.com_cpuutiloverlays.json
+        namespaced: false
+        api:
+          expose: readWrite
+    - crd:
+        path: topologies/crds/topologies.eda.nokia.com_deviationoverlays.yaml
+        schema: topologies/openapiv3/eda_oas_topologies.eda.nokia.com_deviationoverlays.json
+        namespaced: false
+        api:
+          expose: readWrite
+    - crd:
+        path: topologies/crds/topologies.eda.nokia.com_memoryoverlays.yaml
+        schema: topologies/openapiv3/eda_oas_topologies.eda.nokia.com_memoryoverlays.json
+        namespaced: false
+        api:
+          expose: readWrite
+    - crd:
+        path: topologies/crds/topologies.eda.nokia.com_diskoverlays.yaml
+        schema: topologies/openapiv3/eda_oas_topologies.eda.nokia.com_diskoverlays.json
+        namespaced: false
+        api:
+          expose: readWrite
+    - script:
+        path: topologies/topolinkmonitor_intent.py
+        type: config
+        trigger:
+          kind: TopoLinkMonitor
+    - script:
+        path: topologies/topolinkstate_intent.py
+        type: state
+        trigger:
+          kind: TopoLinkState
+    - script:
+        path: topologies/topology_intent.py
+        type: state
+        trigger:
+          kind: Topology
+    - script:
+        path: topologies/topology_grouping_intent.py
+        type: state
+        trigger:
+          kind: TopologyGrouping
+    - script:
+        path: topologies/cpu_util_overlay_intent.py
+        type: state
+        trigger:
+          kind: CPUUtilOverlay
+    - script:
+        path: topologies/deviation_overlay_intent.py
+        type: state
+        trigger:
+          kind: DeviationOverlay
+    - script:
+        path: topologies/memory_overlay_intent.py
+        type: state
+        trigger:
+          kind: MemoryOverlay
+    - script:
+        path: topologies/disk_overlay_intent.py
+        type: state
+        trigger:
+          kind: DiskOverlay
+    - cr:
+        path: topologies/resources/default.yaml
+  dependencies:
+    - file:
+        path: topologies/pysrc/
+    - file:
+        path: common/
+    - file:
+        path: utils/
+    - file:
+        path: core/pysrc/
