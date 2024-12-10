@@ -1,0 +1,15 @@
+apiVersion: core.eda.nokia.com/v1
+kind: Workflow
+metadata:
+  name: aaa-nokia-delete
+  namespace: eda-system
+spec:
+  type: app-installer
+  input:
+    operation: delete
+    app: aaa
+    catalog: eda-catalog-builtin-apps
+    vendor: nokia
+    version:
+      value: v2.0.0+24.12.1
+      type: semver
