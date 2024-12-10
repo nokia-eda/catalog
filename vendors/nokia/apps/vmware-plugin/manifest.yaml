@@ -10,18 +10,19 @@ spec:
     This application provides the means to deploy instances of the plugin that integrates vmware with the Connect application.
 
     After installing this app, a new CRD, VmwarePluginInstance, is exposed. Creating such a CR will deploy an instance of the vmware plugin.
-  image: ghcr.io/nokia-eda/apps/vmware-plugin:v1.0.0
+  image: ghcr.io/nokia-eda/apps/vmware-plugin:v2.0.0
   author: Nokia
-  supportedEndpoints:
-    - "srl:0.0.0"
   supportedCoreVersions:
-    - "v1.0.0"
+    - "v2.0.0"
   appInfo:
     readme: app-meta/README.md
     license: app-meta/license.txt
+    categories:
+      - "integrations"
   components:
     - crd:
         path: vmwareplugininstance/crds/vmware.eda.nokia.com_vmwareplugininstances.yaml
+        namespaced: false
         schema: vmwareplugininstance/openapiv3/eda_oas_vmware.eda.nokia.com_vmwareplugininstances.json
         ui:
           category: Connect
@@ -46,4 +47,4 @@ spec:
         path: vmwareplugininstance/common/
     - container:
         name: vmware-plugin-container
-        image: eda.nokia.com/nokia-eda/eda-connect-vmware-plugin:v1.0.0
+        image: eda.nokia.com/nokia-eda/eda-connect-vmware-plugin:v2.0.0
