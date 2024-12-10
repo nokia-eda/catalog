@@ -11,25 +11,19 @@ spec:
 
     The following anomalies are supported:
     - MTUMismatch - MTU mismatch between two interfaces
-  image: ghcr.io/nokia-eda/apps/anomalies:24.8.2
-  gitReference: d94df842f5925fd648a74a81e4e8e6f6e35d72ab
+  image: ghcr.io/nokia-eda/apps/anomalies:24.12.1
+  gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
   author: Nokia
   supportedEndpoints:
     - "srl:0.0.0"
-    - "srl:23.7.1" # specific release
-    - "srl:23.10.*" # any release in a minor
     - "srl:24.*" # any release in a major
-    - "sros:23.7.r1"
   supportedCoreVersions:
-    - "v1.0.1"
+    - "v2.0.0"
   appInfo:
-    readme: README.md
-    documentation: DOCUMENTATION.md
     license: LICENSE
-    screenshots:
-      - png/screenshot1.png
-      - png/screenshot2.png
+    categories:
+      - "monitoring"
   components:
     - crd:
         path: anomalies/crds/anomalies.eda.nokia.com_mtus.yaml
