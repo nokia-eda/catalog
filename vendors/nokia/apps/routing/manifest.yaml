@@ -8,26 +8,31 @@ spec:
   title: Routing
   description: |
     This application provides underlay routing resources for various Network Operating Systems.
-  image: ghcr.io/nokia-eda/apps/routing:24.8.2
-  gitReference: d94df842f5925fd648a74a81e4e8e6f6e35d72ab
+  image: ghcr.io/nokia-eda/apps/routing:24.12.1
+  gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
   author: Nokia
   appInfo:
-    readme: README.md
-    documentation: DOCUMENTATION.md
     license: LICENSE
-    screenshots:
-      - png/screenshot1.png
-      - png/screenshot2.png
+    categories:
+      - "networking"
   supportedEndpoints:
     - "srl:0.0.0"
-    - "srl:23.7.1" # specific release
-    - "srl:23.10.*" # any release in a minor
     - "srl:24.*" # any release in a major
     - "sros:23.7.r1"
   supportedCoreVersions:
-    - "v1.0.1"
+    - "v2.0.0"
   components:
+    - view:
+        path: routing/ui/defaultinterface_dashboard_v1.0.json
+        ui:
+          category: Default Routing
+          name: Default Interfaces
+    - view:
+        path: routing/ui/defaultrouter_dashboard_v1.0.json
+        ui:
+          category: Default Routing
+          name: Default Routers
     - crd:
         path: routing/crds/routing.eda.nokia.com_defaultinterfaces.yaml
         schema: routing/openapiv3/eda_oas_routing.eda.nokia.com_defaultinterfaces.json
@@ -67,6 +72,19 @@ spec:
         schema: routing/openapiv3/eda_oas_routing.eda.nokia.com_drainstates.json
         api:
           expose: none
+    - crd:
+        path: routing/crds/routing.eda.nokia.com_systeminterfaces.yaml
+        schema: routing/openapiv3/eda_oas_routing.eda.nokia.com_systeminterfaces.json
+        ui:
+          category: System Interface
+          name: System Interfaces
+        api:
+          expose: readWrite
+    - crd:
+        path: routing/crds/routing.eda.nokia.com_systeminterfacestates.yaml
+        schema: routing/openapiv3/eda_oas_routing.eda.nokia.com_systeminterfacestates.json
+        api:
+          expose: none
     - script:
         path: routing/defaultinterface_intent.py
         type: config
@@ -97,6 +115,16 @@ spec:
         type: state
         trigger:
           kind: DrainState
+    - script:
+        path: routing/systeminterface_intent.py
+        type: config
+        trigger:
+          kind: SystemInterface
+    - script:
+        path: routing/systeminterfacestate_intent.py
+        type: state
+        trigger:
+          kind: SystemInterfaceState
   dependencies:
     - file:
         path: routing/pysrc/
