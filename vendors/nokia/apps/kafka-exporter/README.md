@@ -21,11 +21,11 @@ metadata:
 spec:
   brokers: kafka-service:9092
   exports:
-    - path: .db.alarm
+    - path: .namespace.alarms.alarm
       topic: alarms
-    - path: .db.current-alarm
+    - path: .namespace.alarms.current-alarm
       topic: alarms-current
-    - path: .db.alarm.history
+    - path: .namespace.alarms.alarm.history
       topic: alarms-history
 ```
 
@@ -39,11 +39,11 @@ metadata:
 spec:
   brokers: kafka-service:9092
   exports:
-    - path: .node.srl.interface.statistics
+    - path: .namespace.node.srl.interface.statistics
       topic: interfaces
       mode: periodic
       period: 10s
-    - path: .node.srl.interface
+    - path: .namespace.node.srl.interface
       fields:
         - oper-state
         - admin-state
