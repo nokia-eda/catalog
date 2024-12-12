@@ -17,10 +17,11 @@ apiVersion: prom.eda.nokia.com/v1alpha1
 kind: Export
 metadata:
   name: interface-stats
+  namespace: eda-system
 spec:
   exports:
     - prefix: interfaces
-      path: .node.srl.interface.statistics
+      path: .namespace.node.srl.interface.statistics
 ```
 
 - LLDP statistics:
@@ -30,8 +31,9 @@ apiVersion: prom.eda.nokia.com/v1alpha1
 kind: Export
 metadata:
   name: lldp-stats
+  namespace: eda-system
 spec:
   exports:
   - prefix: lldp
-    path: .node.srl.system.lldp.interface.statistics
+    path: .namespace.node.srl.system.lldp.interface.statistics
 ```
