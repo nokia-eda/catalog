@@ -24,6 +24,7 @@ apiVersion: notifiers.eda.nokia.com/v1
 kind: Notifier
 metadata:
   name: alarms-to-discord
+  namespace: eda-system
 spec:
   description: "Notifier for all alarms to Discord"
   enabled: true
@@ -42,6 +43,7 @@ apiVersion: notifiers.eda.nokia.com/v1
 kind: Provider
 metadata:
   name: discord
+  namespace: eda-system
 spec:
   enabled: true
   uri: discord://${TOKEN}@${WEBHOOKID}
@@ -55,7 +57,8 @@ Notifier CR
 apiVersion: notifiers.eda.nokia.com/v1
 kind: Notifier
 metadata:
-  name: filtered-to-discord
+  name: interface-down-alarm-to-discord
+  namespace: eda-system
 spec:
   description: "Send InterfaceDown Alarm only"
   enabled: true
@@ -74,6 +77,7 @@ apiVersion: notifiers.eda.nokia.com/v1
 kind: Provider
 metadata:
   name: discord
+  namespace: eda-system
 spec:
   enabled: true
   uri: discord://${TOKEN}@${WEBHOOKID}
@@ -88,6 +92,7 @@ apiVersion: notifiers.eda.nokia.com/v1
 kind: Notifier
 metadata:
   name: alarms-to-discord
+  namespace: eda-system
 spec:
   description: "Notifier for all alarms except InterfaceDown to Discord"
   enabled: true
@@ -108,6 +113,7 @@ apiVersion: notifiers.eda.nokia.com/v1
 kind: Provider
 metadata:
   name: discord
+  namespace: eda-system
 spec:
   enabled: true
   uri: discord://${TOKEN}@${WEBHOOKID}
@@ -122,20 +128,22 @@ apiVersion: notifiers.eda.nokia.com/v1
 kind: Notifier
 metadata:
   name: new-lldp-neighbor
+  namespace: eda-system
 spec:
   description: "Notifier for new LLDP neighbors"
   enabled: true
   sources:
     query:
       title: "LLDP neighbor - new"
-      table: .db.cr-status.interfaces_eda_nokia_com.v1alpha1.interface.status.members.neighbors
+      table: .namespace.resources.cr-status.interfaces_eda_nokia_com.v1alpha1.interface.status.members.neighbors
       fields:
-      - .db.cr-status.interfaces_eda_nokia_com.v1alpha1.interface.name
+      - .namespace.resources.cr-status.interfaces_eda_nokia_com.v1alpha1.interface.name
       - interface
       - node
-      template: "A new LLDP neighbor has appeared on interface {{ index . \".db.cr-status.interfaces_eda_nokia_com.v1alpha1.interface.name\" }}: host name {{ index . \"node\" }}, interface name {{ index . \"interface\" }}"
+      template: "A new LLDP neighbor has appeared on interface {{index . \".namespace.resources.cr-status.interfaces_eda_nokia_com.v1alpha1.interface.name\"}}: host name {{index . \"node\"}}, interface name {{index . \"interface\"}}"
   providers:
   - discord
+
 ```
 
 Provider CR
@@ -145,6 +153,7 @@ apiVersion: notifiers.eda.nokia.com/v1
 kind: Provider
 metadata:
   name: discord
+  namespace: eda-system
 spec:
   enabled: true
   uri: discord://${TOKEN}@${WEBHOOKID}
@@ -159,6 +168,7 @@ apiVersion: notifiers.eda.nokia.com/v1
 kind: Notifier
 metadata:
   name: interface-down-to-discord
+  namespace: eda-system
 spec:
   description: "Notifier for interface down events"
   enabled: true
@@ -169,7 +179,7 @@ spec:
       exclude:
       - InterfaceMemberDown
     query:
-      table: .node.srl.interface
+      table: .namespace.node.srl.interface
       where: oper-state = "down"
       fields:
       - .node.name
@@ -187,6 +197,7 @@ apiVersion: notifiers.eda.nokia.com/v1
 kind: Provider
 metadata:
   name: discord
+  namespace: eda-system
 spec:
   enabled: true
   uri: discord://${TOKEN}@${WEBHOOKID}
@@ -195,6 +206,7 @@ apiVersion: notifiers.eda.nokia.com/v1
 kind: Provider
 metadata:
   name: teams
+  namespace: eda-system
 spec:
   enabled: true
   uri: teams://group@tenant/altid/groupowner

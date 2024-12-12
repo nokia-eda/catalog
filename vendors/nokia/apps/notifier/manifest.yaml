@@ -8,7 +8,7 @@ spec:
   title: Notifier
   author: Nokia
   description: Notifies users using external providers
-  image: ghcr.io/nokia-eda/apps/notifier:v1.0.0
+  image: ghcr.io/nokia-eda/apps/notifier:v2.0.0
   gitPathPrefix: /
   supportedEndpoints:
     - "srl:0.0.0"
@@ -17,7 +17,7 @@ spec:
     - "srl:24.*" # any release in a major
     - "sros:23.7.r1"
   supportedCoreVersions:
-    - "v1.0.0"
+    - "v2.0.0"
   appInfo:
     readme: README.md
     documentation: DOCUMENTATION.md
@@ -25,10 +25,14 @@ spec:
     screenshots:
       - notifier/assets/screenshot1.png
       - notifier/assets/screenshot2.png
+    categories:
+      - "integrations"
+    ociSpecVersion: v1.0.0
   components:
     - crd:
         path: notifier/config/crd/bases/notifiers.eda.nokia.com_notifiers.yaml
         schema: notifier/docs/openapiv3/eda_oas_notifiers.eda.nokia.com_notifiers.json
+        namespaced: false
         api:
           expose: readWrite
         ui:
@@ -40,6 +44,7 @@ spec:
     - crd:
         path: notifier/config/crd/bases/notifiers.eda.nokia.com_providers.yaml
         schema: notifier/docs/openapiv3/eda_oas_notifiers.eda.nokia.com_providers.json
+        namespaced: false
         api:
           expose: readWrite
         ui:
@@ -49,8 +54,9 @@ spec:
           exportPolicy: all
           importPolicy: spec
     - cr:
-        path: notifier/manifests/deployment.yaml
+        path: notifier/manifests/app_deployment.yaml
   dependencies:
     - container:
         name: notifier-controller
-        image: ghcr.io/nokia-eda/apps/notifier-controller:v1.0.0
+        image: ghcr.io/nokia-eda/apps/notifier-controller:v2.0.0
+
