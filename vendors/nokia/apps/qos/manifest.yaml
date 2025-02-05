@@ -8,7 +8,7 @@ spec:
   title: QoS
   description: |
     This application provides resources relating to QOS for various Network Operating Systems.
-  image: ghcr.io/nokia-eda/apps/qos:24.12.1
+  image: ghcr.io/nokia-eda/apps/qos:24.12.2
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
   author: Nokia
