@@ -3,7 +3,7 @@ kind: Manifest
 metadata:
   name: kafka-exporter
 spec:
-  image: ghcr.io/nokia-eda/apps/kafka-exporter:v2.0.0
+  image: ghcr.io/nokia-eda/apps/kafka-exporter:v2.0.1
   group: kafka.eda.nokia.com
   version: v1alpha1
   title: Kafka Exporter
@@ -17,6 +17,7 @@ spec:
     - "sros:23.7.r1"
   supportedCoreVersions:
     - "v2.0.0"
+    - "v0.0.0-0"
   appInfo:
     readme: README.md
     documentation: DOCUMENTATION.md
@@ -44,5 +45,5 @@ spec:
   dependencies:
     - container:
         name: kafka-exporter-controller
-        image: ghcr.io/nokia-eda/apps/kafka-exporter-controller:v2.0.0
+        image: ghcr.io/nokia-eda/apps/kafka-exporter-controller:v2.0.1
 
