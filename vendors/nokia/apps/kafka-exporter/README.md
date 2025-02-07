@@ -39,11 +39,11 @@ metadata:
 spec:
   brokers: kafka-service:9092
   exports:
-    - path: .namespace.node.srl.interface.statistics
+    - path: .node.srl.interface.statistics
       topic: interfaces
       mode: periodic
       period: 10s
-    - path: .namespace.node.srl.interface
+    - path: .node.srl.interface
       fields:
         - oper-state
         - admin-state
