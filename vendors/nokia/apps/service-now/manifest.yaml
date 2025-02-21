@@ -1,0 +1,60 @@
+apiVersion: core.eda.nokia.com/v1
+kind: Manifest
+metadata:
+  name: service-now
+spec:
+  group: snow.eda.nokia.com
+  version: v1alpha1
+  title: ServiceNow
+  description: This application creates ServiceNow incidents based on alarms from the network.
+  image: ghcr.io/nokia-eda/apps/service-now:v1.0.0
+  author: Nokia
+  supportedEndpoints:
+    - "srl:0.0.0"
+    - "srl:23.7.1" # specific release
+    - "srl:23.10.*" # any release in a minor
+    - "srl:24.*" # any release in a major
+    - "sros:23.7.r1"
+  supportedCoreVersions:
+    - "v2.0.0"
+  appInfo:
+    readme: README.md
+    documentation: DOCUMENTATION.md
+    license: LICENSE
+    screenshots:
+      - snow/assets/screenshot1.png
+    categories:
+      - "integrations"
+    ociSpecVersion: v1.0.0
+  components:
+    - crd:
+        path: snow/config/crd/bases/snow.eda.nokia.com_incidents.yaml
+        schema: snow/docs/openapiv3/eda_oas_snow.eda.nokia.com_incidents.json
+        namespaced: false
+        api:
+          expose: readWrite
+        ui:
+          category: ServiceNow
+          name: Incident
+        kubernetes:
+          exportPolicy: all
+          importPolicy: all
+    - crd:
+        path: snow/config/crd/bases/snow.eda.nokia.com_instances.yaml
+        schema: snow/docs/openapiv3/eda_oas_snow.eda.nokia.com_instances.json
+        namespaced: false
+        api:
+          expose: readWrite
+        ui:
+          category: ServiceNow
+          name: Instance
+        kubernetes:
+          exportPolicy: all
+          importPolicy: all
+    - cr:
+        path: snow/manifests/app_deployment.yaml
+  dependencies:
+    - container:
+        name: service-now-controller
+        image: ghcr.io/nokia-eda/apps/service-now-controller:v1.0.0
+
