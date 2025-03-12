@@ -10,7 +10,7 @@ spec:
     This application provides device bootstrap for various Network Operating Systems.
 
     It generates initial device configuration for Zero Touch Provisioning (ZTP).
-  image: ghcr.io/nokia-eda/apps/bootstrap:24.12.2
+  image: ghcr.io/nokia-eda/apps/bootstrap:24.12.3
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
   author: Nokia
