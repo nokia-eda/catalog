@@ -10,7 +10,7 @@ spec:
     This application provides functionality relating to hardware components for various Network Operating Systems.
 
     It discovers hardware components and their properties, publishing these in a normalized format, and performing any alarming as necessary.
-  image: ghcr.io/nokia-eda/apps/components:24.12.2
+  image: ghcr.io/nokia-eda/apps/components:24.12.3
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
   author: Nokia
