@@ -3,7 +3,7 @@ kind: Manifest
 metadata:
   name: connect
 spec:
-  image: ghcr.io/nokia-eda/apps/connect:v2.0.0
+  image: ghcr.io/nokia-eda/apps/connect:v2.0.1
   group: connect.eda.nokia.com
   version: v1
   title: Cloud Connect
@@ -75,7 +75,7 @@ spec:
   dependencies:
     - container:
         name: connect-plugin-controller
-        image: eda.nokia.com/nokia-eda/eda-connect-plugin-controller:v2.0.0
+        image: eda.nokia.com/nokia-eda/eda-connect-plugin-controller:v2.0.1
     - container:
         name: connect-interface-controller
-        image: eda.nokia.com/nokia-eda/eda-connect-interface-controller:v2.0.0
+        image: eda.nokia.com/nokia-eda/eda-connect-interface-controller:v2.0.1
