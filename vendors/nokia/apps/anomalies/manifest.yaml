@@ -11,7 +11,7 @@ spec:
 
     The following anomalies are supported:
     - MTUMismatch - MTU mismatch between two interfaces
-  image: ghcr.io/nokia-eda/apps/anomalies:24.12.3
+  image: ghcr.io/nokia-eda/apps/anomalies:24.12.4
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
   author: Nokia
