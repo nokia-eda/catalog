@@ -17,7 +17,7 @@ spec:
       vendor: nokia
       version: "v3.0.*"
   supportedCoreVersions:
-    - "v2.0.0-0"
+    - "v2.0.0"
   appInfo:
     readme: app-meta/README.md
     license: app-meta/eda-license.txt
