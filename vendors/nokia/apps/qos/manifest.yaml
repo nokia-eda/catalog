@@ -3,88 +3,97 @@ kind: Manifest
 metadata:
   name: qos
 spec:
-  group: qos.eda.nokia.com
-  version: v1alpha1
-  title: QoS
-  description: |
-    This application provides resources relating to QOS for various Network Operating Systems.
-  image: ghcr.io/nokia-eda/apps/qos:24.12.4
-  gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
-  gitPathPrefix: /
-  author: Nokia
   appInfo:
-    license: LICENSE
     categories:
-      - "networking"
-  supportedEndpoints:
-    - "srl:0.0.0"
-    - "srl:24.*" # any release in a major
-    - "sros:23.7.r1"
-  supportedCoreVersions:
-    - "v2.0.0"
+      - networking
+    license: LICENSE
+    readme: README.md
+    ociSpecVersion: v1.0.0
+  author: Nokia
   components:
     - crd:
+        api:
+          expose: readWrite
+        namespaced: true
         path: qos/crds/qos.eda.nokia.com_ingresspolicys.yaml
         schema: qos/openapiv3/eda_oas_qos.eda.nokia.com_ingresspolicys.json
         ui:
           category: QoS
           name: Ingress Policies
+    - crd:
         api:
           expose: readWrite
-    - crd:
+        namespaced: true
         path: qos/crds/qos.eda.nokia.com_egresspolicys.yaml
         schema: qos/openapiv3/eda_oas_qos.eda.nokia.com_egresspolicys.json
         ui:
           category: QoS
           name: Egress Policies
+    - crd:
         api:
           expose: readWrite
-    - crd:
+        namespaced: true
         path: qos/crds/qos.eda.nokia.com_policydeployments.yaml
         schema: qos/openapiv3/eda_oas_qos.eda.nokia.com_policydeployments.json
         ui:
           category: QoS
           name: Policy Deployment
+    - crd:
         api:
           expose: readWrite
+        namespaced: true
+        path: qos/crds/qos.eda.nokia.com_policyattachments.yaml
+        schema: qos/openapiv3/eda_oas_qos.eda.nokia.com_policyattachments.json
+        ui:
+          category: QoS
+          name: Policy Attachment
     - crd:
+        api:
+          expose: readWrite
+        kubernetes:
+          importPolicy: all
+        namespaced: true
         path: qos/crds/qos.eda.nokia.com_forwardingclasss.yaml
         schema: qos/openapiv3/eda_oas_qos.eda.nokia.com_forwardingclasss.json
         ui:
           category: QoS
           name: Forwarding Class
+    - crd:
         api:
           expose: readWrite
         kubernetes:
           importPolicy: all
-    - crd:
+        namespaced: true
         path: qos/crds/qos.eda.nokia.com_queues.yaml
         schema: qos/openapiv3/eda_oas_qos.eda.nokia.com_queues.json
         ui:
           category: QoS
           name: Queue
-        api:
-          expose: readWrite
-        kubernetes:
-          importPolicy: all
     - script:
-        path: qos/ingresspolicy_intent.py
-        type: config
+        path: qos/intents/ingresspolicy/ingresspolicy_intent.py
         trigger:
           kind: IngressPolicy
-    - script:
-        path: qos/egresspolicy_intent.py
         type: config
+    - script:
+        path: qos/intents/egresspolicy/egresspolicy_intent.py
         trigger:
           kind: EgressPolicy
-    - script:
-        path: qos/policydeployment_intent.py
         type: config
+    - script:
+        path: qos/intents/policydeployment/policydeployment_intent.py
         trigger:
           kind: PolicyDeployment
+        type: config
+    - script:
+        path: qos/intents/policyattachment/policyattachment_intent.py
+        trigger:
+          kind: PolicyAttachment
+        type: config
   dependencies:
     - file:
-        path: qos/pysrc/
+        path: qos/intents
+    - file:
+        path: qos/api/v1alpha1/pysrc
     - file:
         path: common/
     - file:
@@ -93,3 +102,20 @@ spec:
         path: filters/
     - file:
         path: interfaces/
+  description: |
+    This application provides resources relating to QOS for various Network Operating Systems.
+  image: ghcr.io/nokia-eda/apps/qos:v3.0.0
+  gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
+  gitPathPrefix: /
+  group: qos.eda.nokia.com
+  supportedCoreVersions:
+    - "v2.0.0-0"
+  title: QoS
+  version: v1alpha1
+  requirements:
+    - appName: interfaces
+      vendor: nokia
+      version: v3.0.*
+    - appName: filters
+      vendor: nokia
+      version: v3.0.*
