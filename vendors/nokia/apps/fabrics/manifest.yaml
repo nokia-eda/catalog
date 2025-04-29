@@ -8,7 +8,7 @@ spec:
   title: Fabrics
   description: |
     This application provides automation resources relating to datacenter fabrics.
-  image: ghcr.io/nokia-eda/apps/fabrics:24.12.4
+  image: ghcr.io/nokia-eda/apps/fabrics:v3.0.0
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
   author: Nokia
@@ -16,12 +16,14 @@ spec:
     license: LICENSE
     categories:
       - "networking"
+    readme: README.md
+    ociSpecVersion: v1.0.0
   supportedEndpoints:
     - "srl:0.0.0"
     - "srl:24.*" # any release in a major
     - "sros:23.7.r1"
   supportedCoreVersions:
-    - "v2.0.0"
+    - "v2.0.0-0"
   components:
     - crd:
         path: fabrics/crds/fabrics.eda.nokia.com_fabrics.yaml
@@ -50,33 +52,35 @@ spec:
         api:
           expose: none
     - script:
-        path: fabrics/fabric_intent.py
+        path: fabrics/intents/fabric/fabric_intent.py
         type: config
         trigger:
           kind: Fabric
     - script:
-        path: fabrics/fabricstate_intent.py
+        path: fabrics/intents/fabricstate/fabricstate_intent.py
         type: state
         trigger:
           kind: FabricState
     - script:
-        path: fabrics/isl_intent.py
+        path: fabrics/intents/isl/isl_intent.py
         type: config
         trigger:
           kind: ISL
     - script:
-        path: fabrics/islstate_intent.py
+        path: fabrics/intents/islstate/islstate_intent.py
         type: state
         trigger:
           kind: ISLState
     - view:
-        path: fabrics/ui/fabric-dashboard-v0.5.json
+        path: fabrics/ui/fabric-dashboard-v0.9.json
         ui:
           category: Fabrics
           name: Fabrics
   dependencies:
     - file:
-        path: fabrics/pysrc/
+        path: fabrics/intents
+    - file:
+        path: fabrics/api/v1alpha1/pysrc
     - file:
         path: common/
     - file:
@@ -142,10 +146,33 @@ spec:
       #--- Routing
     - file:
         path: interfaces/
-        #--- Interfaces
-    # - file:
-    #     path: interfaces/pysrc/
-    # - file:
-    #     path: interfaces/interface_intent.py
+        # - file:
+        #     path: interfaces/pysrc/
+        # - file:
+        #     path: interfaces/interface_intent.py
+      #--- Interfaces
+    - file:
+        path: qos/
+        #--- Security
+      #--- Qos
     - file:
         path: security/
+  requirements:
+    - appName: protocols
+      vendor: nokia
+      version: v3.0.*
+    - appName: routingpolicies
+      vendor: nokia
+      version: v3.0.*
+    - appName: routing
+      vendor: nokia
+      version: v3.0.*
+    - appName: interfaces
+      vendor: nokia
+      version: v3.0.*
+    - appName: qos
+      vendor: nokia
+      version: v3.0.*
+    - appName: security
+      vendor: nokia
+      version: v3.0.*
