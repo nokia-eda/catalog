@@ -7,9 +7,10 @@ spec:
   type: app-installer
   input:
     operation: delete
-    app: interfaces
-    catalog: eda-catalog-builtin-apps
-    vendor: nokia
-    version:
-      value: v2.0.3+24.12.4
-      type: semver
+    apps:
+      - app: interfaces
+        catalog: eda-catalog-builtin-apps
+        vendor: nokia
+        version:
+          value: v3.0.0+25.4.1
+          type: semver
