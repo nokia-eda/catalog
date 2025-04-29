@@ -10,7 +10,7 @@ spec:
     This application provides functionality relating to authentication, authorization, and accounting.
 
     It allows the deployment of users, groups, and AAA policy, performing any alarming as necessary.
-  image: ghcr.io/nokia-eda/apps/aaa:24.12.4
+  image: ghcr.io/nokia-eda/apps/aaa:v3.0.0
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
   author: Nokia
@@ -18,11 +18,14 @@ spec:
     - "srl:0.0.0"
     - "srl:24.10.*" # any release in a minor
   supportedCoreVersions:
-    - "v2.0.0"
+    - "v2.0.0-0"
+    - "v24.0.0-0"
   appInfo:
     license: LICENSE
     categories:
       - "system"
+    readme: README.md
+    ociSpecVersion: v1.0.0
   components:
     - crd:
         path: aaa/crds/aaa.eda.nokia.com_userdeployments.yaml
@@ -48,17 +51,17 @@ spec:
     - cr:
         path: aaa/resources/default.yaml
     - script:
-        path: aaa/userdeployment.py
+        path: aaa/intents/userdeployment/userdeployment.py
         type: config
         trigger:
           kind: UserDeployment
     - script:
-        path: aaa/nodeuserstate_intent.py
+        path: aaa/intents/nodeuserstate/nodeuserstate_intent.py
         type: state
         trigger:
           kind: NodeUserState
     - script:
-        path: aaa/nodegroupdeployment_intent.py
+        path: aaa/intents/nodegroupdeployment/nodegroupdeployment_intent.py
         type: config
         trigger:
           kind: NodeGroupDeployment
@@ -73,6 +76,8 @@ spec:
     - file:
         path: utils/
     - file:
-        path: aaa/pysrc/
+        path: aaa/intents
+    - file:
+        path: aaa/api/v1alpha1/pysrc
     - file:
         path: core/pysrc/
