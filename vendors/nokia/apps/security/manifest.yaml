@@ -8,7 +8,7 @@ spec:
   title: Security
   description: |
     This application provides resources related to security for various Network Operating Systems.
-  image: ghcr.io/nokia-eda/apps/security:24.12.4
+  image: ghcr.io/nokia-eda/apps/security:v3.0.0
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
   author: Nokia
@@ -16,12 +16,14 @@ spec:
     license: LICENSE
     categories:
       - "system"
+    readme: README.md
+    ociSpecVersion: v1.0.0
   supportedEndpoints:
     - "srl:0.0.0"
     - "srl:24.*" # any release in a major
     - "sros:23.7.r1"
   supportedCoreVersions:
-    - "v2.0.0"
+    - "v2.0.0-0"
   components:
     - crd:
         path: security/crds/security.eda.nokia.com_keychains.yaml
@@ -40,21 +42,27 @@ spec:
         api:
           expose: readWrite
     - script:
-        path: security/keychain_intent.py
+        path: security/intents/keychain/keychain_intent.py
         type: config
         trigger:
           kind: Keychain
     - script:
-        path: security/keychaindeployment_intent.py
+        path: security/intents/keychaindeployment/keychaindeployment_intent.py
         type: config
         trigger:
           kind: KeychainDeployment
   dependencies:
     - file:
-        path: security/pysrc/
+        path: security/intents
+    - file:
+        path: security/api/v1alpha1/pysrc
     - file:
         path: common/
     - file:
         path: utils/
     - file:
         path: interfaces/
+  requirements:
+    - appName: interfaces
+      vendor: nokia
+      version: v3.0.*
