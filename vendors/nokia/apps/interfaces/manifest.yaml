@@ -10,7 +10,7 @@ spec:
     This application provides interface configuration and state for various Network Operating Systems.
 
     It also supports alarming driven by interface operational state and the population of a normalized table to support queries across supported endpoints.
-  image: ghcr.io/nokia-eda/apps/interfaces:24.12.4
+  image: ghcr.io/nokia-eda/apps/interfaces:v3.0.0
   author: Nokia
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
@@ -19,11 +19,14 @@ spec:
     - "srl:24.*" # any release in a major
     - "sros:23.7.r1"
   supportedCoreVersions:
-    - "v2.0.0"
+    - "v2.0.0-0"
   appInfo:
     license: LICENSE
     categories:
       - "networking"
+      - "monitoring"
+    readme: README.md
+    ociSpecVersion: v1.0.0
   components:
     - crd:
         path: interfaces/crds/interfaces.eda.nokia.com_interfaces.yaml
@@ -52,44 +55,48 @@ spec:
           expose: readWrite
           # no ui section means do not present in the UI
     - script:
-        path: interfaces/breakout_intent.py
+        path: interfaces/intents/breakout/breakout_intent.py
         type: config
         trigger:
           kind: Breakout
     - script:
-        path: interfaces/interface_intent.py
+        path: interfaces/intents/interface/interface_intent.py
         type: config
         trigger:
           kind: Interface
-          #group:
-          #version:
     - script:
-        path: interfaces/interface_intent.py
+        path: interfaces/intents/interface/interface_intent.py
         type: state
         trigger:
           kind: InterfaceState
-          #group:
-          #version:
-  # - view:
-  #    path: ui/dashboard.json
-  #    ui:
-  #      category: Topology
-  #      name: Interface
-  # - cr:
-  #     path: crs/create_interface_if1.yaml
-  # - cr:
-  #     path: crs/create_interface_if2.yaml
-  # - view:
-  #     path: ui/create.json
-  #     ui:
-  #       category: Topology
-  #       name: Interface
-  # - artifact:
-  #     path: image/interface_controller.img
-
+          # - crd:
+          #     path: interfaces/crds/interfaces.eda.nokia.com_mtus.yaml
+          #     schema: interfaces/openapiv3/eda_oas_interfaces.eda.nokia.com_mtus.json
+          #     ui:
+          #       category: Anomalies
+          #       name: MTU
+          #     api:
+          #       expose: readWrite
+          # - crd:
+          #     path: interfaces/crds/interfaces.eda.nokia.com_mtustates.yaml
+          #     schema: interfaces/openapiv3/eda_oas_interfaces.eda.nokia.com_mtustates.json
+          #     api:
+          #       expose: none
+          # - script:
+          #     path: interfaces/intents/mtu/anomaly_mtu.py
+          #     type: config
+          #     trigger:
+          #       kind: MTU
+          # - script:
+          #     path: interfaces/intents/mtu/anomaly_mtu.py
+          #     type: state
+          #     trigger:
+          #       kind: MTUState
   dependencies:
     - file:
-        path: interfaces/pysrc/
+        path: interfaces/intents
+    - file:
+        path: interfaces/api/v1alpha1/pysrc
     - file:
         path: common/
     - file:
