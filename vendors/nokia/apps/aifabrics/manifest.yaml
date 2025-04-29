@@ -1,0 +1,92 @@
+apiVersion: core.eda.nokia.com/v1
+kind: Manifest
+metadata:
+  name: aifabrics
+spec:
+  group: aifabrics.eda.nokia.com
+  version: v1alpha1
+  title: AIFabrics
+  description: |
+    This application provides automation resources relating to datacenter AI fabrics.
+  image: ghcr.io/nokia-eda/apps/aifabrics:v3.0.0
+  gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
+  gitPathPrefix: /
+  author: Nokia
+  appInfo:
+    license: LICENSE
+    categories:
+      - "networking"
+    readme: README.md
+    ociSpecVersion: v1.0.0
+  supportedEndpoints:
+    - "srl:0.0.0"
+    - "srl:24.*" # any release in a major
+    - "sros:23.7.r1"
+  supportedCoreVersions:
+    - "v2.0.0-0"
+  components:
+    - crd:
+        path: aifabrics/crds/aifabrics.eda.nokia.com_backends.yaml
+        schema: aifabrics/openapiv3/eda_oas_aifabrics.eda.nokia.com_backends.json
+        ui:
+          category: AIFabrics
+          name: Backends
+        api:
+          expose: readWrite
+    - crd:
+        path: aifabrics/crds/aifabrics.eda.nokia.com_backendstates.yaml
+        schema: aifabrics/openapiv3/eda_oas_aifabrics.eda.nokia.com_backendstates.json
+        api:
+          expose: none
+    - script:
+        path: aifabrics/intents/backend/backend_intent.py
+        type: config
+        trigger:
+          kind: Backend
+    - script:
+        path: aifabrics/intents/backendstate/backendstate_intent.py
+        type: state
+        trigger:
+          kind: BackendState
+  dependencies:
+    - file:
+        path: aifabrics/intents
+    - file:
+        path: aifabrics/api/v1alpha1/pysrc
+    - file:
+        path: aifabrics
+    - file:
+        path: fabrics
+    - file:
+        path: common/
+    - file:
+        path: utils/
+    - file:
+        path: protocols/
+    - file:
+        path: qos/
+    - file:
+        path: services/
+    - file:
+        path: routingpolicies/
+    - file:
+        path: interfaces/
+  requirements:
+    - appName: fabrics
+      vendor: nokia
+      version: v3.0.*
+    - appName: protocols
+      vendor: nokia
+      version: v3.0.*
+    - appName: qos
+      vendor: nokia
+      version: v3.0.*
+    - appName: services
+      vendor: nokia
+      version: v3.0.*
+    - appName: routingpolicies
+      vendor: nokia
+      version: v3.0.*
+    - appName: interfaces
+      vendor: nokia
+      version: v3.0.*
