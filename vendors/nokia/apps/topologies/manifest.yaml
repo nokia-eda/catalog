@@ -8,7 +8,7 @@ spec:
   title: Topologies
   description: |
     This application provides physical topology support
-  image: ghcr.io/nokia-eda/apps/topologies:24.12.4
+  image: ghcr.io/nokia-eda/apps/topologies:v3.0.0
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
   author: Nokia
@@ -16,11 +16,13 @@ spec:
     license: LICENSE
     categories:
       - "networking"
+    readme: README.md
+    ociSpecVersion: v1.0.0
   supportedEndpoints:
     - "srl:0.0.0"
     - "srl:24.*" # any release in a major
   supportedCoreVersions:
-    - "v2.0.0"
+    - "v2.0.0-0"
   components:
     - crd:
         path: topologies/crds/topologies.eda.nokia.com_topolinkmonitors.yaml
@@ -69,51 +71,75 @@ spec:
         namespaced: false
         api:
           expose: readWrite
+    - crd:
+        path: topologies/crds/topologies.eda.nokia.com_trafficrateoverlays.yaml
+        schema: topologies/openapiv3/eda_oas_topologies.eda.nokia.com_trafficrateoverlays.json
+        namespaced: false
+        api:
+          expose: readWrite
+    - crd:
+        path: topologies/crds/topologies.eda.nokia.com_lldpoverlays.yaml
+        schema: topologies/openapiv3/eda_oas_topologies.eda.nokia.com_lldpoverlays.json
+        namespaced: false
+        api:
+          expose: readWrite
     - script:
-        path: topologies/topolinkmonitor_intent.py
+        path: topologies/intents/topolinkmonitor/topolinkmonitor_intent.py
         type: config
         trigger:
           kind: TopoLinkMonitor
     - script:
-        path: topologies/topolinkstate_intent.py
+        path: topologies/intents/topolinkstate/topolinkstate_intent.py
         type: state
         trigger:
           kind: TopoLinkState
     - script:
-        path: topologies/topology_intent.py
+        path: topologies/intents/topology/topology_intent.py
         type: state
         trigger:
           kind: Topology
     - script:
-        path: topologies/topology_grouping_intent.py
+        path: topologies/intents/topologygrouping/topology_grouping_intent.py
         type: state
         trigger:
           kind: TopologyGrouping
     - script:
-        path: topologies/cpu_util_overlay_intent.py
+        path: topologies/intents/cpuutiloverlay/cpu_util_overlay_intent.py
         type: state
         trigger:
           kind: CPUUtilOverlay
     - script:
-        path: topologies/deviation_overlay_intent.py
+        path: topologies/intents/deviationoverlay/deviation_overlay_intent.py
         type: state
         trigger:
           kind: DeviationOverlay
     - script:
-        path: topologies/memory_overlay_intent.py
+        path: topologies/intents/memoryoverlay/memory_overlay_intent.py
         type: state
         trigger:
           kind: MemoryOverlay
     - script:
-        path: topologies/disk_overlay_intent.py
+        path: topologies/intents/diskoverlay/disk_overlay_intent.py
         type: state
         trigger:
           kind: DiskOverlay
+    - script:
+        path: topologies/intents/trafficrateoverlay/trafficrate_overlay_intent.py
+        type: state
+        trigger:
+          kind: TrafficRateOverlay
+    - script:
+        path: topologies/intents/lldpoverlay/lldp_overlay_intent.py
+        type: state
+        trigger:
+          kind: LldpOverlay
     - cr:
         path: topologies/resources/default.yaml
   dependencies:
     - file:
-        path: topologies/pysrc/
+        path: topologies/intents
+    - file:
+        path: topologies/api/v1alpha1/pysrc
     - file:
         path: common/
     - file:
