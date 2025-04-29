@@ -8,7 +8,7 @@ spec:
   title: Demo
   description: |
     This application provides demonstration examples
-  image: ghcr.io/nokia-eda/apps/demo:24.12.4
+  image: ghcr.io/nokia-eda/apps/demo:v3.0.0
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
   author: Nokia
@@ -16,12 +16,14 @@ spec:
     license: LICENSE
     categories:
       - "demo"
+    readme: README.md
+    ociSpecVersion: v1.0.0
   supportedEndpoints:
     - "srl:0.0.0"
     - "srl:24.*" # any release in a major
     - "sros:23.7.r1"
   supportedCoreVersions:
-    - "v2.0.0"
+    - "v2.0.0-0"
   components:
     - crd:
         path: demo/crds/demo.eda.nokia.com_simplevrfs.yaml
@@ -52,20 +54,23 @@ spec:
     - crd:
         path: demo/crds/demo.eda.nokia.com_overlays.yaml
         schema: demo/openapiv3/eda_oas_demo.eda.nokia.com_overlays.json
-        # ui:
-        #   category: Demo
-        #   name: Overlay
         api:
           expose: readWrite
+    - crd:
+        path: demo/crds/demo.eda.nokia.com_gvkpings.yaml
+        schema: demo/openapiv3/eda_oas_demo.eda.nokia.com_gvkpings.json
+        api:
+          expose: readWrite
+        ui:
+          category: Demo
+          name: GVK Ping
     - script:
-        path: demo/vrf-demo.py
+        path: demo/intents/simplevrf/simplevrf_intent.py
         type: config
         trigger:
           kind: SimpleVRF
-          #group:
-          #version:
     - script:
-        path: demo/overlay_intent.py
+        path: demo/intents/overlay/overlay_intent.py
         type: state
         trigger:
           kind: Overlay
@@ -91,3 +96,7 @@ spec:
         path: utils/
     - file:
         path: demo/ui
+    - file:
+        path: demo/intents
+    - file:
+        path: demo/api/v1alpha1/pysrc
