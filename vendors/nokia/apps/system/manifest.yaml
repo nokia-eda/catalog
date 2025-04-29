@@ -10,7 +10,7 @@ spec:
     This application provides system monitoring functionality for various Network Operating Systems.
 
     It supports thresholding of CPU, memory, and disk utilization.
-  image: ghcr.io/nokia-eda/apps/system:24.12.4
+  image: ghcr.io/nokia-eda/apps/system:v3.0.0
   author: Nokia
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
@@ -19,11 +19,13 @@ spec:
     - "srl:24.*"
     - "sros:23.7.r1"
   supportedCoreVersions:
-    - "v2.0.0"
+    - "v2.0.0-0"
   appInfo:
     license: LICENSE
     categories:
       - "monitoring"
+    readme: README.md
+    ociSpecVersion: v1.0.0
   components:
     - crd:
         path: system/crds/system.eda.nokia.com_monitors.yaml
@@ -31,7 +33,7 @@ spec:
         api:
           expose: readWrite
         ui:
-          category: Components
+          category: OAM
           name: Monitoring
     - crd:
         path: system/crds/system.eda.nokia.com_monitorstates.yaml
@@ -44,28 +46,30 @@ spec:
         api:
           expose: readWrite
     - script:
-        path: system/monitor_intent.py
+        path: system/intents/monitor/monitor_intent.py
         type: config
         trigger:
           kind: Monitor
     - script:
-        path: system/monitor_intent.py
+        path: system/intents/monitor/monitor_intent.py
         type: state
         trigger:
           kind: MonitorState
     - script:
-        path: system/monitoraggregatestate_intent.py
+        path: system/intents/monitoraggregatestate/monitoraggregatestate_intent.py
         type: state
         trigger:
           kind: MonitorAggregateState
-    - view:
-        path: system/ui/resource-monitor-dashboard-v1.json
-        ui:
-          category: Components
-          name: Monitoring
+          # - view:
+          #     path: system/ui/resource-monitor-dashboard-v1.json
+          #     ui:
+          #       category: OAM
+          #       name: Monitoring
   dependencies:
     - file:
-        path: system/pysrc/
+        path: system/intents
+    - file:
+        path: system/api/v1alpha1/pysrc
     - file:
         path: common/
     - file:
