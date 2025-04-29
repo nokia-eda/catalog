@@ -8,7 +8,7 @@ spec:
   title: Services
   description: |
     This application provides EVPN services for various Network Operating Systems.
-  image: ghcr.io/nokia-eda/apps/services:24.12.4
+  image: ghcr.io/nokia-eda/apps/services:v3.0.0
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
   author: Nokia
@@ -16,12 +16,14 @@ spec:
     license: LICENSE
     categories:
       - "networking"
+    readme: README.md
+    ociSpecVersion: v1.0.0
   supportedEndpoints:
     - "srl:0.0.0"
     - "srl:24.*" # any release in a major
     - "sros:23.7.r1"
   supportedCoreVersions:
-    - "v2.0.0"
+    - "v2.0.0-0"
   components:
     - crd:
         path: services/crds/services.eda.nokia.com_vlans.yaml
@@ -140,92 +142,92 @@ spec:
         api:
           expose: none
     - script:
-        path: services/stateconfig_intent.py
+        path: services/intents/stateconfig/stateconfig_intent.py
         type: state
         trigger:
           kind: StateConfig
     - script:
-        path: services/vlan_intent.py
+        path: services/intents/vlan/vlan_intent.py
         type: config
         trigger:
           kind: VLAN
     - script:
-        path: services/vlanstate_intent.py
+        path: services/intents/vlanstate/vlanstate_intent.py
         type: state
         trigger:
           kind: VLANState
     - script:
-        path: services/virtualnetwork_intent.py
+        path: services/intents/virtualnetwork/virtualnetwork_intent.py
         type: config
         trigger:
           kind: VirtualNetwork
     - script:
-        path: services/virtualnetworkstate_intent.py
+        path: services/intents/virtualnetworkstate/virtualnetworkstate_intent.py
         type: state
         trigger:
           kind: VirtualNetworkState
     - script:
-        path: services/router_intent.py
+        path: services/intents/router/router_intent.py
         type: config
         trigger:
           kind: Router
     - script:
-        path: services/routerstate_intent.py
+        path: services/intents/routerstate/routerstate_intent.py
         type: state
         trigger:
           kind: RouterState
     - script:
-        path: services/routerdeployment_intent.py
+        path: services/intents/routerdeployment/routerdeployment_intent.py
         type: config
         trigger:
           kind: RouterDeployment
     - script:
-        path: services/bridgedomain_intent.py
+        path: services/intents/bridgedomain/bridgedomain_intent.py
         type: config
         trigger:
           kind: BridgeDomain
     - script:
-        path: services/bridgedomainstate_intent.py
+        path: services/intents/bridgedomainstate/bridgedomainstate_intent.py
         type: state
         trigger:
           kind: BridgeDomainState
     - script:
-        path: services/bridgedomaindeployment_intent.py
+        path: services/intents/bridgedomaindeployment/bridgedomaindeployment_intent.py
         type: config
         trigger:
           kind: BridgeDomainDeployment
     - script:
-        path: services/bridgeinterface_intent.py
+        path: services/intents/bridgeinterface/bridgeinterface_intent.py
         type: config
         trigger:
           kind: BridgeInterface
     - script:
-        path: services/bridgeinterfacestate_intent.py
+        path: services/intents/bridgeinterfacestate/bridgeinterfacestate_intent.py
         type: state
         trigger:
           kind: BridgeInterfaceState
     - script:
-        path: services/routedinterface_intent.py
+        path: services/intents/routedinterface/routedinterface_intent.py
         type: config
         trigger:
           kind: RoutedInterface
     - script:
-        path: services/routedinterfacestate_intent.py
+        path: services/intents/routedinterfacestate/routedinterfacestate_intent.py
         type: state
         trigger:
           kind: RoutedInterfaceState
     - script:
-        path: services/irbinterface_intent.py
+        path: services/intents/irbinterface/irbinterface_intent.py
         type: config
         trigger:
           kind: IRBInterface
     - script:
-        path: services/irbinterfacestate_intent.py
+        path: services/intents/irbinterfacestate/irbinterfacestate_intent.py
         type: state
         trigger:
           kind: IRBInterfaceState
     - script:
-        path: services/dhcprelay_intent.py
+        path: services/intents/dhcprelay/dhcprelay_intent.py
         type: config
         trigger:
           kind: DHCPRelay
@@ -235,7 +237,7 @@ spec:
           category: Virtual Networks
           name: VLANs
     - view:
-        path: services/ui/router-dashboard-v0.1.json
+        path: services/ui/router-dashboard-v0.2.json
         ui:
           category: Virtual Networks
           name: Routers
@@ -245,7 +247,7 @@ spec:
           category: Virtual Networks
           name: Virtual Networks
     - view:
-        path: services/ui/bridgedomain-dashboard-v0.1.json
+        path: services/ui/bridgedomain-dashboard-v0.2.json
         ui:
           category: Virtual Networks
           name: Bridge Domains
@@ -253,7 +255,9 @@ spec:
         path: services/workflows/edgeping/core_v1_flowdefinition.yaml
   dependencies:
     - file:
-        path: services/pysrc/
+        path: services/intents
+    - file:
+        path: services/api/v1alpha1/pysrc
     - file:
         path: common/
     - file:
@@ -261,6 +265,26 @@ spec:
     - file:
         path: filters/
     - file:
+        path: protocols/
+    - file:
+        path: routingpolicies/
+    - file:
         path: qos/
     - file:
         path: interfaces/
+  requirements:
+    - appName: protocols
+      vendor: nokia
+      version: v3.0.*
+    - appName: routingpolicies
+      vendor: nokia
+      version: v3.0.*
+    - appName: interfaces
+      vendor: nokia
+      version: v3.0.*
+    - appName: qos
+      vendor: nokia
+      version: v3.0.*
+    - appName: filters
+      vendor: nokia
+      version: v3.0.*
