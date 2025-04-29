@@ -1,0 +1,36 @@
+apiVersion: core.eda.nokia.com/v1
+kind: Manifest
+metadata:
+  name: logs
+spec:
+  appInfo:
+    categories:
+      - networking
+    license: LICENSE
+    readme: README.md
+    ociSpecVersion: v1.0.0
+  author: Nokia
+  dependencies:
+    - file:
+        path: logs/api/v1alpha1/pysrc/
+    - file:
+        path: common/
+    - file:
+        path: utils/
+    - file:
+        path: logs/intents/
+    - file:
+        path: logs/api/v1alpha1/pysrc
+  description: Configuration of syslog clients on targets
+  group: logs.eda.nokia.com
+  image: ghcr.io/nokia-eda/apps/logs:v3.0.0
+  supportedCoreVersions:
+    - v2.0.0-0
+  supportedEndpoints:
+    - srl:0.0.0
+    - srl:24.10.*
+    - srl:25.*
+    - sros:24.10.*
+    - sros:25.*
+  title: Logs
+  version: v1alpha1
