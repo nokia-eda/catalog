@@ -3,24 +3,40 @@ kind: Manifest
 metadata:
   name: operatingsystem
 spec:
-  group: os.eda.nokia.com
-  version: v1alpha1
-  title: Operating System
-  description: |
-    This application provides workflows managing the operating system version of targets.
-  image: ghcr.io/nokia-eda/apps/operatingsystem:24.12.4
-  author: Nokia
-  gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
-  gitPathPrefix: /
-  supportedEndpoints:
-    - "srl:0.0.0"
-    - "srl:24.7.1"
-  supportedCoreVersions:
-    - "v2.0.0"
   appInfo:
-    license: LICENSE
     categories:
-      - "system"
+      - system
+    license: LICENSE
+    readme: README.md
+    ociSpecVersion: v1.0.0
+  author: Nokia
   components:
     - cr:
         path: operatingsystem/workflows/image/core_v1_flowdefinition.yaml
+    - cr:
+        path: operatingsystem/workflows/image/core_v1_flowdefinition_gvk.yaml
+    - crd:
+        api:
+          expose: readWrite
+        namespaced: true
+        path: operatingsystem/crds/os.eda.nokia.com_deployimages.yaml
+        schema: operatingsystem/openapiv3/eda_oas_os.eda.nokia.com_deployimages.json
+        workflow: true
+  dependencies:
+    - file:
+        path: operatingsystem/api/v1alpha1/pysrc/
+    - file:
+        path: operatingsystem/api/v1alpha1/pysrc
+  description: |
+    This application provides workflows managing the operating system version of targets.
+  gitPathPrefix: /
+  gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
+  group: os.eda.nokia.com
+  image: ghcr.io/nokia-eda/apps/operatingsystem:v3.0.0
+  supportedCoreVersions:
+    - v2.0.0-0
+  supportedEndpoints:
+    - srl:0.0.0
+    - srl:24.7.1
+  title: Operating System
+  version: v1alpha1
