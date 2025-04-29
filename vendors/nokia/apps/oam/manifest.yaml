@@ -3,52 +3,66 @@ kind: Manifest
 metadata:
   name: oam
 spec:
-  group: oam.eda.nokia.com
-  version: v1alpha1
-  title: Mirror
-  description: |
-    This application provides the ping workflow, along with mirroring services for interfaces, subinterfaces and ipfilters.
-  image: ghcr.io/nokia-eda/apps/oam:24.12.4
-  gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
-  gitPathPrefix: /
-  author: Nokia
   appInfo:
-    license: LICENSE
     categories:
-      - "networking"
-  supportedEndpoints:
-    - "srl:0.0.0"
-    - "srl:24.*" # any release in a major
-    - "sros:23.7.r1"
-  supportedCoreVersions:
-    - "v2.0.0"
+      - networking
+    license: LICENSE
+    readme: README.md
+    ociSpecVersion: v1.0.0
+  author: Nokia
   components:
     - crd:
+        api:
+          expose: readWrite
+        namespaced: true
         path: oam/crds/oam.eda.nokia.com_mirrors.yaml
         schema: oam/openapiv3/eda_oas_oam.eda.nokia.com_mirrors.json
         ui:
           category: OAM
           name: Mirror
-        api:
-          expose: readWrite
     - crd:
+        namespaced: true
         path: oam/crds/oam.eda.nokia.com_mirrorstates.yaml
         schema: oam/openapiv3/eda_oas_oam.eda.nokia.com_mirrorstates.json
     - script:
-        path: oam/mirror_intent.py
-        type: config
+        path: oam/intents/mirror/mirror_intent.py
         trigger:
           kind: Mirror
+        type: config
     - script:
-        path: oam/mirrorstate_intent.py
-        type: state
+        path: oam/intents/mirrorstate/mirrorstate_intent.py
         trigger:
           kind: MirrorState
+        type: state
     - cr:
         path: oam/workflows/ping/core_v1_flowdefinition.yaml
+    - cr:
+        path: oam/workflows/ping/core_v1_flowdefinition_gvk.yaml
+    - crd:
+        api:
+          expose: readWrite
+        namespaced: true
+        path: oam/crds/oam.eda.nokia.com_pings.yaml
+        schema: oam/openapiv3/eda_oas_oam.eda.nokia.com_pings.json
+        workflow: true
+    - crd:
+        path: oam/crds/oam.eda.nokia.com_thresholds.yaml
+        schema: oam/openapiv3/eda_oas_oam.eda.nokia.com_thresholds.json
+        ui:
+          category: OAM
+          name: Thresholds
+        api:
+          expose: readWrite
+    - script:
+        path: oam/intents/threshold/threshold_intent.py
+        type: state
+        trigger:
+          kind: Threshold
   dependencies:
     - file:
-        path: oam/pysrc/
+        path: oam/intents
+    - file:
+        path: oam/api/v1alpha1/pysrc
     - file:
         path: common/
     - file:
@@ -61,3 +75,37 @@ spec:
         path: interfaces/
     - file:
         path: qos/
+    - file:
+        path: oam/api/v1alpha1/pysrc/
+    - file:
+        path: topologies/
+  requirements:
+    - appName: services
+      vendor: nokia
+      version: v3.0.*
+    - appName: filters
+      vendor: nokia
+      version: v3.0.*
+    - appName: interfaces
+      vendor: nokia
+      version: v3.0.*
+    - appName: qos
+      vendor: nokia
+      version: v3.0.*
+    - appName: topologies
+      vendor: nokia
+      version: v3.0.*
+  description: |
+    This application provides the ping workflow, along with mirroring services for interfaces, subinterfaces and ipfilters.
+  gitPathPrefix: /
+  gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
+  group: oam.eda.nokia.com
+  image: ghcr.io/nokia-eda/apps/oam:v3.0.0
+  supportedCoreVersions:
+    - v2.0.0-0
+  supportedEndpoints:
+    - srl:0.0.0
+    - srl:24.*
+    - sros:23.7.r1
+  title: Mirror
+  version: v1alpha1
