@@ -10,7 +10,7 @@ spec:
     This application provides device bootstrap for various Network Operating Systems.
 
     It generates initial device configuration for Zero Touch Provisioning (ZTP).
-  image: ghcr.io/nokia-eda/apps/bootstrap:24.12.4
+  image: ghcr.io/nokia-eda/apps/bootstrap:v3.0.0
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
   author: Nokia
@@ -18,11 +18,14 @@ spec:
     license: LICENSE
     categories:
       - "core"
+    readme: README.md
+    ociSpecVersion: v1.0.0
   supportedEndpoints:
     - "srl:0.0.0"
     - "srl:24.*" # any release in a major
+    - "sros:23.7.r1"
   supportedCoreVersions:
-    - "v2.0.0"
+    - "v2.0.0-0"
   components:
     - crd:
         path: bootstrap/crds/bootstrap.eda.nokia.com_inits.yaml
@@ -47,25 +50,27 @@ spec:
         api:
           expose: none
     - script:
-        path: bootstrap/init_intent.py
+        path: bootstrap/intents/init/init_intent.py
         type: config
         trigger:
           kind: Init
           #group:
           #version:
     - script:
-        path: bootstrap/managementrouter_intent.py
+        path: bootstrap/intents/managementrouter/managementrouter_intent.py
         type: config
         trigger:
           kind: ManagementRouter
     - script:
-        path: bootstrap/managementrouterstate_intent.py
+        path: bootstrap/intents/managementrouterstate/managementrouterstate_intent.py
         type: state
         trigger:
           kind: ManagementRouterState
   dependencies:
     - file:
-        path: bootstrap/pysrc/
+        path: bootstrap/intents
+    - file:
+        path: bootstrap/api/v1alpha1/pysrc
     - file:
         path: common/
     - file:
