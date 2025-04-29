@@ -8,7 +8,7 @@ spec:
   title: Protocols
   description: |
     This application provides resources related to routing protocols for various Network Operating Systems.
-  image: ghcr.io/nokia-eda/apps/protocols:24.12.4
+  image: ghcr.io/nokia-eda/apps/protocols:v3.0.0
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
   author: Nokia
@@ -16,15 +16,17 @@ spec:
     license: LICENSE
     categories:
       - "networking"
+    readme: README.md
+    ociSpecVersion: v1.0.0
   supportedEndpoints:
     - "srl:0.0.0"
     - "srl:24.*" # any release in a major
     - "sros:23.7.r1"
   supportedCoreVersions:
-    - "v2.0.0"
+    - "v2.0.0-0"
   components:
     - view:
-        path: protocols/ui/defaultbgppeer_dashboard_v1.0.json
+        path: protocols/ui/defaultbgppeer_dashboard_v1.1.json
         ui:
           category: Default Routing
           name: Default BGP Peers
@@ -170,92 +172,92 @@ spec:
         api:
           expose: readWrite
     - script:
-        path: protocols/defaultbgpgroup_intent.py
+        path: protocols/intents/defaultbgpgroup/defaultbgpgroup_intent.py
         type: config
         trigger:
           kind: DefaultBGPGroup
     - script:
-        path: protocols/defaultbgpgroupdeployment_intent.py
+        path: protocols/intents/defaultbgpgroupdeployment/defaultbgpgroupdeployment_intent.py
         type: config
         trigger:
           kind: DefaultBGPGroupDeployment
     - script:
-        path: protocols/defaultbgppeer_intent.py
+        path: protocols/intents/defaultbgppeer/defaultbgppeer_intent.py
         type: config
         trigger:
           kind: DefaultBGPPeer
     - script:
-        path: protocols/defaultstaticroute_intent.py
+        path: protocols/intents/defaultstaticroute/defaultstaticroute_intent.py
         type: config
         trigger:
           kind: DefaultStaticRoute
     - script:
-        path: protocols/defaultaggregateroute_intent.py
+        path: protocols/intents/defaultaggregateroute/defaultaggregateroute_intent.py
         type: config
         trigger:
           kind: DefaultAggregateRoute
     - script:
-        path: protocols/defaultroutereflector_intent.py
+        path: protocols/intents/defaultroutereflector/defaultroutereflector_intent.py
         type: config
         trigger:
           kind: DefaultRouteReflector
     - script:
-        path: protocols/defaultroutereflectorclient_intent.py
+        path: protocols/intents/defaultroutereflectorclient/defaultroutereflectorclient_intent.py
         type: config
         trigger:
           kind: DefaultRouteReflectorClient
     - script:
-        path: protocols/bgpgroup_intent.py
+        path: protocols/intents/bgpgroup/bgpgroup_intent.py
         type: config
         trigger:
           kind: BGPGroup
     - script:
-        path: protocols/bgpgroupdeployment_intent.py
+        path: protocols/intents/bgpgroupdeployment/bgpgroupdeployment_intent.py
         type: config
         trigger:
           kind: BGPGroupDeployment
     - script:
-        path: protocols/bgpgroupstate_intent.py
+        path: protocols/intents/bgpgroupstate/bgpgroupstate_intent.py
         type: state
         trigger:
           kind: BGPGroupState
     - script:
-        path: protocols/bgppeer_intent.py
+        path: protocols/intents/bgppeer/bgppeer_intent.py
         type: config
         trigger:
           kind: BGPPeer
     - script:
-        path: protocols/bgppeerstate_intent.py
+        path: protocols/intents/bgppeerstate/bgppeerstate_intent.py
         type: state
         trigger:
           kind: BGPPeerState
     - script:
-        path: protocols/staticroute_intent.py
+        path: protocols/intents/staticroute/staticroute_intent.py
         type: config
         trigger:
           kind: StaticRoute
     - script:
-        path: protocols/aggregateroute_intent.py
+        path: protocols/intents/aggregateroute/aggregateroute_intent.py
         type: config
         trigger:
           kind: AggregateRoute
     - script:
-        path: protocols/routereflector_intent.py
+        path: protocols/intents/routereflector/routereflector_intent.py
         type: config
         trigger:
           kind: RouteReflector
     - script:
-        path: protocols/routereflectorclient_intent.py
+        path: protocols/intents/routereflectorclient/routereflectorclient_intent.py
         type: config
         trigger:
           kind: RouteReflectorClient
     - script:
-        path: protocols/routereflectorstate_intent.py
+        path: protocols/intents/routereflectorstate/routereflectorstate_intent.py
         type: state
         trigger:
           kind: RouteReflectorState
     - script:
-        path: protocols/routereflectorclientstate_intent.py
+        path: protocols/intents/routereflectorclientstate/routereflectorclientstate_intent.py
         type: state
         trigger:
           kind: RouteReflectorClientState
@@ -263,7 +265,9 @@ spec:
         path: protocols/workflows/checkdefaultbgppeers/core_v1_flowdefinition.yaml
   dependencies:
     - file:
-        path: protocols/pysrc/
+        path: protocols/intents
+    - file:
+        path: protocols/api/v1alpha1/pysrc
     - file:
         path: common/
     - file:
@@ -276,3 +280,13 @@ spec:
         path: services/
     - file:
         path: security/
+  requirements:
+    - appName: interfaces
+      vendor: nokia
+      version: v3.0.*
+    - appName: routing
+      vendor: nokia
+      version: v3.0.*
+    - appName: security
+      vendor: nokia
+      version: v3.0.*
