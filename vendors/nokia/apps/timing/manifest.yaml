@@ -8,7 +8,7 @@ spec:
   title: Timing
   description: |
     This application provides underlay timing resources for various Network Operating Systems.
-  image: ghcr.io/nokia-eda/apps/timing:24.12.4
+  image: ghcr.io/nokia-eda/apps/timing:v3.0.0
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
   author: Nokia
@@ -16,12 +16,14 @@ spec:
     license: LICENSE
     categories:
       - "system"
+    readme: README.md
+    ociSpecVersion: v1.0.0
   supportedEndpoints:
     - "srl:0.0.0"
     - "srl:24.*" # any release in a major
     - "sros:23.7.r1"
   supportedCoreVersions:
-    - "v2.0.0"
+    - "v2.0.0-0"
   components:
     - crd:
         path: timing/crds/timing.eda.nokia.com_ntpclients.yaml
@@ -37,18 +39,20 @@ spec:
         api:
           expose: none
     - script:
-        path: timing/ntpclient_intent.py
+        path: timing/intents/ntpclient/ntpclient_intent.py
         type: config
         trigger:
           kind: NTPClient
     - script:
-        path: timing/ntpclientstate_intent.py
+        path: timing/intents/ntpclientstate/ntpclientstate_intent.py
         type: state
         trigger:
           kind: NTPClientState
   dependencies:
     - file:
-        path: timing/pysrc/
+        path: timing/intents
+    - file:
+        path: timing/api/v1alpha1/pysrc
     - file:
         path: common/
     - file:
@@ -61,3 +65,16 @@ spec:
         path: services/
     - file:
         path: bootstrap/
+  requirements:
+    - appName: interfaces
+      vendor: nokia
+      version: v3.0.*
+    - appName: routing
+      vendor: nokia
+      version: v3.0.*
+    - appName: services
+      vendor: nokia
+      version: v3.0.*
+    - appName: bootstrap
+      vendor: nokia
+      version: v3.0.*
