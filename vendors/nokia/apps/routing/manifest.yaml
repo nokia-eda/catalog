@@ -8,7 +8,7 @@ spec:
   title: Routing
   description: |
     This application provides underlay routing resources for various Network Operating Systems.
-  image: ghcr.io/nokia-eda/apps/routing:24.12.4
+  image: ghcr.io/nokia-eda/apps/routing:v3.0.0
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
   author: Nokia
@@ -16,20 +16,22 @@ spec:
     license: LICENSE
     categories:
       - "networking"
+    readme: README.md
+    ociSpecVersion: v1.0.0
   supportedEndpoints:
     - "srl:0.0.0"
     - "srl:24.*" # any release in a major
     - "sros:23.7.r1"
   supportedCoreVersions:
-    - "v2.0.0"
+    - "v2.0.0-0"
   components:
     - view:
-        path: routing/ui/defaultinterface_dashboard_v1.0.json
+        path: routing/ui/defaultinterface_dashboard_v1.1.json
         ui:
           category: Default Routing
           name: Default Interfaces
     - view:
-        path: routing/ui/defaultrouter_dashboard_v1.0.json
+        path: routing/ui/defaultrouter_dashboard_v1.1.json
         ui:
           category: Default Routing
           name: Default Routers
@@ -86,51 +88,57 @@ spec:
         api:
           expose: none
     - script:
-        path: routing/defaultinterface_intent.py
+        path: routing/intents/defaultinterface/defaultinterface_intent.py
         type: config
         trigger:
           kind: DefaultInterface
     - script:
-        path: routing/defaultrouter_intent.py
+        path: routing/intents/defaultrouter/defaultrouter_intent.py
         type: config
         trigger:
           kind: DefaultRouter
     - script:
-        path: routing/defaultinterfacestate_intent.py
+        path: routing/intents/defaultinterfacestate/defaultinterfacestate_intent.py
         type: state
         trigger:
           kind: DefaultInterfaceState
     - script:
-        path: routing/defaultrouterstate_intent.py
+        path: routing/intents/defaultrouterstate/defaultrouterstate_intent.py
         type: state
         trigger:
           kind: DefaultRouterState
     - script:
-        path: routing/drain_intent.py
+        path: routing/intents/drain/drain_intent.py
         type: config
         trigger:
           kind: Drain
     - script:
-        path: routing/drainstate_intent.py
+        path: routing/intents/drainstate/drainstate_intent.py
         type: state
         trigger:
           kind: DrainState
     - script:
-        path: routing/systeminterface_intent.py
+        path: routing/intents/systeminterface/systeminterface_intent.py
         type: config
         trigger:
           kind: SystemInterface
     - script:
-        path: routing/systeminterfacestate_intent.py
+        path: routing/intents/systeminterfacestate/systeminterfacestate_intent.py
         type: state
         trigger:
           kind: SystemInterfaceState
   dependencies:
     - file:
-        path: routing/pysrc/
+        path: routing/intents
+    - file:
+        path: routing/api/v1alpha1/pysrc
     - file:
         path: common/
     - file:
         path: utils/
     - file:
         path: interfaces/
+  requirements:
+    - appName: interfaces
+      vendor: nokia
+      version: v3.0.*
