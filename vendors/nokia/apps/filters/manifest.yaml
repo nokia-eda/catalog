@@ -8,7 +8,7 @@ spec:
   title: Filters
   description: |
     This application provides resources relating to filtering for various Network Operating Systems.
-  image: ghcr.io/nokia-eda/apps/filters:24.12.4
+  image: ghcr.io/nokia-eda/apps/filters:v3.0.0
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
   author: Nokia
@@ -16,12 +16,14 @@ spec:
     license: LICENSE
     categories:
       - "networking"
+    readme: README.md
+    ociSpecVersion: v1.0.0
   supportedEndpoints:
     - "srl:0.0.0"
     - "srl:24.*" # any release in a major
     - "sros:23.7.r1"
   supportedCoreVersions:
-    - "v2.0.0"
+    - "v2.0.0-0"
   components:
     - crd:
         path: filters/crds/filters.eda.nokia.com_filters.yaml
@@ -59,36 +61,38 @@ spec:
         api:
           expose: none
     - script:
-        path: filters/filterdeployment_intent.py
+        path: filters/intents/filterdeployment/filterdeployment_intent.py
         type: config
         trigger:
           kind: FilterDeployment
           #group:
           #version:
     - script:
-        path: filters/filter_intent.py
+        path: filters/intents/filter/filter_intent.py
         type: config
         trigger:
           kind: Filter
     - script:
-        path: filters/controlplanefilter_intent.py
+        path: filters/intents/controlplanefilter/controlplanefilter_intent.py
         type: config
         trigger:
           kind: ControlPlaneFilter
     - script:
-        path: filters/mirrorfilter_intent.py
+        path: filters/intents/mirrorfilter/mirrorfilter_intent.py
         type: config
         trigger:
           kind: MirrorFilter
     - script:
-        path: filters/mirrorfilterdeployment_intent.py
+        path: filters/intents/mirrorfilterdeployment/mirrorfilterdeployment_intent.py
         type: config
         trigger:
           kind: MirrorFilterDeployment
   dependencies:
     - file:
-        path: filters/pysrc/
-    - file:
         path: common/
     - file:
         path: utils/
+    - file:
+        path: filters/intents
+    - file:
+        path: filters/api/v1alpha1/pysrc
