@@ -10,7 +10,7 @@ spec:
     This application provides simple resources allowing device specific configuration.
 
     In particular it provides the Configlet resource, which allows JSON configuration to be applied to devices.
-  image: ghcr.io/nokia-eda/apps/config:24.12.4
+  image: ghcr.io/nokia-eda/apps/config:v3.0.0
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
   author: Nokia
@@ -18,11 +18,14 @@ spec:
     - "srl:0.0.0"
     - "srl:24.10.*" # any release in a minor
   supportedCoreVersions:
-    - "v2.0.0"
+    - "v2.0.0-0"
+    - "v24.0.0-0"
   appInfo:
     license: LICENSE
     categories:
       - "networking"
+    readme: README.md
+    ociSpecVersion: v1.0.0
   components:
     - crd:
         path: config/crds/config.eda.nokia.com_configlets.yaml
@@ -38,12 +41,12 @@ spec:
         api:
           expose: none
     - script:
-        path: config/configlet.py
+        path: config/intents/configlet/configlet.py
         type: config
         trigger:
           kind: Configlet
     - script:
-        path: config/configlet.py
+        path: config/intents/configlet/configlet.py
         type: state
         trigger:
           kind: ConfigletState
@@ -52,3 +55,7 @@ spec:
         path: common/
     - file:
         path: utils/
+    - file:
+        path: config/intents
+    - file:
+        path: config/api/v1alpha1/pysrc
