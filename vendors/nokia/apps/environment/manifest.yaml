@@ -10,18 +10,20 @@ spec:
     This application provides workflows for environment configuration.
 
     It deploys CLI plugins and environment files to targets.
-  image: ghcr.io/nokia-eda/apps/environment:24.12.4
+  image: ghcr.io/nokia-eda/apps/environment:v3.0.0
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   author: Nokia
   supportedEndpoints:
     - "srl:0.0.0"
     - "srl:24.*"
   supportedCoreVersions:
-    - "v2.0.0"
+    - "v2.0.0-0"
   appInfo:
     license: LICENSE
     categories:
       - "core"
+    readme: README.md
+    ociSpecVersion: v1.0.0
   components:
     - cr:
         path: environment/workflows/cliplugin/core_v1_flowdefinition.yaml
