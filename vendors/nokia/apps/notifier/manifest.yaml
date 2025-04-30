@@ -8,7 +8,7 @@ spec:
   title: Notifier
   author: Nokia
   description: Notifies users using external providers
-  image: ghcr.io/nokia-eda/apps/notifier:v2.0.0
+  image: ghcr.io/nokia-eda/apps/notifier:v3.0.0
   gitPathPrefix: /
   supportedEndpoints:
     - "srl:0.0.0"
@@ -18,6 +18,7 @@ spec:
     - "sros:23.7.r1"
   supportedCoreVersions:
     - "v2.0.0"
+    - "v2.0.0-0"
   appInfo:
     readme: README.md
     documentation: DOCUMENTATION.md
@@ -32,7 +33,7 @@ spec:
     - crd:
         path: notifier/config/crd/bases/notifiers.eda.nokia.com_notifiers.yaml
         schema: notifier/docs/openapiv3/eda_oas_notifiers.eda.nokia.com_notifiers.json
-        namespaced: false
+        namespaced: true
         api:
           expose: readWrite
         ui:
@@ -44,7 +45,7 @@ spec:
     - crd:
         path: notifier/config/crd/bases/notifiers.eda.nokia.com_providers.yaml
         schema: notifier/docs/openapiv3/eda_oas_notifiers.eda.nokia.com_providers.json
-        namespaced: false
+        namespaced: true
         api:
           expose: readWrite
         ui:
@@ -53,10 +54,36 @@ spec:
         kubernetes:
           exportPolicy: all
           importPolicy: spec
+    - crd:
+        path: notifier/config/crd/bases/notifiers.eda.nokia.com_clusternotifiers.yaml
+        schema: notifier/docs/openapiv3/eda_oas_notifiers.eda.nokia.com_clusternotifiers.json
+        namespaced: false
+        api:
+          expose: readWrite
+        ui:
+          category: Notifier
+          name: Cluster Notifier
+        kubernetes:
+          exportPolicy: all
+          importPolicy: spec
+    - crd:
+        path: notifier/config/crd/bases/notifiers.eda.nokia.com_clusterproviders.yaml
+        schema: notifier/docs/openapiv3/eda_oas_notifiers.eda.nokia.com_clusterproviders.json
+        namespaced: false
+        api:
+          expose: readWrite
+        ui:
+          category: Notifier
+          name: Cluster Provider
+        kubernetes:
+          exportPolicy: all
+          importPolicy: spec
+    - cr:
+        path: notifier/manifests/webhooks.yaml
     - cr:
         path: notifier/manifests/app_deployment.yaml
   dependencies:
     - container:
         name: notifier-controller
-        image: ghcr.io/nokia-eda/apps/notifier-controller:v2.0.0
+        image: ghcr.io/nokia-eda/apps/notifier-controller:v3.0.0
 
