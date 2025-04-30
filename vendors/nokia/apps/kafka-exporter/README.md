@@ -7,7 +7,7 @@ Users can specify which notifications are exported as well as an export mode one
 
 ## Getting started
 
-After installing the App through the appstore, users can specify which notifications are exported using the **Producer** Custom Resource (CR) or via the UI by navigating to **Exporters**, **Kafka**.
+After installing the App through the appstore, users can specify which notifications are exported using the **Producer** or **ClusterProducer** Custom Resources (CR) or via the UI by navigating to **Kafka** category.
 
 ## Examples
 
@@ -15,7 +15,7 @@ After installing the App through the appstore, users can specify which notificat
 
 ```yaml
 apiVersion: kafka.eda.nokia.com/v1alpha1
-kind: Producer
+kind: ClusterProducer
 metadata:
   name: alarms
 spec:
@@ -33,17 +33,17 @@ spec:
 
 ```yaml
 apiVersion: kafka.eda.nokia.com/v1alpha1
-kind: Producer
+kind: ClusterProducer
 metadata:
   name: interfaces
 spec:
   brokers: kafka-service:9092
   exports:
-    - path: .node.srl.interface.statistics
+    - path: .namespace.node.srl.interface.statistics
       topic: interfaces
       mode: periodic
       period: 10s
-    - path: .node.srl.interface
+    - path: .namespace.node.srl.interface
       fields:
         - oper-state
         - admin-state
