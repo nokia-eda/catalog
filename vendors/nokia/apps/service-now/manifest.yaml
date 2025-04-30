@@ -7,7 +7,7 @@ spec:
   version: v1alpha1
   title: ServiceNow
   description: This application creates ServiceNow incidents based on alarms from the network.
-  image: ghcr.io/nokia-eda/apps/service-now:v1.0.0
+  image: ghcr.io/nokia-eda/apps/service-now:v2.0.0
   author: Nokia
   supportedEndpoints:
     - "srl:0.0.0"
@@ -17,6 +17,7 @@ spec:
     - "sros:23.7.r1"
   supportedCoreVersions:
     - "v2.0.0"
+    - "v2.0.0-0"
   appInfo:
     readme: README.md
     documentation: DOCUMENTATION.md
@@ -30,7 +31,7 @@ spec:
     - crd:
         path: snow/config/crd/bases/snow.eda.nokia.com_incidents.yaml
         schema: snow/docs/openapiv3/eda_oas_snow.eda.nokia.com_incidents.json
-        namespaced: false
+        namespaced: true
         api:
           expose: readWrite
         ui:
@@ -42,7 +43,7 @@ spec:
     - crd:
         path: snow/config/crd/bases/snow.eda.nokia.com_instances.yaml
         schema: snow/docs/openapiv3/eda_oas_snow.eda.nokia.com_instances.json
-        namespaced: false
+        namespaced: true
         api:
           expose: readWrite
         ui:
@@ -51,10 +52,34 @@ spec:
         kubernetes:
           exportPolicy: all
           importPolicy: all
+    - crd:
+        path: snow/config/crd/bases/snow.eda.nokia.com_clusterincidents.yaml
+        schema: snow/docs/openapiv3/eda_oas_snow.eda.nokia.com_clusterincidents.json
+        namespaced: false
+        api:
+          expose: readWrite
+        ui:
+          category: ServiceNow
+          name: Cluster Incident
+        kubernetes:
+          exportPolicy: all
+          importPolicy: all
+    - crd:
+        path: snow/config/crd/bases/snow.eda.nokia.com_clusterinstances.yaml
+        schema: snow/docs/openapiv3/eda_oas_snow.eda.nokia.com_clusterinstances.json
+        namespaced: false
+        api:
+          expose: readWrite
+        ui:
+          category: ServiceNow
+          name: Cluster Instance
+        kubernetes:
+          exportPolicy: all
+          importPolicy: all
     - cr:
         path: snow/manifests/app_deployment.yaml
   dependencies:
     - container:
         name: service-now-controller
-        image: ghcr.io/nokia-eda/apps/service-now-controller:v1.0.0
+        image: ghcr.io/nokia-eda/apps/service-now-controller:v2.0.0
 
