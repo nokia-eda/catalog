@@ -6,7 +6,7 @@ This EDA App exports network and EDA metrics to Prometheus. Users can specify wh
 
 ## Getting started
 
-After installing the App through the appstore, users can specify which sets of metrics are exported using the **Export** Custom Resource (CR) or via the UI by navigating to **Exporters**, **Prometheus**.
+After installing the App through the appstore, users can specify which sets of metrics are exported using the **Export** Custom Resource (CR) or via the UI by navigating to **Prometheu
 
 ## Examples
 
@@ -17,7 +17,6 @@ apiVersion: prom.eda.nokia.com/v1alpha1
 kind: Export
 metadata:
   name: interface-stats
-  namespace: eda-system
 spec:
   exports:
     - prefix: interfaces
@@ -31,7 +30,6 @@ apiVersion: prom.eda.nokia.com/v1alpha1
 kind: Export
 metadata:
   name: lldp-stats
-  namespace: eda-system
 spec:
   exports:
   - prefix: lldp
