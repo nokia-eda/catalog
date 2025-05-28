@@ -3,7 +3,7 @@ kind: Manifest
 metadata:
   name: connect
 spec:
-  image: ghcr.io/nokia-eda/apps/connect:v3.0.0
+  image: ghcr.io/nokia-eda/apps/connect:v3.0.1
   group: connect.eda.nokia.com
   version: v1
   title: Cloud Connect
@@ -49,8 +49,7 @@ spec:
     - crd:
         path: eda-connect-plugin-controller/config/crd/bases/connect.eda.nokia.com_connectpluginheartbeats.yaml
         schema: eda-connect-plugin-controller/openapiv3/eda_oas_connect.eda.nokia.com_connectpluginheartbeats.json
-        api:
-          expose: readWrite
+        resourceType: Kubernetes
     - crd:
         path: eda-connect-plugin-controller/config/crd/bases/connect.eda.nokia.com_connectplugins.yaml
         schema: eda-connect-plugin-controller/openapiv3/eda_oas_connect.eda.nokia.com_connectplugins.json
@@ -84,7 +83,7 @@ spec:
   dependencies:
     - container:
         name: connect-plugin-controller
-        image: eda.nokia.com/nokia-eda/eda-connect-plugin-controller:v3.0.0
+        image: eda.nokia.com/nokia-eda/eda-connect-plugin-controller:v3.0.1
     - container:
         name: connect-interface-controller
-        image: eda.nokia.com/nokia-eda/eda-connect-interface-controller:v3.0.0
+        image: eda.nokia.com/nokia-eda/eda-connect-interface-controller:v3.0.1
