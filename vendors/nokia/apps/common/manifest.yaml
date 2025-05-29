@@ -9,7 +9,7 @@ spec:
       - pymodel-generation-only
     ociSpecVersion: v1.0.0
   author: nokia
-  image: ghcr.io/nokia-eda/apps/common:v3.0.0
+  image: ghcr.io/nokia-eda/apps/common:v3.0.1
   version: v1alpha1
   dependencies:
     - file:
