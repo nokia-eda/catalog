@@ -8,7 +8,7 @@ spec:
   title: Topologies
   description: |
     This application provides physical topology support
-  image: ghcr.io/nokia-eda/apps/topologies:v3.0.0
+  image: ghcr.io/nokia-eda/apps/topologies:v3.0.1
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
   author: Nokia
@@ -19,10 +19,12 @@ spec:
     readme: README.md
     ociSpecVersion: v1.0.0
   supportedEndpoints:
-    - "srl:0.0.0"
-    - "srl:24.*" # any release in a major
+    - "srl:24.10.*"
+    - "srl:25.3.*"
+    - "sros:24.10.r4+"
+    - "sros:25.3.r2+"
   supportedCoreVersions:
-    - "v2.0.0-0"
+    - "v2.0"
   components:
     - crd:
         path: topologies/crds/topologies.eda.nokia.com_topolinkmonitors.yaml
@@ -41,12 +43,16 @@ spec:
         namespaced: false
         api:
           expose: readWrite
+        kubernetes:
+          exportPolicy: all
     - crd:
         path: topologies/crds/topologies.eda.nokia.com_topologygroupings.yaml
         schema: topologies/openapiv3/eda_oas_topologies.eda.nokia.com_topologygroupings.json
         namespaced: false
         api:
           expose: readWrite
+        kubernetes:
+          exportPolicy: all
     - crd:
         path: topologies/crds/topologies.eda.nokia.com_cpuutiloverlays.yaml
         schema: topologies/openapiv3/eda_oas_topologies.eda.nokia.com_cpuutiloverlays.json
