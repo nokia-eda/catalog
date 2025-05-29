@@ -10,16 +10,17 @@ spec:
     This application provides simple resources allowing device specific configuration.
 
     In particular it provides the Configlet resource, which allows JSON configuration to be applied to devices.
-  image: ghcr.io/nokia-eda/apps/config:v3.0.0
+  image: ghcr.io/nokia-eda/apps/config:v3.0.1
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
   author: Nokia
   supportedEndpoints:
-    - "srl:0.0.0"
-    - "srl:24.10.*" # any release in a minor
+    - "srl:24.10.*"
+    - "srl:25.3.*"
+    - "sros:24.10.r4+"
+    - "sros:25.3.r2+"
   supportedCoreVersions:
-    - "v2.0.0-0"
-    - "v24.0.0-0"
+    - "v2.0"
   appInfo:
     license: LICENSE
     categories:
