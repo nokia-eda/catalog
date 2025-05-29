@@ -23,14 +23,13 @@ spec:
         path: logs/api/v1alpha1/pysrc
   description: Configuration of syslog clients on targets
   group: logs.eda.nokia.com
-  image: ghcr.io/nokia-eda/apps/logs:v3.0.0
+  image: ghcr.io/nokia-eda/apps/logs:v3.0.1
   supportedCoreVersions:
-    - v2.0.0-0
+    - "v2.0"
   supportedEndpoints:
-    - srl:0.0.0
-    - srl:24.10.*
-    - srl:25.*
-    - sros:24.10.*
-    - sros:25.*
+    - "srl:24.10.*"
+    - "srl:25.3.*"
+    - "sros:24.10.r4+"
+    - "sros:25.3.r2+"
   title: Logs
   version: v1alpha1
