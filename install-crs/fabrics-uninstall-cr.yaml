@@ -12,5 +12,5 @@ spec:
         catalog: eda-catalog-builtin-apps
         vendor: nokia
         version:
-          value: v3.0.1+25.4.2
+          value: v3.0.2+25.4.3
           type: semver
