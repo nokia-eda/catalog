@@ -8,7 +8,7 @@ spec:
   title: AIFabrics
   description: |
     This application provides automation resources relating to datacenter AI fabrics.
-  image: ghcr.io/nokia-eda/apps/aifabrics:v3.0.1
+  image: ghcr.io/nokia-eda/apps/aifabrics:v3.0.2
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
   author: Nokia
