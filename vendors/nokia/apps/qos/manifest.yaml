@@ -104,7 +104,7 @@ spec:
         path: interfaces/
   description: |
     This application provides resources relating to QOS for various Network Operating Systems.
-  image: ghcr.io/nokia-eda/apps/qos:v3.0.1
+  image: ghcr.io/nokia-eda/apps/qos:v3.0.2
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
   group: qos.eda.nokia.com
