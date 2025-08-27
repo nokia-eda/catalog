@@ -3,7 +3,7 @@ kind: Manifest
 metadata:
   name: connect
 spec:
-  image: ghcr.io/nokia-eda/apps/connect:v3.0.1
+  image: ghcr.io/nokia-eda/apps/connect:v4.0.0
   group: connect.eda.nokia.com
   version: v1
   title: Cloud Connect
@@ -12,18 +12,18 @@ spec:
   requirements:
     - appName: interfaces
       vendor: nokia
-      version: "v3.0.*"
+      version: "v4.0.*"
     - appName: services
       vendor: nokia
-      version: "v3.0.*"
+      version: "v4.0.*"
   supportedCoreVersions:
-    - "v2.0.0"
+    - "v3.0.0"
   appInfo:
     readme: app-meta/README.md
     license: app-meta/eda-license.txt
     categories:
       - "integrations"
-    settings: app-meta/settings.json
+    settings: settings-openapi/eda_oas_connect.eda.nokia.com_appsettings.json
     ociSpecVersion: v1.0.0
   components:
     - crd:
@@ -34,6 +34,11 @@ spec:
         kubernetes:
           exportPolicy: all
           importPolicy: all
+        names:
+          plural: connectpluginactionables
+          singular: connectpluginactionable
+          kind: ConnectPluginActionable
+          listKind: ConnectPluginActionableList
     - crd:
         path: eda-connect-plugin-controller/config/crd/bases/connect.eda.nokia.com_connectaudits.yaml
         schema: eda-connect-plugin-controller/openapiv3/eda_oas_connect.eda.nokia.com_connectaudits.json
@@ -46,10 +51,20 @@ spec:
         kubernetes:
           exportPolicy: all
           importPolicy: all
+        names:
+          plural: connectaudits
+          singular: connectaudit
+          kind: ConnectAudit
+          listKind: ConnectAuditList
     - crd:
         path: eda-connect-plugin-controller/config/crd/bases/connect.eda.nokia.com_connectpluginheartbeats.yaml
         schema: eda-connect-plugin-controller/openapiv3/eda_oas_connect.eda.nokia.com_connectpluginheartbeats.json
         resourceType: Kubernetes
+        names:
+          kind: ConnectPluginHeartbeat
+          listKind: ConnectPluginHeartbeatList
+          plural: connectpluginheartbeats
+          singular: connectpluginheartbeat
     - crd:
         path: eda-connect-plugin-controller/config/crd/bases/connect.eda.nokia.com_connectplugins.yaml
         schema: eda-connect-plugin-controller/openapiv3/eda_oas_connect.eda.nokia.com_connectplugins.json
@@ -62,6 +77,11 @@ spec:
         kubernetes:
           exportPolicy: all
           importPolicy: all
+        names:
+          kind: ConnectPlugin
+          listKind: ConnectPluginList
+          plural: connectplugins
+          singular: connectplugin
     - crd:
         path: eda-connect-interface-controller/config/crd/bases/connect.eda.nokia.com_connectinterfaces.yaml
         schema: eda-connect-interface-controller/openapiv3/eda_oas_connect.eda.nokia.com_connectinterfaces.json
@@ -74,6 +94,11 @@ spec:
         kubernetes:
           exportPolicy: all
           importPolicy: all
+        names:
+          plural: connectinterfaces
+          singular: connectinterface
+          kind: ConnectInterface
+          listKind: ConnectInterfaceList
     - cr:
         path: eda-connect-interface-controller/appstore-crs/crs.yaml
     - cr:
@@ -83,7 +108,7 @@ spec:
   dependencies:
     - container:
         name: connect-plugin-controller
-        image: eda.nokia.com/nokia-eda/eda-connect-plugin-controller:v3.0.1
+        image: eda.nokia.com/nokia-eda/eda-connect-plugin-controller:v4.0.0
     - container:
         name: connect-interface-controller
-        image: eda.nokia.com/nokia-eda/eda-connect-interface-controller:v3.0.1
+        image: eda.nokia.com/nokia-eda/eda-connect-interface-controller:v4.0.0

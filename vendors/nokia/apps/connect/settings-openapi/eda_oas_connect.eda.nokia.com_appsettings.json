@@ -24,6 +24,12 @@
           "title": "Interface Controller Pod CPU Limit",
           "default": "1"
         },
+        "interfaceControllerGraceTimer": {
+          "description": "The GraceTimer employed by the Interface Controller when LLDP information disappears from the Interface before acting upon that (in seconds).",
+          "type": "string",
+          "title": "Interface Controller GraceTimer",
+          "default": "10"
+        },
         "interfaceControllerMemoryLimit": {
           "description": "The memory limit for the connect-interface-controller pod.",
           "type": "string",
