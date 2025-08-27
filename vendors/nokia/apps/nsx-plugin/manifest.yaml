@@ -1,0 +1,59 @@
+apiVersion: core.eda.nokia.com/v1
+kind: Manifest
+metadata:
+  name: nsx-plugin
+spec:
+  title: NSX Plugin Operator
+  description: A plugin integrating VMware NSX with Cloud Connect
+  appInfo:
+    readme: nsx_plugin/README.md
+    license: nsx_plugin/LICENSE
+    categories:
+      - "integrations"
+    ociSpecVersion: v1.0.0
+  group: nsx.eda.nokia.com
+  version: v1alpha1
+  author: Nokia
+  image: ghcr.io/nokia-eda/apps/nsx-plugin:v0.0.1
+  supportedCoreVersions:
+    - "v3.0.0"
+  requirements:
+    - appName: vmware-plugin
+      vendor: nokia
+      version: "*"
+  components:
+    - crd:
+        api:
+          expose: readWrite
+        path: nsx_plugin/crds/nsx.eda.nokia.com_nsxplugininstances.yaml
+        schema: nsx_plugin/openapiv3/eda_oas_nsx.eda.nokia.com_nsxplugininstances.json
+        namespaced: false
+        ui:
+          category: Connect
+          name: NSX Plugins
+          panel: system_administration
+        kubernetes:
+          exportPolicy: all
+          importPolicy: all
+        names:
+          listKind: NSXPluginInstanceList
+          plural: nsxplugininstances
+          singular: nsxplugininstance
+          kind: NSXPluginInstance
+    - script:
+        path: nsx_plugin/intents/nsxplugininstance/config_intent.py
+        trigger:
+          kind: NSXPluginInstance
+        type: config
+  dependencies:
+    - file:
+        path: utils
+    - file:
+        path: common
+    - file:
+        path: nsx_plugin/intents
+    - file:
+        path: nsx_plugin/api/v1alpha1/pysrc
+    - container:
+        name: nsx-plugin-container
+        image: eda.nokia.com/nokia-eda/eda-connect-nsx-plugin:v0.0.1
