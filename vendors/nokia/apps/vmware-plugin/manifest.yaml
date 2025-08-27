@@ -12,7 +12,7 @@ spec:
   requirements:
     - appName: connect
       vendor: nokia
-      version: "*"
+      version: "v4.0.*"
   supportedCoreVersions:
     - "v3.0.0"
   appInfo:
@@ -36,10 +36,10 @@ spec:
           exportPolicy: all
           importPolicy: all
         names:
-          kind: VmwarePluginInstance
-          listKind: VmwarePluginInstanceList
           plural: vmwareplugininstances
           singular: vmwareplugininstance
+          kind: VmwarePluginInstance
+          listKind: VmwarePluginInstanceList
     - script:
         path: vmwareplugininstance/pysrc/vmwareplugininstance_intent.py
         type: config
