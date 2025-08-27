@@ -20,7 +20,7 @@ spec:
   requirements:
     - appName: vmware-plugin
       vendor: nokia
-      version: "*"
+      version: "v4.0.*"
   components:
     - crd:
         api:
@@ -36,10 +36,10 @@ spec:
           exportPolicy: all
           importPolicy: all
         names:
-          listKind: NSXPluginInstanceList
           plural: nsxplugininstances
           singular: nsxplugininstance
           kind: NSXPluginInstance
+          listKind: NSXPluginInstanceList
     - script:
         path: nsx_plugin/intents/nsxplugininstance/config_intent.py
         trigger:
