@@ -2,7 +2,7 @@ PRODUCT LEGAL NOTICE
 
 Copyright
 EDA Software
-Copyright © Nokia 2024.  All Rights Reserved.
+Copyright © Nokia 2025.  All Rights Reserved.
 
 Trademarks
 Nokia and the Nokia logo are registered trademarks of Nokia. All other trademarks are the property of their respective owners.
