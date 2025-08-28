@@ -8,23 +8,27 @@ spec:
   title: Security
   description: |
     This application provides resources related to security for various Network Operating Systems.
-  image: ghcr.io/nokia-eda/apps/security:v3.0.2
+  image: ghcr.io/nokia-eda/apps/security:v4.0.0
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
   author: Nokia
   appInfo:
-    license: LICENSE
+    license: security/LICENSE
     categories:
       - "system"
-    readme: README.md
+    readme: security/README.md
     ociSpecVersion: v1.0.0
   supportedEndpoints:
     - "srl:24.10.*"
     - "srl:25.3.*"
+    - "srl:25.7.*"
     - "sros:24.10.r4+"
     - "sros:25.3.r2+"
+    - "sros:25.7.*"
+    - "eos:4.33.2f"
+    - "nxos:10.5.2"
   supportedCoreVersions:
-    - "v2.0"
+    - "v3.0"
   components:
     - crd:
         path: security/crds/security.eda.nokia.com_keychains.yaml
@@ -34,6 +38,11 @@ spec:
           name: Keychains
         api:
           expose: readWrite
+        names:
+          listKind: KeychainList
+          plural: keychains
+          singular: keychain
+          kind: Keychain
     - crd:
         path: security/crds/security.eda.nokia.com_keychaindeployments.yaml
         schema: security/openapiv3/eda_oas_security.eda.nokia.com_keychaindeployments.json
@@ -42,6 +51,11 @@ spec:
           name: Keychain Deployments
         api:
           expose: readWrite
+        names:
+          listKind: KeychainDeploymentList
+          plural: keychaindeployments
+          singular: keychaindeployment
+          kind: KeychainDeployment
     - script:
         path: security/intents/keychain/keychain_intent.py
         type: config
@@ -66,4 +80,4 @@ spec:
   requirements:
     - appName: interfaces
       vendor: nokia
-      version: v3.0.*
+      version: v4.0.0
