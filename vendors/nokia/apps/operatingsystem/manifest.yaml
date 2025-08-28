@@ -6,15 +6,13 @@ spec:
   appInfo:
     categories:
       - system
-    license: LICENSE
-    readme: README.md
+    license: operatingsystem/LICENSE
+    readme: operatingsystem/README.md
     ociSpecVersion: v1.0.0
   author: Nokia
   components:
     - cr:
         path: operatingsystem/workflows/image/core_v1_flowdefinition.yaml
-    - cr:
-        path: operatingsystem/workflows/image/core_v1_flowdefinition_gvk.yaml
     - crd:
         api:
           expose: readWrite
@@ -22,6 +20,13 @@ spec:
         path: operatingsystem/crds/os.eda.nokia.com_deployimages.yaml
         schema: operatingsystem/openapiv3/eda_oas_os.eda.nokia.com_deployimages.json
         workflow: true
+        ui:
+          name: Image
+        names:
+          listKind: DeployImageList
+          plural: deployimages
+          singular: deployimage
+          kind: DeployImage
   dependencies:
     - file:
         path: operatingsystem/api/v1alpha1/pysrc/
@@ -32,13 +37,17 @@ spec:
   gitPathPrefix: /
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   group: os.eda.nokia.com
-  image: ghcr.io/nokia-eda/apps/operatingsystem:v3.0.2
+  image: ghcr.io/nokia-eda/apps/operatingsystem:v4.0.0
   supportedCoreVersions:
-    - "v2.0"
+    - "v3.0"
   supportedEndpoints:
     - "srl:24.10.*"
     - "srl:25.3.*"
+    - "srl:25.7.*"
     - "sros:24.10.r4+"
     - "sros:25.3.r2+"
+    - "sros:25.7.*"
+    - "eos:4.33.2f"
+    - "nxos:10.5.2"
   title: Operating System
   version: v1alpha1
