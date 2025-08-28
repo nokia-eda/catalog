@@ -1,0 +1,13 @@
+apiVersion: appstore.eda.nokia.com/v1
+kind: AppInstaller
+metadata:
+  name: filters-nokia-delete
+  namespace: eda-system
+spec:
+  operation: delete
+  apps:
+    - appId: filters.eda.nokia.com
+      catalog: eda-catalog-builtin-apps
+      version:
+        type: semver
+        value: v4.0.0
