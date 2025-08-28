@@ -10,23 +10,27 @@ spec:
     This application provides interface configuration and state for various Network Operating Systems.
 
     It also supports alarming driven by interface operational state and the population of a normalized table to support queries across supported endpoints.
-  image: ghcr.io/nokia-eda/apps/interfaces:v3.0.2
+  image: ghcr.io/nokia-eda/apps/interfaces:v4.0.0
   author: Nokia
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
   supportedEndpoints:
     - "srl:24.10.*"
     - "srl:25.3.*"
+    - "srl:25.7.*"
     - "sros:24.10.r4+"
     - "sros:25.3.r2+"
+    - "sros:25.7.*"
+    - "eos:4.33.2f"
+    - "nxos:10.5.2"
   supportedCoreVersions:
-    - "v2.0"
+    - "v3.0"
   appInfo:
-    license: LICENSE
+    license: interfaces/LICENSE
     categories:
       - "networking"
       - "monitoring"
-    readme: README.md
+    readme: interfaces/README.md
     ociSpecVersion: v1.0.0
   components:
     - crd:
@@ -39,6 +43,11 @@ spec:
           name: Interfaces
         kubernetes:
           exportPolicy: all # needed for connect controllers
+        names:
+          listKind: InterfaceList
+          plural: interfaces
+          singular: interface
+          kind: Interface
     - crd:
         path: interfaces/crds/interfaces.eda.nokia.com_breakouts.yaml
         schema: interfaces/openapiv3/eda_oas_interfaces.eda.nokia.com_breakouts.json
@@ -48,13 +57,23 @@ spec:
           category: Topology
           name: Breakouts
         kubernetes:
-          exportPolicy: all # needed for connect controllers      
+          exportPolicy: all # needed for connect controllers
+        names:
+          plural: breakouts
+          singular: breakout
+          kind: Breakout
+          listKind: BreakoutList
     - crd:
         path: interfaces/crds/interfaces.eda.nokia.com_interfacestates.yaml
         schema: interfaces/openapiv3/eda_oas_interfaces.eda.nokia.com_interfacestates.json
         api:
           expose: readWrite
           # no ui section means do not present in the UI
+        names:
+          listKind: InterfaceStateList
+          plural: interfacestates
+          singular: interfacestate
+          kind: InterfaceState
     - script:
         path: interfaces/intents/breakout/breakout_intent.py
         type: config
@@ -66,7 +85,7 @@ spec:
         trigger:
           kind: Interface
     - script:
-        path: interfaces/intents/interface/interface_intent.py
+        path: interfaces/intents/interfacestate/interfacestate_intent.py
         type: state
         trigger:
           kind: InterfaceState
@@ -93,6 +112,22 @@ spec:
           #     type: state
           #     trigger:
           #       kind: MTUState
+    - crd:
+        api:
+          expose: readWrite
+        namespaced: true
+        path: interfaces/crds/interfaces.eda.nokia.com_checkinterfacess.yaml
+        schema: interfaces/openapiv3/eda_oas_interfaces.eda.nokia.com_checkinterfacess.json
+        workflow: true
+        ui:
+          name: Check Interfaces
+        names:
+          plural: checkinterfacess
+          singular: checkinterfaces
+          kind: CheckInterfaces
+          listKind: CheckInterfacesList
+    - cr:
+        path: interfaces/workflows/checkinterfaces/core_v1_flowdefinition.yaml
   dependencies:
     - file:
         path: interfaces/intents
