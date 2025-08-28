@@ -6,8 +6,8 @@ spec:
   appInfo:
     categories:
       - monitoring
-    license: LICENSE
-    readme: README.md
+    license: components/LICENSE
+    readme: components/README.md
     ociSpecVersion: v1.0.0
   author: nokia
   components:
@@ -19,16 +19,31 @@ spec:
         ui:
           category: Components
           name: Monitoring
+        names:
+          plural: monitors
+          singular: monitor
+          kind: Monitor
+          listKind: MonitorList
     - crd:
         api:
           expose: none
         path: components/crds/components.eda.nokia.com_monitorstates.yaml
         schema: components/openapiv3/eda_oas_components.eda.nokia.com_monitorstates.json
+        names:
+          listKind: MonitorStateList
+          plural: monitorstates
+          singular: monitorstate
+          kind: MonitorState
     - crd:
         api:
           expose: none
         path: components/crds/components.eda.nokia.com_monitoraggregatestates.yaml
         schema: components/openapiv3/eda_oas_components.eda.nokia.com_monitoraggregatestates.json
+        names:
+          plural: monitoraggregatestates
+          singular: monitoraggregatestate
+          kind: MonitorAggregateState
+          listKind: MonitorAggregateStateList
     - script:
         path: components/intents/monitor/monitor_intent.py
         type: config
@@ -48,14 +63,29 @@ spec:
         namespaced: false
         path: components/crds/components.eda.nokia.com_cpuoverlays.yaml
         schema: components/openapiv3/eda_oas_components.eda.nokia.com_cpuoverlays.json
+        names:
+          singular: cpuoverlay
+          kind: CPUOverlay
+          listKind: CPUOverlayList
+          plural: cpuoverlays
     - crd:
         namespaced: false
         path: components/crds/components.eda.nokia.com_memoryoverlays.yaml
         schema: components/openapiv3/eda_oas_components.eda.nokia.com_memoryoverlays.json
+        names:
+          plural: memoryoverlays
+          singular: memoryoverlay
+          kind: MemoryOverlay
+          listKind: MemoryOverlayList
     - crd:
         namespaced: false
         path: components/crds/components.eda.nokia.com_volumeoverlays.yaml
         schema: components/openapiv3/eda_oas_components.eda.nokia.com_volumeoverlays.json
+        names:
+          plural: volumeoverlays
+          singular: volumeoverlay
+          kind: VolumeOverlay
+          listKind: VolumeOverlayList
     - script:
         path: components/intents/cpuoverlay/cpu_overlay_intent.py
         trigger:
@@ -78,18 +108,33 @@ spec:
         namespaced: true
         path: components/crds/components.eda.nokia.com_discoveries.yaml
         schema: components/openapiv3/eda_oas_components.eda.nokia.com_discoveries.json
+        names:
+          singular: discovery
+          kind: Discovery
+          listKind: DiscoveryList
+          plural: discoveries
     - crd:
         api:
           expose: none
         namespaced: true
         path: components/crds/components.eda.nokia.com_discoverystates.yaml
         schema: components/openapiv3/eda_oas_components.eda.nokia.com_discoverystates.json
+        names:
+          listKind: DiscoveryStateList
+          plural: discoverystates
+          singular: discoverystate
+          kind: DiscoveryState
     - crd:
         api:
           expose: none
         namespaced: true
         path: components/crds/components.eda.nokia.com_discoveryaggregatestates.yaml
         schema: components/openapiv3/eda_oas_components.eda.nokia.com_discoveryaggregatestates.json
+        names:
+          plural: discoveryaggregatestates
+          singular: discoveryaggregatestate
+          kind: DiscoveryAggregateState
+          listKind: DiscoveryAggregateStateList
     - crd:
         api:
           expose: read
@@ -99,6 +144,11 @@ spec:
         ui:
           category: Components
           name: Components
+        names:
+          plural: components
+          singular: component
+          kind: Component
+          listKind: ComponentList
     - script:
         path: components/intents/discovery/discovery.py
         trigger:
@@ -123,6 +173,11 @@ spec:
         namespaced: false
         path: components/crds/components.eda.nokia.com_clusterdiscoveries.yaml
         schema: components/openapiv3/eda_oas_components.eda.nokia.com_clusterdiscoveries.json
+        names:
+          plural: clusterdiscoveries
+          singular: clusterdiscovery
+          kind: ClusterDiscovery
+          listKind: ClusterDiscoveryList
     - script:
         path: components/intents/clusterdiscovery/clusterdiscovery_intent.py
         trigger:
@@ -145,6 +200,11 @@ spec:
         ui:
           category: Components
           name: Chassis
+        names:
+          kind: Chassis
+          listKind: ChassisList
+          plural: chassis
+          singular: chassis
     - crd:
         api:
           expose: read
@@ -154,6 +214,11 @@ spec:
         ui:
           category: Components
           name: Control Modules
+        names:
+          plural: controlmodules
+          singular: controlmodule
+          kind: ControlModule
+          listKind: ControlModuleList
     - crd:
         api:
           expose: read
@@ -163,6 +228,11 @@ spec:
         ui:
           category: Components
           name: Interface Modules
+        names:
+          listKind: InterfaceModuleList
+          plural: interfacemodules
+          singular: interfacemodule
+          kind: InterfaceModule
     - crd:
         api:
           expose: read
@@ -172,6 +242,11 @@ spec:
         ui:
           category: Components
           name: Fabric Modules
+        names:
+          singular: fabricmodule
+          kind: FabricModule
+          listKind: FabricModuleList
+          plural: fabricmodules
     - crd:
         api:
           expose: read
@@ -181,6 +256,11 @@ spec:
         ui:
           category: Components
           name: Power Supplies
+        names:
+          plural: powersupplies
+          singular: powersupply
+          kind: PowerSupply
+          listKind: PowerSupplyList
     - crd:
         api:
           expose: read
@@ -190,6 +270,11 @@ spec:
         ui:
           category: Components
           name: Fans
+        names:
+          singular: fan
+          kind: Fan
+          listKind: FanList
+          plural: fans
   dependencies:
     - file:
         path: common/
@@ -216,13 +301,17 @@ spec:
   gitPathPrefix: /
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   group: components.eda.nokia.com
-  image: ghcr.io/nokia-eda/apps/components:v3.0.2
+  image: ghcr.io/nokia-eda/apps/components:v4.0.0
   supportedCoreVersions:
-    - "v2.0"
+    - "v3.0"
   supportedEndpoints:
     - "srl:24.10.*"
     - "srl:25.3.*"
+    - "srl:25.7.*"
     - "sros:24.10.r4+"
     - "sros:25.3.r2+"
+    - "sros:25.7.*"
+    - "eos:4.33.2f"
+    - "nxos:10.5.2"
   title: Components
   version: v1
