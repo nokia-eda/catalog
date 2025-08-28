@@ -8,23 +8,27 @@ spec:
   title: Fabrics
   description: |
     This application provides automation resources relating to datacenter fabrics.
-  image: ghcr.io/nokia-eda/apps/fabrics:v3.0.2
+  image: ghcr.io/nokia-eda/apps/fabrics:v4.0.0
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
   author: Nokia
   appInfo:
-    license: LICENSE
+    license: fabrics/LICENSE
     categories:
       - "networking"
-    readme: README.md
+    readme: fabrics/README.md
     ociSpecVersion: v1.0.0
   supportedEndpoints:
     - "srl:24.10.*"
     - "srl:25.3.*"
+    - "srl:25.7.*"
     - "sros:24.10.r4+"
     - "sros:25.3.r2+"
+    - "sros:25.7.*"
+    - "eos:4.33.2f"
+    - "nxos:10.5.2"
   supportedCoreVersions:
-    - "v2.0"
+    - "v3.0"
   components:
     - crd:
         path: fabrics/crds/fabrics.eda.nokia.com_fabrics.yaml
@@ -34,6 +38,11 @@ spec:
           name: Fabrics
         api:
           expose: readWrite
+        names:
+          plural: fabrics
+          singular: fabric
+          kind: Fabric
+          listKind: FabricList
     - crd:
         path: fabrics/crds/fabrics.eda.nokia.com_isls.yaml
         schema: fabrics/openapiv3/eda_oas_fabrics.eda.nokia.com_isls.json
@@ -42,16 +51,31 @@ spec:
           name: ISLs
         api:
           expose: readWrite
+        names:
+          plural: isls
+          singular: isl
+          kind: ISL
+          listKind: ISLList
     - crd:
         path: fabrics/crds/fabrics.eda.nokia.com_islstates.yaml
         schema: fabrics/openapiv3/eda_oas_fabrics.eda.nokia.com_islstates.json
         api:
           expose: none
+        names:
+          plural: islstates
+          singular: islstate
+          kind: ISLState
+          listKind: ISLStateList
     - crd:
         path: fabrics/crds/fabrics.eda.nokia.com_fabricstates.yaml
         schema: fabrics/openapiv3/eda_oas_fabrics.eda.nokia.com_fabricstates.json
         api:
           expose: none
+        names:
+          plural: fabricstates
+          singular: fabricstate
+          kind: FabricState
+          listKind: FabricStateList
     - script:
         path: fabrics/intents/fabric/fabric_intent.py
         type: config
@@ -73,10 +97,26 @@ spec:
         trigger:
           kind: ISLState
     - view:
-        path: fabrics/ui/fabric-dashboard-v0.9.json
+        path: fabrics/ui/fabric-dashboard-v0.10.json
         ui:
           category: Fabrics
           name: Fabrics
+    - crd:
+        api:
+          expose: readWrite
+        namespaced: true
+        path: fabrics/crds/fabrics.eda.nokia.com_islpings.yaml
+        schema: fabrics/openapiv3/eda_oas_fabrics.eda.nokia.com_islpings.json
+        workflow: true
+        ui:
+          name: ISL Ping
+        names:
+          plural: islpings
+          singular: islping
+          kind: IslPing
+          listKind: IslPingList
+    - cr:
+        path: fabrics/workflows/islping/core_v1_flowdefinition.yaml
   dependencies:
     - file:
         path: fabrics/intents
@@ -161,19 +201,19 @@ spec:
   requirements:
     - appName: protocols
       vendor: nokia
-      version: v3.0.*
+      version: v4.0.0
     - appName: routingpolicies
       vendor: nokia
-      version: v3.0.*
+      version: v4.0.0
     - appName: routing
       vendor: nokia
-      version: v3.0.*
+      version: v4.0.0
     - appName: interfaces
       vendor: nokia
-      version: v3.0.*
+      version: v4.0.0
     - appName: qos
       vendor: nokia
-      version: v3.0.*
+      version: v4.0.0
     - appName: security
       vendor: nokia
-      version: v3.0.*
+      version: v4.0.0
