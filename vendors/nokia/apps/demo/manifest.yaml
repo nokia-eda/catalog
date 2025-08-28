@@ -8,23 +8,28 @@ spec:
   title: Demo
   description: |
     This application provides demonstration examples
-  image: ghcr.io/nokia-eda/apps/demo:v3.0.2
+  image: ghcr.io/nokia-eda/apps/demo:v4.0.0
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
   author: Nokia
   appInfo:
-    license: LICENSE
+    license: demo/LICENSE
     categories:
       - "demo"
-    readme: README.md
+    readme: demo/README.md
+    settings: demo/settings-openapi/eda_oas_demo.eda.nokia.com_appsettings.json
     ociSpecVersion: v1.0.0
   supportedEndpoints:
     - "srl:24.10.*"
     - "srl:25.3.*"
+    - "srl:25.7.*"
     - "sros:24.10.r4+"
     - "sros:25.3.r2+"
+    - "sros:25.7.*"
+    - "eos:4.33.2f"
+    - "nxos:10.5.2"
   supportedCoreVersions:
-    - "v2.0"
+    - "v3.0"
   components:
     - crd:
         path: demo/crds/demo.eda.nokia.com_simplevrfs.yaml
@@ -34,6 +39,11 @@ spec:
         ui:
           category: Demo
           name: Simple VRFs
+        names:
+          plural: simplevrfs
+          singular: simplevrf
+          kind: SimpleVRF
+          listKind: SimpleVRFList
     - crd:
         path: demo/crds/demo.eda.nokia.com_labels.yaml
         schema: demo/openapiv3/eda_oas_demo.eda.nokia.com_labels.json
@@ -43,20 +53,35 @@ spec:
           category: Demo
           name: Labels
           panel: system_administration
+        names:
+          singular: label
+          kind: Label
+          listKind: LabelList
+          plural: labels
     - crd:
         path: demo/crds/demo.eda.nokia.com_oesextensions.yaml
         schema: demo/openapiv3/eda_oas_demo.eda.nokia.com_oesextensions.json
-        namespaced: false
         api:
           expose: readWrite
         ui:
           category: Demo
           name: OAS Extension
+        names:
+          plural: oesextensions
+          singular: oasextension
+          kind: OasExtension
+          listKind: OasExtensionList
     - crd:
         path: demo/crds/demo.eda.nokia.com_overlays.yaml
         schema: demo/openapiv3/eda_oas_demo.eda.nokia.com_overlays.json
+        namespaced: false
         api:
           expose: readWrite
+        names:
+          plural: overlays
+          singular: overlay
+          kind: Overlay
+          listKind: OverlayList
     - crd:
         path: demo/crds/demo.eda.nokia.com_gvkpings.yaml
         schema: demo/openapiv3/eda_oas_demo.eda.nokia.com_gvkpings.json
@@ -65,6 +90,11 @@ spec:
         ui:
           category: Demo
           name: GVK Ping
+        names:
+          plural: gvkpings
+          singular: gvkping
+          kind: Gvkping
+          listKind: GvkpingList
     - script:
         path: demo/intents/simplevrf/simplevrf_intent.py
         type: config
