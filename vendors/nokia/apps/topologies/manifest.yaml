@@ -8,23 +8,27 @@ spec:
   title: Topologies
   description: |
     This application provides physical topology support
-  image: ghcr.io/nokia-eda/apps/topologies:v3.0.2
+  image: ghcr.io/nokia-eda/apps/topologies:v4.0.0
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
   author: Nokia
   appInfo:
-    license: LICENSE
+    license: topologies/LICENSE
     categories:
       - "networking"
-    readme: README.md
+    readme: topologies/README.md
     ociSpecVersion: v1.0.0
   supportedEndpoints:
     - "srl:24.10.*"
     - "srl:25.3.*"
+    - "srl:25.7.*"
     - "sros:24.10.r4+"
     - "sros:25.3.r2+"
+    - "sros:25.7.*"
+    - "eos:4.33.2f"
+    - "nxos:10.5.2"
   supportedCoreVersions:
-    - "v2.0"
+    - "v3.0"
   components:
     - crd:
         path: topologies/crds/topologies.eda.nokia.com_topolinkmonitors.yaml
@@ -32,11 +36,21 @@ spec:
         namespaced: false
         api:
           expose: none
+        names:
+          plural: topolinkmonitors
+          singular: topolinkmonitor
+          kind: TopoLinkMonitor
+          listKind: TopoLinkMonitorList
     - crd:
         path: topologies/crds/topologies.eda.nokia.com_topolinkstates.yaml
         schema: topologies/openapiv3/eda_oas_topologies.eda.nokia.com_topolinkstates.json
         api:
           expose: none
+        names:
+          plural: topolinkstates
+          singular: topolinkstate
+          kind: TopoLinkState
+          listKind: TopoLinkStateList
     - crd:
         path: topologies/crds/topologies.eda.nokia.com_topologies.yaml
         schema: topologies/openapiv3/eda_oas_topologies.eda.nokia.com_topologies.json
@@ -45,6 +59,11 @@ spec:
           expose: readWrite
         kubernetes:
           exportPolicy: all
+        names:
+          plural: topologies
+          singular: topology
+          kind: Topology
+          listKind: TopologyList
     - crd:
         path: topologies/crds/topologies.eda.nokia.com_topologygroupings.yaml
         schema: topologies/openapiv3/eda_oas_topologies.eda.nokia.com_topologygroupings.json
@@ -53,42 +72,44 @@ spec:
           expose: readWrite
         kubernetes:
           exportPolicy: all
-    - crd:
-        path: topologies/crds/topologies.eda.nokia.com_cpuutiloverlays.yaml
-        schema: topologies/openapiv3/eda_oas_topologies.eda.nokia.com_cpuutiloverlays.json
-        namespaced: false
-        api:
-          expose: readWrite
+        names:
+          plural: topologygroupings
+          singular: topologygrouping
+          kind: TopologyGrouping
+          listKind: TopologyGroupingList
     - crd:
         path: topologies/crds/topologies.eda.nokia.com_deviationoverlays.yaml
         schema: topologies/openapiv3/eda_oas_topologies.eda.nokia.com_deviationoverlays.json
         namespaced: false
         api:
           expose: readWrite
-    - crd:
-        path: topologies/crds/topologies.eda.nokia.com_memoryoverlays.yaml
-        schema: topologies/openapiv3/eda_oas_topologies.eda.nokia.com_memoryoverlays.json
-        namespaced: false
-        api:
-          expose: readWrite
-    - crd:
-        path: topologies/crds/topologies.eda.nokia.com_diskoverlays.yaml
-        schema: topologies/openapiv3/eda_oas_topologies.eda.nokia.com_diskoverlays.json
-        namespaced: false
-        api:
-          expose: readWrite
+        names:
+          listKind: DeviationOverlayList
+          plural: deviationoverlays
+          singular: deviationoverlay
+          kind: DeviationOverlay
     - crd:
         path: topologies/crds/topologies.eda.nokia.com_trafficrateoverlays.yaml
         schema: topologies/openapiv3/eda_oas_topologies.eda.nokia.com_trafficrateoverlays.json
         namespaced: false
         api:
           expose: readWrite
+        names:
+          singular: trafficrateoverlay
+          kind: TrafficRateOverlay
+          listKind: TrafficRateOverlayList
+          plural: trafficrateoverlays
     - crd:
         path: topologies/crds/topologies.eda.nokia.com_lldpoverlays.yaml
         schema: topologies/openapiv3/eda_oas_topologies.eda.nokia.com_lldpoverlays.json
         namespaced: false
         api:
           expose: readWrite
+        names:
+          plural: lldpoverlays
+          singular: lldpoverlay
+          kind: LldpOverlay
+          listKind: LldpOverlayList
     - script:
         path: topologies/intents/topolinkmonitor/topolinkmonitor_intent.py
         type: config
@@ -110,25 +131,10 @@ spec:
         trigger:
           kind: TopologyGrouping
     - script:
-        path: topologies/intents/cpuutiloverlay/cpu_util_overlay_intent.py
-        type: state
-        trigger:
-          kind: CPUUtilOverlay
-    - script:
         path: topologies/intents/deviationoverlay/deviation_overlay_intent.py
         type: state
         trigger:
           kind: DeviationOverlay
-    - script:
-        path: topologies/intents/memoryoverlay/memory_overlay_intent.py
-        type: state
-        trigger:
-          kind: MemoryOverlay
-    - script:
-        path: topologies/intents/diskoverlay/disk_overlay_intent.py
-        type: state
-        trigger:
-          kind: DiskOverlay
     - script:
         path: topologies/intents/trafficrateoverlay/trafficrate_overlay_intent.py
         type: state
@@ -152,3 +158,9 @@ spec:
         path: utils/
     - file:
         path: core/pysrc/
+    - file:
+        path: interfaces/
+  requirements:
+    - appName: interfaces
+      vendor: nokia
+      version: v4.0.0
