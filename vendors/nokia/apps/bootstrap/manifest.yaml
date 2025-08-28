@@ -10,23 +10,27 @@ spec:
     This application provides device bootstrap for various Network Operating Systems.
 
     It generates initial device configuration for Zero Touch Provisioning (ZTP).
-  image: ghcr.io/nokia-eda/apps/bootstrap:v3.0.2
+  image: ghcr.io/nokia-eda/apps/bootstrap:v4.0.0
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
   author: Nokia
   appInfo:
-    license: LICENSE
+    license: bootstrap/LICENSE
     categories:
       - "core"
-    readme: README.md
+    readme: bootstrap/README.md
     ociSpecVersion: v1.0.0
   supportedEndpoints:
     - "srl:24.10.*"
     - "srl:25.3.*"
+    - "srl:25.7.*"
     - "sros:24.10.r4+"
     - "sros:25.3.r2+"
+    - "sros:25.7.*"
+    - "eos:4.33.2f"
+    - "nxos:10.5.2"
   supportedCoreVersions:
-    - "v2.0"
+    - "v3.0"
   components:
     - crd:
         path: bootstrap/crds/bootstrap.eda.nokia.com_inits.yaml
@@ -37,6 +41,11 @@ spec:
           panel: system_administration
         api:
           expose: readWrite
+        names:
+          plural: inits
+          singular: init
+          kind: Init
+          listKind: InitList
     - crd:
         path: bootstrap/crds/bootstrap.eda.nokia.com_managementrouters.yaml
         schema: bootstrap/openapiv3/eda_oas_bootstrap.eda.nokia.com_managementrouters.json
@@ -45,11 +54,21 @@ spec:
           name: Management Routers
         api:
           expose: readWrite
+        names:
+          kind: ManagementRouter
+          listKind: ManagementRouterList
+          plural: managementrouters
+          singular: managementrouter
     - crd:
         path: bootstrap/crds/bootstrap.eda.nokia.com_managementrouterstates.yaml
         schema: bootstrap/openapiv3/eda_oas_bootstrap.eda.nokia.com_managementrouterstates.json
         api:
           expose: none
+        names:
+          kind: ManagementRouterState
+          listKind: ManagementRouterStateList
+          plural: managementrouterstates
+          singular: managementrouterstate
     - script:
         path: bootstrap/intents/init/init_intent.py
         type: config
