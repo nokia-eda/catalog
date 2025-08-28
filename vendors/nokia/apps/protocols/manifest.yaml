@@ -4,27 +4,31 @@ metadata:
   name: protocols
 spec:
   group: protocols.eda.nokia.com
-  version: v1alpha1
+  version: v1
   title: Protocols
   description: |
     This application provides resources related to routing protocols for various Network Operating Systems.
-  image: ghcr.io/nokia-eda/apps/protocols:v3.0.2
+  image: ghcr.io/nokia-eda/apps/protocols:v4.0.0
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
   author: Nokia
   appInfo:
-    license: LICENSE
+    license: protocols/LICENSE
     categories:
       - "networking"
-    readme: README.md
+    readme: protocols/README.md
     ociSpecVersion: v1.0.0
   supportedEndpoints:
     - "srl:24.10.*"
     - "srl:25.3.*"
+    - "srl:25.7.*"
     - "sros:24.10.r4+"
     - "sros:25.3.r2+"
+    - "sros:25.7.*"
+    - "eos:4.33.2f"
+    - "nxos:10.5.2"
   supportedCoreVersions:
-    - "v2.0"
+    - "v3.0"
   components:
     - view:
         path: protocols/ui/defaultbgppeer_dashboard_v1.1.json
@@ -54,11 +58,23 @@ spec:
           name: Default BGP Groups
         api:
           expose: readWrite
+        conversionScript: protocols/intents/defaultbgpgroup/conversion_v1.py
+        names:
+          plural: defaultbgpgroups
+          singular: defaultbgpgroup
+          kind: DefaultBGPGroup
+          listKind: DefaultBGPGroupList
     - crd:
         path: protocols/crds/protocols.eda.nokia.com_defaultbgpgroupdeployments.yaml
         schema: protocols/openapiv3/eda_oas_protocols.eda.nokia.com_defaultbgpgroupdeployments.json
         api:
           expose: none
+        conversionScript: protocols/intents/defaultbgpgroupdeployment/conversion_v1.py
+        names:
+          plural: defaultbgpgroupdeployments
+          singular: defaultbgpgroupdeployment
+          kind: DefaultBGPGroupDeployment
+          listKind: DefaultBGPGroupDeploymentList
     - crd:
         path: protocols/crds/protocols.eda.nokia.com_defaultbgppeers.yaml
         schema: protocols/openapiv3/eda_oas_protocols.eda.nokia.com_defaultbgppeers.json
@@ -67,6 +83,12 @@ spec:
           name: Default BGP Peers
         api:
           expose: readWrite
+        conversionScript: protocols/intents/defaultbgppeer/conversion_v1.py
+        names:
+          plural: defaultbgppeers
+          singular: defaultbgppeer
+          kind: DefaultBGPPeer
+          listKind: DefaultBGPPeerList
     - crd:
         path: protocols/crds/protocols.eda.nokia.com_defaultstaticroutes.yaml
         schema: protocols/openapiv3/eda_oas_protocols.eda.nokia.com_defaultstaticroutes.json
@@ -75,6 +97,12 @@ spec:
           name: Default Static Routes
         api:
           expose: readWrite
+        conversionScript: protocols/intents/defaultstaticroute/conversion_v1.py
+        names:
+          plural: defaultstaticroutes
+          singular: defaultstaticroute
+          kind: DefaultStaticRoute
+          listKind: DefaultStaticRouteList
     - crd:
         path: protocols/crds/protocols.eda.nokia.com_defaultaggregateroutes.yaml
         schema: protocols/openapiv3/eda_oas_protocols.eda.nokia.com_defaultaggregateroutes.json
@@ -83,6 +111,12 @@ spec:
           name: Default Aggregate Routes
         api:
           expose: readWrite
+        conversionScript: protocols/intents/defaultaggregateroute/conversion_v1.py
+        names:
+          plural: defaultaggregateroutes
+          singular: defaultaggregateroute
+          kind: DefaultAggregateRoute
+          listKind: DefaultAggregateRouteList
     - crd:
         path: protocols/crds/protocols.eda.nokia.com_defaultroutereflectors.yaml
         schema: protocols/openapiv3/eda_oas_protocols.eda.nokia.com_defaultroutereflectors.json
@@ -91,6 +125,12 @@ spec:
           name: Default Route Reflectors
         api:
           expose: readWrite
+        conversionScript: protocols/intents/defaultroutereflector/conversion_v1.py
+        names:
+          plural: defaultroutereflectors
+          singular: defaultroutereflector
+          kind: DefaultRouteReflector
+          listKind: DefaultRouteReflectorList
     - crd:
         path: protocols/crds/protocols.eda.nokia.com_defaultroutereflectorclients.yaml
         schema: protocols/openapiv3/eda_oas_protocols.eda.nokia.com_defaultroutereflectorclients.json
@@ -99,6 +139,12 @@ spec:
           name: Default Route Reflector Clients
         api:
           expose: readWrite
+        conversionScript: protocols/intents/defaultroutereflectorclient/conversion_v1.py
+        names:
+          kind: DefaultRouteReflectorClient
+          listKind: DefaultRouteReflectorClientList
+          plural: defaultroutereflectorclients
+          singular: defaultroutereflectorclient
     - crd:
         path: protocols/crds/protocols.eda.nokia.com_bgpgroups.yaml
         schema: protocols/openapiv3/eda_oas_protocols.eda.nokia.com_bgpgroups.json
@@ -107,16 +153,34 @@ spec:
           name: BGP Groups
         api:
           expose: readWrite
+        conversionScript: protocols/intents/bgpgroup/conversion_v1.py
+        names:
+          kind: BGPGroup
+          listKind: BGPGroupList
+          plural: bgpgroups
+          singular: bgpgroup
     - crd:
         path: protocols/crds/protocols.eda.nokia.com_bgpgroupdeployments.yaml
         schema: protocols/openapiv3/eda_oas_protocols.eda.nokia.com_bgpgroupdeployments.json
         api:
           expose: none
+        conversionScript: protocols/intents/bgpgroupdeployment/conversion_v1.py
+        names:
+          plural: bgpgroupdeployments
+          singular: bgpgroupdeployment
+          kind: BGPGroupDeployment
+          listKind: BGPGroupDeploymentList
     - crd:
         path: protocols/crds/protocols.eda.nokia.com_bgpgroupstates.yaml
         schema: protocols/openapiv3/eda_oas_protocols.eda.nokia.com_bgpgroupstates.json
         api:
           expose: none
+        conversionScript: protocols/intents/bgpgroupstate/conversion_v1.py
+        names:
+          listKind: BGPGroupStateList
+          plural: bgpgroupstates
+          singular: bgpgroupstate
+          kind: BGPGroupState
     - crd:
         path: protocols/crds/protocols.eda.nokia.com_bgppeers.yaml
         schema: protocols/openapiv3/eda_oas_protocols.eda.nokia.com_bgppeers.json
@@ -125,6 +189,12 @@ spec:
           name: BGP Peers
         api:
           expose: readWrite
+        conversionScript: protocols/intents/bgppeer/conversion_v1.py
+        names:
+          plural: bgppeers
+          singular: bgppeer
+          kind: BGPPeer
+          listKind: BGPPeerList
     - crd:
         path: protocols/crds/protocols.eda.nokia.com_staticroutes.yaml
         schema: protocols/openapiv3/eda_oas_protocols.eda.nokia.com_staticroutes.json
@@ -133,6 +203,12 @@ spec:
           name: Static Routes
         api:
           expose: readWrite
+        conversionScript: protocols/intents/staticroute/conversion_v1.py
+        names:
+          plural: staticroutes
+          singular: staticroute
+          kind: StaticRoute
+          listKind: StaticRouteList
     - crd:
         path: protocols/crds/protocols.eda.nokia.com_aggregateroutes.yaml
         schema: protocols/openapiv3/eda_oas_protocols.eda.nokia.com_aggregateroutes.json
@@ -141,11 +217,23 @@ spec:
           name: Aggregate Routes
         api:
           expose: readWrite
+        conversionScript: protocols/intents/aggregateroute/conversion_v1.py
+        names:
+          listKind: AggregateRouteList
+          plural: aggregateroutes
+          singular: aggregateroute
+          kind: AggregateRoute
     - crd:
         path: protocols/crds/protocols.eda.nokia.com_bgppeerstates.yaml
         schema: protocols/openapiv3/eda_oas_protocols.eda.nokia.com_bgppeerstates.json
         api:
           expose: readWrite
+        conversionScript: protocols/intents/bgppeerstate/conversion_v1.py
+        names:
+          singular: bgppeerstate
+          kind: BGPPeerState
+          listKind: BGPPeerStateList
+          plural: bgppeerstates
     - crd:
         path: protocols/crds/protocols.eda.nokia.com_routereflectors.yaml
         schema: protocols/openapiv3/eda_oas_protocols.eda.nokia.com_routereflectors.json
@@ -154,6 +242,12 @@ spec:
           name: Route Reflectors
         api:
           expose: readWrite
+        conversionScript: protocols/intents/routereflector/conversion_v1.py
+        names:
+          plural: routereflectors
+          singular: routereflector
+          kind: RouteReflector
+          listKind: RouteReflectorList
     - crd:
         path: protocols/crds/protocols.eda.nokia.com_routereflectorclients.yaml
         schema: protocols/openapiv3/eda_oas_protocols.eda.nokia.com_routereflectorclients.json
@@ -162,16 +256,34 @@ spec:
           name: Route Reflector Clients
         api:
           expose: readWrite
+        conversionScript: protocols/intents/routereflectorclient/conversion_v1.py
+        names:
+          plural: routereflectorclients
+          singular: routereflectorclient
+          kind: RouteReflectorClient
+          listKind: RouteReflectorClientList
     - crd:
         path: protocols/crds/protocols.eda.nokia.com_routereflectorstates.yaml
         schema: protocols/openapiv3/eda_oas_protocols.eda.nokia.com_routereflectorstates.json
         api:
           expose: readWrite
+        conversionScript: protocols/intents/routereflectorstate/conversion_v1.py
+        names:
+          plural: routereflectorstates
+          singular: routereflectorstate
+          kind: RouteReflectorState
+          listKind: RouteReflectorStateList
     - crd:
         path: protocols/crds/protocols.eda.nokia.com_routereflectorclientstates.yaml
         schema: protocols/openapiv3/eda_oas_protocols.eda.nokia.com_routereflectorclientstates.json
         api:
           expose: readWrite
+        conversionScript: protocols/intents/routereflectorclientstate/conversion_v1.py
+        names:
+          plural: routereflectorclientstates
+          singular: routereflectorclientstate
+          kind: RouteReflectorClientState
+          listKind: RouteReflectorClientStateList
     - script:
         path: protocols/intents/defaultbgpgroup/defaultbgpgroup_intent.py
         type: config
@@ -264,6 +376,21 @@ spec:
           kind: RouteReflectorClientState
     - cr:
         path: protocols/workflows/checkdefaultbgppeers/core_v1_flowdefinition.yaml
+    - crd:
+        api:
+          expose: readWrite
+        namespaced: true
+        path: protocols/crds/protocols.eda.nokia.com_checkdefaultbgppeerss.yaml
+        schema: protocols/openapiv3/eda_oas_protocols.eda.nokia.com_checkdefaultbgppeerss.json
+        workflow: true
+        conversionScript: protocols/intents/checkdefaultbgppeers/conversion_v1.py
+        ui:
+          name: Check BGP
+        names:
+          kind: CheckDefaultBgpPeers
+          listKind: CheckDefaultBgpPeersList
+          plural: checkdefaultbgppeerss
+          singular: checkdefaultbgppeers
   dependencies:
     - file:
         path: protocols/intents
@@ -278,16 +405,20 @@ spec:
     - file:
         path: routing/
     - file:
+        path: routingpolicies/
+    - file:
         path: services/
     - file:
         path: security/
+    - file:
+        path: protocols/api/v1/pysrc
   requirements:
     - appName: interfaces
       vendor: nokia
-      version: v3.0.*
+      version: v4.0.0
     - appName: routing
       vendor: nokia
-      version: v3.0.*
+      version: v4.0.0
     - appName: security
       vendor: nokia
-      version: v3.0.*
+      version: v4.0.0
