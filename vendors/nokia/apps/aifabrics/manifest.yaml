@@ -8,23 +8,27 @@ spec:
   title: AIFabrics
   description: |
     This application provides automation resources relating to datacenter AI fabrics.
-  image: ghcr.io/nokia-eda/apps/aifabrics:v3.0.2
+  image: ghcr.io/nokia-eda/apps/aifabrics:v4.0.0
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
   author: Nokia
   appInfo:
-    license: LICENSE
+    license: aifabrics/LICENSE
     categories:
       - "networking"
-    readme: README.md
+    readme: aifabrics/README.md
     ociSpecVersion: v1.0.0
   supportedEndpoints:
     - "srl:24.10.*"
     - "srl:25.3.*"
+    - "srl:25.7.*"
     - "sros:24.10.r4+"
     - "sros:25.3.r2+"
+    - "sros:25.7.*"
+    - "eos:4.33.2f"
+    - "nxos:10.5.2"
   supportedCoreVersions:
-    - "v2.0"
+    - "v3.0"
   components:
     - crd:
         path: aifabrics/crds/aifabrics.eda.nokia.com_backends.yaml
@@ -34,11 +38,21 @@ spec:
           name: Backends
         api:
           expose: readWrite
+        names:
+          plural: backends
+          singular: backend
+          kind: Backend
+          listKind: BackendList
     - crd:
         path: aifabrics/crds/aifabrics.eda.nokia.com_backendstates.yaml
         schema: aifabrics/openapiv3/eda_oas_aifabrics.eda.nokia.com_backendstates.json
         api:
           expose: none
+        names:
+          plural: backendstates
+          singular: backendstate
+          kind: BackendState
+          listKind: BackendStateList
     - script:
         path: aifabrics/intents/backend/backend_intent.py
         type: config
@@ -49,6 +63,11 @@ spec:
         type: state
         trigger:
           kind: BackendState
+    - view:
+        path: aifabrics/ui/aifabric-dashboard-v0.1.json
+        ui:
+          category: AIFabrics
+          name: Backends
   dependencies:
     - file:
         path: aifabrics/intents
@@ -75,19 +94,19 @@ spec:
   requirements:
     - appName: fabrics
       vendor: nokia
-      version: v3.0.*
+      version: v4.0.0
     - appName: protocols
       vendor: nokia
-      version: v3.0.*
+      version: v4.0.0
     - appName: qos
       vendor: nokia
-      version: v3.0.*
+      version: v4.0.0
     - appName: services
       vendor: nokia
-      version: v3.0.*
+      version: v4.0.0
     - appName: routingpolicies
       vendor: nokia
-      version: v3.0.*
+      version: v4.0.0
     - appName: interfaces
       vendor: nokia
-      version: v3.0.*
+      version: v4.0.0
