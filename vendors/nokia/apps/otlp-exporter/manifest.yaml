@@ -1,0 +1,106 @@
+apiVersion: core.eda.nokia.com/v1
+kind: Manifest
+metadata:
+  name: otlp-exporter
+spec:
+  group: otlp.eda.nokia.com
+  version: v1alpha1
+  title: OTLP Exporter
+  description: Publish EDA metrics to an OpenTelemetry receiver.
+  image: ghcr.io/nokia-eda/apps/otlp-exporter:v1.0.0
+  author: Nokia
+  gitPathPrefix: /
+  supportedEndpoints:
+    - "srl:0.0.0"
+    - "srl:23.7.1" # specific release
+    - "srl:23.10.*" # any release in a minor
+    - "srl:24.*" # any release in a major
+    - "sros:23.7.r1"
+  supportedCoreVersions:
+    - "v3.0"
+  appInfo:
+    readme: README.md
+    documentation: DOCUMENTATION.md
+    license: LICENSE
+    screenshots:
+      - ote/assets/logo.png
+    categories:
+      - "integrations"
+    ociSpecVersion: v1.0.0
+  components:
+    - crd:
+        path: ote/config/crd/bases/otlp.eda.nokia.com_metricexports.yaml
+        schema: ote/docs/openapiv3/eda_oas_otlp.eda.nokia.com_metricexports.json
+        namespaced: true
+        api:
+          expose: readWrite
+        ui:
+          category: OpenTelemetry
+          name: Metric Export
+        kubernetes:
+          exportPolicy: all
+          importPolicy: all
+        names:
+          plural: metricexports
+          singular: metricexport
+          kind: MetricExport
+          listKind: MetricExportList
+    - crd:
+        path: ote/config/crd/bases/otlp.eda.nokia.com_clustermetricexports.yaml
+        schema: ote/docs/openapiv3/eda_oas_otlp.eda.nokia.com_clustermetricexports.json
+        namespaced: false
+        api:
+          expose: readWrite
+        ui:
+          category: OpenTelemetry
+          name: Cluster Metric Export
+        kubernetes:
+          exportPolicy: all
+          importPolicy: all
+        names:
+          singular: clustermetricexport
+          kind: ClusterMetricExport
+          listKind: ClusterMetricExportList
+          plural: clustermetricexports
+    - crd:
+        path: ote/config/crd/bases/otlp.eda.nokia.com_receivers.yaml
+        schema: ote/docs/openapiv3/eda_oas_otlp.eda.nokia.com_receivers.json
+        namespaced: true
+        api:
+          expose: readWrite
+        ui:
+          category: OpenTelemetry
+          name: Receiver
+        kubernetes:
+          exportPolicy: all
+          importPolicy: all
+        names:
+          plural: receivers
+          singular: receiver
+          kind: Receiver
+          listKind: ReceiverList
+    - crd:
+        path: ote/config/crd/bases/otlp.eda.nokia.com_clusterreceivers.yaml
+        schema: ote/docs/openapiv3/eda_oas_otlp.eda.nokia.com_clusterreceivers.json
+        namespaced: false
+        api:
+          expose: readWrite
+        ui:
+          category: OpenTelemetry
+          name: Cluster Receiver
+        kubernetes:
+          exportPolicy: all
+          importPolicy: all
+        names:
+          kind: ClusterReceiver
+          listKind: ClusterReceiverList
+          plural: clusterreceivers
+          singular: clusterreceiver
+    - cr:
+        path: ote/manifests/webhooks.yaml
+    - cr:
+        path: ote/manifests/deployment.yaml
+  dependencies:
+    - container:
+        name: otlp-exporter-controller
+        image: ghcr.io/nokia-eda/apps/otlp-exporter-controller:v1.0.0
