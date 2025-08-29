@@ -8,7 +8,7 @@ spec:
   title: Notifier
   author: Nokia
   description: Notifies users using external providers
-  image: ghcr.io/nokia-eda/apps/notifier:v3.0.0
+  image: ghcr.io/nokia-eda/apps/notifier:v4.0.0
   gitPathPrefix: /
   supportedEndpoints:
     - "srl:0.0.0"
@@ -17,8 +17,8 @@ spec:
     - "srl:24.*" # any release in a major
     - "sros:23.7.r1"
   supportedCoreVersions:
-    - "v2.0.0"
-    - "v2.0.0-0"
+    - "v3.0"
+    - "v3.0.0-0"
   appInfo:
     readme: README.md
     documentation: DOCUMENTATION.md
@@ -42,6 +42,11 @@ spec:
         kubernetes:
           exportPolicy: all
           importPolicy: spec
+        names:
+          kind: Notifier
+          listKind: NotifierList
+          plural: notifiers
+          singular: notifier
     - crd:
         path: notifier/config/crd/bases/notifiers.eda.nokia.com_providers.yaml
         schema: notifier/docs/openapiv3/eda_oas_notifiers.eda.nokia.com_providers.json
@@ -54,6 +59,11 @@ spec:
         kubernetes:
           exportPolicy: all
           importPolicy: spec
+        names:
+          singular: provider
+          kind: Provider
+          listKind: ProviderList
+          plural: providers
     - crd:
         path: notifier/config/crd/bases/notifiers.eda.nokia.com_clusternotifiers.yaml
         schema: notifier/docs/openapiv3/eda_oas_notifiers.eda.nokia.com_clusternotifiers.json
@@ -62,10 +72,15 @@ spec:
           expose: readWrite
         ui:
           category: Notifier
-          name: Cluster Notifier
+          name: ClusterNotifier
         kubernetes:
           exportPolicy: all
           importPolicy: spec
+        names:
+          singular: clusternotifier
+          kind: ClusterNotifier
+          listKind: ClusterNotifierList
+          plural: clusternotifiers
     - crd:
         path: notifier/config/crd/bases/notifiers.eda.nokia.com_clusterproviders.yaml
         schema: notifier/docs/openapiv3/eda_oas_notifiers.eda.nokia.com_clusterproviders.json
@@ -74,10 +89,15 @@ spec:
           expose: readWrite
         ui:
           category: Notifier
-          name: Cluster Provider
+          name: ClusterProvider
         kubernetes:
           exportPolicy: all
           importPolicy: spec
+        names:
+          kind: ClusterProvider
+          listKind: ClusterProviderList
+          plural: clusterproviders
+          singular: clusterprovider
     - cr:
         path: notifier/manifests/webhooks.yaml
     - cr:
@@ -85,5 +105,4 @@ spec:
   dependencies:
     - container:
         name: notifier-controller
-        image: ghcr.io/nokia-eda/apps/notifier-controller:v3.0.0
-
+        image: ghcr.io/nokia-eda/apps/notifier-controller:v4.0.0

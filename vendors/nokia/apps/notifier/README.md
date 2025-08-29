@@ -7,11 +7,11 @@ This EDA App creates and delivers custom notifications from a variety of sources
 ## Getting started
 
 After installing the App from the app store, you can configure your notification sources and destinations.
-You can choose between two sources — Alarm or Query — and send notifications to one or multiple destinations.
+You have the option to choose between two sources—Alarm or Query—and can send notifications to multiple destinations.
 The full list of supported providers is available [here](https://containrrr.dev/shoutrrr/v0.8).
 
-Sources are defined using the Notifier (or ClusterNotifier) Custom Resource (CR), while destinations (referred to as Providers) are set up using the Provider or ClusterProvider CRs.
-You can mix and match sources and send notifications to multiple destinations.
+Sources are defined using the Notifier (or ClusterNotifier) Custom Resource (CR), while destinations (referred to as Providers ) are set up using the Provider or ClusterProvider CRs.
+You can mix and match sources and send notifications to multiple destinations
 
 ## Resources
 
@@ -27,8 +27,7 @@ The Provider resource can be created in any namespace except the EDA base namesp
 
 ### Alarm
 
-Alarms can be used as a source for notifications. Users can specify a list of included alarm types as well as a list of excluded types.
-Whenever an Alarm with an included type is raised, a notification is generated and sent using the referenced providers.
+Alarms can be used as a source for notifications, the user can set the list of included alarm types as well as a list of excluded types. Whenever an Alarm with an included type is raised, a notification is generated and send using the referenced providers.
 The format of the Alarm-based notification depends on the provider type.
 
 - **Notifier**
@@ -75,8 +74,8 @@ The notification supports two fields for customization: title and template, both
 
 For example, querying the table `.namespace.node.srl.interface` returns the keys:
 
-- `namespace.name`
-- `namespace.node.name`
+- `.namespace.name`
+- `.namespace.node.name`
 - `name`
 
 And of course any field that was explicitly requested under `fields`. These can then be used within your template to dynamically construct notification messages.
@@ -97,9 +96,9 @@ spec:
         - oper-state
         - .namespace.node.name
       table: .node.srl.interface
-      template: |
-        Namespace: {{ index . ".namespace.name" }}.
-        Interface {{ index . "name"}} is DOWN on node {{ index . "namespace.node.name"}} (admin state:  {{ index . "admin-state" }})
+      template: >-
+        Namespace: {{ index . ".namespace.name" }}.\nInterface {{ index . "name"}} is DOWN on node {{ index .
+        ".namespace.node.name"}} (admin state:  {{ index . "admin-state" }})
       title: Interface Down Alert
       where: admin-state ="enable" and oper-state = "down"
   providers:
@@ -248,8 +247,6 @@ Additional query parameters can be added to the URI:
 - `startTLS` : yes|no, if set to yes  the connection to the SMTP server must use TLS.
 - `useHTML`  : yes|no, if yes the email content type will be set to "text/html; charset=UTF-8" otherwise "text/plain; charset=UTF-8"
 
-Example `email` provider and cluster provider:
-
 - **Provider**
 
 ```yaml
@@ -281,7 +278,6 @@ Additional Providers are supported via the [shoutrrr](https://containrrr.dev/sho
 ## Proxy settings
 
 If the Notifier app is sitting behind a proxy it can be configured using environment variables `HTTP_PROXY`, `HTTPS_PROXY` and `NO_PROXY`.
-Proxy environment variables must be set in the App container environment.
 
 ## Examples
 
@@ -314,7 +310,7 @@ metadata:
   name: discord
 spec:
   enabled: true
-  uri: discord://${SCHEMELESS_WEBHOOK_URL}
+  uri: discord://${TOKEN}@${WEBHOOKID}
 ```
 
 - Send specific Alarms to Discord
@@ -403,7 +399,7 @@ spec:
       table: .node.srl.interface
       template: >-
         Interface {{ index . "name"}} is DOWN on node {{ index .
-        "namespace.node.name"}} (State:  {{ index . "oper-state" }})
+        ".namespace.node.name"}} (State:  {{ index . "oper-state" }})
       title: Interface Down Alert
       where: admin-state ="enable" and oper-state = "down"
   providers:
@@ -446,7 +442,7 @@ spec:
       fields:
       - .node.name
       - .interface.name
-      template: "🚨 {{ index . \"namespace.node.name\" }} has an interface down: {{ index . \"name\" }} 🚨"
+      template: "🚨 {{ index . \".namespace.node.name\" }} has an interface down: {{ index . \"name\" }} 🚨"
   providers:
   - discord
   - teams
