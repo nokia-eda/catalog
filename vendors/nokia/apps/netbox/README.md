@@ -5,7 +5,7 @@
 This app integrates with NetBox using two custom resources (CRs):
 
 - **Instance**: Defines the target NetBox instance to interact with.
-- **Allocation**: Specifies the type of EDA allocation to create based on `NetboxPrefixes`.
+- **Allocation**: Specifies the type of EDA allocation to create based on Netbox `Prefixes`.
 
 > **Note**: Both CRs **must** be created in the same namespace (excluding `eda-system`).
 
@@ -28,7 +28,7 @@ To enable NetBox to send updates to the EDA app:
 #### 2. Create an Event Rule
 
 - **Name**: Choose a relevant name
-- **Objects**: Include **IPAM IPAddresses** and **IPAM Prefixes**
+- **Objects**: Include **DCIM Cables**, **DCIM Devices**, **DCIM DeviceTypes**, **DCIM Sites**,  **IPAM Prefixes** and **IPAM IPAddresses**
 - **Enabled**: Yes
 - **Event Types**:
   - Object Created
@@ -42,7 +42,8 @@ To enable NetBox to send updates to the EDA app:
 
 - Generate a NetBox API token to be used by the app.
 
-- The associated user **must** have permissions to `create`, `update`, and `delete` **IPAM.IPAddresses**, **IPAM.Prefixes**, **Customizations.Tags** and **Customizations.CustomFields** at a minimum.
+- The associated user **must** have permissions to `create`, `update`, and `delete` **DCIM.Cables, DCIM.Devices, DCIM.Sites, IPAM.IPAddresses**, **IPAM.Prefixes**, **Customizations.Tags** and **Customizations.CustomFields** at a minimum.
+
 ---
 
 ## EDA Configuration
