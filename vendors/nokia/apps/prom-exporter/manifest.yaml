@@ -3,7 +3,7 @@ kind: Manifest
 metadata:
   name: prom-exporter
 spec:
-  image: ghcr.io/nokia-eda/apps/prom-exporter:v3.0.0
+  image: ghcr.io/nokia-eda/apps/prom-exporter:v4.0.0
   group: prom.eda.nokia.com
   version: v1alpha1
   title: Prometheus Exporter
@@ -17,8 +17,7 @@ spec:
     - "srl:24.*" # any release in a major
     - "sros:23.7.r1"
   supportedCoreVersions:
-    - "v2.0.0"
-    - "v2.0.0-0"
+    - "v3.0"
   appInfo:
     readme: README.md
     documentation: DOCUMENTATION.md
@@ -42,10 +41,14 @@ spec:
         kubernetes:
           exportPolicy: all
           importPolicy: spec
+        names:
+          plural: exports
+          singular: export
+          kind: Export
+          listKind: ExportList
     - cr:
         path: px/manifests/app_deployment.yaml
   dependencies:
     - container:
         name: prom-exporter-controller
-        image: ghcr.io/nokia-eda/apps/prom-exporter-controller:v3.0.0
-
+        image: ghcr.io/nokia-eda/apps/prom-exporter-controller:v4.0.0

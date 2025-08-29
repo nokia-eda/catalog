@@ -6,7 +6,7 @@ This EDA App exports network and EDA metrics to Prometheus. Users can specify wh
 
 ## Getting started
 
-After installing the App through the appstore, users can specify which sets of metrics are exported using the **Export** Custom Resource (CR) or via the UI by navigating to **Prometheu
+After installing the App through the appstore, users can specify which sets of metrics are exported using the **Export** Custom Resource (CR) or via the UI by navigating to **Prometheus**, **Export**.
 
 ## Examples
 
