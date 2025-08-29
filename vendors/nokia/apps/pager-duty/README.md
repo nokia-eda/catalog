@@ -39,7 +39,7 @@ data:
 
 After installing the application from the app store, configure how alerts are sent to PagerDuty. Alerts can originate from two sources: Alarms or Queries.
 
-To define the alert behavior, create a **Pager** or **ClusterPager** custom resource (CR). The CR specifies a `routingKeySecret`, which determines the service that the alerts target.. The Pager CR specifies a `routingKeySecret`, which determines the service that the alerts target.
+To define the alert behavior, create a **Pager** or **ClusterPager** custom resource (CR). The CR specifies a `routingKeySecret`, which determines the service that the alerts target.
 
 ## Examples
 

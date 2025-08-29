@@ -7,7 +7,7 @@ spec:
   version: v1alpha1
   title: Pager Duty
   description: This application creates PagerDuty incidents based on alarms from the network.
-  image: ghcr.io/nokia-eda/apps/pager-duty:v2.0.0
+  image: ghcr.io/nokia-eda/apps/pager-duty:v3.0.0
   author: Nokia
   gitPathPrefix: /
   supportedEndpoints:
@@ -17,8 +17,8 @@ spec:
     - "srl:24.*" # any release in a major
     - "sros:23.7.r1"
   supportedCoreVersions:
-    - "v2.0.0"
-    - "v2.0.0-0"
+    - "v3.0"
+    - "v3.0.0-0"
   appInfo:
     readme: README.md
     documentation: DOCUMENTATION.md
@@ -41,6 +41,11 @@ spec:
         kubernetes:
           exportPolicy: all
           importPolicy: all
+        names:
+          plural: pagers
+          singular: pager
+          kind: Pager
+          listKind: PagerList
     - crd:
         path: pd/config/crd/bases/pagers.eda.nokia.com_clusterpagers.yaml
         schema: pd/docs/openapiv3/eda_oas_pagers.eda.nokia.com_clusterpagers.json
@@ -53,6 +58,11 @@ spec:
         kubernetes:
           exportPolicy: all
           importPolicy: all
+        names:
+          plural: clusterpagers
+          singular: clusterpager
+          kind: ClusterPager
+          listKind: ClusterPagerList
     - cr:
         path: pd/manifests/webhooks.yaml
     - cr:
@@ -60,5 +70,4 @@ spec:
   dependencies:
     - container:
         name: pager-duty-controller
-        image: ghcr.io/nokia-eda/apps/pager-duty-controller:v2.0.0
-
+        image: ghcr.io/nokia-eda/apps/pager-duty-controller:v3.0.0
