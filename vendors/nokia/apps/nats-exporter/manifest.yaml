@@ -7,7 +7,7 @@ spec:
   version: v1alpha1
   title: NATS Exporter
   description: Publish EDA alarms or any EDB object to a NATS cluster.
-  image: ghcr.io/nokia-eda/nats-exporter:v2.0.0
+  image: ghcr.io/nokia-eda/apps/nats-exporter:v2.0.0
   author: Nokia
   gitPathPrefix: /
   supportedEndpoints:
@@ -83,4 +83,4 @@ spec:
   dependencies:
     - container:
         name: nats-exporter-controller
-        image: ghcr.io/nokia-eda/nats-exporter-controller:v2.0.0
+        image: ghcr.io/nokia-eda/apps/nats-exporter-controller:v2.0.0
