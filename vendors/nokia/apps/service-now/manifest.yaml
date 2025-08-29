@@ -7,7 +7,7 @@ spec:
   version: v1alpha1
   title: ServiceNow
   description: This application creates ServiceNow incidents based on alarms from the network.
-  image: ghcr.io/nokia-eda/apps/service-now:v2.0.0
+  image: ghcr.io/nokia-eda/apps/service-now:v3.0.0
   author: Nokia
   supportedEndpoints:
     - "srl:0.0.0"
@@ -16,8 +16,8 @@ spec:
     - "srl:24.*" # any release in a major
     - "sros:23.7.r1"
   supportedCoreVersions:
-    - "v2.0.0"
-    - "v2.0.0-0"
+    - "v3.0"
+    - "v3.0.0-0"
   appInfo:
     readme: README.md
     documentation: DOCUMENTATION.md
@@ -40,6 +40,11 @@ spec:
         kubernetes:
           exportPolicy: all
           importPolicy: all
+        names:
+          plural: incidents
+          singular: incident
+          kind: Incident
+          listKind: IncidentList
     - crd:
         path: snow/config/crd/bases/snow.eda.nokia.com_instances.yaml
         schema: snow/docs/openapiv3/eda_oas_snow.eda.nokia.com_instances.json
@@ -52,6 +57,11 @@ spec:
         kubernetes:
           exportPolicy: all
           importPolicy: all
+        names:
+          plural: instances
+          singular: instance
+          kind: Instance
+          listKind: InstanceList
     - crd:
         path: snow/config/crd/bases/snow.eda.nokia.com_clusterincidents.yaml
         schema: snow/docs/openapiv3/eda_oas_snow.eda.nokia.com_clusterincidents.json
@@ -64,6 +74,11 @@ spec:
         kubernetes:
           exportPolicy: all
           importPolicy: all
+        names:
+          kind: ClusterIncident
+          listKind: ClusterIncidentList
+          plural: clusterincidents
+          singular: clusterincident
     - crd:
         path: snow/config/crd/bases/snow.eda.nokia.com_clusterinstances.yaml
         schema: snow/docs/openapiv3/eda_oas_snow.eda.nokia.com_clusterinstances.json
@@ -76,10 +91,14 @@ spec:
         kubernetes:
           exportPolicy: all
           importPolicy: all
+        names:
+          singular: clusterinstance
+          kind: ClusterInstance
+          listKind: ClusterInstanceList
+          plural: clusterinstances
     - cr:
         path: snow/manifests/app_deployment.yaml
   dependencies:
     - container:
         name: service-now-controller
-        image: ghcr.io/nokia-eda/apps/service-now-controller:v2.0.0
-
+        image: ghcr.io/nokia-eda/apps/service-now-controller:v3.0.0
