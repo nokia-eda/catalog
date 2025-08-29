@@ -43,10 +43,10 @@ spec:
           exportPolicy: all
           importPolicy: spec
         names:
-          kind: Notifier
-          listKind: NotifierList
           plural: notifiers
           singular: notifier
+          kind: Notifier
+          listKind: NotifierList
     - crd:
         path: notifier/config/crd/bases/notifiers.eda.nokia.com_providers.yaml
         schema: notifier/docs/openapiv3/eda_oas_notifiers.eda.nokia.com_providers.json
@@ -72,15 +72,15 @@ spec:
           expose: readWrite
         ui:
           category: Notifier
-          name: ClusterNotifier
+          name: Cluster Notifier
         kubernetes:
           exportPolicy: all
           importPolicy: spec
         names:
-          singular: clusternotifier
           kind: ClusterNotifier
           listKind: ClusterNotifierList
           plural: clusternotifiers
+          singular: clusternotifier
     - crd:
         path: notifier/config/crd/bases/notifiers.eda.nokia.com_clusterproviders.yaml
         schema: notifier/docs/openapiv3/eda_oas_notifiers.eda.nokia.com_clusterproviders.json
@@ -89,15 +89,15 @@ spec:
           expose: readWrite
         ui:
           category: Notifier
-          name: ClusterProvider
+          name: Cluster Provider
         kubernetes:
           exportPolicy: all
           importPolicy: spec
         names:
+          singular: clusterprovider
           kind: ClusterProvider
           listKind: ClusterProviderList
           plural: clusterproviders
-          singular: clusterprovider
     - cr:
         path: notifier/manifests/webhooks.yaml
     - cr:
