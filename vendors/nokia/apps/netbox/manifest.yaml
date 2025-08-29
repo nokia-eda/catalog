@@ -7,7 +7,7 @@ spec:
   version: v1alpha1
   title: NetBox
   description: Create EDA allocations from NetBox.
-  image: ghcr.io/nokia-eda/apps/apps/netbox:v2.0.0
+  image: ghcr.io/nokia-eda/apps/netbox:v2.0.0
   author: Nokia
   gitPathPrefix: /
   supportedEndpoints:
@@ -41,10 +41,10 @@ spec:
           exportPolicy: all
           importPolicy: all
         names:
-          kind: Allocation
           listKind: AllocationList
           plural: allocations
           singular: allocation
+          kind: Allocation
     - crd:
         path: nb/config/crd/bases/netbox.eda.nokia.com_instances.yaml
         schema: nb/docs/openapiv3/eda_oas_netbox.eda.nokia.com_instances.json
@@ -69,4 +69,4 @@ spec:
   dependencies:
     - container:
         name: netbox-controller
-        image: ghcr.io/nokia-eda/apps/apps/netbox-controller:v2.0.0
+        image: ghcr.io/nokia-eda/apps/netbox-controller:v2.0.0
