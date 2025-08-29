@@ -7,7 +7,7 @@ spec:
   version: v1alpha1
   title: Remote Write
   description: This application exports metrics to Remote Server adhering to Prometheus Remote-Write Specifications v1.0.
-  image: ghcr.io/nokia-eda/remote-write:v1.0.0
+  image: ghcr.io/nokia-eda/apps/remote-write:v2.0.0
   author: Nokia
   supportedEndpoints:
     - "srl:0.0.0"
@@ -16,8 +16,7 @@ spec:
     - "srl:24.*" # any release in a major
     - "sros:23.7.r1"
   supportedCoreVersions:
-    - "v2.0.0"
-    - "v2.0.0-0"
+    - "v3.0"
   appInfo:
     readme: README.md
     documentation: DOCUMENTATION.md
@@ -36,11 +35,16 @@ spec:
         api:
           expose: readWrite
         ui:
-          category: Remote Write
+          category: RemoteWrite
           name: Destinations
         kubernetes:
           exportPolicy: all
           importPolicy: all
+        names:
+          listKind: DestinationList
+          plural: destinations
+          singular: destination
+          kind: Destination
     - crd:
         path: prw/config/crd/bases/remotewrite.eda.nokia.com_clusterdestinations.yaml
         schema: prw/docs/openapiv3/eda_oas_remotewrite.eda.nokia.com_clusterdestinations.json
@@ -48,11 +52,16 @@ spec:
         api:
           expose: readWrite
         ui:
-          category: Remote Write
-          name: Cluster Destinations
+          category: RemoteWrite
+          name: ClusterDestinations
         kubernetes:
           exportPolicy: all
           importPolicy: all
+        names:
+          plural: clusterdestinations
+          singular: clusterdestination
+          kind: ClusterDestination
+          listKind: ClusterDestinationList
     - crd:
         path: prw/config/crd/bases/remotewrite.eda.nokia.com_exports.yaml
         schema: prw/docs/openapiv3/eda_oas_remotewrite.eda.nokia.com_exports.json
@@ -60,11 +69,16 @@ spec:
         api:
           expose: readWrite
         ui:
-          category: Remote Write
+          category: RemoteWrite
           name: Exporters
         kubernetes:
           exportPolicy: all
           importPolicy: all
+        names:
+          plural: exports
+          singular: export
+          kind: Export
+          listKind: ExportList
     - crd:
         path: prw/config/crd/bases/remotewrite.eda.nokia.com_clusterexports.yaml
         schema: prw/docs/openapiv3/eda_oas_remotewrite.eda.nokia.com_clusterexports.json
@@ -72,11 +86,16 @@ spec:
         api:
           expose: readWrite
         ui:
-          category: Remote Write
-          name: Cluster Exporters
+          category: RemoteWrite
+          name: ClusterExporters
         kubernetes:
           exportPolicy: all
           importPolicy: all
+        names:
+          plural: clusterexports
+          singular: clusterexport
+          kind: ClusterExport
+          listKind: ClusterExportList
     - cr:
         path: prw/manifests/app_deployment.yaml
     - cr:
@@ -84,5 +103,4 @@ spec:
   dependencies:
     - container:
         name: remote-write-controller
-        image: ghcr.io/nokia-eda/remote-write-controller:v1.0.0
-
+        image: ghcr.io/nokia-eda/apps/remote-write-controller:v2.0.0
