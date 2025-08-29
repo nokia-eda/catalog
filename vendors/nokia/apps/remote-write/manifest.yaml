@@ -41,10 +41,10 @@ spec:
           exportPolicy: all
           importPolicy: all
         names:
-          listKind: DestinationList
           plural: destinations
           singular: destination
           kind: Destination
+          listKind: DestinationList
     - crd:
         path: prw/config/crd/bases/remotewrite.eda.nokia.com_clusterdestinations.yaml
         schema: prw/docs/openapiv3/eda_oas_remotewrite.eda.nokia.com_clusterdestinations.json
@@ -53,15 +53,15 @@ spec:
           expose: readWrite
         ui:
           category: RemoteWrite
-          name: ClusterDestinations
+          name: Cluster Destinations
         kubernetes:
           exportPolicy: all
           importPolicy: all
         names:
-          plural: clusterdestinations
-          singular: clusterdestination
           kind: ClusterDestination
           listKind: ClusterDestinationList
+          plural: clusterdestinations
+          singular: clusterdestination
     - crd:
         path: prw/config/crd/bases/remotewrite.eda.nokia.com_exports.yaml
         schema: prw/docs/openapiv3/eda_oas_remotewrite.eda.nokia.com_exports.json
@@ -75,10 +75,10 @@ spec:
           exportPolicy: all
           importPolicy: all
         names:
-          plural: exports
           singular: export
           kind: Export
           listKind: ExportList
+          plural: exports
     - crd:
         path: prw/config/crd/bases/remotewrite.eda.nokia.com_clusterexports.yaml
         schema: prw/docs/openapiv3/eda_oas_remotewrite.eda.nokia.com_clusterexports.json
@@ -87,7 +87,7 @@ spec:
           expose: readWrite
         ui:
           category: RemoteWrite
-          name: ClusterExporters
+          name: Cluster Exporters
         kubernetes:
           exportPolicy: all
           importPolicy: all
