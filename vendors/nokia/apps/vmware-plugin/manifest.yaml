@@ -36,10 +36,10 @@ spec:
           exportPolicy: all
           importPolicy: all
         names:
-          listKind: VmwarePluginInstanceList
           plural: vmwareplugininstances
           singular: vmwareplugininstance
           kind: VmwarePluginInstance
+          listKind: VmwarePluginInstanceList
     - script:
         path: vmwareplugininstance/pysrc/vmwareplugininstance_intent.py
         type: config
