@@ -8,7 +8,7 @@ spec:
   title: Demo
   description: |
     This application provides demonstration examples
-  image: ghcr.io/nokia-eda/apps/demo:v4.0.0
+  image: ghcr.io/nokia-eda/apps/demo:v4.0.1
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
   author: Nokia
@@ -54,10 +54,10 @@ spec:
           name: Labels
           panel: system_administration
         names:
+          plural: labels
           singular: label
           kind: Label
           listKind: LabelList
-          plural: labels
     - crd:
         path: demo/crds/demo.eda.nokia.com_oesextensions.yaml
         schema: demo/openapiv3/eda_oas_demo.eda.nokia.com_oesextensions.json
@@ -67,10 +67,10 @@ spec:
           category: Demo
           name: OAS Extension
         names:
+          listKind: OasExtensionList
           plural: oesextensions
           singular: oasextension
           kind: OasExtension
-          listKind: OasExtensionList
     - crd:
         path: demo/crds/demo.eda.nokia.com_overlays.yaml
         schema: demo/openapiv3/eda_oas_demo.eda.nokia.com_overlays.json
