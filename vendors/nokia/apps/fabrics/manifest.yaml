@@ -8,7 +8,7 @@ spec:
   title: Fabrics
   description: |
     This application provides automation resources relating to datacenter fabrics.
-  image: ghcr.io/nokia-eda/apps/fabrics:v4.0.0
+  image: ghcr.io/nokia-eda/apps/fabrics:v4.0.1
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
   author: Nokia
@@ -39,10 +39,10 @@ spec:
         api:
           expose: readWrite
         names:
-          plural: fabrics
           singular: fabric
           kind: Fabric
           listKind: FabricList
+          plural: fabrics
     - crd:
         path: fabrics/crds/fabrics.eda.nokia.com_isls.yaml
         schema: fabrics/openapiv3/eda_oas_fabrics.eda.nokia.com_isls.json
@@ -52,20 +52,20 @@ spec:
         api:
           expose: readWrite
         names:
-          plural: isls
-          singular: isl
           kind: ISL
           listKind: ISLList
+          plural: isls
+          singular: isl
     - crd:
         path: fabrics/crds/fabrics.eda.nokia.com_islstates.yaml
         schema: fabrics/openapiv3/eda_oas_fabrics.eda.nokia.com_islstates.json
         api:
           expose: none
         names:
+          listKind: ISLStateList
           plural: islstates
           singular: islstate
           kind: ISLState
-          listKind: ISLStateList
     - crd:
         path: fabrics/crds/fabrics.eda.nokia.com_fabricstates.yaml
         schema: fabrics/openapiv3/eda_oas_fabrics.eda.nokia.com_fabricstates.json
@@ -111,10 +111,10 @@ spec:
         ui:
           name: ISL Ping
         names:
-          plural: islpings
           singular: islping
           kind: IslPing
           listKind: IslPingList
+          plural: islpings
     - cr:
         path: fabrics/workflows/islping/core_v1_flowdefinition.yaml
   dependencies:
@@ -201,19 +201,19 @@ spec:
   requirements:
     - appName: protocols
       vendor: nokia
-      version: v4.0.0
+      version: v4.0.1
     - appName: routingpolicies
       vendor: nokia
-      version: v4.0.0
+      version: v4.0.1
     - appName: routing
       vendor: nokia
-      version: v4.0.0
+      version: v4.0.1
     - appName: interfaces
       vendor: nokia
-      version: v4.0.0
+      version: v4.0.1
     - appName: qos
       vendor: nokia
-      version: v4.0.0
+      version: v4.0.1
     - appName: security
       vendor: nokia
-      version: v4.0.0
+      version: v4.0.1
