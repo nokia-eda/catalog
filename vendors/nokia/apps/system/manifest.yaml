@@ -10,7 +10,7 @@ spec:
     This application provides system monitoring functionality for various Network Operating Systems.
 
     It supports thresholding of CPU, memory, and disk utilization.
-  image: ghcr.io/nokia-eda/apps/system:v4.0.0
+  image: ghcr.io/nokia-eda/apps/system:v4.0.1
   author: Nokia
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
@@ -41,30 +41,30 @@ spec:
           category: OAM
           name: Monitoring
         names:
-          kind: Monitor
-          listKind: MonitorList
           plural: monitors
           singular: monitor
+          kind: Monitor
+          listKind: MonitorList
     - crd:
         path: system/crds/system.eda.nokia.com_monitorstates.yaml
         schema: system/openapiv3/eda_oas_system.eda.nokia.com_monitorstates.json
         api:
           expose: readWrite
         names:
+          listKind: MonitorStateList
           plural: monitorstates
           singular: monitorstate
           kind: MonitorState
-          listKind: MonitorStateList
     - crd:
         path: system/crds/system.eda.nokia.com_monitoraggregatestates.yaml
         schema: system/openapiv3/eda_oas_system.eda.nokia.com_monitoraggregatestates.json
         api:
           expose: readWrite
         names:
-          singular: monitoraggregatestate
           kind: MonitorAggregateState
           listKind: MonitorAggregateStateList
           plural: monitoraggregatestates
+          singular: monitoraggregatestate
     - script:
         path: system/intents/monitor/monitor_intent.py
         type: config
