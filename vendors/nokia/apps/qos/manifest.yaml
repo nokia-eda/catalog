@@ -22,10 +22,10 @@ spec:
           name: Ingress Policies
         conversionScript: qos/intents/ingresspolicy/conversion_v1.py
         names:
-          kind: IngressPolicy
-          listKind: IngressPolicyList
           plural: ingresspolicys
           singular: ingresspolicy
+          kind: IngressPolicy
+          listKind: IngressPolicyList
     - crd:
         api:
           expose: readWrite
@@ -37,10 +37,10 @@ spec:
           name: Egress Policies
         conversionScript: qos/intents/egresspolicy/conversion_v1.py
         names:
+          plural: egresspolicys
           singular: egresspolicy
           kind: EgressPolicy
           listKind: EgressPolicyList
-          plural: egresspolicys
     - crd:
         api:
           expose: readWrite
@@ -67,10 +67,10 @@ spec:
           name: Policy Attachment
         conversionScript: qos/intents/policyattachment/conversion_v1.py
         names:
-          listKind: PolicyAttachmentList
           plural: policyattachments
           singular: policyattachment
           kind: PolicyAttachment
+          listKind: PolicyAttachmentList
     - crd:
         api:
           expose: readWrite
@@ -84,10 +84,10 @@ spec:
           name: Forwarding Class
         conversionScript: qos/intents/forwardingclass/conversion_v1.py
         names:
-          plural: forwardingclasss
-          singular: forwardingclass
           kind: ForwardingClass
           listKind: ForwardingClassList
+          plural: forwardingclasss
+          singular: forwardingclass
     - crd:
         api:
           expose: readWrite
@@ -142,7 +142,7 @@ spec:
         path: qos/api/v1/pysrc
   description: |
     This application provides resources relating to QOS for various Network Operating Systems.
-  image: ghcr.io/nokia-eda/apps/qos:v4.0.0
+  image: ghcr.io/nokia-eda/apps/qos:v4.0.1
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
   group: qos.eda.nokia.com
@@ -153,10 +153,10 @@ spec:
   requirements:
     - appName: interfaces
       vendor: nokia
-      version: v4.0.0
+      version: v4.0.1
     - appName: filters
       vendor: nokia
-      version: v4.0.0
+      version: v4.0.1
   supportedEndpoints:
     - "srl:24.10.*"
     - "srl:25.3.*"
