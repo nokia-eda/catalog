@@ -3,7 +3,7 @@ kind: Manifest
 metadata:
   name: prom-exporter
 spec:
-  image: ghcr.io/nokia-eda/apps/prom-exporter:v4.0.0
+  image: ghcr.io/nokia-eda/apps/prom-exporter:v4.1.0
   group: prom.eda.nokia.com
   version: v1alpha1
   title: Prometheus Exporter
@@ -51,4 +51,4 @@ spec:
   dependencies:
     - container:
         name: prom-exporter-controller
-        image: ghcr.io/nokia-eda/apps/prom-exporter-controller:v4.0.0
+        image: ghcr.io/nokia-eda/apps/prom-exporter-controller:v4.1.0
