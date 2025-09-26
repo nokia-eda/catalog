@@ -7,7 +7,7 @@ spec:
   version: v1alpha1
   title: OTLP Exporter
   description: Publish EDA metrics to an OpenTelemetry receiver.
-  image: ghcr.io/nokia-eda/apps/otlp-exporter:v1.0.0
+  image: ghcr.io/nokia-eda/apps/otlp-exporter:v1.1.0
   author: Nokia
   gitPathPrefix: /
   supportedEndpoints:
@@ -41,10 +41,10 @@ spec:
           exportPolicy: all
           importPolicy: all
         names:
+          listKind: MetricExportList
           plural: metricexports
           singular: metricexport
           kind: MetricExport
-          listKind: MetricExportList
     - crd:
         path: ote/config/crd/bases/otlp.eda.nokia.com_clustermetricexports.yaml
         schema: ote/docs/openapiv3/eda_oas_otlp.eda.nokia.com_clustermetricexports.json
@@ -92,10 +92,10 @@ spec:
           exportPolicy: all
           importPolicy: all
         names:
-          kind: ClusterReceiver
           listKind: ClusterReceiverList
           plural: clusterreceivers
           singular: clusterreceiver
+          kind: ClusterReceiver
     - cr:
         path: ote/manifests/webhooks.yaml
     - cr:
@@ -103,4 +103,4 @@ spec:
   dependencies:
     - container:
         name: otlp-exporter-controller
-        image: ghcr.io/nokia-eda/apps/otlp-exporter-controller:v1.0.0
+        image: ghcr.io/nokia-eda/apps/otlp-exporter-controller:v1.1.0
