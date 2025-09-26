@@ -8,7 +8,7 @@ spec:
   title: Filters
   description: |
     This application provides resources relating to filtering for various Network Operating Systems.
-  image: ghcr.io/nokia-eda/apps/filters:v4.0.0
+  image: ghcr.io/nokia-eda/apps/filters:v4.0.1
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
   author: Nokia
@@ -39,10 +39,10 @@ spec:
         api:
           expose: readWrite
         names:
-          plural: filters
-          singular: filter
           kind: Filter
           listKind: FilterList
+          plural: filters
+          singular: filter
     - crd:
         path: filters/crds/filters.eda.nokia.com_controlplanefilters.yaml
         schema: filters/openapiv3/eda_oas_filters.eda.nokia.com_controlplanefilters.json
@@ -52,10 +52,10 @@ spec:
         api:
           expose: readWrite
         names:
-          kind: ControlPlaneFilter
-          listKind: ControlPlaneFilterList
           plural: controlplanefilters
           singular: controlplanefilter
+          kind: ControlPlaneFilter
+          listKind: ControlPlaneFilterList
     # - crd:
     #     path: filters/crds/filters.eda.nokia.com_ipfilterstates.yaml
     #     schema: filters/openapiv3/eda_oas_filters.eda.nokia.com_ipfilterstates.json
@@ -76,10 +76,10 @@ spec:
         api:
           expose: none
         names:
-          kind: MirrorFilterDeployment
-          listKind: MirrorFilterDeploymentList
           plural: mirrorfilterdeployments
           singular: mirrorfilterdeployment
+          kind: MirrorFilterDeployment
+          listKind: MirrorFilterDeploymentList
     - crd:
         path: filters/crds/filters.eda.nokia.com_mirrorfilters.yaml
         schema: filters/openapiv3/eda_oas_filters.eda.nokia.com_mirrorfilters.json
