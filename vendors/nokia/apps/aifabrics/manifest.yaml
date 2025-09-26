@@ -8,7 +8,7 @@ spec:
   title: AIFabrics
   description: |
     This application provides automation resources relating to datacenter AI fabrics.
-  image: ghcr.io/nokia-eda/apps/aifabrics:v4.0.0
+  image: ghcr.io/nokia-eda/apps/aifabrics:v4.0.1
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
   author: Nokia
@@ -94,19 +94,19 @@ spec:
   requirements:
     - appName: fabrics
       vendor: nokia
-      version: v4.0.0
+      version: v4.0.1
     - appName: protocols
       vendor: nokia
-      version: v4.0.0
+      version: v4.0.1
     - appName: qos
       vendor: nokia
-      version: v4.0.0
+      version: v4.0.1
     - appName: services
       vendor: nokia
-      version: v4.0.0
+      version: v4.0.1
     - appName: routingpolicies
       vendor: nokia
-      version: v4.0.0
+      version: v4.0.1
     - appName: interfaces
       vendor: nokia
-      version: v4.0.0
+      version: v4.0.1
