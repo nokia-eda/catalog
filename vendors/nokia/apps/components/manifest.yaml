@@ -30,20 +30,20 @@ spec:
         path: components/crds/components.eda.nokia.com_monitorstates.yaml
         schema: components/openapiv3/eda_oas_components.eda.nokia.com_monitorstates.json
         names:
-          listKind: MonitorStateList
           plural: monitorstates
           singular: monitorstate
           kind: MonitorState
+          listKind: MonitorStateList
     - crd:
         api:
           expose: none
         path: components/crds/components.eda.nokia.com_monitoraggregatestates.yaml
         schema: components/openapiv3/eda_oas_components.eda.nokia.com_monitoraggregatestates.json
         names:
+          listKind: MonitorAggregateStateList
           plural: monitoraggregatestates
           singular: monitoraggregatestate
           kind: MonitorAggregateState
-          listKind: MonitorAggregateStateList
     - script:
         path: components/intents/monitor/monitor_intent.py
         type: config
@@ -64,10 +64,10 @@ spec:
         path: components/crds/components.eda.nokia.com_cpuoverlays.yaml
         schema: components/openapiv3/eda_oas_components.eda.nokia.com_cpuoverlays.json
         names:
-          singular: cpuoverlay
           kind: CPUOverlay
           listKind: CPUOverlayList
           plural: cpuoverlays
+          singular: cpuoverlay
     - crd:
         namespaced: false
         path: components/crds/components.eda.nokia.com_memoryoverlays.yaml
@@ -109,10 +109,10 @@ spec:
         path: components/crds/components.eda.nokia.com_discoveries.yaml
         schema: components/openapiv3/eda_oas_components.eda.nokia.com_discoveries.json
         names:
+          plural: discoveries
           singular: discovery
           kind: Discovery
           listKind: DiscoveryList
-          plural: discoveries
     - crd:
         api:
           expose: none
@@ -120,10 +120,10 @@ spec:
         path: components/crds/components.eda.nokia.com_discoverystates.yaml
         schema: components/openapiv3/eda_oas_components.eda.nokia.com_discoverystates.json
         names:
-          listKind: DiscoveryStateList
           plural: discoverystates
           singular: discoverystate
           kind: DiscoveryState
+          listKind: DiscoveryStateList
     - crd:
         api:
           expose: none
@@ -145,10 +145,10 @@ spec:
           category: Components
           name: Components
         names:
+          listKind: ComponentList
           plural: components
           singular: component
           kind: Component
-          listKind: ComponentList
     - script:
         path: components/intents/discovery/discovery.py
         trigger:
@@ -201,10 +201,10 @@ spec:
           category: Components
           name: Chassis
         names:
-          kind: Chassis
           listKind: ChassisList
           plural: chassis
           singular: chassis
+          kind: Chassis
     - crd:
         api:
           expose: read
@@ -229,10 +229,10 @@ spec:
           category: Components
           name: Interface Modules
         names:
-          listKind: InterfaceModuleList
           plural: interfacemodules
           singular: interfacemodule
           kind: InterfaceModule
+          listKind: InterfaceModuleList
     - crd:
         api:
           expose: read
@@ -243,10 +243,10 @@ spec:
           category: Components
           name: Fabric Modules
         names:
+          plural: fabricmodules
           singular: fabricmodule
           kind: FabricModule
           listKind: FabricModuleList
-          plural: fabricmodules
     - crd:
         api:
           expose: read
@@ -271,10 +271,10 @@ spec:
           category: Components
           name: Fans
         names:
+          plural: fans
           singular: fan
           kind: Fan
           listKind: FanList
-          plural: fans
   dependencies:
     - file:
         path: common/
@@ -301,7 +301,7 @@ spec:
   gitPathPrefix: /
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   group: components.eda.nokia.com
-  image: ghcr.io/nokia-eda/apps/components:v4.0.0
+  image: ghcr.io/nokia-eda/apps/components:v4.0.1
   supportedCoreVersions:
     - "v3.0"
   supportedEndpoints:
