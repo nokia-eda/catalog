@@ -8,7 +8,7 @@ spec:
   title: Routing
   description: |
     This application provides underlay routing resources for various Network Operating Systems.
-  image: ghcr.io/nokia-eda/apps/routing:v4.0.0
+  image: ghcr.io/nokia-eda/apps/routing:v4.0.1
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
   author: Nokia
@@ -49,10 +49,10 @@ spec:
         api:
           expose: readWrite
         names:
-          plural: defaultinterfaces
           singular: defaultinterface
           kind: DefaultInterface
           listKind: DefaultInterfaceList
+          plural: defaultinterfaces
     - crd:
         path: routing/crds/routing.eda.nokia.com_defaultinterfacestates.yaml
         schema: routing/openapiv3/eda_oas_routing.eda.nokia.com_defaultinterfacestates.json
@@ -72,20 +72,20 @@ spec:
         api:
           expose: readWrite
         names:
+          plural: defaultrouters
           singular: defaultrouter
           kind: DefaultRouter
           listKind: DefaultRouterList
-          plural: defaultrouters
     - crd:
         path: routing/crds/routing.eda.nokia.com_defaultrouterstates.yaml
         schema: routing/openapiv3/eda_oas_routing.eda.nokia.com_defaultrouterstates.json
         api:
           expose: none
         names:
+          listKind: DefaultRouterStateList
           plural: defaultrouterstates
           singular: defaultrouterstate
           kind: DefaultRouterState
-          listKind: DefaultRouterStateList
     - crd:
         path: routing/crds/routing.eda.nokia.com_drains.yaml
         schema: routing/openapiv3/eda_oas_routing.eda.nokia.com_drains.json
@@ -105,10 +105,10 @@ spec:
         api:
           expose: none
         names:
-          listKind: DrainStateList
           plural: drainstates
           singular: drainstate
           kind: DrainState
+          listKind: DrainStateList
     - crd:
         path: routing/crds/routing.eda.nokia.com_systeminterfaces.yaml
         schema: routing/openapiv3/eda_oas_routing.eda.nokia.com_systeminterfaces.json
@@ -118,20 +118,20 @@ spec:
         api:
           expose: readWrite
         names:
-          plural: systeminterfaces
-          singular: systeminterface
           kind: SystemInterface
           listKind: SystemInterfaceList
+          plural: systeminterfaces
+          singular: systeminterface
     - crd:
         path: routing/crds/routing.eda.nokia.com_systeminterfacestates.yaml
         schema: routing/openapiv3/eda_oas_routing.eda.nokia.com_systeminterfacestates.json
         api:
           expose: none
         names:
+          plural: systeminterfacestates
           singular: systeminterfacestate
           kind: SystemInterfaceState
           listKind: SystemInterfaceStateList
-          plural: systeminterfacestates
     - script:
         path: routing/intents/defaultinterface/defaultinterface_intent.py
         type: config
@@ -186,10 +186,10 @@ spec:
         ui:
           name: Route Lookup
         names:
+          plural: routelookups
           singular: routelookup
           kind: RouteLookup
           listKind: RouteLookupList
-          plural: routelookups
     - crd:
         api:
           expose: readWrite
@@ -200,10 +200,10 @@ spec:
         ui:
           name: Attachment Lookup
         names:
+          plural: attachmentlookups
           singular: attachmentlookup
           kind: AttachmentLookup
           listKind: AttachmentLookupList
-          plural: attachmentlookups
   dependencies:
     - file:
         path: routing/intents
@@ -222,4 +222,4 @@ spec:
   requirements:
     - appName: interfaces
       vendor: nokia
-      version: v4.0.0
+      version: v4.0.1
