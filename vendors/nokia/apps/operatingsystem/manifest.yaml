@@ -37,7 +37,7 @@ spec:
   gitPathPrefix: /
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   group: os.eda.nokia.com
-  image: ghcr.io/nokia-eda/apps/operatingsystem:v4.0.0
+  image: ghcr.io/nokia-eda/apps/operatingsystem:v4.0.1
   supportedCoreVersions:
     - "v3.0"
   supportedEndpoints:
