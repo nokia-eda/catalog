@@ -8,7 +8,7 @@ spec:
   title: Topologies
   description: |
     This application provides physical topology support
-  image: ghcr.io/nokia-eda/apps/topologies:v4.0.1
+  image: ghcr.io/nokia-eda/apps/topologies:v4.0.2
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
   author: Nokia
@@ -47,10 +47,10 @@ spec:
         api:
           expose: none
         names:
+          listKind: TopoLinkStateList
           plural: topolinkstates
           singular: topolinkstate
           kind: TopoLinkState
-          listKind: TopoLinkStateList
     - crd:
         path: topologies/crds/topologies.eda.nokia.com_topologies.yaml
         schema: topologies/openapiv3/eda_oas_topologies.eda.nokia.com_topologies.json
@@ -60,10 +60,10 @@ spec:
         kubernetes:
           exportPolicy: all
         names:
-          plural: topologies
-          singular: topology
           kind: Topology
           listKind: TopologyList
+          plural: topologies
+          singular: topology
     - crd:
         path: topologies/crds/topologies.eda.nokia.com_topologygroupings.yaml
         schema: topologies/openapiv3/eda_oas_topologies.eda.nokia.com_topologygroupings.json
@@ -73,10 +73,10 @@ spec:
         kubernetes:
           exportPolicy: all
         names:
-          listKind: TopologyGroupingList
           plural: topologygroupings
           singular: topologygrouping
           kind: TopologyGrouping
+          listKind: TopologyGroupingList
     - crd:
         path: topologies/crds/topologies.eda.nokia.com_deviationoverlays.yaml
         schema: topologies/openapiv3/eda_oas_topologies.eda.nokia.com_deviationoverlays.json
@@ -95,10 +95,10 @@ spec:
         api:
           expose: readWrite
         names:
-          listKind: TrafficRateOverlayList
           plural: trafficrateoverlays
           singular: trafficrateoverlay
           kind: TrafficRateOverlay
+          listKind: TrafficRateOverlayList
     - crd:
         path: topologies/crds/topologies.eda.nokia.com_lldpoverlays.yaml
         schema: topologies/openapiv3/eda_oas_topologies.eda.nokia.com_lldpoverlays.json
@@ -163,4 +163,4 @@ spec:
   requirements:
     - appName: interfaces
       vendor: nokia
-      version: v4.0.1
+      version: v4.0.2
