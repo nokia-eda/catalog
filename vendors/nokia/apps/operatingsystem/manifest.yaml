@@ -23,10 +23,10 @@ spec:
         ui:
           name: Image
         names:
+          kind: DeployImage
           listKind: DeployImageList
           plural: deployimages
           singular: deployimage
-          kind: DeployImage
   dependencies:
     - file:
         path: operatingsystem/api/v1alpha1/pysrc/
@@ -37,7 +37,7 @@ spec:
   gitPathPrefix: /
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   group: os.eda.nokia.com
-  image: ghcr.io/nokia-eda/apps/operatingsystem:v4.0.1
+  image: ghcr.io/nokia-eda/apps/operatingsystem:v4.0.2
   supportedCoreVersions:
     - "v3.0"
   supportedEndpoints:
