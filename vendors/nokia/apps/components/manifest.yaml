@@ -40,10 +40,10 @@ spec:
         path: components/crds/components.eda.nokia.com_monitoraggregatestates.yaml
         schema: components/openapiv3/eda_oas_components.eda.nokia.com_monitoraggregatestates.json
         names:
-          listKind: MonitorAggregateStateList
           plural: monitoraggregatestates
           singular: monitoraggregatestate
           kind: MonitorAggregateState
+          listKind: MonitorAggregateStateList
     - script:
         path: components/intents/monitor/monitor_intent.py
         type: config
@@ -64,19 +64,19 @@ spec:
         path: components/crds/components.eda.nokia.com_cpuoverlays.yaml
         schema: components/openapiv3/eda_oas_components.eda.nokia.com_cpuoverlays.json
         names:
-          kind: CPUOverlay
           listKind: CPUOverlayList
           plural: cpuoverlays
           singular: cpuoverlay
+          kind: CPUOverlay
     - crd:
         namespaced: false
         path: components/crds/components.eda.nokia.com_memoryoverlays.yaml
         schema: components/openapiv3/eda_oas_components.eda.nokia.com_memoryoverlays.json
         names:
-          plural: memoryoverlays
           singular: memoryoverlay
           kind: MemoryOverlay
           listKind: MemoryOverlayList
+          plural: memoryoverlays
     - crd:
         namespaced: false
         path: components/crds/components.eda.nokia.com_volumeoverlays.yaml
@@ -120,10 +120,10 @@ spec:
         path: components/crds/components.eda.nokia.com_discoverystates.yaml
         schema: components/openapiv3/eda_oas_components.eda.nokia.com_discoverystates.json
         names:
+          listKind: DiscoveryStateList
           plural: discoverystates
           singular: discoverystate
           kind: DiscoveryState
-          listKind: DiscoveryStateList
     - crd:
         api:
           expose: none
@@ -174,10 +174,10 @@ spec:
         path: components/crds/components.eda.nokia.com_clusterdiscoveries.yaml
         schema: components/openapiv3/eda_oas_components.eda.nokia.com_clusterdiscoveries.json
         names:
-          plural: clusterdiscoveries
           singular: clusterdiscovery
           kind: ClusterDiscovery
           listKind: ClusterDiscoveryList
+          plural: clusterdiscoveries
     - script:
         path: components/intents/clusterdiscovery/clusterdiscovery_intent.py
         trigger:
@@ -201,10 +201,10 @@ spec:
           category: Components
           name: Chassis
         names:
-          listKind: ChassisList
           plural: chassis
           singular: chassis
           kind: Chassis
+          listKind: ChassisList
     - crd:
         api:
           expose: read
@@ -229,10 +229,10 @@ spec:
           category: Components
           name: Interface Modules
         names:
-          plural: interfacemodules
           singular: interfacemodule
           kind: InterfaceModule
           listKind: InterfaceModuleList
+          plural: interfacemodules
     - crd:
         api:
           expose: read
@@ -271,10 +271,10 @@ spec:
           category: Components
           name: Fans
         names:
-          plural: fans
           singular: fan
           kind: Fan
           listKind: FanList
+          plural: fans
   dependencies:
     - file:
         path: common/
@@ -301,7 +301,7 @@ spec:
   gitPathPrefix: /
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   group: components.eda.nokia.com
-  image: ghcr.io/nokia-eda/apps/components:v4.0.1
+  image: ghcr.io/nokia-eda/apps/components:v4.0.2
   supportedCoreVersions:
     - "v3.0"
   supportedEndpoints:
