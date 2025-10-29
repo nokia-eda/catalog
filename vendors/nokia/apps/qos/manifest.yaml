@@ -37,10 +37,10 @@ spec:
           name: Egress Policies
         conversionScript: qos/intents/egresspolicy/conversion_v1.py
         names:
-          plural: egresspolicys
           singular: egresspolicy
           kind: EgressPolicy
           listKind: EgressPolicyList
+          plural: egresspolicys
     - crd:
         api:
           expose: readWrite
@@ -142,7 +142,7 @@ spec:
         path: qos/api/v1/pysrc
   description: |
     This application provides resources relating to QOS for various Network Operating Systems.
-  image: ghcr.io/nokia-eda/apps/qos:v4.0.1
+  image: ghcr.io/nokia-eda/apps/qos:v4.0.2
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
   group: qos.eda.nokia.com
@@ -153,10 +153,10 @@ spec:
   requirements:
     - appName: interfaces
       vendor: nokia
-      version: v4.0.1
+      version: v4.0.2
     - appName: filters
       vendor: nokia
-      version: v4.0.1
+      version: v4.0.2
   supportedEndpoints:
     - "srl:24.10.*"
     - "srl:25.3.*"
