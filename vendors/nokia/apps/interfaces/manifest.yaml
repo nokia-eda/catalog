@@ -10,7 +10,7 @@ spec:
     This application provides interface configuration and state for various Network Operating Systems.
 
     It also supports alarming driven by interface operational state and the population of a normalized table to support queries across supported endpoints.
-  image: ghcr.io/nokia-eda/apps/interfaces:v4.0.1
+  image: ghcr.io/nokia-eda/apps/interfaces:v4.0.2
   author: Nokia
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
@@ -44,10 +44,10 @@ spec:
         kubernetes:
           exportPolicy: all # needed for connect controllers
         names:
+          plural: interfaces
           singular: interface
           kind: Interface
           listKind: InterfaceList
-          plural: interfaces
     - crd:
         path: interfaces/crds/interfaces.eda.nokia.com_breakouts.yaml
         schema: interfaces/openapiv3/eda_oas_interfaces.eda.nokia.com_breakouts.json
@@ -70,10 +70,10 @@ spec:
           expose: readWrite
           # no ui section means do not present in the UI
         names:
-          singular: interfacestate
           kind: InterfaceState
           listKind: InterfaceStateList
           plural: interfacestates
+          singular: interfacestate
     - script:
         path: interfaces/intents/breakout/breakout_intent.py
         type: config
@@ -122,10 +122,10 @@ spec:
         ui:
           name: Check Interfaces
         names:
-          plural: checkinterfacess
           singular: checkinterfaces
           kind: CheckInterfaces
           listKind: CheckInterfacesList
+          plural: checkinterfacess
     - cr:
         path: interfaces/workflows/checkinterfaces/core_v1_flowdefinition.yaml
   dependencies:
