@@ -21,19 +21,19 @@ spec:
           category: OAM
           name: Mirror
         names:
+          plural: mirrors
           singular: mirror
           kind: Mirror
           listKind: MirrorList
-          plural: mirrors
     - crd:
         namespaced: true
         path: oam/crds/oam.eda.nokia.com_mirrorstates.yaml
         schema: oam/openapiv3/eda_oas_oam.eda.nokia.com_mirrorstates.json
         names:
-          plural: mirrorstates
-          singular: mirrorstate
           kind: MirrorState
           listKind: MirrorStateList
+          plural: mirrorstates
+          singular: mirrorstate
     - script:
         path: oam/intents/mirror/mirror_intent.py
         trigger:
@@ -58,10 +58,10 @@ spec:
         ui:
           name: Ping
         names:
+          listKind: PingList
           plural: pings
           singular: ping
           kind: Ping
-          listKind: PingList
     - crd:
         path: oam/crds/oam.eda.nokia.com_thresholds.yaml
         schema: oam/openapiv3/eda_oas_oam.eda.nokia.com_thresholds.json
@@ -71,10 +71,10 @@ spec:
         api:
           expose: readWrite
         names:
-          listKind: ThresholdList
           plural: thresholds
           singular: threshold
           kind: Threshold
+          listKind: ThresholdList
     - script:
         path: oam/intents/threshold/threshold_intent.py
         type: state
@@ -90,10 +90,10 @@ spec:
         ui:
           name: Tech Support
         names:
+          listKind: TechSupportList
           plural: techsupports
           singular: techsupport
           kind: TechSupport
-          listKind: TechSupportList
   dependencies:
     - file:
         path: oam/intents
@@ -120,25 +120,25 @@ spec:
   requirements:
     - appName: services
       vendor: nokia
-      version: v4.0.1
+      version: v4.0.2
     - appName: filters
       vendor: nokia
-      version: v4.0.1
+      version: v4.0.2
     - appName: interfaces
       vendor: nokia
-      version: v4.0.1
+      version: v4.0.2
     - appName: qos
       vendor: nokia
-      version: v4.0.1
+      version: v4.0.2
     - appName: topologies
       vendor: nokia
-      version: v4.0.1
+      version: v4.0.2
   description: |
     This application provides the ping workflow, along with mirroring services for interfaces, subinterfaces and ipfilters.
   gitPathPrefix: /
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   group: oam.eda.nokia.com
-  image: ghcr.io/nokia-eda/apps/oam:v4.0.1
+  image: ghcr.io/nokia-eda/apps/oam:v4.0.2
   supportedCoreVersions:
     - "v3.0"
   supportedEndpoints:
