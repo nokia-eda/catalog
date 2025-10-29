@@ -8,7 +8,7 @@ spec:
   title: Routing Policies
   description: |
     This application provides routing policies for various Network Operating Systems.
-  image: ghcr.io/nokia-eda/apps/routingpolicies:v4.0.1
+  image: ghcr.io/nokia-eda/apps/routingpolicies:v4.0.2
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
   author: Nokia
@@ -39,10 +39,10 @@ spec:
         api:
           expose: readWrite
         names:
-          listKind: PolicyList
           plural: policys
           singular: policy
           kind: Policy
+          listKind: PolicyList
     - crd:
         path: routingpolicies/crds/routingpolicies.eda.nokia.com_policydeployments.yaml
         schema: routingpolicies/openapiv3/eda_oas_routingpolicies.eda.nokia.com_policydeployments.json
@@ -148,10 +148,10 @@ spec:
           category: Routing Policies
           name: AS Path Sets
         names:
-          kind: ASPathSet
           listKind: ASPathSetList
           plural: aspathsets
           singular: aspathset
+          kind: ASPathSet
     - crd:
         path: routingpolicies/crds/routingpolicies.eda.nokia.com_aspathsetdeployments.yaml
         schema: routingpolicies/openapiv3/eda_oas_routingpolicies.eda.nokia.com_aspathsetdeployments.json
