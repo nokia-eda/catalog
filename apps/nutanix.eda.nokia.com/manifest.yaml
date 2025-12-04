@@ -1,0 +1,58 @@
+apiVersion: core.eda.nokia.com/v1
+kind: Manifest
+metadata:
+  name: nutanix
+spec:
+  appInfo:
+    categories:
+      - "integrations"
+    ociSpecVersion: v1.0.0
+  author: nokia
+  dependencies:
+    - file:
+        path: utils
+    - file:
+        path: common
+    - file:
+        path: nutanix/intents
+    - file:
+        path: nutanix/api/v1/pysrc
+    - file:
+        path: nutanix/deps
+    - container:
+        name: nutanix-plugin-container
+        image: eda.nokia.com/nokia-eda/eda-connect-nutanix-plugin:v0.0.1-beta
+  description: A plugin integrating Nutanix Prism Central with Cloud Connect
+  group: nutanix.eda.nokia.com
+  image: ghcr.io/nokia-eda/apps/nutanix-plugin:v0.0.1-beta
+  supportedCoreVersions:
+    - "v4.0.0"
+  requirements:
+    - appId: connect.eda.nokia.com
+      version: "v5.0.*"
+  title: Connect Nutanix Prism Operator
+  version: v1
+  components:
+    - crd:
+        api:
+          expose: readWrite
+        path: nutanix/crds/nutanix.eda.nokia.com_nutanixplugininstances.yaml
+        schema: nutanix/openapiv3/eda_oas_nutanix.eda.nokia.com_nutanixplugininstances.json
+        namespaced: false
+        ui:
+          category: Connect
+          name: Nutanix Plugins
+          panel: system_administration
+        kubernetes:
+          exportPolicy: all
+          importPolicy: all
+        names:
+          plural: nutanixplugininstances
+          singular: nutanixplugininstance
+          kind: NutanixPluginInstance
+          listKind: NutanixPluginInstanceList
+    - script:
+        path: nutanix/intents/nutanixplugininstance/config_intent.py
+        trigger:
+          kind: NutanixPluginInstance
+        type: config
