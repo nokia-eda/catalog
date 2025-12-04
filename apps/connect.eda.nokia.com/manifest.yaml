@@ -93,10 +93,10 @@ spec:
           exportPolicy: all
           importPolicy: all
         names:
-          listKind: ConnectInterfaceList
           plural: connectinterfaces
           singular: connectinterface
           kind: ConnectInterface
+          listKind: ConnectInterfaceList
     - cr:
         path: eda-connect-interface-controller/appstore-crs/crs.yaml
     - cr:
