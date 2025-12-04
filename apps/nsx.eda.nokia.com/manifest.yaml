@@ -35,10 +35,10 @@ spec:
           exportPolicy: all
           importPolicy: all
         names:
+          kind: NSXPluginInstance
           listKind: NSXPluginInstanceList
           plural: nsxplugininstances
           singular: nsxplugininstance
-          kind: NSXPluginInstance
     - script:
         path: nsx_plugin/intents/nsxplugininstance/config_intent.py
         trigger:
