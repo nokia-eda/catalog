@@ -1,0 +1,16 @@
+apiVersion: core.eda.nokia.com/v1
+kind: Workflow
+metadata:
+  name: management-nokia-install
+  namespace: eda-system
+spec:
+  type: app-installer
+  input:
+    operation: install
+    apps:
+      - app: management
+        catalog: eda-catalog-builtin-apps
+        vendor: nokia
+        version:
+          value: v5.0.0
+          type: semver
