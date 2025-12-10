@@ -1,0 +1,320 @@
+apiVersion: core.eda.nokia.com/v1
+kind: Manifest
+metadata:
+  name: components
+spec:
+  appInfo:
+    categories:
+      - monitoring
+    documentation: components/docs
+    ociSpecVersion: v1.0.0
+  author: nokia
+  components:
+    - crd:
+        path: components/crds/components.eda.nokia.com_monitors.yaml
+        schema: components/openapiv3/eda_oas_components.eda.nokia.com_monitors.json
+        api:
+          expose: readWrite
+        ui:
+          category: Components
+          name: Monitoring
+        names:
+          listKind: MonitorList
+          plural: monitors
+          singular: monitor
+          kind: Monitor
+    - crd:
+        api:
+          expose: none
+        path: components/crds/components.eda.nokia.com_monitorstates.yaml
+        schema: components/openapiv3/eda_oas_components.eda.nokia.com_monitorstates.json
+        names:
+          plural: monitorstates
+          singular: monitorstate
+          kind: MonitorState
+          listKind: MonitorStateList
+    - crd:
+        api:
+          expose: none
+        path: components/crds/components.eda.nokia.com_monitoraggregatestates.yaml
+        schema: components/openapiv3/eda_oas_components.eda.nokia.com_monitoraggregatestates.json
+        names:
+          plural: monitoraggregatestates
+          singular: monitoraggregatestate
+          kind: MonitorAggregateState
+          listKind: MonitorAggregateStateList
+    - script:
+        path: components/intents/monitor/monitor_intent.py
+        type: config
+        trigger:
+          kind: Monitor
+    - script:
+        path: components/intents/monitor/monitor_intent.py
+        type: state
+        trigger:
+          kind: MonitorState
+    - script:
+        path: components/intents/monitoraggregatestate/monitoraggregatestate_intent.py
+        type: state
+        trigger:
+          kind: MonitorAggregateState
+    - crd:
+        namespaced: false
+        path: components/crds/components.eda.nokia.com_cpuoverlays.yaml
+        schema: components/openapiv3/eda_oas_components.eda.nokia.com_cpuoverlays.json
+        names:
+          plural: cpuoverlays
+          singular: cpuoverlay
+          kind: CPUOverlay
+          listKind: CPUOverlayList
+    - crd:
+        namespaced: false
+        path: components/crds/components.eda.nokia.com_memoryoverlays.yaml
+        schema: components/openapiv3/eda_oas_components.eda.nokia.com_memoryoverlays.json
+        names:
+          listKind: MemoryOverlayList
+          plural: memoryoverlays
+          singular: memoryoverlay
+          kind: MemoryOverlay
+    - crd:
+        namespaced: false
+        path: components/crds/components.eda.nokia.com_volumeoverlays.yaml
+        schema: components/openapiv3/eda_oas_components.eda.nokia.com_volumeoverlays.json
+        names:
+          plural: volumeoverlays
+          singular: volumeoverlay
+          kind: VolumeOverlay
+          listKind: VolumeOverlayList
+    - script:
+        path: components/intents/cpuoverlay/cpu_overlay_intent.py
+        trigger:
+          kind: CPUOverlay
+        type: state
+    - script:
+        path: components/intents/memoryoverlay/memory_overlay_intent.py
+        trigger:
+          kind: MemoryOverlay
+        type: state
+    - script:
+        path: components/intents/volumeoverlay/volume_overlay_intent.py
+        trigger:
+          kind: VolumeOverlay
+        type: state
+    - crd:
+        api:
+          expose: none
+        conversionScript: components/intents/discovery/conversion.py
+        namespaced: true
+        path: components/crds/components.eda.nokia.com_discoveries.yaml
+        schema: components/openapiv3/eda_oas_components.eda.nokia.com_discoveries.json
+        names:
+          kind: Discovery
+          listKind: DiscoveryList
+          plural: discoveries
+          singular: discovery
+    - crd:
+        api:
+          expose: none
+        namespaced: true
+        path: components/crds/components.eda.nokia.com_discoverystates.yaml
+        schema: components/openapiv3/eda_oas_components.eda.nokia.com_discoverystates.json
+        names:
+          plural: discoverystates
+          singular: discoverystate
+          kind: DiscoveryState
+          listKind: DiscoveryStateList
+    - crd:
+        api:
+          expose: none
+        namespaced: true
+        path: components/crds/components.eda.nokia.com_discoveryaggregatestates.yaml
+        schema: components/openapiv3/eda_oas_components.eda.nokia.com_discoveryaggregatestates.json
+        names:
+          plural: discoveryaggregatestates
+          singular: discoveryaggregatestate
+          kind: DiscoveryAggregateState
+          listKind: DiscoveryAggregateStateList
+    - crd:
+        api:
+          expose: read
+        namespaced: true
+        path: components/crds/components.eda.nokia.com_components.yaml
+        schema: components/openapiv3/eda_oas_components.eda.nokia.com_components.json
+        ui:
+          category: Components
+          name: Components
+        names:
+          plural: components
+          singular: component
+          kind: Component
+          listKind: ComponentList
+    - script:
+        path: components/intents/discovery/discovery.py
+        trigger:
+          kind: Discovery
+        type: config
+    - script:
+        path: components/intents/discovery/discovery.py
+        trigger:
+          kind: DiscoveryState
+        type: state
+    - script:
+        path: components/intents/discoveryaggregatestate/discoveryaggregatestate.py
+        trigger:
+          kind: DiscoveryAggregateState
+        type: state
+    # - view:
+    #     path: components/ui/components-dashboard-v1.json
+    #     ui:
+    #       category: Components
+    #       name: Components
+    - crd:
+        namespaced: false
+        path: components/crds/components.eda.nokia.com_clusterdiscoveries.yaml
+        schema: components/openapiv3/eda_oas_components.eda.nokia.com_clusterdiscoveries.json
+        names:
+          singular: clusterdiscovery
+          kind: ClusterDiscovery
+          listKind: ClusterDiscoveryList
+          plural: clusterdiscoveries
+    - script:
+        path: components/intents/clusterdiscovery/clusterdiscovery_intent.py
+        trigger:
+          kind: ClusterDiscovery
+        type: state
+    - cr:
+        path: components/resources/discovery.yaml
+    - cr:
+        path: components/resources/cpu_overlay.yaml
+    - cr:
+        path: components/resources/memory_overlay.yaml
+    - cr:
+        path: components/resources/volume_overlay.yaml
+    - crd:
+        api:
+          expose: read
+        namespaced: true
+        path: components/crds/components.eda.nokia.com_chassis.yaml
+        schema: components/openapiv3/eda_oas_components.eda.nokia.com_chassis.json
+        ui:
+          category: Components
+          name: Chassis
+        names:
+          plural: chassis
+          singular: chassis
+          kind: Chassis
+          listKind: ChassisList
+    - crd:
+        api:
+          expose: read
+        path: components/crds/components.eda.nokia.com_controlmodules.yaml
+        namespaced: true
+        schema: components/openapiv3/eda_oas_components.eda.nokia.com_controlmodules.json
+        ui:
+          category: Components
+          name: Control Modules
+        names:
+          plural: controlmodules
+          singular: controlmodule
+          kind: ControlModule
+          listKind: ControlModuleList
+    - crd:
+        api:
+          expose: read
+        path: components/crds/components.eda.nokia.com_interfacemodules.yaml
+        namespaced: true
+        schema: components/openapiv3/eda_oas_components.eda.nokia.com_interfacemodules.json
+        ui:
+          category: Components
+          name: Interface Modules
+        names:
+          plural: interfacemodules
+          singular: interfacemodule
+          kind: InterfaceModule
+          listKind: InterfaceModuleList
+    - crd:
+        api:
+          expose: read
+        path: components/crds/components.eda.nokia.com_fabricmodules.yaml
+        namespaced: true
+        schema: components/openapiv3/eda_oas_components.eda.nokia.com_fabricmodules.json
+        ui:
+          category: Components
+          name: Fabric Modules
+        names:
+          plural: fabricmodules
+          singular: fabricmodule
+          kind: FabricModule
+          listKind: FabricModuleList
+    - crd:
+        api:
+          expose: read
+        path: components/crds/components.eda.nokia.com_powersupplies.yaml
+        namespaced: true
+        schema: components/openapiv3/eda_oas_components.eda.nokia.com_powersupplies.json
+        ui:
+          category: Components
+          name: Power Supplies
+        names:
+          plural: powersupplies
+          singular: powersupply
+          kind: PowerSupply
+          listKind: PowerSupplyList
+    - crd:
+        api:
+          expose: read
+        path: components/crds/components.eda.nokia.com_fans.yaml
+        namespaced: true
+        schema: components/openapiv3/eda_oas_components.eda.nokia.com_fans.json
+        ui:
+          category: Components
+          name: Fans
+        names:
+          listKind: FanList
+          plural: fans
+          singular: fan
+          kind: Fan
+    - cr:
+        path: components/alarms/alarms.yaml
+  dependencies:
+    - file:
+        path: common/
+    - file:
+        path: utils/
+    - file:
+        path: components/intents
+    - file:
+        path: components/api/v1alpha1/pysrc
+    - file:
+        path: components/api/v1/pysrc/
+    - file:
+        path: topologies/intents/common
+    - file:
+        path: components/api/v1/pysrc
+    - file:
+        path: oam/api/v1alpha1/pysrc
+    - file:
+        path: oam/intents/threshold
+  description: |
+    This application provides functionality relating to hardware components for various Network Operating Systems.
+
+    It discovers hardware components and their properties, publishing these in a normalized format, and performing any alarming as necessary.
+  gitPathPrefix: /
+  gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
+  group: components.eda.nokia.com
+  image: ghcr.io/nokia-eda/apps/components:v5.0.0
+  supportedCoreVersions:
+    - "v4.0"
+  supportedEndpoints:
+    - "srl:24.10.*"
+    - "srl:25.3.*"
+    - "srl:25.7.*"
+    - "srl:25.10.*"
+    - "sros:24.10.r4+"
+    - "sros:25.3.r2+"
+    - "sros:25.7.*"
+    - "sros:25.10.*"
+    - "eos:4.33.2f:beta"
+    - "nxos:10.5.2:alpha"
+  title: Components
+  version: v1
