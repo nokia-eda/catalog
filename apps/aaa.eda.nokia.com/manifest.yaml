@@ -1,0 +1,111 @@
+apiVersion: core.eda.nokia.com/v1
+kind: Manifest
+metadata:
+  name: aaa
+spec:
+  group: aaa.eda.nokia.com
+  version: v1alpha1
+  title: AAA
+  description: |
+    This application provides functionality relating to authentication, authorization, and accounting.
+
+    It allows the deployment of users, groups, and AAA policy, performing any alarming as necessary.
+  image: ghcr.io/nokia-eda/apps/aaa:v5.0.0
+  gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
+  gitPathPrefix: /
+  author: Nokia
+  supportedEndpoints:
+    - "srl:24.10.*"
+    - "srl:25.3.*"
+    - "srl:25.7.*"
+    - "srl:25.10.*"
+    - "sros:24.10.r4+"
+    - "sros:25.3.r2+"
+    - "sros:25.7.*"
+    - "sros:25.10.*"
+    - "eos:4.33.2f:beta"
+    - "nxos:10.5.2:alpha"
+  supportedCoreVersions:
+    - "v4.0"
+  appInfo:
+    categories:
+      - "system"
+    documentation: aaa/docs
+    ociSpecVersion: v1.0.0
+  components:
+    - crd:
+        path: aaa/crds/aaa.eda.nokia.com_userdeployments.yaml
+        schema: aaa/openapiv3/eda_oas_aaa.eda.nokia.com_userdeployments.json
+        api:
+          expose: none
+        namespaced: false
+        names:
+          listKind: UserDeploymentList
+          plural: userdeployments
+          singular: userdeployment
+          kind: UserDeployment
+    - crd:
+        path: aaa/crds/aaa.eda.nokia.com_nodegroupdeployments.yaml
+        schema: aaa/openapiv3/eda_oas_aaa.eda.nokia.com_nodegroupdeployments.json
+        names:
+          plural: nodegroupdeployments
+          singular: nodegroupdeployment
+          kind: NodeGroupDeployment
+          listKind: NodeGroupDeploymentList
+    - crd:
+        path: aaa/crds/aaa.eda.nokia.com_nodegroups.yaml
+        schema: aaa/openapiv3/eda_oas_aaa.eda.nokia.com_nodegroups.json
+        ui:
+          category: Node Management
+          name: Node Groups
+          panel: system_administration
+        api:
+          expose: readWrite
+        names:
+          plural: nodegroups
+          singular: nodegroup
+          kind: NodeGroup
+          listKind: NodeGroupList
+    - crd:
+        path: aaa/crds/aaa.eda.nokia.com_nodeuserstates.yaml
+        schema: aaa/openapiv3/eda_oas_aaa.eda.nokia.com_nodeuserstates.json
+        names:
+          plural: nodeuserstates
+          singular: nodeuserstate
+          kind: NodeUserState
+          listKind: NodeUserStateList
+    - cr:
+        path: aaa/resources/default.yaml
+    - cr:
+        path: aaa/resources/engine_v1_nodegroup_sudo.yaml
+    - script:
+        path: aaa/intents/userdeployment/userdeployment.py
+        type: config
+        trigger:
+          kind: UserDeployment
+    - script:
+        path: aaa/intents/nodeuserstate/nodeuserstate_intent.py
+        type: state
+        trigger:
+          kind: NodeUserState
+    - script:
+        path: aaa/intents/nodegroupdeployment/nodegroupdeployment_intent.py
+        type: config
+        trigger:
+          kind: NodeGroupDeployment
+          # - script:
+          #     path: core/userdeploymentstate.py
+          #     type: state
+          #     trigger:
+          #       kind: UserDeploymentState
+  dependencies:
+    - file:
+        path: common/
+    - file:
+        path: utils/
+    - file:
+        path: aaa/intents
+    - file:
+        path: aaa/api/v1alpha1/pysrc
+    - file:
+        path: core/pysrc/
