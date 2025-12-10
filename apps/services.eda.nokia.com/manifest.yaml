@@ -1,0 +1,426 @@
+apiVersion: core.eda.nokia.com/v1
+kind: Manifest
+metadata:
+  name: services
+spec:
+  group: services.eda.nokia.com
+  version: v1
+  title: Services
+  description: |
+    This application provides EVPN services for various Network Operating Systems.
+  image: ghcr.io/nokia-eda/apps/services:v5.0.0
+  gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
+  gitPathPrefix: /
+  author: Nokia
+  appInfo:
+    documentation: services/docs
+    categories:
+      - "networking"
+    ociSpecVersion: v1.0.0
+  supportedEndpoints:
+    - "srl:24.10.*"
+    - "srl:25.3.*"
+    - "srl:25.7.*"
+    - "srl:25.10.*"
+    - "sros:24.10.r4+"
+    - "sros:25.3.r2+"
+    - "sros:25.7.*"
+    - "sros:25.10.*"
+    - "eos:4.33.2f:beta"
+    - "nxos:10.5.2:alpha"
+  supportedCoreVersions:
+    - "v4.0"
+  components:
+    - crd:
+        path: services/crds/services.eda.nokia.com_vlans.yaml
+        schema: services/openapiv3/eda_oas_services.eda.nokia.com_vlans.json
+        ui:
+          category: Virtual Networks
+          name: VLANs
+        api:
+          expose: readWrite
+        conversionScript: services/intents/vlan/conversion_v1.py
+        names:
+          plural: vlans
+          singular: vlan
+          kind: VLAN
+          listKind: VLANList
+    - crd:
+        path: services/crds/services.eda.nokia.com_vlanstates.yaml
+        schema: services/openapiv3/eda_oas_services.eda.nokia.com_vlanstates.json
+        api:
+          expose: none
+        conversionScript: services/intents/vlanstate/conversion_v1.py
+        names:
+          listKind: VLANStateList
+          plural: vlanstates
+          singular: vlanstate
+          kind: VLANState
+    - crd:
+        path: services/crds/services.eda.nokia.com_virtualnetworks.yaml
+        schema: services/openapiv3/eda_oas_services.eda.nokia.com_virtualnetworks.json
+        ui:
+          category: Virtual Networks
+          name: Virtual Networks
+        api:
+          expose: readWrite
+        conversionScript: services/intents/virtualnetwork/conversion_v1.py
+        names:
+          plural: virtualnetworks
+          singular: virtualnetwork
+          kind: VirtualNetwork
+          listKind: VirtualNetworkList
+    - crd:
+        path: services/crds/services.eda.nokia.com_virtualnetworkstates.yaml
+        schema: services/openapiv3/eda_oas_services.eda.nokia.com_virtualnetworkstates.json
+        api:
+          expose: none
+        conversionScript: services/intents/virtualnetworkstate/conversion_v1.py
+        names:
+          listKind: VirtualNetworkStateList
+          plural: virtualnetworkstates
+          singular: virtualnetworkstate
+          kind: VirtualNetworkState
+    - crd:
+        path: services/crds/services.eda.nokia.com_routers.yaml
+        schema: services/openapiv3/eda_oas_services.eda.nokia.com_routers.json
+        ui:
+          category: Virtual Networks
+          name: Routers
+        api:
+          expose: readWrite
+        conversionScript: services/intents/router/conversion_v1.py
+        names:
+          plural: routers
+          singular: router
+          kind: Router
+          listKind: RouterList
+    - crd:
+        path: services/crds/services.eda.nokia.com_routerstates.yaml
+        schema: services/openapiv3/eda_oas_services.eda.nokia.com_routerstates.json
+        api:
+          expose: none
+        conversionScript: services/intents/routerstate/conversion_v1.py
+        names:
+          plural: routerstates
+          singular: routerstate
+          kind: RouterState
+          listKind: RouterStateList
+    - crd:
+        path: services/crds/services.eda.nokia.com_routerdeployments.yaml
+        schema: services/openapiv3/eda_oas_services.eda.nokia.com_routerdeployments.json
+        api:
+          expose: none
+        conversionScript: services/intents/routerdeployment/conversion_v1.py
+        names:
+          plural: routerdeployments
+          singular: routerdeployment
+          kind: RouterDeployment
+          listKind: RouterDeploymentList
+    - crd:
+        path: services/crds/services.eda.nokia.com_bridgedomains.yaml
+        schema: services/openapiv3/eda_oas_services.eda.nokia.com_bridgedomains.json
+        ui:
+          category: Virtual Networks
+          name: Bridge Domains
+        kubernetes:
+          exportPolicy: all # needed for connect controllers
+        api:
+          expose: readWrite
+        conversionScript: services/intents/bridgedomain/conversion_v1.py
+        names:
+          plural: bridgedomains
+          singular: bridgedomain
+          kind: BridgeDomain
+          listKind: BridgeDomainList
+    - crd:
+        path: services/crds/services.eda.nokia.com_bridgedomainstates.yaml
+        schema: services/openapiv3/eda_oas_services.eda.nokia.com_bridgedomainstates.json
+        api:
+          expose: none
+        conversionScript: services/intents/bridgedomainstate/conversion_v1.py
+        names:
+          plural: bridgedomainstates
+          singular: bridgedomainstate
+          kind: BridgeDomainState
+          listKind: BridgeDomainStateList
+    - crd:
+        path: services/crds/services.eda.nokia.com_bridgedomaindeployments.yaml
+        schema: services/openapiv3/eda_oas_services.eda.nokia.com_bridgedomaindeployments.json
+        api:
+          expose: none
+        conversionScript: services/intents/bridgedomaindeployment/conversion_v1.py
+        names:
+          plural: bridgedomaindeployments
+          singular: bridgedomaindeployment
+          kind: BridgeDomainDeployment
+          listKind: BridgeDomainDeploymentList
+    - crd:
+        path: services/crds/services.eda.nokia.com_bridgeinterfaces.yaml
+        schema: services/openapiv3/eda_oas_services.eda.nokia.com_bridgeinterfaces.json
+        ui:
+          category: Virtual Networks
+          name: Bridge Interfaces
+        api:
+          expose: readWrite
+        conversionScript: services/intents/bridgeinterface/conversion_v1.py
+        names:
+          plural: bridgeinterfaces
+          singular: bridgeinterface
+          kind: BridgeInterface
+          listKind: BridgeInterfaceList
+    - crd:
+        path: services/crds/services.eda.nokia.com_bridgeinterfacestates.yaml
+        schema: services/openapiv3/eda_oas_services.eda.nokia.com_bridgeinterfacestates.json
+        api:
+          expose: none
+        conversionScript: services/intents/bridgeinterfacestate/conversion_v1.py
+        names:
+          plural: bridgeinterfacestates
+          singular: bridgeinterfacestate
+          kind: BridgeInterfaceState
+          listKind: BridgeInterfaceStateList
+    - crd:
+        path: services/crds/services.eda.nokia.com_routedinterfaces.yaml
+        schema: services/openapiv3/eda_oas_services.eda.nokia.com_routedinterfaces.json
+        ui:
+          category: Virtual Networks
+          name: Routed Interfaces
+        api:
+          expose: readWrite
+        conversionScript: services/intents/routedinterface/conversion_v1.py
+        names:
+          plural: routedinterfaces
+          singular: routedinterface
+          kind: RoutedInterface
+          listKind: RoutedInterfaceList
+    - crd:
+        path: services/crds/services.eda.nokia.com_routedinterfacestates.yaml
+        schema: services/openapiv3/eda_oas_services.eda.nokia.com_routedinterfacestates.json
+        api:
+          expose: none
+        conversionScript: services/intents/routedinterfacestate/conversion_v1.py
+        names:
+          singular: routedinterfacestate
+          kind: RoutedInterfaceState
+          listKind: RoutedInterfaceStateList
+          plural: routedinterfacestates
+    - crd:
+        path: services/crds/services.eda.nokia.com_irbinterfaces.yaml
+        schema: services/openapiv3/eda_oas_services.eda.nokia.com_irbinterfaces.json
+        ui:
+          category: Virtual Networks
+          name: IRB Interfaces
+        api:
+          expose: readWrite
+        conversionScript: services/intents/irbinterface/conversion_v1.py
+        names:
+          plural: irbinterfaces
+          singular: irbinterface
+          kind: IRBInterface
+          listKind: IRBInterfaceList
+    - crd:
+        path: services/crds/services.eda.nokia.com_irbinterfacestates.yaml
+        schema: services/openapiv3/eda_oas_services.eda.nokia.com_irbinterfacestates.json
+        api:
+          expose: none
+        conversionScript: services/intents/irbinterfacestate/conversion_v1.py
+        names:
+          listKind: IRBInterfaceStateList
+          plural: irbinterfacestates
+          singular: irbinterfacestate
+          kind: IRBInterfaceState
+    - crd:
+        path: services/crds/services.eda.nokia.com_dhcprelays.yaml
+        schema: services/openapiv3/eda_oas_services.eda.nokia.com_dhcprelays.json
+        ui:
+          category: DHCP
+          name: DHCP Relay
+        api:
+          expose: readWrite
+        conversionScript: services/intents/dhcprelay/conversion_v1.py
+        names:
+          plural: dhcprelays
+          singular: dhcprelay
+          kind: DHCPRelay
+          listKind: DHCPRelayList
+    - crd:
+        path: services/crds/services.eda.nokia.com_stateconfigs.yaml
+        schema: services/openapiv3/eda_oas_services.eda.nokia.com_stateconfigs.json
+        api:
+          expose: none
+        conversionScript: services/intents/stateconfig/conversion_v1.py
+        names:
+          plural: stateconfigs
+          singular: stateconfig
+          kind: StateConfig
+          listKind: StateConfigList
+    - script:
+        path: services/intents/stateconfig/stateconfig_intent.py
+        type: state
+        trigger:
+          kind: StateConfig
+    - script:
+        path: services/intents/vlan/vlan_intent.py
+        type: config
+        trigger:
+          kind: VLAN
+    - script:
+        path: services/intents/vlanstate/vlanstate_intent.py
+        type: state
+        trigger:
+          kind: VLANState
+    - script:
+        path: services/intents/virtualnetwork/virtualnetwork_intent.py
+        type: config
+        trigger:
+          kind: VirtualNetwork
+    - script:
+        path: services/intents/virtualnetworkstate/virtualnetworkstate_intent.py
+        type: state
+        trigger:
+          kind: VirtualNetworkState
+    - script:
+        path: services/intents/router/router_intent.py
+        type: config
+        trigger:
+          kind: Router
+    - script:
+        path: services/intents/routerstate/routerstate_intent.py
+        type: state
+        trigger:
+          kind: RouterState
+    - script:
+        path: services/intents/routerdeployment/routerdeployment_intent.py
+        type: config
+        trigger:
+          kind: RouterDeployment
+    - script:
+        path: services/intents/bridgedomain/bridgedomain_intent.py
+        type: config
+        trigger:
+          kind: BridgeDomain
+    - script:
+        path: services/intents/bridgedomainstate/bridgedomainstate_intent.py
+        type: state
+        trigger:
+          kind: BridgeDomainState
+    - script:
+        path: services/intents/bridgedomaindeployment/bridgedomaindeployment_intent.py
+        type: config
+        trigger:
+          kind: BridgeDomainDeployment
+    - script:
+        path: services/intents/bridgeinterface/bridgeinterface_intent.py
+        type: config
+        trigger:
+          kind: BridgeInterface
+    - script:
+        path: services/intents/bridgeinterfacestate/bridgeinterfacestate_intent.py
+        type: state
+        trigger:
+          kind: BridgeInterfaceState
+    - script:
+        path: services/intents/routedinterface/routedinterface_intent.py
+        type: config
+        trigger:
+          kind: RoutedInterface
+    - script:
+        path: services/intents/routedinterfacestate/routedinterfacestate_intent.py
+        type: state
+        trigger:
+          kind: RoutedInterfaceState
+    - script:
+        path: services/intents/irbinterface/irbinterface_intent.py
+        type: config
+        trigger:
+          kind: IRBInterface
+    - script:
+        path: services/intents/irbinterfacestate/irbinterfacestate_intent.py
+        type: state
+        trigger:
+          kind: IRBInterfaceState
+    - script:
+        path: services/intents/dhcprelay/dhcprelay_intent.py
+        type: config
+        trigger:
+          kind: DHCPRelay
+    - view:
+        path: services/ui/vlan-dashboard-v0.1.json
+        ui:
+          category: Virtual Networks
+          name: VLANs
+    - view:
+        path: services/ui/router-dashboard-v0.2.json
+        ui:
+          category: Virtual Networks
+          name: Routers
+    - view:
+        path: services/ui/vnet-dashboard-v0.1.json
+        ui:
+          category: Virtual Networks
+          name: Virtual Networks
+    - view:
+        path: services/ui/bridgedomain-dashboard-v0.2.json
+        ui:
+          category: Virtual Networks
+          name: Bridge Domains
+    - cr:
+        path: services/workflows/edgeping/core_v1_flowdefinition.yaml
+    - crd:
+        api:
+          expose: readWrite
+        namespaced: true
+        path: services/crds/services.eda.nokia.com_edgepings.yaml
+        schema: services/openapiv3/eda_oas_services.eda.nokia.com_edgepings.json
+        workflow: true
+        conversionScript: services/intents/edgeping/conversion_v1.py
+        ui:
+          name: Edge Ping
+        names:
+          plural: edgepings
+          singular: edgeping
+          kind: EdgePing
+          listKind: EdgePingList
+    - cr:
+        path: services/alarms/alarms.yaml
+  dependencies:
+    - file:
+        path: services/intents
+    - file:
+        path: services/api/v1alpha1/pysrc
+    - file:
+        path: common/
+    - file:
+        path: utils/
+    - file:
+        path: filters/
+    - file:
+        path: protocols/
+    - file:
+        path: routing/
+    - file:
+        path: routingpolicies/
+    - file:
+        path: qos/
+    - file:
+        path: interfaces/
+    - file:
+        path: security/
+    - file:
+        path: services/api/v1/pysrc
+    - file:
+        path: services/alarms/pysrc
+  requirements:
+    - appId: protocols.eda.nokia.com
+      version: v5.0.0
+    - appId: routingpolicies.eda.nokia.com
+      version: v5.0.0
+    - appId: interfaces.eda.nokia.com
+      version: v5.0.0
+    - appId: qos.eda.nokia.com
+      version: v5.0.0
+    - appId: security.eda.nokia.com
+      version: v5.0.0
+    - appId: filters.eda.nokia.com
+      version: v5.0.0
