@@ -1,0 +1,100 @@
+apiVersion: core.eda.nokia.com/v1
+kind: Manifest
+metadata:
+  name: nats-exporter
+spec:
+  group: nats.eda.nokia.com
+  version: v1alpha1
+  title: NATS Exporter
+  description: Publish EDA alarms or any EDB object to a NATS cluster.
+  image: ghcr.io/nokia-eda/nats-exporter:v3.0.0
+  author: Nokia
+  gitPathPrefix: /
+  supportedCoreVersions:
+    - "v4.0"
+  appInfo:
+    readme: README.md
+    documentation: DOCUMENTATION.md
+    license: LICENSE
+    screenshots:
+      - ne/assets/logo.png
+    categories:
+      - "integrations"
+    ociSpecVersion: v1.0.0
+  components:
+    - crd:
+        path: ne/config/crd/bases/nats.eda.nokia.com_exports.yaml
+        schema: ne/docs/openapiv3/eda_oas_nats.eda.nokia.com_exports.json
+        namespaced: true
+        api:
+          expose: readWrite
+        ui:
+          category: NATS
+          name: Export
+        kubernetes:
+          exportPolicy: all
+          importPolicy: all
+        names:
+          listKind: ExportList
+          plural: exports
+          singular: export
+          kind: Export
+    - crd:
+        path: ne/config/crd/bases/nats.eda.nokia.com_clusterexports.yaml
+        schema: ne/docs/openapiv3/eda_oas_nats.eda.nokia.com_clusterexports.json
+        namespaced: false
+        api:
+          expose: readWrite
+        ui:
+          category: NATS
+          name: Cluster Export
+        kubernetes:
+          exportPolicy: all
+          importPolicy: all
+        names:
+          plural: clusterexports
+          singular: clusterexport
+          kind: ClusterExport
+          listKind: ClusterExportList
+    - crd:
+        path: ne/config/crd/bases/nats.eda.nokia.com_publishers.yaml
+        schema: ne/docs/openapiv3/eda_oas_nats.eda.nokia.com_publishers.json
+        namespaced: true
+        api:
+          expose: readWrite
+        ui:
+          category: NATS
+          name: Publisher
+        kubernetes:
+          exportPolicy: all
+          importPolicy: all
+        names:
+          plural: publishers
+          singular: publisher
+          kind: Publisher
+          listKind: PublisherList
+    - crd:
+        path: ne/config/crd/bases/nats.eda.nokia.com_clusterpublishers.yaml
+        schema: ne/docs/openapiv3/eda_oas_nats.eda.nokia.com_clusterpublishers.json
+        namespaced: false
+        api:
+          expose: readWrite
+        ui:
+          category: NATS
+          name: Cluster Publisher
+        kubernetes:
+          exportPolicy: all
+          importPolicy: all
+        names:
+          listKind: ClusterPublisherList
+          plural: clusterpublishers
+          singular: clusterpublisher
+          kind: ClusterPublisher
+    - cr:
+        path: ne/manifests/webhook.yaml
+    - cr:
+        path: ne/manifests/deployment.yaml
+  dependencies:
+    - container:
+        name: nats-exporter-controller
+        image: ghcr.io/nokia-eda/nats-exporter-controller:v3.0.0
