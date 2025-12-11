@@ -1,0 +1,99 @@
+apiVersion: core.eda.nokia.com/v1
+kind: Manifest
+metadata:
+  name: service-now
+spec:
+  group: snow.eda.nokia.com
+  version: v1alpha1
+  title: ServiceNow
+  description: This application creates ServiceNow incidents based on alarms from the network.
+  image: ghcr.io/nokia-eda/apps/service-now:v4.0.0
+  author: Nokia
+  supportedCoreVersions:
+    - "v4.0"
+    - "v4.0.0-0"
+  appInfo:
+    readme: README.md
+    documentation: DOCUMENTATION.md
+    license: LICENSE
+    screenshots:
+      - snow/assets/screenshot1.png
+    categories:
+      - "integrations"
+    settings: settings-openapi/eda_oas_snow.eda.nokia.com_appsettings.json
+    ociSpecVersion: v1.0.0
+  components:
+    - crd:
+        path: snow/config/crd/bases/snow.eda.nokia.com_incidents.yaml
+        schema: snow/docs/openapiv3/eda_oas_snow.eda.nokia.com_incidents.json
+        namespaced: true
+        api:
+          expose: readWrite
+        ui:
+          category: ServiceNow
+          name: Incident
+        kubernetes:
+          exportPolicy: all
+          importPolicy: all
+        names:
+          plural: incidents
+          singular: incident
+          kind: Incident
+          listKind: IncidentList
+    - crd:
+        path: snow/config/crd/bases/snow.eda.nokia.com_instances.yaml
+        schema: snow/docs/openapiv3/eda_oas_snow.eda.nokia.com_instances.json
+        namespaced: true
+        api:
+          expose: readWrite
+        ui:
+          category: ServiceNow
+          name: Instance
+        kubernetes:
+          exportPolicy: all
+          importPolicy: all
+        names:
+          listKind: InstanceList
+          plural: instances
+          singular: instance
+          kind: Instance
+    - crd:
+        path: snow/config/crd/bases/snow.eda.nokia.com_clusterincidents.yaml
+        schema: snow/docs/openapiv3/eda_oas_snow.eda.nokia.com_clusterincidents.json
+        namespaced: false
+        api:
+          expose: readWrite
+        ui:
+          category: ServiceNow
+          name: Cluster Incident
+        kubernetes:
+          exportPolicy: all
+          importPolicy: all
+        names:
+          singular: clusterincident
+          kind: ClusterIncident
+          listKind: ClusterIncidentList
+          plural: clusterincidents
+    - crd:
+        path: snow/config/crd/bases/snow.eda.nokia.com_clusterinstances.yaml
+        schema: snow/docs/openapiv3/eda_oas_snow.eda.nokia.com_clusterinstances.json
+        namespaced: false
+        api:
+          expose: readWrite
+        ui:
+          category: ServiceNow
+          name: Cluster Instance
+        kubernetes:
+          exportPolicy: all
+          importPolicy: all
+        names:
+          plural: clusterinstances
+          singular: clusterinstance
+          kind: ClusterInstance
+          listKind: ClusterInstanceList
+    - cr:
+        path: snow/manifests/app_deployment.yaml
+  dependencies:
+    - container:
+        name: service-now-controller
+        image: ghcr.io/nokia-eda/apps/service-now-controller:v4.0.0
