@@ -1,0 +1,100 @@
+apiVersion: core.eda.nokia.com/v1
+kind: Manifest
+metadata:
+  name: snmp-traps
+spec:
+  group: snmp.eda.nokia.com
+  version: v1alpha1
+  title: SNMP Traps
+  author: Nokia
+  description: Sends traps to external destinations
+  image: ghcr.io/nokia-eda/apps/snmp-traps:v2.0.0
+  gitPathPrefix: /
+  supportedCoreVersions:
+    - "v4.0"
+  appInfo:
+    readme: README.md
+    documentation: DOCUMENTATION.md
+    license: LICENSE
+    screenshots:
+      - st/assets/screenshot1.png
+      - st/assets/screenshot2.png
+    categories:
+      - "monitoring"
+    settings: settings/openapi/eda_oas_snmp.eda.nokia.com_appsettings.json
+    ociSpecVersion: v1.0.0
+  components:
+    - crd:
+        path: st/config/crd/bases/snmp.eda.nokia.com_destinations.yaml
+        schema: st/docs/openapiv3/eda_oas_snmp.eda.nokia.com_destinations.json
+        namespaced: true
+        api:
+          expose: readWrite
+        ui:
+          category: Snmptraps
+          name: Destination
+        kubernetes:
+          exportPolicy: all
+          importPolicy: spec
+        names:
+          listKind: DestinationList
+          plural: destinations
+          singular: destination
+          kind: Destination
+    - crd:
+        path: st/config/crd/bases/snmp.eda.nokia.com_trapgroups.yaml
+        schema: st/docs/openapiv3/eda_oas_snmp.eda.nokia.com_trapgroups.json
+        namespaced: true
+        api:
+          expose: readWrite
+        ui:
+          category: Snmptraps
+          name: Trap Group
+        kubernetes:
+          exportPolicy: all
+          importPolicy: spec
+        names:
+          plural: trapgroups
+          singular: trapgroup
+          kind: TrapGroup
+          listKind: TrapGroupList
+    - crd:
+        path: st/config/crd/bases/snmp.eda.nokia.com_clusterdestinations.yaml
+        schema: st/docs/openapiv3/eda_oas_snmp.eda.nokia.com_clusterdestinations.json
+        namespaced: false
+        api:
+          expose: readWrite
+        ui:
+          category: Snmptraps
+          name: Cluster Destination
+        kubernetes:
+          exportPolicy: all
+          importPolicy: spec
+        names:
+          plural: clusterdestinations
+          singular: clusterdestination
+          kind: ClusterDestination
+          listKind: ClusterDestinationList
+    - crd:
+        path: st/config/crd/bases/snmp.eda.nokia.com_clustertrapgroups.yaml
+        schema: st/docs/openapiv3/eda_oas_snmp.eda.nokia.com_clustertrapgroups.json
+        namespaced: false
+        api:
+          expose: readWrite
+        ui:
+          category: Snmptraps
+          name: Cluster Trap Group
+        kubernetes:
+          exportPolicy: all
+          importPolicy: spec
+        names:
+          kind: ClusterTrapGroup
+          listKind: ClusterTrapGroupList
+          plural: clustertrapgroups
+          singular: clustertrapgroup
+    - cr:
+        path: st/manifests/app_deployment.yaml
+  dependencies:
+    - container:
+        name: snmp-traps-controller
+        image: ghcr.io/nokia-eda/apps/snmp-traps-controller:v2.0.0
