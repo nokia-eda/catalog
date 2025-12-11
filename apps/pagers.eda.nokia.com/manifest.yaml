@@ -1,0 +1,68 @@
+apiVersion: core.eda.nokia.com/v1
+kind: Manifest
+metadata:
+  name: pager-duty
+spec:
+  group: pagers.eda.nokia.com
+  version: v1alpha1
+  title: Pager Duty
+  description: This application creates PagerDuty incidents based on alarms from the network.
+  image: ghcr.io/nokia-eda/apps/pager-duty:v4.0.0
+  author: Nokia
+  gitPathPrefix: /
+  supportedCoreVersions:
+    - "v4.0"
+    - "v4.0.0-0"
+  appInfo:
+    readme: README.md
+    documentation: DOCUMENTATION.md
+    license: LICENSE
+    screenshots:
+      - pd/assets/screenshot1.png
+    categories:
+      - "integrations"
+    settings: settings-openapi/eda_oas_pagers.eda.nokia.com_appsettings.json
+    ociSpecVersion: v1.0.0
+  components:
+    - crd:
+        path: pd/config/crd/bases/pagers.eda.nokia.com_pagers.yaml
+        schema: pd/docs/openapiv3/eda_oas_pagers.eda.nokia.com_pagers.json
+        namespaced: true
+        api:
+          expose: readWrite
+        ui:
+          category: PagerDuty
+          name: Pagers
+        kubernetes:
+          exportPolicy: all
+          importPolicy: all
+        names:
+          plural: pagers
+          singular: pager
+          kind: Pager
+          listKind: PagerList
+    - crd:
+        path: pd/config/crd/bases/pagers.eda.nokia.com_clusterpagers.yaml
+        schema: pd/docs/openapiv3/eda_oas_pagers.eda.nokia.com_clusterpagers.json
+        namespaced: false
+        api:
+          expose: readWrite
+        ui:
+          category: PagerDuty
+          name: Cluster Pagers
+        kubernetes:
+          exportPolicy: all
+          importPolicy: all
+        names:
+          plural: clusterpagers
+          singular: clusterpager
+          kind: ClusterPager
+          listKind: ClusterPagerList
+    - cr:
+        path: pd/manifests/webhooks.yaml
+    - cr:
+        path: pd/manifests/app_deployment.yaml
+  dependencies:
+    - container:
+        name: pager-duty-controller
+        image: ghcr.io/nokia-eda/apps/pager-duty-controller:v4.0.0

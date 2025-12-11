@@ -1,0 +1,72 @@
+{
+  "description": "AppSettings is the Schema for the appsettings API.",
+  "type": "object",
+  "properties": {
+    "apiVersion": {
+      "description": "APIVersion defines the versioned schema of this representation of an object.\nServers should convert recognized schemas to the latest internal value, and\nmay reject unrecognized values.\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+      "type": "string"
+    },
+    "kind": {
+      "description": "Kind is a string value representing the REST resource this object represents.\nServers may infer this from the endpoint the client submits requests to.\nCannot be updated.\nIn CamelCase.\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+      "type": "string"
+    },
+    "metadata": {
+      "type": "object"
+    },
+    "spec": {
+      "description": "AppSettingsSpec defines the desired state of AppSettings.",
+      "type": "object",
+      "title": "Specification",
+      "properties": {
+        "pdApiKeySecretName": {
+          "description": "A secret holding the pager duty API key.",
+          "type": "string",
+          "title": "API Key Secret Name",
+          "default": "eda-pd-api-key",
+          "x-eda-nokia-com": {
+            "ui-order-priority": 300
+          }
+        },
+        "pdCPULimit": {
+          "description": "The CPU limit for the pager duty app.",
+          "type": "string",
+          "title": "CPU Limit",
+          "default": "1",
+          "x-eda-nokia-com": {
+            "ui-order-priority": 100
+          }
+        },
+        "pdConfigMapName": {
+          "description": "A config map holding pager duty app configuration.",
+          "type": "string",
+          "title": "Pager duty config",
+          "default": "pd-config",
+          "x-eda-nokia-com": {
+            "ui-order-priority": 500
+          }
+        },
+        "pdMemoryLimit": {
+          "description": "The memory limit for the pager duty app.",
+          "type": "string",
+          "title": "Memory Limit",
+          "default": "1Gi",
+          "x-eda-nokia-com": {
+            "ui-order-priority": 200
+          }
+        },
+        "proxyConfigMapName": {
+          "description": "A config map holding proxy configuration.",
+          "type": "string",
+          "title": "Proxy config",
+          "default": "proxy-config",
+          "x-eda-nokia-com": {
+            "ui-order-priority": 400
+          }
+        }
+      },
+      "x-eda-nokia-com": {
+        "ui-order-priority": 30
+      }
+    }
+  }
+}
