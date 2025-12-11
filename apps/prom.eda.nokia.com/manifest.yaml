@@ -1,0 +1,49 @@
+apiVersion: core.eda.nokia.com/v1
+kind: Manifest
+metadata:
+  name: prom-exporter
+spec:
+  image: ghcr.io/nokia-eda/apps/prom-exporter:v5.0.0
+  group: prom.eda.nokia.com
+  version: v1alpha1
+  title: Prometheus Exporter
+  description: Exports metrics to Prometheus.
+  author: Nokia
+  gitPathPrefix: /
+  supportedCoreVersions:
+    - "v4.0"
+  appInfo:
+    readme: README.md
+    documentation: DOCUMENTATION.md
+    license: LICENSE
+    screenshots:
+      - px/assets/screenshot1.png
+      - px/assets/screenshot2.png
+    categories:
+      - "monitoring"
+    settings: settings-openapi/eda_oas_prom.eda.nokia.com_appsettings.json
+    ociSpecVersion: v1.0.0
+  components:
+    - crd:
+        path: px/config/crd/bases/prom.eda.nokia.com_exports.yaml
+        schema: px/docs/openapiv3/eda_oas_prom.eda.nokia.com_exports.json
+        namespaced: false
+        api:
+          expose: readWrite
+        ui:
+          category: Prometheus
+          name: Export
+        kubernetes:
+          exportPolicy: all
+          importPolicy: spec
+        names:
+          kind: Export
+          listKind: ExportList
+          plural: exports
+          singular: export
+    - cr:
+        path: px/manifests/app_deployment.yaml
+  dependencies:
+    - container:
+        name: prom-exporter-controller
+        image: ghcr.io/nokia-eda/apps/prom-exporter-controller:v5.0.0
