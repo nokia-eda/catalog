@@ -1,0 +1,67 @@
+apiVersion: core.eda.nokia.com/v1
+kind: Manifest
+metadata:
+  name: kafka-importer
+spec:
+  group: kafkaimporter.eda.nokia.com
+  version: v1alpha1
+  title: Kafka Importer
+  author: Nokia
+  description: Import data into EDB from Kafka brokers
+  image: ghcr.io/nokia-eda/apps/kafka-importer:v1.0.0
+  gitPathPrefix: /
+  supportedCoreVersions:
+    - "v4.0"
+  appInfo:
+    readme: README.md
+    documentation: DOCUMENTATION.md
+    license: LICENSE
+    screenshots:
+      - ki/assets/screenshot1.png
+    categories:
+      - "integrations"
+    settings: settings/openapi/eda_oas_kafkaimporter.eda.nokia.com_appsettings.json
+    ociSpecVersion: v1.0.0
+  components:
+    - crd:
+        path: ki/config/crd/bases/kafkaimporter.eda.nokia.com_consumers.yaml
+        schema: ki/docs/openapiv3/eda_oas_kafkaimporter.eda.nokia.com_consumers.json
+        namespaced: true
+        api:
+          expose: readWrite
+        ui:
+          category: Kafka
+          name: Consumer
+        kubernetes:
+          exportPolicy: all
+          importPolicy: spec
+        names:
+          plural: consumers
+          singular: consumer
+          kind: Consumer
+          listKind: ConsumerList
+    - crd:
+        path: ki/config/crd/bases/kafkaimporter.eda.nokia.com_clusterconsumers.yaml
+        schema: ki/docs/openapiv3/eda_oas_kafkaimporter.eda.nokia.com_clusterconsumers.json
+        namespaced: false
+        api:
+          expose: readWrite
+        ui:
+          category: Kafka
+          name: Cluster Consumer
+        kubernetes:
+          exportPolicy: all
+          importPolicy: spec
+        names:
+          singular: clusterconsumer
+          kind: ClusterConsumer
+          listKind: ClusterConsumerList
+          plural: clusterconsumers
+    - cr:
+        path: ki/manifests/webhook.yaml
+    - cr:
+        path: ki/manifests/deployment.yaml
+  dependencies:
+    - container:
+        name: kafka-importer-controller
+        image: ghcr.io/nokia-eda/apps/kafka-importer-controller:v1.0.0
