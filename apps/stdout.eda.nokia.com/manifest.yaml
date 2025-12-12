@@ -1,0 +1,65 @@
+apiVersion: core.eda.nokia.com/v1
+kind: Manifest
+metadata:
+  name: stdout-exporter
+spec:
+  group: stdout.eda.nokia.com
+  version: v1alpha1
+  title: Standard Out Exporter
+  description: EDA APP that writes network and EDA data to stdout.
+  image: ghcr.io/nokia-eda/apps/soe-exporter:v1.0.0
+  author: Nokia
+  gitPathPrefix: /
+  supportedCoreVersions:
+    - "v4.0.0"
+  appInfo:
+    readme: README.md
+    documentation: DOCUMENTATION.md
+    license: LICENSE
+    categories:
+      - "integrations"
+    settings: settings/openapi/eda_oas_stdout.eda.nokia.com_appsettings.json
+    ociSpecVersion: v1.0.0
+  components:
+    - crd:
+        path: soe/config/crd/bases/stdout.eda.nokia.com_standardouts.yaml
+        schema: soe/docs/openapiv3/eda_oas_stdout.eda.nokia.com_standardouts.json
+        namespaced: true
+        api:
+          expose: readWrite
+        ui:
+          category: Standard Out Exporter
+          name: Standard Out
+        kubernetes:
+          exportPolicy: all
+          importPolicy: all
+        names:
+          plural: standardouts
+          singular: standardout
+          kind: StandardOut
+          listKind: StandardOutList
+    - crd:
+        path: soe/config/crd/bases/stdout.eda.nokia.com_clusterstandardouts.yaml
+        schema: soe/docs/openapiv3/eda_oas_stdout.eda.nokia.com_clusterstandardouts.json
+        namespaced: false
+        api:
+          expose: readWrite
+        ui:
+          category: Standard Out Exporter
+          name: Cluster Standard Out
+        kubernetes:
+          exportPolicy: all
+          importPolicy: all
+        names:
+          plural: clusterstandardouts
+          singular: clusterstandardout
+          kind: ClusterStandardOut
+          listKind: ClusterStandardOutList
+    - cr:
+        path: soe/manifests/webhooks.yaml
+    - cr:
+        path: soe/manifests/app_deployment.yaml
+  dependencies:
+    - container:
+        name: stdout-exporter-controller
+        image: ghcr.io/nokia-eda/apps/soe-exporter-controller:v1.0.0
