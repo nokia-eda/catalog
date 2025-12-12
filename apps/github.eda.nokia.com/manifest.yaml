@@ -1,0 +1,115 @@
+apiVersion: core.eda.nokia.com/v1
+kind: Manifest
+metadata:
+  name: github
+spec:
+  group: github.eda.nokia.com
+  version: v1alpha1
+  title: GitHub
+  description: Creates GitHub workflows and issues.
+  image: ghcr.io/nokia-eda/apps/github:v1.0.0
+  author: Nokia
+  gitPathPrefix: /
+  supportedCoreVersions:
+    - "v4.0"
+  appInfo:
+    readme: README.md
+    documentation: DOCUMENTATION.md
+    license: LICENSE
+    screenshots:
+      - gh/assets/github-logo.png
+    categories:
+      - "integrations"
+    ociSpecVersion: v1.0.0
+  components:
+    - crd:
+        path: gh/config/crd/bases/github.eda.nokia.com_githubinstances.yaml
+        schema: gh/docs/openapiv3/eda_oas_github.eda.nokia.com_githubinstances.json
+        namespaced: true
+        api:
+          expose: readWrite
+        ui:
+          category: GitHub
+          name: Instance
+        kubernetes:
+          exportPolicy: all
+          importPolicy: all
+        names:
+          singular: githubinstance
+          kind: GitHubInstance
+          listKind: GitHubInstanceList
+          plural: githubinstances
+    - crd:
+        path: gh/config/crd/bases/github.eda.nokia.com_githubactions.yaml
+        schema: gh/docs/openapiv3/eda_oas_github.eda.nokia.com_githubactions.json
+        namespaced: true
+        api:
+          expose: readWrite
+        ui:
+          category: GitHub
+          name: Action
+        kubernetes:
+          exportPolicy: all
+          importPolicy: all
+        names:
+          plural: githubactions
+          singular: githubaction
+          kind: GitHubAction
+          listKind: GitHubActionList
+    - crd:
+        path: gh/config/crd/bases/github.eda.nokia.com_githubissues.yaml
+        schema: gh/docs/openapiv3/eda_oas_github.eda.nokia.com_githubissues.json
+        namespaced: true
+        api:
+          expose: readWrite
+        ui:
+          category: GitHub
+          name: Issue
+        kubernetes:
+          exportPolicy: all
+          importPolicy: all
+        names:
+          plural: githubissues
+          singular: githubissue
+          kind: GitHubIssue
+          listKind: GitHubIssueList
+    - crd:
+        path: gh/config/crd/bases/github.eda.nokia.com_creategithubissues.yaml
+        schema: gh/docs/openapiv3/eda_oas_github.eda.nokia.com_creategithubissues.json
+        namespaced: true
+        workflow: true
+        api:
+          expose: readWrite
+        ui:
+          name: Create Github Issue
+        names:
+          plural: creategithubissues
+          singular: creategithubissue
+          kind: CreateGithubIssue
+          listKind: CreateGithubIssueList
+    - crd:
+        path: gh/config/crd/bases/github.eda.nokia.com_rungithubworkflows.yaml
+        schema: gh/docs/openapiv3/eda_oas_github.eda.nokia.com_rungithubworkflows.json
+        namespaced: true
+        workflow: true
+        api:
+          expose: readWrite
+        ui:
+          name: Run Github Workflow
+        names:
+          kind: RunGithubWorkflow
+          listKind: RunGithubWorkflowList
+          plural: rungithubworkflows
+          singular: rungithubworkflow
+    - cr:
+        path: gh/manifests/webhooks.yaml
+    - cr:
+        path: gh/manifests/deployment.yaml
+    - cr:
+        path: workflows/v1alpha1/create-github-issue/flowdefinition.yaml
+    - cr:
+        path: workflows/v1alpha1/run-github-workflow/flowdefinition.yaml
+  dependencies:
+    - container:
+        name: github-controller
+        image: ghcr.io/nokia-eda/apps/github-controller:v1.0.0
