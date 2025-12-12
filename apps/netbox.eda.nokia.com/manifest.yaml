@@ -1,0 +1,89 @@
+apiVersion: core.eda.nokia.com/v1
+kind: Manifest
+metadata:
+  name: netbox
+spec:
+  group: netbox.eda.nokia.com
+  version: v1alpha1
+  title: NetBox
+  description: Create EDA allocations from NetBox.
+  image: ghcr.io/nokia-eda/apps/netbox:v3.0.0
+  author: Nokia
+  gitPathPrefix: /
+  supportedEndpoints:
+    - "srl:0.0.0"
+    - "srl:23.7.1" # specific release
+    - "srl:23.10.*" # any release in a minor
+    - "srl:24.*" # any release in a major
+    - "sros:23.7.r1"
+  supportedCoreVersions:
+    - "v4.0"
+  appInfo:
+    readme: README.md
+    documentation: DOCUMENTATION.md
+    license: LICENSE
+    screenshots:
+      - nb/assets/netbox-logo.png
+    categories:
+      - "integrations"
+    settings: settings/openapi/eda_oas_netbox.eda.nokia.com_appsettings.json
+    ociSpecVersion: v1.0.0
+  components:
+    - crd:
+        path: nb/config/crd/bases/netbox.eda.nokia.com_allocations.yaml
+        schema: nb/docs/openapiv3/eda_oas_netbox.eda.nokia.com_allocations.json
+        namespaced: true
+        api:
+          expose: readWrite
+        ui:
+          category: NetBox
+          name: Allocation
+        kubernetes:
+          exportPolicy: all
+          importPolicy: all
+        names:
+          plural: allocations
+          singular: allocation
+          kind: Allocation
+          listKind: AllocationList
+    - crd:
+        path: nb/config/crd/bases/netbox.eda.nokia.com_instances.yaml
+        schema: nb/docs/openapiv3/eda_oas_netbox.eda.nokia.com_instances.json
+        namespaced: true
+        api:
+          expose: readWrite
+        ui:
+          category: NetBox
+          name: Instance
+        kubernetes:
+          exportPolicy: all
+          importPolicy: all
+        names:
+          plural: instances
+          singular: instance
+          kind: Instance
+          listKind: InstanceList
+    - crd:
+        path: nb/config/crd/bases/netbox.eda.nokia.com_applyallocations.yaml
+        schema: nb/docs/openapiv3/eda_oas_netbox.eda.nokia.com_applyallocations.json
+        namespaced: true
+        workflow: true
+        api:
+          expose: readWrite
+        ui:
+          name: Apply Allocation
+        names:
+          plural: applyallocations
+          singular: applyallocation
+          kind: ApplyAllocation
+          listKind: ApplyAllocationList
+    - cr:
+        path: workflows/applyallocation/apply_allocation_flowdefinition.yaml
+    # - cr:
+    #     path: nb/manifests/webhooks.yaml
+    - cr:
+        path: nb/manifests/deployment.yaml
+  dependencies:
+    - container:
+        name: netbox-controller
+        image: ghcr.io/nokia-eda/apps/netbox-controller:v3.0.0
