@@ -42,10 +42,10 @@ spec:
           exportPolicy: all
           importPolicy: all
         names:
+          listKind: AllocationList
           plural: allocations
           singular: allocation
           kind: Allocation
-          listKind: AllocationList
     - crd:
         path: nb/config/crd/bases/netbox.eda.nokia.com_instances.yaml
         schema: nb/docs/openapiv3/eda_oas_netbox.eda.nokia.com_instances.json
