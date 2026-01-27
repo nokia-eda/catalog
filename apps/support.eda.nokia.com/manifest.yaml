@@ -18,10 +18,10 @@ spec:
         path: support/api/v1alpha1/pysrc
   description: This application provides resources that can be used to identify and troubleshoot targets.
   group: support.eda.nokia.com
-  image: ghcr.io/nokia-eda/apps/support:v5.0.0
+  image: ghcr.io/nokia-eda/apps/support:v5.0.1
   supportedCoreVersions:
     - "v4.0"
-  title: support
+  title: Support
   version: v1alpha1
   components:
     - crd:
@@ -37,10 +37,10 @@ spec:
           matchTags:
             - main
         names:
-          listKind: LocatorList
-          plural: locators
           singular: locator
           kind: Locator
+          listKind: LocatorList
+          plural: locators
     - cr:
         path: support/workflows/locator/core_v1_flowdefinition.yaml
   supportedEndpoints:
