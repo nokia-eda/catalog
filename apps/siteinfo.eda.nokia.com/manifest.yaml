@@ -7,7 +7,7 @@ spec:
   version: v1alpha1
   title: Site Information
   description: "This application provides resources describing the environment at a given site. \n\nThis includes managing DNS, host and domain names, banners and MOTD messages, and other site-specific information.\n"
-  image: ghcr.io/nokia-eda/apps/siteinfo:v5.0.0
+  image: ghcr.io/nokia-eda/apps/siteinfo:v5.0.1
   author: Nokia
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
@@ -39,10 +39,10 @@ spec:
           category: Site Profiles
           name: Banners
         names:
-          listKind: BannerList
           plural: banners
           singular: banner
           kind: Banner
+          listKind: BannerList
     - crd:
         path: siteinfo/crds/siteinfo.eda.nokia.com_bannerstates.yaml
         schema: siteinfo/openapiv3/eda_oas_siteinfo.eda.nokia.com_bannerstates.json
