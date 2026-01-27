@@ -8,7 +8,7 @@ spec:
   title: Timing
   description: |
     This application provides underlay timing resources for various Network Operating Systems.
-  image: ghcr.io/nokia-eda/apps/timing:v5.0.0
+  image: ghcr.io/nokia-eda/apps/timing:v5.0.1
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
   author: Nokia
@@ -83,10 +83,10 @@ spec:
         path: bootstrap/
   requirements:
     - appId: interfaces.eda.nokia.com
-      version: v5.0.0
+      version: v5.0.1
     - appId: routing.eda.nokia.com
-      version: v5.0.0
+      version: v5.0.1
     - appId: services.eda.nokia.com
-      version: v5.0.0
+      version: v5.0.1
     - appId: bootstrap.eda.nokia.com
-      version: v5.0.0
+      version: v5.0.1
