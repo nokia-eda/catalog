@@ -19,10 +19,10 @@ spec:
           category: Components
           name: Monitoring
         names:
-          listKind: MonitorList
           plural: monitors
           singular: monitor
           kind: Monitor
+          listKind: MonitorList
     - crd:
         api:
           expose: none
@@ -72,19 +72,19 @@ spec:
         path: components/crds/components.eda.nokia.com_memoryoverlays.yaml
         schema: components/openapiv3/eda_oas_components.eda.nokia.com_memoryoverlays.json
         names:
-          listKind: MemoryOverlayList
-          plural: memoryoverlays
           singular: memoryoverlay
           kind: MemoryOverlay
+          listKind: MemoryOverlayList
+          plural: memoryoverlays
     - crd:
         namespaced: false
         path: components/crds/components.eda.nokia.com_volumeoverlays.yaml
         schema: components/openapiv3/eda_oas_components.eda.nokia.com_volumeoverlays.json
         names:
+          listKind: VolumeOverlayList
           plural: volumeoverlays
           singular: volumeoverlay
           kind: VolumeOverlay
-          listKind: VolumeOverlayList
     - script:
         path: components/intents/cpuoverlay/cpu_overlay_intent.py
         trigger:
@@ -108,10 +108,10 @@ spec:
         path: components/crds/components.eda.nokia.com_discoveries.yaml
         schema: components/openapiv3/eda_oas_components.eda.nokia.com_discoveries.json
         names:
-          kind: Discovery
-          listKind: DiscoveryList
           plural: discoveries
           singular: discovery
+          kind: Discovery
+          listKind: DiscoveryList
     - crd:
         api:
           expose: none
@@ -144,10 +144,10 @@ spec:
           category: Components
           name: Components
         names:
-          plural: components
-          singular: component
           kind: Component
           listKind: ComponentList
+          plural: components
+          singular: component
     - script:
         path: components/intents/discovery/discovery.py
         trigger:
@@ -173,10 +173,10 @@ spec:
         path: components/crds/components.eda.nokia.com_clusterdiscoveries.yaml
         schema: components/openapiv3/eda_oas_components.eda.nokia.com_clusterdiscoveries.json
         names:
+          plural: clusterdiscoveries
           singular: clusterdiscovery
           kind: ClusterDiscovery
           listKind: ClusterDiscoveryList
-          plural: clusterdiscoveries
     - script:
         path: components/intents/clusterdiscovery/clusterdiscovery_intent.py
         trigger:
@@ -242,10 +242,10 @@ spec:
           category: Components
           name: Fabric Modules
         names:
+          listKind: FabricModuleList
           plural: fabricmodules
           singular: fabricmodule
           kind: FabricModule
-          listKind: FabricModuleList
     - crd:
         api:
           expose: read
@@ -270,10 +270,10 @@ spec:
           category: Components
           name: Fans
         names:
-          listKind: FanList
           plural: fans
           singular: fan
           kind: Fan
+          listKind: FanList
     - cr:
         path: components/alarms/alarms.yaml
   dependencies:
@@ -302,7 +302,7 @@ spec:
   gitPathPrefix: /
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   group: components.eda.nokia.com
-  image: ghcr.io/nokia-eda/apps/components:v5.0.0
+  image: ghcr.io/nokia-eda/apps/components:v5.0.1
   supportedCoreVersions:
     - "v4.0"
   supportedEndpoints:
