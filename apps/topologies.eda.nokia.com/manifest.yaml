@@ -8,7 +8,7 @@ spec:
   title: Topologies
   description: |
     This application provides physical topology support
-  image: ghcr.io/nokia-eda/apps/topologies:v5.0.0
+  image: ghcr.io/nokia-eda/apps/topologies:v5.0.1
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
   author: Nokia
@@ -38,20 +38,20 @@ spec:
         api:
           expose: none
         names:
-          listKind: TopoLinkMonitorList
-          plural: topolinkmonitors
           singular: topolinkmonitor
           kind: TopoLinkMonitor
+          listKind: TopoLinkMonitorList
+          plural: topolinkmonitors
     - crd:
         path: topologies/crds/topologies.eda.nokia.com_topolinkstates.yaml
         schema: topologies/openapiv3/eda_oas_topologies.eda.nokia.com_topolinkstates.json
         api:
           expose: none
         names:
-          plural: topolinkstates
-          singular: topolinkstate
           kind: TopoLinkState
           listKind: TopoLinkStateList
+          plural: topolinkstates
+          singular: topolinkstate
     - crd:
         path: topologies/crds/topologies.eda.nokia.com_topologies.yaml
         schema: topologies/openapiv3/eda_oas_topologies.eda.nokia.com_topologies.json
@@ -61,10 +61,10 @@ spec:
         kubernetes:
           exportPolicy: all
         names:
+          plural: topologies
           singular: topology
           kind: Topology
           listKind: TopologyList
-          plural: topologies
     - crd:
         path: topologies/crds/topologies.eda.nokia.com_topologygroupings.yaml
         schema: topologies/openapiv3/eda_oas_topologies.eda.nokia.com_topologygroupings.json
@@ -74,10 +74,10 @@ spec:
         kubernetes:
           exportPolicy: all
         names:
-          listKind: TopologyGroupingList
           plural: topologygroupings
           singular: topologygrouping
           kind: TopologyGrouping
+          listKind: TopologyGroupingList
     - crd:
         path: topologies/crds/topologies.eda.nokia.com_deviationoverlays.yaml
         schema: topologies/openapiv3/eda_oas_topologies.eda.nokia.com_deviationoverlays.json
@@ -85,10 +85,10 @@ spec:
         api:
           expose: readWrite
         names:
+          singular: deviationoverlay
           kind: DeviationOverlay
           listKind: DeviationOverlayList
           plural: deviationoverlays
-          singular: deviationoverlay
     - crd:
         path: topologies/crds/topologies.eda.nokia.com_trafficrateoverlays.yaml
         schema: topologies/openapiv3/eda_oas_topologies.eda.nokia.com_trafficrateoverlays.json
@@ -96,10 +96,10 @@ spec:
         api:
           expose: readWrite
         names:
-          listKind: TrafficRateOverlayList
           plural: trafficrateoverlays
           singular: trafficrateoverlay
           kind: TrafficRateOverlay
+          listKind: TrafficRateOverlayList
     - crd:
         path: topologies/crds/topologies.eda.nokia.com_lldpoverlays.yaml
         schema: topologies/openapiv3/eda_oas_topologies.eda.nokia.com_lldpoverlays.json
@@ -107,10 +107,10 @@ spec:
         api:
           expose: readWrite
         names:
-          kind: LldpOverlay
-          listKind: LldpOverlayList
           plural: lldpoverlays
           singular: lldpoverlay
+          kind: LldpOverlay
+          listKind: LldpOverlayList
     - script:
         path: topologies/intents/topolinkmonitor/topolinkmonitor_intent.py
         type: config
@@ -191,4 +191,4 @@ spec:
         path: topologies/alarms/pysrc
   requirements:
     - appId: interfaces.eda.nokia.com
-      version: v5.0.0
+      version: v5.0.1
