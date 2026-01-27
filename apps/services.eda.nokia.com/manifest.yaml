@@ -8,7 +8,7 @@ spec:
   title: Services
   description: |
     This application provides EVPN services for various Network Operating Systems.
-  image: ghcr.io/nokia-eda/apps/services:v5.0.0
+  image: ghcr.io/nokia-eda/apps/services:v5.0.1
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
   author: Nokia
@@ -77,10 +77,10 @@ spec:
           expose: none
         conversionScript: services/intents/virtualnetworkstate/conversion_v1.py
         names:
-          listKind: VirtualNetworkStateList
-          plural: virtualnetworkstates
           singular: virtualnetworkstate
           kind: VirtualNetworkState
+          listKind: VirtualNetworkStateList
+          plural: virtualnetworkstates
     - crd:
         path: services/crds/services.eda.nokia.com_routers.yaml
         schema: services/openapiv3/eda_oas_services.eda.nokia.com_routers.json
@@ -140,10 +140,10 @@ spec:
           expose: none
         conversionScript: services/intents/bridgedomainstate/conversion_v1.py
         names:
-          plural: bridgedomainstates
           singular: bridgedomainstate
           kind: BridgeDomainState
           listKind: BridgeDomainStateList
+          plural: bridgedomainstates
     - crd:
         path: services/crds/services.eda.nokia.com_bridgedomaindeployments.yaml
         schema: services/openapiv3/eda_oas_services.eda.nokia.com_bridgedomaindeployments.json
@@ -226,10 +226,10 @@ spec:
           expose: none
         conversionScript: services/intents/irbinterfacestate/conversion_v1.py
         names:
+          kind: IRBInterfaceState
           listKind: IRBInterfaceStateList
           plural: irbinterfacestates
           singular: irbinterfacestate
-          kind: IRBInterfaceState
     - crd:
         path: services/crds/services.eda.nokia.com_dhcprelays.yaml
         schema: services/openapiv3/eda_oas_services.eda.nokia.com_dhcprelays.json
@@ -378,10 +378,10 @@ spec:
         ui:
           name: Edge Ping
         names:
-          plural: edgepings
-          singular: edgeping
           kind: EdgePing
           listKind: EdgePingList
+          plural: edgepings
+          singular: edgeping
     - cr:
         path: services/alarms/alarms.yaml
   dependencies:
@@ -413,14 +413,14 @@ spec:
         path: services/alarms/pysrc
   requirements:
     - appId: protocols.eda.nokia.com
-      version: v5.0.0
+      version: v5.0.1
     - appId: routingpolicies.eda.nokia.com
-      version: v5.0.0
+      version: v5.0.1
     - appId: interfaces.eda.nokia.com
-      version: v5.0.0
+      version: v5.0.1
     - appId: qos.eda.nokia.com
-      version: v5.0.0
+      version: v5.0.1
     - appId: security.eda.nokia.com
-      version: v5.0.0
+      version: v5.0.1
     - appId: filters.eda.nokia.com
-      version: v5.0.0
+      version: v5.0.1
