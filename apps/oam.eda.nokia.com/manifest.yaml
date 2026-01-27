@@ -61,10 +61,10 @@ spec:
         ui:
           name: Ping
         names:
+          listKind: PingList
           plural: pings
           singular: ping
           kind: Ping
-          listKind: PingList
     - crd:
         path: oam/crds/oam.eda.nokia.com_thresholds.yaml
         schema: oam/openapiv3/eda_oas_oam.eda.nokia.com_thresholds.json
@@ -125,21 +125,21 @@ spec:
         path: topologies/
   requirements:
     - appId: services.eda.nokia.com
-      version: v5.0.0
+      version: v5.0.1
     - appId: filters.eda.nokia.com
-      version: v5.0.0
+      version: v5.0.1
     - appId: interfaces.eda.nokia.com
-      version: v5.0.0
+      version: v5.0.1
     - appId: qos.eda.nokia.com
-      version: v5.0.0
+      version: v5.0.1
     - appId: topologies.eda.nokia.com
-      version: v5.0.0
+      version: v5.0.1
   description: |
     This application provides the ping workflow, along with mirroring services for interfaces, subinterfaces and ipfilters.
   gitPathPrefix: /
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   group: oam.eda.nokia.com
-  image: ghcr.io/nokia-eda/apps/oam:v5.0.0
+  image: ghcr.io/nokia-eda/apps/oam:v5.0.1
   supportedCoreVersions:
     - "v4.0"
   supportedEndpoints:
