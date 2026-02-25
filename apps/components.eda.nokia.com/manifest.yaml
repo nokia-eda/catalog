@@ -29,10 +29,10 @@ spec:
         path: components/crds/components.eda.nokia.com_monitorstates.yaml
         schema: components/openapiv3/eda_oas_components.eda.nokia.com_monitorstates.json
         names:
-          plural: monitorstates
           singular: monitorstate
           kind: MonitorState
           listKind: MonitorStateList
+          plural: monitorstates
     - crd:
         api:
           expose: none
@@ -63,28 +63,28 @@ spec:
         path: components/crds/components.eda.nokia.com_cpuoverlays.yaml
         schema: components/openapiv3/eda_oas_components.eda.nokia.com_cpuoverlays.json
         names:
-          plural: cpuoverlays
           singular: cpuoverlay
           kind: CPUOverlay
           listKind: CPUOverlayList
+          plural: cpuoverlays
     - crd:
         namespaced: false
         path: components/crds/components.eda.nokia.com_memoryoverlays.yaml
         schema: components/openapiv3/eda_oas_components.eda.nokia.com_memoryoverlays.json
         names:
-          singular: memoryoverlay
           kind: MemoryOverlay
           listKind: MemoryOverlayList
           plural: memoryoverlays
+          singular: memoryoverlay
     - crd:
         namespaced: false
         path: components/crds/components.eda.nokia.com_volumeoverlays.yaml
         schema: components/openapiv3/eda_oas_components.eda.nokia.com_volumeoverlays.json
         names:
+          kind: VolumeOverlay
           listKind: VolumeOverlayList
           plural: volumeoverlays
           singular: volumeoverlay
-          kind: VolumeOverlay
     - script:
         path: components/intents/cpuoverlay/cpu_overlay_intent.py
         trigger:
@@ -119,10 +119,10 @@ spec:
         path: components/crds/components.eda.nokia.com_discoverystates.yaml
         schema: components/openapiv3/eda_oas_components.eda.nokia.com_discoverystates.json
         names:
-          plural: discoverystates
-          singular: discoverystate
           kind: DiscoveryState
           listKind: DiscoveryStateList
+          plural: discoverystates
+          singular: discoverystate
     - crd:
         api:
           expose: none
@@ -144,10 +144,10 @@ spec:
           category: Components
           name: Components
         names:
+          singular: component
           kind: Component
           listKind: ComponentList
           plural: components
-          singular: component
     - script:
         path: components/intents/discovery/discovery.py
         trigger:
@@ -214,10 +214,10 @@ spec:
           category: Components
           name: Control Modules
         names:
-          plural: controlmodules
-          singular: controlmodule
           kind: ControlModule
           listKind: ControlModuleList
+          plural: controlmodules
+          singular: controlmodule
     - crd:
         api:
           expose: read
@@ -228,10 +228,10 @@ spec:
           category: Components
           name: Interface Modules
         names:
-          plural: interfacemodules
           singular: interfacemodule
           kind: InterfaceModule
           listKind: InterfaceModuleList
+          plural: interfacemodules
     - crd:
         api:
           expose: read
@@ -242,10 +242,10 @@ spec:
           category: Components
           name: Fabric Modules
         names:
-          listKind: FabricModuleList
           plural: fabricmodules
           singular: fabricmodule
           kind: FabricModule
+          listKind: FabricModuleList
     - crd:
         api:
           expose: read
@@ -295,6 +295,8 @@ spec:
         path: oam/api/v1alpha1/pysrc
     - file:
         path: oam/intents/threshold
+    - file:
+        path: components/alarms/pysrc
   description: |
     This application provides functionality relating to hardware components for various Network Operating Systems.
 
@@ -302,7 +304,7 @@ spec:
   gitPathPrefix: /
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   group: components.eda.nokia.com
-  image: ghcr.io/nokia-eda/apps/components:v5.0.1
+  image: ghcr.io/nokia-eda/apps/components:v5.0.2
   supportedCoreVersions:
     - "v4.0"
   supportedEndpoints:
