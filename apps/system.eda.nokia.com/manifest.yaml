@@ -8,7 +8,7 @@ spec:
   title: System
   description: |
     This applications pre-existing functionality has been moved to the components app. It may be used to hold generic system functionality in the future.
-  image: ghcr.io/nokia-eda/apps/system:v5.0.1
+  image: ghcr.io/nokia-eda/apps/system:v5.0.2
   author: Nokia
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
