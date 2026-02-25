@@ -21,10 +21,10 @@ spec:
           name: Ingress Policies
         conversionScript: qos/intents/ingresspolicy/conversion_v1.py
         names:
-          kind: IngressPolicy
           listKind: IngressPolicyList
           plural: ingresspolicys
           singular: ingresspolicy
+          kind: IngressPolicy
     - crd:
         api:
           expose: readWrite
@@ -36,10 +36,10 @@ spec:
           name: Egress Policies
         conversionScript: qos/intents/egresspolicy/conversion_v1.py
         names:
+          singular: egresspolicy
           kind: EgressPolicy
           listKind: EgressPolicyList
           plural: egresspolicys
-          singular: egresspolicy
     - crd:
         api:
           expose: readWrite
@@ -51,10 +51,10 @@ spec:
           name: Policy Deployment
         conversionScript: qos/intents/policydeployment/conversion_v1.py
         names:
-          plural: policydeployments
-          singular: policydeployment
           kind: PolicyDeployment
           listKind: PolicyDeploymentList
+          plural: policydeployments
+          singular: policydeployment
     - crd:
         api:
           expose: readWrite
@@ -83,10 +83,10 @@ spec:
           name: Forwarding Class
         conversionScript: qos/intents/forwardingclass/conversion_v1.py
         names:
+          listKind: ForwardingClassList
           plural: forwardingclasss
           singular: forwardingclass
           kind: ForwardingClass
-          listKind: ForwardingClassList
     - crd:
         api:
           expose: readWrite
@@ -100,10 +100,10 @@ spec:
           name: Queue
         conversionScript: qos/intents/queue/conversion_v1.py
         names:
+          plural: queues
           singular: queue
           kind: Queue
           listKind: QueueList
-          plural: queues
     - cr:
         path: qos/resources/fc/af.yaml
     - cr:
@@ -209,7 +209,7 @@ spec:
         path: qos/api/v1/pysrc
   description: |
     This application provides resources relating to QOS for various Network Operating Systems.
-  image: ghcr.io/nokia-eda/apps/qos:v5.0.1
+  image: ghcr.io/nokia-eda/apps/qos:v5.0.2
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
   group: qos.eda.nokia.com
@@ -219,9 +219,9 @@ spec:
   version: v1
   requirements:
     - appId: interfaces.eda.nokia.com
-      version: v5.0.1
+      version: v5.0.2
     - appId: filters.eda.nokia.com
-      version: v5.0.1
+      version: v5.0.2
   supportedEndpoints:
     - "srl:24.10.*"
     - "srl:25.3.*"
