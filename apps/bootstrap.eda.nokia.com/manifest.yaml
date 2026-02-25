@@ -10,7 +10,7 @@ spec:
     This application provides device bootstrap for various Network Operating Systems.
 
     It generates initial device configuration for Zero Touch Provisioning (ZTP).
-  image: ghcr.io/nokia-eda/apps/bootstrap:v5.0.1
+  image: ghcr.io/nokia-eda/apps/bootstrap:v5.0.2
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
   author: Nokia
@@ -56,10 +56,10 @@ spec:
         api:
           expose: readWrite
         names:
+          listKind: ManagementRouterList
           plural: managementrouters
           singular: managementrouter
           kind: ManagementRouter
-          listKind: ManagementRouterList
     - crd:
         path: bootstrap/crds/bootstrap.eda.nokia.com_managementrouterstates.yaml
         schema: bootstrap/openapiv3/eda_oas_bootstrap.eda.nokia.com_managementrouterstates.json
