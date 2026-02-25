@@ -8,7 +8,7 @@ spec:
   title: Topologies
   description: |
     This application provides physical topology support
-  image: ghcr.io/nokia-eda/apps/topologies:v5.0.1
+  image: ghcr.io/nokia-eda/apps/topologies:v5.0.2
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
   author: Nokia
@@ -38,10 +38,10 @@ spec:
         api:
           expose: none
         names:
+          plural: topolinkmonitors
           singular: topolinkmonitor
           kind: TopoLinkMonitor
           listKind: TopoLinkMonitorList
-          plural: topolinkmonitors
     - crd:
         path: topologies/crds/topologies.eda.nokia.com_topolinkstates.yaml
         schema: topologies/openapiv3/eda_oas_topologies.eda.nokia.com_topolinkstates.json
@@ -61,10 +61,10 @@ spec:
         kubernetes:
           exportPolicy: all
         names:
-          plural: topologies
-          singular: topology
           kind: Topology
           listKind: TopologyList
+          plural: topologies
+          singular: topology
     - crd:
         path: topologies/crds/topologies.eda.nokia.com_topologygroupings.yaml
         schema: topologies/openapiv3/eda_oas_topologies.eda.nokia.com_topologygroupings.json
@@ -85,10 +85,10 @@ spec:
         api:
           expose: readWrite
         names:
+          plural: deviationoverlays
           singular: deviationoverlay
           kind: DeviationOverlay
           listKind: DeviationOverlayList
-          plural: deviationoverlays
     - crd:
         path: topologies/crds/topologies.eda.nokia.com_trafficrateoverlays.yaml
         schema: topologies/openapiv3/eda_oas_topologies.eda.nokia.com_trafficrateoverlays.json
@@ -107,10 +107,10 @@ spec:
         api:
           expose: readWrite
         names:
+          listKind: LldpOverlayList
           plural: lldpoverlays
           singular: lldpoverlay
           kind: LldpOverlay
-          listKind: LldpOverlayList
     - script:
         path: topologies/intents/topolinkmonitor/topolinkmonitor_intent.py
         type: config
@@ -168,10 +168,10 @@ spec:
         ui:
           name: Network Topology
         names:
+          listKind: NetworkTopologyList
           plural: networktopologies
           singular: networktopology
           kind: NetworkTopology
-          listKind: NetworkTopologyList
     - cr:
         path: topologies/alarms/alarms.yaml
   dependencies:
@@ -191,4 +191,4 @@ spec:
         path: topologies/alarms/pysrc
   requirements:
     - appId: interfaces.eda.nokia.com
-      version: v5.0.1
+      version: v5.0.2
