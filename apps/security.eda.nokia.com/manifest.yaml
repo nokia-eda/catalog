@@ -8,7 +8,7 @@ spec:
   title: Security
   description: |
     This application provides resources related to security for various Network Operating Systems.
-  image: ghcr.io/nokia-eda/apps/security:v5.0.1
+  image: ghcr.io/nokia-eda/apps/security:v5.0.2
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
   author: Nokia
@@ -40,10 +40,10 @@ spec:
         api:
           expose: readWrite
         names:
-          plural: keychains
           singular: keychain
           kind: Keychain
           listKind: KeychainList
+          plural: keychains
     - crd:
         path: security/crds/security.eda.nokia.com_keychaindeployments.yaml
         schema: security/openapiv3/eda_oas_security.eda.nokia.com_keychaindeployments.json
@@ -80,4 +80,4 @@ spec:
         path: interfaces/
   requirements:
     - appId: interfaces.eda.nokia.com
-      version: v5.0.1
+      version: v5.0.2
