@@ -8,7 +8,7 @@ spec:
   title: Routing
   description: |
     This application provides underlay routing resources for various Network Operating Systems.
-  image: ghcr.io/nokia-eda/apps/routing:v5.0.1
+  image: ghcr.io/nokia-eda/apps/routing:v5.0.2
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
   author: Nokia
@@ -50,20 +50,20 @@ spec:
         api:
           expose: readWrite
         names:
-          kind: DefaultInterface
-          listKind: DefaultInterfaceList
           plural: defaultinterfaces
           singular: defaultinterface
+          kind: DefaultInterface
+          listKind: DefaultInterfaceList
     - crd:
         path: routing/crds/routing.eda.nokia.com_defaultinterfacestates.yaml
         schema: routing/openapiv3/eda_oas_routing.eda.nokia.com_defaultinterfacestates.json
         api:
           expose: none
         names:
-          listKind: DefaultInterfaceStateList
-          plural: defaultinterfacestates
           singular: defaultinterfacestate
           kind: DefaultInterfaceState
+          listKind: DefaultInterfaceStateList
+          plural: defaultinterfacestates
     - crd:
         path: routing/crds/routing.eda.nokia.com_defaultrouters.yaml
         schema: routing/openapiv3/eda_oas_routing.eda.nokia.com_defaultrouters.json
@@ -73,20 +73,20 @@ spec:
         api:
           expose: readWrite
         names:
-          plural: defaultrouters
-          singular: defaultrouter
           kind: DefaultRouter
           listKind: DefaultRouterList
+          plural: defaultrouters
+          singular: defaultrouter
     - crd:
         path: routing/crds/routing.eda.nokia.com_defaultrouterstates.yaml
         schema: routing/openapiv3/eda_oas_routing.eda.nokia.com_defaultrouterstates.json
         api:
           expose: none
         names:
-          singular: defaultrouterstate
           kind: DefaultRouterState
           listKind: DefaultRouterStateList
           plural: defaultrouterstates
+          singular: defaultrouterstate
     - crd:
         path: routing/crds/routing.eda.nokia.com_drains.yaml
         schema: routing/openapiv3/eda_oas_routing.eda.nokia.com_drains.json
@@ -96,10 +96,10 @@ spec:
         api:
           expose: readWrite
         names:
+          listKind: DrainList
           plural: drains
           singular: drain
           kind: Drain
-          listKind: DrainList
     - crd:
         path: routing/crds/routing.eda.nokia.com_drainstates.yaml
         schema: routing/openapiv3/eda_oas_routing.eda.nokia.com_drainstates.json
@@ -119,20 +119,20 @@ spec:
         api:
           expose: readWrite
         names:
-          kind: SystemInterface
           listKind: SystemInterfaceList
           plural: systeminterfaces
           singular: systeminterface
+          kind: SystemInterface
     - crd:
         path: routing/crds/routing.eda.nokia.com_systeminterfacestates.yaml
         schema: routing/openapiv3/eda_oas_routing.eda.nokia.com_systeminterfacestates.json
         api:
           expose: none
         names:
+          kind: SystemInterfaceState
           listKind: SystemInterfaceStateList
           plural: systeminterfacestates
           singular: systeminterfacestate
-          kind: SystemInterfaceState
     - script:
         path: routing/intents/defaultinterface/defaultinterface_intent.py
         type: config
@@ -194,10 +194,10 @@ spec:
           matchTags:
             - main
         names:
-          plural: routelookups
-          singular: routelookup
           kind: RouteLookup
           listKind: RouteLookupList
+          plural: routelookups
+          singular: routelookup
     - crd:
         api:
           expose: readWrite
@@ -242,10 +242,10 @@ spec:
         ui:
           name: System Ping
         names:
+          plural: systempings
           singular: systemping
           kind: SystemPing
           listKind: SystemPingList
-          plural: systempings
     - cr:
         path: routing/alarms/alarms.yaml
   dependencies:
@@ -267,4 +267,4 @@ spec:
         path: routing/alarms/pysrc
   requirements:
     - appId: interfaces.eda.nokia.com
-      version: v5.0.1
+      version: v5.0.2
