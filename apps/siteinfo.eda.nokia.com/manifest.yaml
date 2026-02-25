@@ -7,7 +7,7 @@ spec:
   version: v1alpha1
   title: Site Information
   description: "This application provides resources describing the environment at a given site. \n\nThis includes managing DNS, host and domain names, banners and MOTD messages, and other site-specific information.\n"
-  image: ghcr.io/nokia-eda/apps/siteinfo:v5.0.1
+  image: ghcr.io/nokia-eda/apps/siteinfo:v5.0.2
   author: Nokia
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
@@ -70,10 +70,10 @@ spec:
           category: Site Profiles
           name: Default MTU
         names:
-          plural: defaultmtus
-          singular: defaultmtu
           kind: DefaultMTU
           listKind: DefaultMTUList
+          plural: defaultmtus
+          singular: defaultmtu
     - script:
         path: siteinfo/intents/defaultmtu/defaultmtu_intent.py
         type: config
