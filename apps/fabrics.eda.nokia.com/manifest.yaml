@@ -8,7 +8,7 @@ spec:
   title: Fabrics
   description: |
     This application provides automation resources relating to datacenter fabrics.
-  image: ghcr.io/nokia-eda/apps/fabrics:v5.0.1
+  image: ghcr.io/nokia-eda/apps/fabrics:v5.0.2
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
   author: Nokia
@@ -63,10 +63,10 @@ spec:
         api:
           expose: none
         names:
-          plural: islstates
-          singular: islstate
           kind: ISLState
           listKind: ISLStateList
+          plural: islstates
+          singular: islstate
     - crd:
         path: fabrics/crds/fabrics.eda.nokia.com_fabricstates.yaml
         schema: fabrics/openapiv3/eda_oas_fabrics.eda.nokia.com_fabricstates.json
@@ -112,10 +112,10 @@ spec:
         ui:
           name: ISL Ping
         names:
-          plural: islpings
-          singular: islping
           kind: IslPing
           listKind: IslPingList
+          plural: islpings
+          singular: islping
     - cr:
         path: fabrics/workflows/islping/core_v1_flowdefinition.yaml
     - cr:
@@ -205,14 +205,14 @@ spec:
         path: fabrics/alarms/pysrc
   requirements:
     - appId: protocols.eda.nokia.com
-      version: v5.0.1
+      version: v5.0.2
     - appId: routingpolicies.eda.nokia.com
-      version: v5.0.1
+      version: v5.0.2
     - appId: routing.eda.nokia.com
-      version: v5.0.1
+      version: v5.0.2
     - appId: interfaces.eda.nokia.com
-      version: v5.0.1
+      version: v5.0.2
     - appId: qos.eda.nokia.com
-      version: v5.0.1
+      version: v5.0.2
     - appId: security.eda.nokia.com
-      version: v5.0.1
+      version: v5.0.2
