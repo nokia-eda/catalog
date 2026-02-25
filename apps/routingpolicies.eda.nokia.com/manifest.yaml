@@ -8,7 +8,7 @@ spec:
   title: Routing Policies
   description: |
     This application provides routing policies for various Network Operating Systems.
-  image: ghcr.io/nokia-eda/apps/routingpolicies:v5.0.1
+  image: ghcr.io/nokia-eda/apps/routingpolicies:v5.0.2
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
   author: Nokia
@@ -50,10 +50,10 @@ spec:
         api:
           expose: none
         names:
+          plural: policydeployments
           singular: policydeployment
           kind: PolicyDeployment
           listKind: PolicyDeploymentList
-          plural: policydeployments
     - crd:
         path: routingpolicies/crds/routingpolicies.eda.nokia.com_prefixsets.yaml
         schema: routingpolicies/openapiv3/eda_oas_routingpolicies.eda.nokia.com_prefixsets.json
@@ -86,10 +86,10 @@ spec:
         api:
           expose: readWrite
         names:
-          listKind: CommunitySetList
           plural: communitysets
           singular: communityset
           kind: CommunitySet
+          listKind: CommunitySetList
     - crd:
         path: routingpolicies/crds/routingpolicies.eda.nokia.com_communitysetdeployments.yaml
         schema: routingpolicies/openapiv3/eda_oas_routingpolicies.eda.nokia.com_communitysetdeployments.json
@@ -169,10 +169,10 @@ spec:
         api:
           expose: none
         names:
-          plural: aspathsetdeployments
-          singular: aspathsetdeployment
           kind: ASPathSetDeployment
           listKind: ASPathSetDeploymentList
+          plural: aspathsetdeployments
+          singular: aspathsetdeployment
     - crd:
         api:
           expose: readWrite
@@ -182,20 +182,20 @@ spec:
           category: Routing Policies
           name: Tag Sets
         names:
+          plural: tagsets
           singular: tagset
           kind: TagSet
           listKind: TagSetList
-          plural: tagsets
     - crd:
         api:
           expose: readWrite
         path: routingpolicies/crds/routingpolicies.eda.nokia.com_tagsetdeployments.yaml
         schema: routingpolicies/openapiv3/eda_oas_routingpolicies.eda.nokia.com_tagsetdeployments.json
         names:
+          kind: TagSetDeployment
           listKind: TagSetDeploymentList
           plural: tagsetdeployments
           singular: tagsetdeployment
-          kind: TagSetDeployment
   dependencies:
     - file:
         path: routingpolicies/intents
