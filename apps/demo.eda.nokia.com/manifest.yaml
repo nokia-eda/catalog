@@ -8,7 +8,7 @@ spec:
   title: Demo
   description: |
     This application provides demonstration examples
-  image: ghcr.io/nokia-eda/apps/demo:v5.0.1
+  image: ghcr.io/nokia-eda/apps/demo:v5.0.2
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
   author: Nokia
@@ -55,10 +55,10 @@ spec:
           name: Labels
           panel: system_administration
         names:
-          listKind: LabelList
           plural: labels
           singular: label
           kind: Label
+          listKind: LabelList
     - crd:
         path: demo/crds/demo.eda.nokia.com_oesextensions.yaml
         schema: demo/openapiv3/eda_oas_demo.eda.nokia.com_oesextensions.json
@@ -92,10 +92,10 @@ spec:
           category: Demo
           name: GVK Ping
         names:
+          listKind: GvkpingList
           plural: gvkpings
           singular: gvkping
           kind: Gvkping
-          listKind: GvkpingList
     - script:
         path: demo/intents/simplevrf/simplevrf_intent.py
         type: config
