@@ -10,4 +10,4 @@ spec:
       catalog: eda-catalog-builtin-apps
       version:
         type: semver
-        value: v5.0.1
+        value: v5.0.2
