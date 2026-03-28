@@ -18,7 +18,7 @@ spec:
         path: support/api/v1alpha1/pysrc
   description: This application provides resources that can be used to identify and troubleshoot targets.
   group: support.eda.nokia.com
-  image: ghcr.io/nokia-eda/apps/support:v5.0.2
+  image: ghcr.io/nokia-eda/apps/support:v5.0.3
   supportedCoreVersions:
     - "v4.0"
   title: Support
