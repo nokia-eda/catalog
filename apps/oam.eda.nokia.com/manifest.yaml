@@ -125,21 +125,21 @@ spec:
         path: topologies/
   requirements:
     - appId: services.eda.nokia.com
-      version: v5.0.2
+      version: v5.0.3
     - appId: filters.eda.nokia.com
-      version: v5.0.2
+      version: v5.0.3
     - appId: interfaces.eda.nokia.com
-      version: v5.0.2
+      version: v5.0.3
     - appId: qos.eda.nokia.com
-      version: v5.0.2
+      version: v5.0.3
     - appId: topologies.eda.nokia.com
-      version: v5.0.2
+      version: v5.0.3
   description: |
     This application provides the ping workflow, along with mirroring services for interfaces, subinterfaces and ipfilters.
   gitPathPrefix: /
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   group: oam.eda.nokia.com
-  image: ghcr.io/nokia-eda/apps/oam:v5.0.2
+  image: ghcr.io/nokia-eda/apps/oam:v5.0.3
   supportedCoreVersions:
     - "v4.0"
   supportedEndpoints:
