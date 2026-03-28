@@ -10,7 +10,7 @@ spec:
     This application provides functionality relating to authentication, authorization, and accounting.
 
     It allows the deployment of users, groups, and AAA policy, performing any alarming as necessary.
-  image: ghcr.io/nokia-eda/apps/aaa:v5.0.2
+  image: ghcr.io/nokia-eda/apps/aaa:v5.0.3
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
   author: Nokia
@@ -40,10 +40,10 @@ spec:
           expose: none
         namespaced: false
         names:
-          kind: UserDeployment
-          listKind: UserDeploymentList
           plural: userdeployments
           singular: userdeployment
+          kind: UserDeployment
+          listKind: UserDeploymentList
     - crd:
         path: aaa/crds/aaa.eda.nokia.com_nodegroupdeployments.yaml
         schema: aaa/openapiv3/eda_oas_aaa.eda.nokia.com_nodegroupdeployments.json
@@ -70,10 +70,10 @@ spec:
         path: aaa/crds/aaa.eda.nokia.com_nodeuserstates.yaml
         schema: aaa/openapiv3/eda_oas_aaa.eda.nokia.com_nodeuserstates.json
         names:
+          listKind: NodeUserStateList
           plural: nodeuserstates
           singular: nodeuserstate
           kind: NodeUserState
-          listKind: NodeUserStateList
     - cr:
         path: aaa/resources/default.yaml
     - cr:
