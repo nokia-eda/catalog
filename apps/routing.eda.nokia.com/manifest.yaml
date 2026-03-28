@@ -8,7 +8,7 @@ spec:
   title: Routing
   description: |
     This application provides underlay routing resources for various Network Operating Systems.
-  image: ghcr.io/nokia-eda/apps/routing:v5.0.2
+  image: ghcr.io/nokia-eda/apps/routing:v5.0.3
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
   author: Nokia
@@ -50,20 +50,20 @@ spec:
         api:
           expose: readWrite
         names:
-          plural: defaultinterfaces
           singular: defaultinterface
           kind: DefaultInterface
           listKind: DefaultInterfaceList
+          plural: defaultinterfaces
     - crd:
         path: routing/crds/routing.eda.nokia.com_defaultinterfacestates.yaml
         schema: routing/openapiv3/eda_oas_routing.eda.nokia.com_defaultinterfacestates.json
         api:
           expose: none
         names:
+          plural: defaultinterfacestates
           singular: defaultinterfacestate
           kind: DefaultInterfaceState
           listKind: DefaultInterfaceStateList
-          plural: defaultinterfacestates
     - crd:
         path: routing/crds/routing.eda.nokia.com_defaultrouters.yaml
         schema: routing/openapiv3/eda_oas_routing.eda.nokia.com_defaultrouters.json
@@ -73,20 +73,20 @@ spec:
         api:
           expose: readWrite
         names:
-          kind: DefaultRouter
-          listKind: DefaultRouterList
           plural: defaultrouters
           singular: defaultrouter
+          kind: DefaultRouter
+          listKind: DefaultRouterList
     - crd:
         path: routing/crds/routing.eda.nokia.com_defaultrouterstates.yaml
         schema: routing/openapiv3/eda_oas_routing.eda.nokia.com_defaultrouterstates.json
         api:
           expose: none
         names:
-          kind: DefaultRouterState
           listKind: DefaultRouterStateList
           plural: defaultrouterstates
           singular: defaultrouterstate
+          kind: DefaultRouterState
     - crd:
         path: routing/crds/routing.eda.nokia.com_drains.yaml
         schema: routing/openapiv3/eda_oas_routing.eda.nokia.com_drains.json
@@ -96,20 +96,20 @@ spec:
         api:
           expose: readWrite
         names:
-          listKind: DrainList
           plural: drains
           singular: drain
           kind: Drain
+          listKind: DrainList
     - crd:
         path: routing/crds/routing.eda.nokia.com_drainstates.yaml
         schema: routing/openapiv3/eda_oas_routing.eda.nokia.com_drainstates.json
         api:
           expose: none
         names:
-          plural: drainstates
-          singular: drainstate
           kind: DrainState
           listKind: DrainStateList
+          plural: drainstates
+          singular: drainstate
     - crd:
         path: routing/crds/routing.eda.nokia.com_systeminterfaces.yaml
         schema: routing/openapiv3/eda_oas_routing.eda.nokia.com_systeminterfaces.json
@@ -119,10 +119,10 @@ spec:
         api:
           expose: readWrite
         names:
-          listKind: SystemInterfaceList
           plural: systeminterfaces
           singular: systeminterface
           kind: SystemInterface
+          listKind: SystemInterfaceList
     - crd:
         path: routing/crds/routing.eda.nokia.com_systeminterfacestates.yaml
         schema: routing/openapiv3/eda_oas_routing.eda.nokia.com_systeminterfacestates.json
@@ -194,10 +194,10 @@ spec:
           matchTags:
             - main
         names:
-          kind: RouteLookup
-          listKind: RouteLookupList
           plural: routelookups
           singular: routelookup
+          kind: RouteLookup
+          listKind: RouteLookupList
     - crd:
         api:
           expose: readWrite
@@ -211,10 +211,10 @@ spec:
           matchTags:
             - main
         names:
-          plural: routetraces
-          singular: routetrace
           kind: RouteTrace
           listKind: RouteTraceList
+          plural: routetraces
+          singular: routetrace
     - crd:
         api:
           expose: readWrite
@@ -267,4 +267,4 @@ spec:
         path: routing/alarms/pysrc
   requirements:
     - appId: interfaces.eda.nokia.com
-      version: v5.0.2
+      version: v5.0.3
