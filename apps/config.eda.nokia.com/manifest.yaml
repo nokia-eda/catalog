@@ -10,7 +10,7 @@ spec:
     This application provides simple resources allowing device specific configuration.
 
     In particular it provides the Configlet resource, which allows JSON configuration to be applied to devices.
-  image: ghcr.io/nokia-eda/apps/config:v5.0.2
+  image: ghcr.io/nokia-eda/apps/config:v5.0.3
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
   author: Nokia
@@ -52,10 +52,10 @@ spec:
         api:
           expose: none
         names:
-          kind: ConfigletState
-          listKind: ConfigletStateList
           plural: configletstates
           singular: configletstate
+          kind: ConfigletState
+          listKind: ConfigletStateList
     - script:
         path: config/intents/configlet/configlet.py
         type: config
