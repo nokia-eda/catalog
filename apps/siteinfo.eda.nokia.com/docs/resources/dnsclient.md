@@ -1,14 +1,14 @@
 ---
-resource_name: Banner
-resource_name_plural: banners
-resource_name_plural_title: Banners
-resource_name_acronym: B
-crd_path: docs/siteinfo.eda.nokia.com/crds/siteinfo.eda.nokia.com_banners.yaml
+resource_name: DNSClient
+resource_name_plural: dnsclients
+resource_name_plural_title: DNS Clients
+resource_name_acronym: DC
+crd_path: docs/siteinfo.eda.nokia.com/crds/siteinfo.eda.nokia.com_dnsclients.yaml
 # 'auto-crd' will automatically select between the normal resource and workflow icon
 icon: auto-crd
 ---
 
-# Banner
+# DNS Client
 
 -{{% import 'icons.html' as icons %}}-
 

@@ -4,10 +4,10 @@ metadata:
   name: siteinfo
 spec:
   group: siteinfo.eda.nokia.com
-  version: v1alpha1
+  version: v1
   title: Site Information
   description: "This application provides resources describing the environment at a given site. \n\nThis includes managing DNS, host and domain names, banners and MOTD messages, and other site-specific information.\n"
-  image: ghcr.io/nokia-eda/apps/siteinfo:v5.0.3
+  image: ghcr.io/nokia-eda/apps/siteinfo:v6.0.0
   author: Nokia
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
@@ -16,14 +16,16 @@ spec:
     - "srl:25.3.*"
     - "srl:25.7.*"
     - "srl:25.10.*"
+    - "srl:26.3.*"
     - "sros:24.10.r4+"
     - "sros:25.3.r2+"
     - "sros:25.7.*"
     - "sros:25.10.*"
+    - "sros:26.3.*"
     - "eos:4.33.2f:beta"
     - "nxos:10.5.2:alpha"
   supportedCoreVersions:
-    - "v4.0"
+    - "v5.0"
   appInfo:
     documentation: siteinfo/docs
     categories:
@@ -36,8 +38,10 @@ spec:
         api:
           expose: readWrite
         ui:
-          category: Site Profiles
+          category: Management
           name: Banners
+          icon: TextOutline
+        conversionScript: siteinfo/intents/banner/conversion_v1.py
         names:
           plural: banners
           singular: banner
@@ -46,11 +50,12 @@ spec:
     - crd:
         path: siteinfo/crds/siteinfo.eda.nokia.com_bannerstates.yaml
         schema: siteinfo/openapiv3/eda_oas_siteinfo.eda.nokia.com_bannerstates.json
+        conversionScript: siteinfo/intents/bannerstate/conversion_v1.py
         names:
-          plural: bannerstates
           singular: bannerstate
           kind: BannerState
           listKind: BannerStateList
+          plural: bannerstates
     - script:
         path: siteinfo/intents/banner/banner_intent.py
         type: config
@@ -69,6 +74,8 @@ spec:
         ui:
           category: Site Profiles
           name: Default MTU
+          icon: Port
+        conversionScript: siteinfo/intents/defaultmtu/conversion_v1.py
         names:
           plural: defaultmtus
           singular: defaultmtu
@@ -87,6 +94,8 @@ spec:
         ui:
           category: Site Profiles
           name: Load Balancing
+          icon: Traffic
+        conversionScript: siteinfo/intents/systemloadbalancer/conversion_v1.py
         names:
           plural: systemloadbalancers
           singular: systemloadbalancer
@@ -97,6 +106,7 @@ spec:
         schema: siteinfo/openapiv3/eda_oas_siteinfo.eda.nokia.com_systemloadbalancerstates.json
         api:
           expose: none
+        conversionScript: siteinfo/intents/systemloadbalancerstate/conversion_v1.py
         names:
           plural: systemloadbalancerstates
           singular: systemloadbalancerstate
@@ -112,12 +122,54 @@ spec:
         type: state
         trigger:
           kind: SystemLoadBalancerState
+    - crd:
+        api:
+          expose: readWrite
+        path: siteinfo/crds/siteinfo.eda.nokia.com_dnsclients.yaml
+        schema: siteinfo/openapiv3/eda_oas_siteinfo.eda.nokia.com_dnsclients.json
+        ui:
+          category: Management
+          name: DNS Clients
+          icon: FindCircle
+        names:
+          plural: dnsclients
+          singular: dnsclient
+          kind: DNSClient
+          listKind: DNSClientList
+    - script:
+        path: siteinfo/intents/dnsclient/dnsclient_intent.py
+        trigger:
+          kind: DNSClient
+        type: config
+    - crd:
+        api:
+          expose: readWrite
+        path: siteinfo/crds/siteinfo.eda.nokia.com_dnsclientstates.yaml
+        schema: siteinfo/openapiv3/eda_oas_siteinfo.eda.nokia.com_dnsclientstates.json
+        names:
+          kind: DNSClientState
+          listKind: DNSClientStateList
+          plural: dnsclientstates
+          singular: dnsclientstate
+    - script:
+        path: siteinfo/intents/dnsclientstate/dnsclientstate_intent.py
+        trigger:
+          kind: DNSClientState
+        type: state
   dependencies:
     - file:
         path: siteinfo/intents
     - file:
-        path: siteinfo/api/v1alpha1/pysrc
+        path: siteinfo/api
     - file:
         path: common/
     - file:
         path: utils/
+    - file:
+        path: routing/
+    - file:
+        path: services/
+    - file:
+        path: bootstrap/
+    - file:
+        path: siteinfo/api/v1/pysrc
