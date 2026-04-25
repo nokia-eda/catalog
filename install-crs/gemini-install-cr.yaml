@@ -1,0 +1,16 @@
+apiVersion: core.eda.nokia.com/v1
+kind: Workflow
+metadata:
+  name: gemini-nokia-install
+  namespace: eda-system
+spec:
+  type: app-installer
+  input:
+    operation: install
+    apps:
+      - app: gemini
+        catalog: eda-catalog-builtin-apps
+        vendor: nokia
+        version:
+          value: v6.0.0
+          type: semver
