@@ -4,13 +4,13 @@ metadata:
   name: environment
 spec:
   group: environment.eda.nokia.com
-  version: v1alpha1
+  version: v1
   title: Environment
   description: |
     This application provides workflows for environment configuration.
 
     It deploys CLI plugins and environment files to targets.
-  image: ghcr.io/nokia-eda/apps/environment:v5.0.3
+  image: ghcr.io/nokia-eda/apps/environment:v6.0.0
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   author: Nokia
   supportedEndpoints:
@@ -18,14 +18,16 @@ spec:
     - "srl:25.3.*"
     - "srl:25.7.*"
     - "srl:25.10.*"
+    - "srl:26.3.*"
     - "sros:24.10.r4+"
     - "sros:25.3.r2+"
     - "sros:25.7.*"
     - "sros:25.10.*"
+    - "sros:26.3.*"
     - "eos:4.33.2f:beta"
     - "nxos:10.5.2:alpha"
   supportedCoreVersions:
-    - "v4.0"
+    - "v5.0"
   appInfo:
     documentation: environment/docs
     categories:
@@ -45,6 +47,7 @@ spec:
         workflow: true
         ui:
           name: Push Environment
+        conversionScript: environment/intents/setupenv/conversion_v1.py
         names:
           plural: setupenvs
           singular: setupenv
@@ -59,11 +62,14 @@ spec:
         workflow: true
         ui:
           name: Push CLI Plugin
+        conversionScript: environment/intents/cliplugin/conversion_v1.py
         names:
-          plural: cliplugins
           singular: cliplugin
           kind: CliPlugin
           listKind: CliPluginList
+          plural: cliplugins
   dependencies:
     - file:
-        path: environment/api/v1alpha1/pysrc
+        path: environment/api
+    - file:
+        path: environment/api/v1/pysrc
