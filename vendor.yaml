@@ -1,0 +1,11 @@
+apiVersion: appstore.eda.nokia.com/v1
+kind: Vendor
+metadata:
+  name: nokia
+spec:
+  # Supported icon formats: .png, .svg
+  icons:
+    light: icons/light.svg
+    dark: icons/dark.svg
+  title: Nokia
+  homepage: "https://www.nokia.com/"
