@@ -4,11 +4,11 @@ metadata:
   name: aifabrics
 spec:
   group: aifabrics.eda.nokia.com
-  version: v1alpha1
+  version: v1
   title: AIFabrics
   description: |
     This application provides automation resources relating to datacenter AI fabrics.
-  image: ghcr.io/nokia-eda/apps/aifabrics:v5.0.3
+  image: ghcr.io/nokia-eda/apps/aifabrics:v6.0.0
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
   author: Nokia
@@ -22,38 +22,43 @@ spec:
     - "srl:25.3.*"
     - "srl:25.7.*"
     - "srl:25.10.*"
+    - "srl:26.3.*"
     - "sros:24.10.r4+"
     - "sros:25.3.r2+"
     - "sros:25.7.*"
     - "sros:25.10.*"
+    - "sros:26.3.*"
     - "eos:4.33.2f:beta"
     - "nxos:10.5.2:alpha"
   supportedCoreVersions:
-    - "v4.0"
+    - "v5.0"
   components:
     - crd:
         path: aifabrics/crds/aifabrics.eda.nokia.com_backends.yaml
         schema: aifabrics/openapiv3/eda_oas_aifabrics.eda.nokia.com_backends.json
         ui:
-          category: AIFabrics
-          name: Backends
+          category: Fabrics
+          name: AI Backends
+          icon: AiIcon
         api:
           expose: readWrite
+        conversionScript: aifabrics/intents/backend/conversion_v1.py
         names:
+          plural: backends
           singular: backend
           kind: Backend
           listKind: BackendList
-          plural: backends
     - crd:
         path: aifabrics/crds/aifabrics.eda.nokia.com_backendstates.yaml
         schema: aifabrics/openapiv3/eda_oas_aifabrics.eda.nokia.com_backendstates.json
         api:
           expose: none
+        conversionScript: aifabrics/intents/backendstate/conversion_v1.py
         names:
-          plural: backendstates
           singular: backendstate
           kind: BackendState
           listKind: BackendStateList
+          plural: backendstates
     - script:
         path: aifabrics/intents/backend/backend_intent.py
         type: config
@@ -65,15 +70,13 @@ spec:
         trigger:
           kind: BackendState
     - view:
-        path: aifabrics/ui/aifabric-dashboard-v0.2.json
+        path: aifabrics/ui/aifabric-dashboard.json
         ui:
-          category: AIFabrics
-          name: Backends
+          category: Fabrics
+          name: AI Backends
   dependencies:
     - file:
         path: aifabrics/intents
-    - file:
-        path: aifabrics/api/v1alpha1/pysrc
     - file:
         path: aifabrics
     - file:
@@ -92,16 +95,20 @@ spec:
         path: routingpolicies/
     - file:
         path: interfaces/
+    - file:
+        path: aifabrics/api
+    - file:
+        path: aifabrics/api/v1/pysrc
   requirements:
     - appId: fabrics.eda.nokia.com
-      version: v5.0.3
+      version: v6.0.0
     - appId: protocols.eda.nokia.com
-      version: v5.0.3
+      version: v6.0.0
     - appId: qos.eda.nokia.com
-      version: v5.0.3
+      version: v6.0.0
     - appId: services.eda.nokia.com
-      version: v5.0.3
+      version: v6.0.0
     - appId: routingpolicies.eda.nokia.com
-      version: v5.0.3
+      version: v6.0.0
     - appId: interfaces.eda.nokia.com
-      version: v5.0.3
+      version: v6.0.0
