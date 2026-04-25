@@ -4,29 +4,31 @@ metadata:
   name: aaa
 spec:
   group: aaa.eda.nokia.com
-  version: v1alpha1
+  version: v1
   title: AAA
   description: |
     This application provides functionality relating to authentication, authorization, and accounting.
 
     It allows the deployment of users, groups, and AAA policy, performing any alarming as necessary.
-  image: ghcr.io/nokia-eda/apps/aaa:v5.0.3
+  image: ghcr.io/nokia-eda/apps/aaa:v6.0.0
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
-  author: Nokia
+  author: nokia
   supportedEndpoints:
     - "srl:24.10.*"
     - "srl:25.3.*"
     - "srl:25.7.*"
     - "srl:25.10.*"
+    - "srl:26.3.*"
     - "sros:24.10.r4+"
     - "sros:25.3.r2+"
     - "sros:25.7.*"
     - "sros:25.10.*"
+    - "sros:26.3.*"
     - "eos:4.33.2f:beta"
     - "nxos:10.5.2:alpha"
   supportedCoreVersions:
-    - "v4.0"
+    - "v5.0"
   appInfo:
     categories:
       - "system"
@@ -39,6 +41,7 @@ spec:
         api:
           expose: none
         namespaced: false
+        conversionScript: aaa/intents/userdeployment/conversion_v1.py
         names:
           plural: userdeployments
           singular: userdeployment
@@ -47,6 +50,7 @@ spec:
     - crd:
         path: aaa/crds/aaa.eda.nokia.com_nodegroupdeployments.yaml
         schema: aaa/openapiv3/eda_oas_aaa.eda.nokia.com_nodegroupdeployments.json
+        conversionScript: aaa/intents/nodegroupdeployment/conversion_v1.py
         names:
           plural: nodegroupdeployments
           singular: nodegroupdeployment
@@ -56,11 +60,13 @@ spec:
         path: aaa/crds/aaa.eda.nokia.com_nodegroups.yaml
         schema: aaa/openapiv3/eda_oas_aaa.eda.nokia.com_nodegroups.json
         ui:
-          category: Node Management
-          name: Node Groups
-          panel: system_administration
+          category: AAA
+          name: Node User Groups
+          icon: AdminSettings
+          # panel: system_administration
         api:
           expose: readWrite
+        conversionScript: aaa/intents/nodegroup/conversion_v1.py
         names:
           plural: nodegroups
           singular: nodegroup
@@ -69,11 +75,12 @@ spec:
     - crd:
         path: aaa/crds/aaa.eda.nokia.com_nodeuserstates.yaml
         schema: aaa/openapiv3/eda_oas_aaa.eda.nokia.com_nodeuserstates.json
+        conversionScript: aaa/intents/nodeuserstate/conversion_v1.py
         names:
-          listKind: NodeUserStateList
           plural: nodeuserstates
           singular: nodeuserstate
           kind: NodeUserState
+          listKind: NodeUserStateList
     - cr:
         path: aaa/resources/default.yaml
     - cr:
@@ -98,6 +105,76 @@ spec:
           #     type: state
           #     trigger:
           #       kind: UserDeploymentState
+    - crd:
+        api:
+          expose: readWrite
+        path: aaa/crds/aaa.eda.nokia.com_servergroups.yaml
+        schema: aaa/openapiv3/eda_oas_aaa.eda.nokia.com_servergroups.json
+        ui:
+          category: AAA
+          name: Server Groups
+          icon: DatabaseAuthentication
+        names:
+          plural: servergroups
+          singular: servergroup
+          kind: ServerGroup
+          listKind: ServerGroupList
+    - script:
+        path: aaa/intents/servergroup/servergroup_intent.py
+        trigger:
+          kind: ServerGroup
+        type: config
+    - crd:
+        api:
+          expose: readWrite
+        path: aaa/crds/aaa.eda.nokia.com_servergroupstates.yaml
+        schema: aaa/openapiv3/eda_oas_aaa.eda.nokia.com_servergroupstates.json
+        names:
+          kind: ServerGroupState
+          listKind: ServerGroupStateList
+          plural: servergroupstates
+          singular: servergroupstate
+    - script:
+        path: aaa/intents/servergroupstate/servergroupstate_intent.py
+        trigger:
+          kind: ServerGroupState
+        type: state
+    - crd:
+        api:
+          expose: readWrite
+        path: aaa/crds/aaa.eda.nokia.com_authenticationpolicies.yaml
+        schema: aaa/openapiv3/eda_oas_aaa.eda.nokia.com_authenticationpolicies.json
+        ui:
+          category: AAA
+          name: Authentication Policies
+          icon: Security
+        names:
+          plural: authenticationpolicies
+          singular: authenticationpolicy
+          kind: AuthenticationPolicy
+          listKind: AuthenticationPolicyList
+    - script:
+        path: aaa/intents/authenticationpolicy/authenticationpolicy_intent.py
+        trigger:
+          kind: AuthenticationPolicy
+        type: config
+    - cr:
+        path: aaa/alarms/alarms.yaml
+    - crd:
+        api:
+          expose: readWrite
+        path: aaa/crds/aaa.eda.nokia.com_authenticationpolicystates.yaml
+        schema: aaa/openapiv3/eda_oas_aaa.eda.nokia.com_authenticationpolicystates.json
+        names:
+          plural: authenticationpolicystates
+          singular: authenticationpolicystate
+          kind: AuthenticationPolicyState
+          listKind: AuthenticationPolicyStateList
+    - script:
+        path: aaa/intents/authenticationpolicystate/authenticationpolicystate_intent.py
+        trigger:
+          kind: AuthenticationPolicyState
+        type: state
   dependencies:
     - file:
         path: common/
@@ -106,6 +183,14 @@ spec:
     - file:
         path: aaa/intents
     - file:
-        path: aaa/api/v1alpha1/pysrc
-    - file:
         path: core/pysrc/
+    - file:
+        path: aaa/api
+    - file:
+        path: aaa/api/v1/pysrc
+    - file:
+        path: aaa/intents/servergroupstate/common.py
+    - file:
+        path: aaa/alarms/pysrc
+    - file:
+        path: aaa/intents/common/common.py

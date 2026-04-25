@@ -1,14 +1,14 @@
 ---
-resource_name: NodeUserState
-resource_name_plural: nodeuserstates
-resource_name_plural_title: Node User States
-resource_name_acronym: NU
-crd_path: docs/aaa.eda.nokia.com/crds/aaa.eda.nokia.com_nodeuserstates.yaml
+resource_name: ServerGroupState
+resource_name_plural: servergroupstates
+resource_name_plural_title: Server Group States
+resource_name_acronym: SG
+crd_path: docs/aaa.eda.nokia.com/crds/aaa.eda.nokia.com_servergroupstates.yaml
 # 'auto-crd' will automatically select between the normal resource and workflow icon
 icon: auto-crd
 ---
 
-# Node User State
+# Server Group State
 
 -{{% import 'icons.html' as icons %}}-
 
