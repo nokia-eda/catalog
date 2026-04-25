@@ -1,14 +1,14 @@
 ---
-resource_name: TrafficRateOverlay
-resource_name_plural: trafficrateoverlays
-resource_name_plural_title: Traffic Rate Overlays
-resource_name_acronym: TR
-crd_path: docs/topologies.eda.nokia.com/crds/topologies.eda.nokia.com_trafficrateoverlays.yaml
+resource_name: AlarmOverlay
+resource_name_plural: alarmoverlays
+resource_name_plural_title: Alarm Overlays
+resource_name_acronym: AO
+crd_path: docs/topologies.eda.nokia.com/crds/topologies.eda.nokia.com_alarmoverlays.yaml
 # 'auto-crd' will automatically select between the normal resource and workflow icon
 icon: auto-crd
 ---
 
-# Traffic Rate Overlay
+# Alarm Overlay
 
 -{{% import 'icons.html' as icons %}}-
 
