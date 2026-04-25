@@ -4,11 +4,11 @@ metadata:
   name: filters
 spec:
   group: filters.eda.nokia.com
-  version: v1alpha1
+  version: v1
   title: Filters
   description: |
     This application provides resources relating to filtering for various Network Operating Systems.
-  image: ghcr.io/nokia-eda/apps/filters:v5.0.3
+  image: ghcr.io/nokia-eda/apps/filters:v6.0.0
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
   author: Nokia
@@ -22,14 +22,16 @@ spec:
     - "srl:25.3.*"
     - "srl:25.7.*"
     - "srl:25.10.*"
+    - "srl:26.3.*"
     - "sros:24.10.r4+"
     - "sros:25.3.r2+"
     - "sros:25.7.*"
     - "sros:25.10.*"
+    - "sros:26.3.*"
     - "eos:4.33.2f:beta"
     - "nxos:10.5.2:alpha"
   supportedCoreVersions:
-    - "v4.0"
+    - "v5.0"
   components:
     - crd:
         path: filters/crds/filters.eda.nokia.com_filters.yaml
@@ -37,8 +39,10 @@ spec:
         ui:
           category: Filters
           name: Filters
+          icon: Filter
         api:
           expose: readWrite
+        conversionScript: filters/intents/filter/conversion_v1.py
         names:
           plural: filters
           singular: filter
@@ -50,13 +54,15 @@ spec:
         ui:
           category: Filters
           name: Control Plane Filters
+          icon: FilterAuto
         api:
           expose: readWrite
+        conversionScript: filters/intents/controlplanefilter/conversion_v1.py
         names:
-          kind: ControlPlaneFilter
-          listKind: ControlPlaneFilterList
           plural: controlplanefilters
           singular: controlplanefilter
+          kind: ControlPlaneFilter
+          listKind: ControlPlaneFilterList
     # - crd:
     #     path: filters/crds/filters.eda.nokia.com_ipfilterstates.yaml
     #     schema: filters/openapiv3/eda_oas_filters.eda.nokia.com_ipfilterstates.json
@@ -66,6 +72,7 @@ spec:
         schema: filters/openapiv3/eda_oas_filters.eda.nokia.com_filterdeployments.json
         api:
           expose: none
+        conversionScript: filters/intents/filterdeployment/conversion_v1.py
         names:
           plural: filterdeployments
           singular: filterdeployment
@@ -76,21 +83,23 @@ spec:
         schema: filters/openapiv3/eda_oas_filters.eda.nokia.com_mirrorfilterdeployments.json
         api:
           expose: none
+        conversionScript: filters/intents/mirrorfilterdeployment/conversion_v1.py
         names:
-          kind: MirrorFilterDeployment
           listKind: MirrorFilterDeploymentList
           plural: mirrorfilterdeployments
           singular: mirrorfilterdeployment
+          kind: MirrorFilterDeployment
     - crd:
         path: filters/crds/filters.eda.nokia.com_mirrorfilters.yaml
         schema: filters/openapiv3/eda_oas_filters.eda.nokia.com_mirrorfilters.json
         api:
           expose: none
+        conversionScript: filters/intents/mirrorfilter/conversion_v1.py
         names:
-          kind: MirrorFilter
-          listKind: MirrorFilterList
           plural: mirrorfilters
           singular: mirrorfilter
+          kind: MirrorFilter
+          listKind: MirrorFilterList
     - script:
         path: filters/intents/filterdeployment/filterdeployment_intent.py
         type: config
@@ -118,6 +127,38 @@ spec:
         type: config
         trigger:
           kind: MirrorFilterDeployment
+    - crd:
+        api:
+          expose: readWrite
+        path: filters/crds/filters.eda.nokia.com_prefixsets.yaml
+        schema: filters/openapiv3/eda_oas_filters.eda.nokia.com_prefixsets.json
+        ui:
+          category: Filters
+          name: Prefix Sets
+          icon: Ipoe
+        names:
+          plural: prefixsets
+          singular: prefixset
+          kind: PrefixSet
+          listKind: PrefixSetList
+    - crd:
+        path: filters/crds/filters.eda.nokia.com_prefixsetdeployments.yaml
+        schema: filters/openapiv3/eda_oas_filters.eda.nokia.com_prefixsetdeployments.json
+        names:
+          kind: PrefixSetDeployment
+          listKind: PrefixSetDeploymentList
+          plural: prefixsetdeployments
+          singular: prefixsetdeployment
+    - script:
+        path: filters/intents/prefixset/config_intent.py
+        trigger:
+          kind: PrefixSet
+        type: config
+    - script:
+        path: filters/intents/prefixsetdeployment/config_intent.py
+        trigger:
+          kind: PrefixSetDeployment
+        type: config
   dependencies:
     - file:
         path: common/
@@ -126,4 +167,6 @@ spec:
     - file:
         path: filters/intents
     - file:
-        path: filters/api/v1alpha1/pysrc
+        path: filters/api
+    - file:
+        path: filters/api/v1/pysrc
