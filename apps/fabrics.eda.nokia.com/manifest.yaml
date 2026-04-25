@@ -4,11 +4,11 @@ metadata:
   name: fabrics
 spec:
   group: fabrics.eda.nokia.com
-  version: v1alpha1
+  version: v1
   title: Fabrics
   description: |
     This application provides automation resources relating to datacenter fabrics.
-  image: ghcr.io/nokia-eda/apps/fabrics:v5.0.3
+  image: ghcr.io/nokia-eda/apps/fabrics:v6.0.0
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
   author: Nokia
@@ -22,14 +22,16 @@ spec:
     - "srl:25.3.*"
     - "srl:25.7.*"
     - "srl:25.10.*"
+    - "srl:26.3.*"
     - "sros:24.10.r4+"
     - "sros:25.3.r2+"
     - "sros:25.7.*"
     - "sros:25.10.*"
+    - "sros:26.3.*"
     - "eos:4.33.2f:beta"
     - "nxos:10.5.2:alpha"
   supportedCoreVersions:
-    - "v4.0"
+    - "v5.0"
   components:
     - crd:
         path: fabrics/crds/fabrics.eda.nokia.com_fabrics.yaml
@@ -37,8 +39,10 @@ spec:
         ui:
           category: Fabrics
           name: Fabrics
+          icon: SiteMap
         api:
           expose: readWrite
+        conversionScript: fabrics/intents/fabric/conversion_v1.py
         names:
           plural: fabrics
           singular: fabric
@@ -50,18 +54,21 @@ spec:
         ui:
           category: Fabrics
           name: ISLs
+          icon: Link
         api:
           expose: readWrite
+        conversionScript: fabrics/intents/isl/conversion_v1.py
         names:
-          kind: ISL
-          listKind: ISLList
           plural: isls
           singular: isl
+          kind: ISL
+          listKind: ISLList
     - crd:
         path: fabrics/crds/fabrics.eda.nokia.com_islstates.yaml
         schema: fabrics/openapiv3/eda_oas_fabrics.eda.nokia.com_islstates.json
         api:
           expose: none
+        conversionScript: fabrics/intents/islstate/conversion_v1.py
         names:
           singular: islstate
           kind: ISLState
@@ -72,6 +79,7 @@ spec:
         schema: fabrics/openapiv3/eda_oas_fabrics.eda.nokia.com_fabricstates.json
         api:
           expose: none
+        conversionScript: fabrics/intents/fabricstate/conversion_v1.py
         names:
           plural: fabricstates
           singular: fabricstate
@@ -98,7 +106,7 @@ spec:
         trigger:
           kind: ISLState
     - view:
-        path: fabrics/ui/fabric-dashboard-v0.10.json
+        path: fabrics/ui/fabric-dashboard.json
         ui:
           category: Fabrics
           name: Fabrics
@@ -111,20 +119,37 @@ spec:
         workflow: true
         ui:
           name: ISL Ping
+        conversionScript: fabrics/intents/islping/conversion_v1.py
         names:
           plural: islpings
           singular: islping
           kind: IslPing
           listKind: IslPingList
+    - crd:
+        api:
+          expose: none
+        namespaced: true
+        path: fabrics/crds/fabrics.eda.nokia.com_fabrictopologies.yaml
+        schema: fabrics/openapiv3/eda_oas_fabrics.eda.nokia.com_fabrictopologies.json
+        workflow: true
+        ui:
+          name: Fabric Topology
+        names:
+          listKind: FabricTopologyList
+          plural: fabrictopologies
+          singular: fabrictopology
+          kind: FabricTopology
     - cr:
         path: fabrics/workflows/islping/core_v1_flowdefinition.yaml
+    # - cr:
+    #     path: fabrics/workflows/fabrictopology/core_v1_flowdefinition.yaml
     - cr:
         path: fabrics/alarms/alarms.yaml
   dependencies:
     - file:
         path: fabrics/intents
     - file:
-        path: fabrics/api/v1alpha1/pysrc
+        path: fabrics/api
     - file:
         path: common/
     - file:
@@ -203,16 +228,18 @@ spec:
         path: security/
     - file:
         path: fabrics/alarms/pysrc
+    - file:
+        path: fabrics/api/v1/pysrc
   requirements:
     - appId: protocols.eda.nokia.com
-      version: v5.0.3
+      version: v6.0.0
     - appId: routingpolicies.eda.nokia.com
-      version: v5.0.3
+      version: v6.0.0
     - appId: routing.eda.nokia.com
-      version: v5.0.3
+      version: v6.0.0
     - appId: interfaces.eda.nokia.com
-      version: v5.0.3
+      version: v6.0.0
     - appId: qos.eda.nokia.com
-      version: v5.0.3
+      version: v6.0.0
     - appId: security.eda.nokia.com
-      version: v5.0.3
+      version: v6.0.0
