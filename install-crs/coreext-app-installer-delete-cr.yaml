@@ -1,0 +1,13 @@
+apiVersion: appstore.eda.nokia.com/v1
+kind: AppInstaller
+metadata:
+  name: coreext-nokia-delete
+  namespace: eda-system
+spec:
+  operation: delete
+  apps:
+    - appId: coreext.eda.nokia.com
+      catalog: eda-catalog-builtin-apps
+      version:
+        type: semver
+        value: v6.0.0
