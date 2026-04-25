@@ -8,7 +8,7 @@ spec:
       - networking
     documentation: qos/docs
     ociSpecVersion: v1.0.0
-  author: Nokia
+  author: nokia
   components:
     - crd:
         api:
@@ -19,12 +19,13 @@ spec:
         ui:
           category: QoS
           name: Ingress Policies
-        conversionScript: qos/intents/ingresspolicy/conversion_v1.py
+          icon: TrafficQos
+        conversionScript: qos/intents/ingresspolicy/conversion_v2.py
         names:
-          kind: IngressPolicy
-          listKind: IngressPolicyList
           plural: ingresspolicys
           singular: ingresspolicy
+          kind: IngressPolicy
+          listKind: IngressPolicyList
     - crd:
         api:
           expose: readWrite
@@ -34,12 +35,13 @@ spec:
         ui:
           category: QoS
           name: Egress Policies
-        conversionScript: qos/intents/egresspolicy/conversion_v1.py
+          icon: TrafficQos
+        conversionScript: qos/intents/egresspolicy/conversion_v2.py
         names:
-          plural: egresspolicys
-          singular: egresspolicy
           kind: EgressPolicy
           listKind: EgressPolicyList
+          plural: egresspolicys
+          singular: egresspolicy
     - crd:
         api:
           expose: readWrite
@@ -49,12 +51,13 @@ spec:
         ui:
           category: QoS
           name: Policy Deployment
-        conversionScript: qos/intents/policydeployment/conversion_v1.py
+          icon: PolicyCheck
+        conversionScript: qos/intents/policydeployment/conversion_v2.py
         names:
-          kind: PolicyDeployment
-          listKind: PolicyDeploymentList
           plural: policydeployments
           singular: policydeployment
+          kind: PolicyDeployment
+          listKind: PolicyDeploymentList
     - crd:
         api:
           expose: readWrite
@@ -64,12 +67,13 @@ spec:
         ui:
           category: QoS
           name: Policy Attachment
-        conversionScript: qos/intents/policyattachment/conversion_v1.py
+          icon: Attachment
+        conversionScript: qos/intents/policyattachment/conversion_v2.py
         names:
+          plural: policyattachments
           singular: policyattachment
           kind: PolicyAttachment
           listKind: PolicyAttachmentList
-          plural: policyattachments
     - crd:
         api:
           expose: readWrite
@@ -81,12 +85,13 @@ spec:
         ui:
           category: QoS
           name: Forwarding Class
-        conversionScript: qos/intents/forwardingclass/conversion_v1.py
+          icon: TrafficCircle
+        conversionScript: qos/intents/forwardingclass/conversion_v2.py
         names:
+          listKind: ForwardingClassList
           plural: forwardingclasss
           singular: forwardingclass
           kind: ForwardingClass
-          listKind: ForwardingClassList
     - crd:
         api:
           expose: readWrite
@@ -98,7 +103,8 @@ spec:
         ui:
           category: QoS
           name: Queue
-        conversionScript: qos/intents/queue/conversion_v1.py
+          icon: Traffic
+        conversionScript: qos/intents/queue/conversion_v2.py
         names:
           plural: queues
           singular: queue
@@ -196,7 +202,7 @@ spec:
     - file:
         path: qos/intents
     - file:
-        path: qos/api/v1alpha1/pysrc
+        path: qos/api
     - file:
         path: common/
     - file:
@@ -206,30 +212,32 @@ spec:
     - file:
         path: interfaces/
     - file:
-        path: qos/api/v1/pysrc
+        path: qos/api/v2/pysrc
   description: |
     This application provides resources relating to QOS for various Network Operating Systems.
-  image: ghcr.io/nokia-eda/apps/qos:v5.0.3
+  image: ghcr.io/nokia-eda/apps/qos:v6.0.0
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
   group: qos.eda.nokia.com
   supportedCoreVersions:
-    - "v4.0"
+    - "v5.0"
   title: QoS
-  version: v1
+  version: v2
   requirements:
     - appId: interfaces.eda.nokia.com
-      version: v5.0.3
+      version: v6.0.0
     - appId: filters.eda.nokia.com
-      version: v5.0.3
+      version: v6.0.0
   supportedEndpoints:
     - "srl:24.10.*"
     - "srl:25.3.*"
     - "srl:25.7.*"
     - "srl:25.10.*"
+    - "srl:26.3.*"
     - "sros:24.10.r4+"
     - "sros:25.3.r2+"
     - "sros:25.7.*"
     - "sros:25.10.*"
+    - "sros:26.3.*"
     - "eos:4.33.2f:beta"
     - "nxos:10.5.2:alpha"
