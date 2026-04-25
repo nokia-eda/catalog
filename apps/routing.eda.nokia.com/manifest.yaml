@@ -4,11 +4,11 @@ metadata:
   name: routing
 spec:
   group: routing.eda.nokia.com
-  version: v1alpha1
+  version: v1
   title: Routing
   description: |
     This application provides underlay routing resources for various Network Operating Systems.
-  image: ghcr.io/nokia-eda/apps/routing:v5.0.3
+  image: ghcr.io/nokia-eda/apps/routing:v6.0.0
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
   author: Nokia
@@ -22,56 +22,63 @@ spec:
     - "srl:25.3.*"
     - "srl:25.7.*"
     - "srl:25.10.*"
+    - "srl:26.3.*"
     - "sros:24.10.r4+"
     - "sros:25.3.r2+"
     - "sros:25.7.*"
     - "sros:25.10.*"
+    - "sros:26.3.*"
     - "eos:4.33.2f:beta"
     - "nxos:10.5.2:alpha"
   supportedCoreVersions:
-    - "v4.0"
+    - "v5.0"
   components:
     - view:
-        path: routing/ui/defaultinterface_dashboard_v1.1.json
+        path: routing/ui/defaultinterface_dashboard.json
         ui:
-          category: Default Routing
+          category: Underlay Routing
           name: Default Interfaces
     - view:
-        path: routing/ui/defaultrouter_dashboard_v1.1.json
+        path: routing/ui/defaultrouter_dashboard.json
         ui:
-          category: Default Routing
+          category: Underlay Routing
           name: Default Routers
     - crd:
         path: routing/crds/routing.eda.nokia.com_defaultinterfaces.yaml
         schema: routing/openapiv3/eda_oas_routing.eda.nokia.com_defaultinterfaces.json
         ui:
-          category: Default Routing
+          category: Underlay Routing
           name: Default Interfaces
+          icon: Interface
         api:
           expose: readWrite
+        conversionScript: routing/intents/defaultinterface/conversion_v1.py
         names:
+          plural: defaultinterfaces
           singular: defaultinterface
           kind: DefaultInterface
           listKind: DefaultInterfaceList
-          plural: defaultinterfaces
     - crd:
         path: routing/crds/routing.eda.nokia.com_defaultinterfacestates.yaml
         schema: routing/openapiv3/eda_oas_routing.eda.nokia.com_defaultinterfacestates.json
         api:
           expose: none
+        conversionScript: routing/intents/defaultinterfacestate/conversion_v1.py
         names:
-          plural: defaultinterfacestates
           singular: defaultinterfacestate
           kind: DefaultInterfaceState
           listKind: DefaultInterfaceStateList
+          plural: defaultinterfacestates
     - crd:
         path: routing/crds/routing.eda.nokia.com_defaultrouters.yaml
         schema: routing/openapiv3/eda_oas_routing.eda.nokia.com_defaultrouters.json
         ui:
-          category: Default Routing
+          category: Underlay Routing
           name: Default Routers
+          icon: Router
         api:
           expose: readWrite
+        conversionScript: routing/intents/defaultrouter/conversion_v1.py
         names:
           plural: defaultrouters
           singular: defaultrouter
@@ -82,19 +89,22 @@ spec:
         schema: routing/openapiv3/eda_oas_routing.eda.nokia.com_defaultrouterstates.json
         api:
           expose: none
+        conversionScript: routing/intents/defaultrouterstate/conversion_v1.py
         names:
-          listKind: DefaultRouterStateList
           plural: defaultrouterstates
           singular: defaultrouterstate
           kind: DefaultRouterState
+          listKind: DefaultRouterStateList
     - crd:
         path: routing/crds/routing.eda.nokia.com_drains.yaml
         schema: routing/openapiv3/eda_oas_routing.eda.nokia.com_drains.json
         ui:
           category: Maintenance
           name: Drains
+          icon: Steering
         api:
           expose: readWrite
+        conversionScript: routing/intents/drain/conversion_v1.py
         names:
           plural: drains
           singular: drain
@@ -105,19 +115,22 @@ spec:
         schema: routing/openapiv3/eda_oas_routing.eda.nokia.com_drainstates.json
         api:
           expose: none
+        conversionScript: routing/intents/drainstate/conversion_v1.py
         names:
-          kind: DrainState
-          listKind: DrainStateList
           plural: drainstates
           singular: drainstate
+          kind: DrainState
+          listKind: DrainStateList
     - crd:
         path: routing/crds/routing.eda.nokia.com_systeminterfaces.yaml
         schema: routing/openapiv3/eda_oas_routing.eda.nokia.com_systeminterfaces.json
         ui:
-          category: System Interface
+          category: Underlay Routing
           name: System Interfaces
+          icon: Interface
         api:
           expose: readWrite
+        conversionScript: routing/intents/systeminterface/conversion_v1.py
         names:
           plural: systeminterfaces
           singular: systeminterface
@@ -128,11 +141,12 @@ spec:
         schema: routing/openapiv3/eda_oas_routing.eda.nokia.com_systeminterfacestates.json
         api:
           expose: none
+        conversionScript: routing/intents/systeminterfacestate/conversion_v1.py
         names:
-          kind: SystemInterfaceState
-          listKind: SystemInterfaceStateList
           plural: systeminterfacestates
           singular: systeminterfacestate
+          kind: SystemInterfaceState
+          listKind: SystemInterfaceStateList
     - script:
         path: routing/intents/defaultinterface/defaultinterface_intent.py
         type: config
@@ -193,11 +207,13 @@ spec:
         ai:
           matchTags:
             - main
+            - netops
+        conversionScript: routing/intents/routelookup/conversion_v1.py
         names:
-          plural: routelookups
           singular: routelookup
           kind: RouteLookup
           listKind: RouteLookupList
+          plural: routelookups
     - crd:
         api:
           expose: readWrite
@@ -210,11 +226,13 @@ spec:
         ai:
           matchTags:
             - main
+            - netops
+        conversionScript: routing/intents/routetrace/conversion_v1.py
         names:
+          singular: routetrace
           kind: RouteTrace
           listKind: RouteTraceList
           plural: routetraces
-          singular: routetrace
     - crd:
         api:
           expose: readWrite
@@ -227,6 +245,8 @@ spec:
         ai:
           matchTags:
             - main
+            - netops
+        conversionScript: routing/intents/attachmentlookup/conversion_v1.py
         names:
           plural: attachmentlookups
           singular: attachmentlookup
@@ -241,6 +261,7 @@ spec:
         workflow: true
         ui:
           name: System Ping
+        conversionScript: routing/intents/systemping/conversion_v1.py
         names:
           plural: systempings
           singular: systemping
@@ -252,7 +273,7 @@ spec:
     - file:
         path: routing/intents
     - file:
-        path: routing/api/v1alpha1/pysrc
+        path: routing/api
     - file:
         path: routingpolicies/
     - file:
@@ -265,6 +286,8 @@ spec:
         path: interfaces/
     - file:
         path: routing/alarms/pysrc
+    - file:
+        path: routing/api/v1/pysrc
   requirements:
     - appId: interfaces.eda.nokia.com
-      version: v5.0.3
+      version: v6.0.0
