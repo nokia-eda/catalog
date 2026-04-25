@@ -4,13 +4,13 @@ metadata:
   name: interfaces
 spec:
   group: interfaces.eda.nokia.com
-  version: v1alpha1
+  version: v1
   title: Interface
   description: |
     This application provides interface configuration and state for various Network Operating Systems.
 
     It also supports alarming driven by interface operational state and the population of a normalized table to support queries across supported endpoints.
-  image: ghcr.io/nokia-eda/apps/interfaces:v5.0.3
+  image: ghcr.io/nokia-eda/apps/interfaces:v6.0.0
   author: Nokia
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
@@ -19,14 +19,16 @@ spec:
     - "srl:25.3.*"
     - "srl:25.7.*"
     - "srl:25.10.*"
+    - "srl:26.3.*"
     - "sros:24.10.r4+"
     - "sros:25.3.r2+"
     - "sros:25.7.*"
     - "sros:25.10.*"
+    - "sros:26.3.*"
     - "eos:4.33.2f:beta"
     - "nxos:10.5.2:alpha"
   supportedCoreVersions:
-    - "v4.0"
+    - "v5.0"
   appInfo:
     categories:
       - "networking"
@@ -42,8 +44,10 @@ spec:
         ui:
           category: Topology
           name: Interfaces
+          icon: LinkAggregation
         kubernetes:
           exportPolicy: all # needed for connect controllers
+        conversionScript: interfaces/intents/interface/conversion_v1.py
         names:
           plural: interfaces
           singular: interface
@@ -57,8 +61,10 @@ spec:
         ui:
           category: Topology
           name: Breakouts
+          icon: SplitLtr
         kubernetes:
           exportPolicy: all # needed for connect controllers
+        conversionScript: interfaces/intents/breakout/conversion_v1.py
         names:
           plural: breakouts
           singular: breakout
@@ -90,29 +96,6 @@ spec:
         type: state
         trigger:
           kind: InterfaceState
-          # - crd:
-          #     path: interfaces/crds/interfaces.eda.nokia.com_mtus.yaml
-          #     schema: interfaces/openapiv3/eda_oas_interfaces.eda.nokia.com_mtus.json
-          #     ui:
-          #       category: Anomalies
-          #       name: MTU
-          #     api:
-          #       expose: readWrite
-          # - crd:
-          #     path: interfaces/crds/interfaces.eda.nokia.com_mtustates.yaml
-          #     schema: interfaces/openapiv3/eda_oas_interfaces.eda.nokia.com_mtustates.json
-          #     api:
-          #       expose: none
-          # - script:
-          #     path: interfaces/intents/mtu/anomaly_mtu.py
-          #     type: config
-          #     trigger:
-          #       kind: MTU
-          # - script:
-          #     path: interfaces/intents/mtu/anomaly_mtu.py
-          #     type: state
-          #     trigger:
-          #       kind: MTUState
     - crd:
         api:
           expose: readWrite
@@ -122,6 +105,7 @@ spec:
         workflow: true
         ui:
           name: Check Interfaces
+        conversionScript: interfaces/intents/checkinterfaces/conversion_v1.py
         names:
           plural: checkinterfacess
           singular: checkinterfaces
@@ -131,14 +115,28 @@ spec:
         path: interfaces/workflows/checkinterfaces/core_v1_flowdefinition.yaml
     - cr:
         path: interfaces/alarms/alarms.yaml
+    - cr:
+        path: interfaces/workflows/analyzealarm/core_v1_flowdefinition.yaml
+    - crd:
+        namespaced: true
+        path: interfaces/crds/interfaces.eda.nokia.com_analyzealarms.yaml
+        schema: interfaces/openapiv3/eda_oas_interfaces.eda.nokia.com_analyzealarms.json
+        workflow: true
+        names:
+          singular: analyzealarm
+          kind: AnalyzeAlarm
+          listKind: AnalyzeAlarmList
+          plural: analyzealarms
   dependencies:
     - file:
         path: interfaces/intents
-    - file:
-        path: interfaces/api/v1alpha1/pysrc
     - file:
         path: common/
     - file:
         path: utils/
     - file:
         path: interfaces/alarms/pysrc
+    - file:
+        path: interfaces/api
+    - file:
+        path: interfaces/api/v1/pysrc
