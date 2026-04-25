@@ -4,11 +4,11 @@ metadata:
   name: security
 spec:
   group: security.eda.nokia.com
-  version: v1alpha1
+  version: v1
   title: Security
   description: |
     This application provides resources related to security for various Network Operating Systems.
-  image: ghcr.io/nokia-eda/apps/security:v5.0.3
+  image: ghcr.io/nokia-eda/apps/security:v6.0.0
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
   author: Nokia
@@ -22,41 +22,47 @@ spec:
     - "srl:25.3.*"
     - "srl:25.7.*"
     - "srl:25.10.*"
+    - "srl:26.3.*"
     - "sros:24.10.r4+"
     - "sros:25.3.r2+"
     - "sros:25.7.*"
     - "sros:25.10.*"
+    - "sros:26.3.*"
     - "eos:4.33.2f:beta"
     - "nxos:10.5.2:alpha"
   supportedCoreVersions:
-    - "v4.0"
+    - "v5.0"
   components:
     - crd:
         path: security/crds/security.eda.nokia.com_keychains.yaml
         schema: security/openapiv3/eda_oas_security.eda.nokia.com_keychains.json
         ui:
-          category: Security
+          category: Secrets
           name: Keychains
+          icon: SecretKeys
         api:
           expose: readWrite
+        conversionScript: security/intents/keychain/conversion_v1.py
         names:
-          listKind: KeychainList
           plural: keychains
           singular: keychain
           kind: Keychain
+          listKind: KeychainList
     - crd:
         path: security/crds/security.eda.nokia.com_keychaindeployments.yaml
         schema: security/openapiv3/eda_oas_security.eda.nokia.com_keychaindeployments.json
         ui:
-          category: Security
+          category: Secrets
           name: Keychain Deployments
+          icon: Deploy
         api:
           expose: readWrite
+        conversionScript: security/intents/keychaindeployment/conversion_v1.py
         names:
+          plural: keychaindeployments
           singular: keychaindeployment
           kind: KeychainDeployment
           listKind: KeychainDeploymentList
-          plural: keychaindeployments
     - script:
         path: security/intents/keychain/keychain_intent.py
         type: config
@@ -71,13 +77,15 @@ spec:
     - file:
         path: security/intents
     - file:
-        path: security/api/v1alpha1/pysrc
+        path: security/api
     - file:
         path: common/
     - file:
         path: utils/
     - file:
         path: interfaces/
+    - file:
+        path: security/api/v1/pysrc
   requirements:
     - appId: interfaces.eda.nokia.com
-      version: v5.0.3
+      version: v6.0.0
