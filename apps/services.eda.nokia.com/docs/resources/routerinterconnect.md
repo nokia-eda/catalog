@@ -1,14 +1,14 @@
 ---
-resource_name: EdgePing
-resource_name_plural: edgepings
-resource_name_plural_title: Edge Pings
-resource_name_acronym: EP
-crd_path: docs/services.eda.nokia.com/crds/services.eda.nokia.com_edgepings.yaml
+resource_name: RouterInterconnect
+resource_name_plural: routerinterconnects
+resource_name_plural_title: Router Interconnects
+resource_name_acronym: RI
+crd_path: docs/services.eda.nokia.com/crds/services.eda.nokia.com_routerinterconnects.yaml
 # 'auto-crd' will automatically select between the normal resource and workflow icon
 icon: auto-crd
 ---
 
-# Edge Ping
+# Router Interconnect
 
 -{{% import 'icons.html' as icons %}}-
 
