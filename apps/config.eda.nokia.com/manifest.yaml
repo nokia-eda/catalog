@@ -4,13 +4,13 @@ metadata:
   name: config
 spec:
   group: config.eda.nokia.com
-  version: v1alpha1
+  version: v1
   title: Configuration
   description: |
     This application provides simple resources allowing device specific configuration.
 
     In particular it provides the Configlet resource, which allows JSON configuration to be applied to devices.
-  image: ghcr.io/nokia-eda/apps/config:v5.0.3
+  image: ghcr.io/nokia-eda/apps/config:v6.0.0
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
   author: Nokia
@@ -19,14 +19,16 @@ spec:
     - "srl:25.3.*"
     - "srl:25.7.*"
     - "srl:25.10.*"
+    - "srl:26.3.*"
     - "sros:24.10.r4+"
     - "sros:25.3.r2+"
     - "sros:25.7.*"
     - "sros:25.10.*"
+    - "sros:26.3.*"
     - "eos:4.33.2f:beta"
     - "nxos:10.5.2:alpha"
   supportedCoreVersions:
-    - "v4.0"
+    - "v5.0"
   appInfo:
     documentation: config/docs
     categories:
@@ -41,16 +43,19 @@ spec:
         ui:
           category: Configuration
           name: Configlets
+          icon: FileJson
+        conversionScript: config/intents/configlet/conversion_v1.py
         names:
+          plural: configlets
           singular: configlet
           kind: Configlet
           listKind: ConfigletList
-          plural: configlets
     - crd:
         path: config/crds/config.eda.nokia.com_configletstates.yaml
         schema: config/openapiv3/eda_oas_config.eda.nokia.com_configletstates.json
         api:
           expose: none
+        conversionScript: config/intents/configletstate/conversion_v1.py
         names:
           plural: configletstates
           singular: configletstate
@@ -74,4 +79,8 @@ spec:
     - file:
         path: config/intents
     - file:
-        path: config/api/v1alpha1/pysrc
+        path: config/api
+    - file:
+        path: config/api/v1/pysrc
+    - file:
+        path: core/pysrc/
