@@ -8,7 +8,7 @@ spec:
       - networking
     documentation: oam/docs
     ociSpecVersion: v1.0.0
-  author: Nokia
+  author: nokia
   components:
     - crd:
         api:
@@ -19,6 +19,8 @@ spec:
         ui:
           category: OAM
           name: Mirror
+          icon: CloudUpgrade
+        conversionScript: oam/intents/mirror/conversion_v1.py
         names:
           plural: mirrors
           singular: mirror
@@ -28,6 +30,7 @@ spec:
         namespaced: true
         path: oam/crds/oam.eda.nokia.com_mirrorstates.yaml
         schema: oam/openapiv3/eda_oas_oam.eda.nokia.com_mirrorstates.json
+        conversionScript: oam/intents/mirrorstate/conversion_v1.py
         names:
           plural: mirrorstates
           singular: mirrorstate
@@ -58,21 +61,25 @@ spec:
           matchTags:
             - main
             - alarm
+            - netops
         ui:
           name: Ping
+        conversionScript: oam/intents/ping/conversion_v1.py
         names:
-          plural: pings
           singular: ping
           kind: Ping
           listKind: PingList
+          plural: pings
     - crd:
         path: oam/crds/oam.eda.nokia.com_thresholds.yaml
         schema: oam/openapiv3/eda_oas_oam.eda.nokia.com_thresholds.json
         ui:
           category: OAM
           name: Thresholds
+          icon: ThresholdAlarm
         api:
           expose: readWrite
+        conversionScript: oam/intents/threshold/conversion_v1.py
         names:
           plural: thresholds
           singular: threshold
@@ -81,6 +88,11 @@ spec:
     - script:
         path: oam/intents/threshold/threshold_intent.py
         type: state
+        trigger:
+          kind: Threshold
+    - script:
+        path: oam/intents/threshold/threshold_intent.py
+        type: config
         trigger:
           kind: Threshold
     - crd:
@@ -95,16 +107,15 @@ spec:
         ai:
           matchTags:
             - main
+        conversionScript: oam/intents/techsupport/conversion_v1.py
         names:
-          plural: techsupports
           singular: techsupport
           kind: TechSupport
           listKind: TechSupportList
+          plural: techsupports
   dependencies:
     - file:
         path: oam/intents
-    - file:
-        path: oam/api/v1alpha1/pysrc
     - file:
         path: common/
     - file:
@@ -118,40 +129,44 @@ spec:
     - file:
         path: qos/
     - file:
-        path: oam/api/v1alpha1/pysrc/
+        path: oam/api
     - file:
         path: routing/
     - file:
         path: topologies/
+    - file:
+        path: oam/api/v1/pysrc
   requirements:
     - appId: services.eda.nokia.com
-      version: v5.0.3
+      version: v6.0.0
     - appId: filters.eda.nokia.com
-      version: v5.0.3
+      version: v6.0.0
     - appId: interfaces.eda.nokia.com
-      version: v5.0.3
+      version: v6.0.0
     - appId: qos.eda.nokia.com
-      version: v5.0.3
+      version: v6.0.0
     - appId: topologies.eda.nokia.com
-      version: v5.0.3
+      version: v6.0.0
   description: |
     This application provides the ping workflow, along with mirroring services for interfaces, subinterfaces and ipfilters.
   gitPathPrefix: /
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   group: oam.eda.nokia.com
-  image: ghcr.io/nokia-eda/apps/oam:v5.0.3
+  image: ghcr.io/nokia-eda/apps/oam:v6.0.0
   supportedCoreVersions:
-    - "v4.0"
+    - "v5.0"
   supportedEndpoints:
     - "srl:24.10.*"
     - "srl:25.3.*"
     - "srl:25.7.*"
     - "srl:25.10.*"
+    - "srl:26.3.*"
     - "sros:24.10.r4+"
     - "sros:25.3.r2+"
     - "sros:25.7.*"
     - "sros:25.10.*"
+    - "sros:26.3.*"
     - "eos:4.33.2f:beta"
     - "nxos:10.5.2:alpha"
   title: OAM
-  version: v1alpha1
+  version: v1
