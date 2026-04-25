@@ -4,13 +4,13 @@ metadata:
   name: bootstrap
 spec:
   group: bootstrap.eda.nokia.com
-  version: v1alpha1
+  version: v1
   title: Bootstrap
   description: |
     This application provides device bootstrap for various Network Operating Systems.
 
     It generates initial device configuration for Zero Touch Provisioning (ZTP).
-  image: ghcr.io/nokia-eda/apps/bootstrap:v5.0.3
+  image: ghcr.io/nokia-eda/apps/bootstrap:v6.0.0
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
   author: Nokia
@@ -24,37 +24,43 @@ spec:
     - "srl:25.3.*"
     - "srl:25.7.*"
     - "srl:25.10.*"
+    - "srl:26.3.*"
     - "sros:24.10.r4+"
     - "sros:25.3.r2+"
     - "sros:25.7.*"
     - "sros:25.10.*"
+    - "sros:26.3.*"
     - "eos:4.33.2f:beta"
     - "nxos:10.5.2:alpha"
   supportedCoreVersions:
-    - "v4.0"
+    - "v5.0"
   components:
     - crd:
         path: bootstrap/crds/bootstrap.eda.nokia.com_inits.yaml
         schema: bootstrap/openapiv3/eda_oas_bootstrap.eda.nokia.com_inits.json
         ui:
-          category: Node Management
+          category: Node Onboarding
           name: Bootstrap
+          icon: Bulk
           panel: system_administration
         api:
           expose: readWrite
+        conversionScript: bootstrap/intents/init/conversion_v1.py
         names:
-          plural: inits
-          singular: init
           kind: Init
           listKind: InitList
+          plural: inits
+          singular: init
     - crd:
         path: bootstrap/crds/bootstrap.eda.nokia.com_managementrouters.yaml
         schema: bootstrap/openapiv3/eda_oas_bootstrap.eda.nokia.com_managementrouters.json
         ui:
-          category: Management Router
+          category: Node Onboarding
           name: Management Routers
+          icon: IcmpPing
         api:
           expose: readWrite
+        conversionScript: bootstrap/intents/managementrouter/conversion_v1.py
         names:
           plural: managementrouters
           singular: managementrouter
@@ -66,10 +72,10 @@ spec:
         api:
           expose: none
         names:
+          listKind: ManagementRouterStateList
           plural: managementrouterstates
           singular: managementrouterstate
           kind: ManagementRouterState
-          listKind: ManagementRouterStateList
     - cr:
         path: bootstrap/resources/init-base.yaml
     - script:
@@ -89,12 +95,68 @@ spec:
         type: state
         trigger:
           kind: ManagementRouterState
+    - cr:
+        path: bootstrap/workflows/rotatecertificate/core_v1_flowdefinition.yaml
+    - crd:
+        api:
+          expose: readWrite
+        path: bootstrap/crds/bootstrap.eda.nokia.com_rotatecertificates.yaml
+        schema: bootstrap/openapiv3/eda_oas_bootstrap.eda.nokia.com_rotatecertificates.json
+        workflow: true
+        ui:
+          name: Rotate Certificates
+        conversionScript: bootstrap/intents/rotatecertificate/conversion_v1.py
+        names:
+          plural: rotatecertificates
+          singular: rotatecertificate
+          kind: RotateCertificate
+          listKind: RotateCertificateList
+    - crd:
+        api:
+          expose: read
+        path: bootstrap/crds/bootstrap.eda.nokia.com_satellites.yaml
+        schema: bootstrap/openapiv3/eda_oas_bootstrap.eda.nokia.com_satellites.json
+        ui:
+          category: Topology
+          name: Satellites
+          icon: Satellite
+        names:
+          plural: satellites
+          singular: satellite
+          kind: Satellite
+          listKind: SatelliteList
+    - crd:
+        api:
+          expose: none
+        path: bootstrap/crds/bootstrap.eda.nokia.com_satellitestates.yaml
+        schema: bootstrap/openapiv3/eda_oas_bootstrap.eda.nokia.com_satellitestates.json
+        names:
+          singular: satellitestate
+          kind: SatelliteState
+          listKind: SatelliteStateList
+          plural: satellitestates
+    - script:
+        path: bootstrap/intents/satellitestate/state_intent.py
+        trigger:
+          kind: SatelliteState
+        type: state
+  requirements:
+    - appId: aaa.eda.nokia.com
+      version: v6.0.0
+    - appId: interfaces.eda.nokia.com
+      version: v6.0.0
   dependencies:
     - file:
         path: bootstrap/intents
     - file:
-        path: bootstrap/api/v1alpha1/pysrc
-    - file:
         path: common/
     - file:
         path: utils/
+    - file:
+        path: bootstrap/api
+    - file:
+        path: aaa/api
+    - file:
+        path: interfaces/api
+    - file:
+        path: bootstrap/api/v1/pysrc

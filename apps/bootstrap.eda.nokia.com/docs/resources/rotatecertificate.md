@@ -1,14 +1,14 @@
 ---
-resource_name: Init
-resource_name_plural: inits
-resource_name_plural_title: Inits
-resource_name_acronym: I
-crd_path: docs/bootstrap.eda.nokia.com/crds/bootstrap.eda.nokia.com_inits.yaml
+resource_name: RotateCertificate
+resource_name_plural: rotatecertificates
+resource_name_plural_title: Rotate Certificates
+resource_name_acronym: RC
+crd_path: docs/bootstrap.eda.nokia.com/crds/bootstrap.eda.nokia.com_rotatecertificates.yaml
 # 'auto-crd' will automatically select between the normal resource and workflow icon
 icon: auto-crd
 ---
 
-# Init
+# Rotate Certificate
 
 -{{% import 'icons.html' as icons %}}-
 
