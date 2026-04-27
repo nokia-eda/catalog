@@ -8,10 +8,10 @@ spec:
   title: Kafka Importer
   author: Nokia
   description: Import data into EDB from Kafka brokers
-  image: ghcr.io/nokia-eda/apps/kafka-importer:v1.0.0
+  image: ghcr.io/nokia-eda/apps/kafka-importer:v2.0.0
   gitPathPrefix: /
   supportedCoreVersions:
-    - "v4.0"
+    - "v5.0"
   appInfo:
     readme: README.md
     documentation: DOCUMENTATION.md
@@ -34,7 +34,7 @@ spec:
           name: Consumer
         kubernetes:
           exportPolicy: all
-          importPolicy: spec
+          importPolicy: all
         names:
           plural: consumers
           singular: consumer
@@ -51,12 +51,12 @@ spec:
           name: Cluster Consumer
         kubernetes:
           exportPolicy: all
-          importPolicy: spec
+          importPolicy: all
         names:
+          plural: clusterconsumers
           singular: clusterconsumer
           kind: ClusterConsumer
           listKind: ClusterConsumerList
-          plural: clusterconsumers
     - cr:
         path: ki/manifests/webhook.yaml
     - cr:
@@ -64,4 +64,4 @@ spec:
   dependencies:
     - container:
         name: kafka-importer-controller
-        image: ghcr.io/nokia-eda/apps/kafka-importer-controller:v1.0.0
+        image: image/kafka-importer-controller
