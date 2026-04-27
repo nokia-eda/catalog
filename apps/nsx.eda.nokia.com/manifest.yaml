@@ -2,45 +2,49 @@
 apiVersion: core.eda.nokia.com/v1
 kind: Manifest
 metadata:
-  name: nsx-plugin
+  name: nsx
 spec:
   title: NSX Plugin Operator
   description: A plugin integrating VMware NSX with Cloud Connect
   appInfo:
     categories:
       - "integrations"
-    documentation: nsx_plugin/docs
+    documentation: nsx/docs
     ociSpecVersion: v1.0.0
   group: nsx.eda.nokia.com
-  version: v1
+  version: v2
   author: Nokia
-  image: ghcr.io/nokia-eda/apps/nsx-plugin:v5.0.0
+  image: ghcr.io/nokia-eda/apps/nsx-plugin:v6.0.0
   supportedCoreVersions:
-    - "v4.0.0"
+    - "v5.0.0"
   requirements:
     - appId: vmware.eda.nokia.com
-      version: "v5.0.*"
+      version: "v6.0.*"
   components:
     - crd:
         api:
           expose: readWrite
-        path: nsx_plugin/crds/nsx.eda.nokia.com_nsxplugininstances.yaml
-        schema: nsx_plugin/openapiv3/eda_oas_nsx.eda.nokia.com_nsxplugininstances.json
+        path: nsx/crds/nsx.eda.nokia.com_nsxplugininstances.yaml
+        schema: nsx/openapiv3/eda_oas_nsx.eda.nokia.com_nsxplugininstances.json
         namespaced: false
         ui:
           category: Connect
           name: NSX Plugins
           panel: system_administration
+          icon: ConnectionInternal
         kubernetes:
           exportPolicy: all
           importPolicy: all
+        conversionScript: nsx/intents/nsxplugininstance/conversion_v2.py
         names:
-          listKind: NSXPluginInstanceList
           plural: nsxplugininstances
           singular: nsxplugininstance
           kind: NSXPluginInstance
+          listKind: NSXPluginInstanceList
+    - cr:
+        path: nsx/alarms/alarms.yaml
     - script:
-        path: nsx_plugin/intents/nsxplugininstance/config_intent.py
+        path: nsx/intents/nsxplugininstance/config_intent.py
         trigger:
           kind: NSXPluginInstance
         type: config
@@ -50,9 +54,11 @@ spec:
     - file:
         path: common
     - file:
-        path: nsx_plugin/intents
+        path: nsx/intents
     - file:
-        path: nsx_plugin/api/v1/pysrc
+        path: nsx/api
+    - file:
+        path: nsx/alarms/pysrc
     - container:
         name: nsx-plugin-container
-        image: eda.nokia.com/nokia-eda/eda-connect-nsx-plugin:v5.0.0
+        image: image/nsx-plugin-container

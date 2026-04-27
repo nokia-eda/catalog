@@ -1,0 +1,17 @@
+apiVersion: nsx.eda.nokia.com/v2
+kind: NSXPluginInstance
+metadata:
+  name: my-nsx-plugin-instance
+  namespace: eda-system
+spec:
+  authSecretRef: my-nsx-creds
+  externalId: example-external-id
+  heartbeatIntervalSeconds: 2
+  name: NSX-andc
+  nsxManagementIP: 10.10.10.10
+  nsxPollIntervalSeconds: 2
+  nsxTlsVerify: false
+  nsxCertificate: ""
+  vCenters:
+    - vCenterFQDN: 20.20.20.20
+      vmwarePluginName: vmware-plugin-1
