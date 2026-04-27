@@ -4,14 +4,14 @@ metadata:
   name: nats-exporter
 spec:
   group: nats.eda.nokia.com
-  version: v1alpha1
+  version: v1
   title: NATS Exporter
   description: Publish EDA alarms or any EDB object to a NATS cluster.
-  image: ghcr.io/nokia-eda/nats-exporter:v3.0.0
+  image: ghcr.io/nokia-eda/apps/nats-exporter:v4.0.0
   author: Nokia
   gitPathPrefix: /
   supportedCoreVersions:
-    - "v4.0"
+    - "v5.0"
   appInfo:
     readme: README.md
     documentation: DOCUMENTATION.md
@@ -34,6 +34,7 @@ spec:
         kubernetes:
           exportPolicy: all
           importPolicy: all
+        conversionScript: ne/api/v1alpha1/pysrc/conversion_v1.py
         names:
           listKind: ExportList
           plural: exports
@@ -51,6 +52,7 @@ spec:
         kubernetes:
           exportPolicy: all
           importPolicy: all
+        conversionScript: ne/api/v1alpha1/pysrc/conversion_v1.py
         names:
           plural: clusterexports
           singular: clusterexport
@@ -68,11 +70,12 @@ spec:
         kubernetes:
           exportPolicy: all
           importPolicy: all
+        conversionScript: ne/api/v1alpha1/pysrc/conversion_v1.py
         names:
-          plural: publishers
-          singular: publisher
           kind: Publisher
           listKind: PublisherList
+          plural: publishers
+          singular: publisher
     - crd:
         path: ne/config/crd/bases/nats.eda.nokia.com_clusterpublishers.yaml
         schema: ne/docs/openapiv3/eda_oas_nats.eda.nokia.com_clusterpublishers.json
@@ -85,6 +88,7 @@ spec:
         kubernetes:
           exportPolicy: all
           importPolicy: all
+        conversionScript: ne/api/v1alpha1/pysrc/conversion_v1.py
         names:
           listKind: ClusterPublisherList
           plural: clusterpublishers
@@ -94,7 +98,11 @@ spec:
         path: ne/manifests/webhook.yaml
     - cr:
         path: ne/manifests/deployment.yaml
+    - cr:
+        path: alarms/alarms.yaml
   dependencies:
     - container:
         name: nats-exporter-controller
-        image: ghcr.io/nokia-eda/nats-exporter-controller:v3.0.0
+        image: image/nats-exporter-controller
+    - file:
+        path: ne/api/v1alpha1/pysrc
