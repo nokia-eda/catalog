@@ -58,10 +58,10 @@ spec:
           importPolicy: all
         conversionScript: connect/intents/connectaudit/conversion_v2.py
         names:
+          kind: ConnectAudit
           listKind: ConnectAuditList
           plural: connectaudits
           singular: connectaudit
-          kind: ConnectAudit
     - crd:
         api:
           expose: readWrite
@@ -77,10 +77,10 @@ spec:
           importPolicy: all
         conversionScript: connect/intents/connectplugin/conversion_v2.py
         names:
+          listKind: ConnectPluginList
           plural: connectplugins
           singular: connectplugin
           kind: ConnectPlugin
-          listKind: ConnectPluginList
     - crd:
         api:
           expose: readWrite
@@ -91,20 +91,20 @@ spec:
           importPolicy: all
         conversionScript: connect/intents/connectpluginactionable/conversion_v2.py
         names:
-          kind: ConnectPluginActionable
-          listKind: ConnectPluginActionableList
           plural: connectpluginactionables
           singular: connectpluginactionable
+          kind: ConnectPluginActionable
+          listKind: ConnectPluginActionableList
     - crd:
         path: connect/crds/connect.eda.nokia.com_connectpluginheartbeats.yaml
         schema: connect/openapiv3/eda_oas_connect.eda.nokia.com_connectpluginheartbeats.json
         resourceType: Kubernetes
         conversionScript: connect/intents/connectpluginheartbeat/conversion_v2.py
         names:
-          plural: connectpluginheartbeats
-          singular: connectpluginheartbeat
           kind: ConnectPluginHeartbeat
           listKind: ConnectPluginHeartbeatList
+          plural: connectpluginheartbeats
+          singular: connectpluginheartbeat
     - cr:
         path: connect/alarms/alarms.yaml
     - cr:
