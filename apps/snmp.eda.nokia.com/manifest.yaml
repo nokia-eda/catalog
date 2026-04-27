@@ -8,10 +8,10 @@ spec:
   title: SNMP Traps
   author: Nokia
   description: Sends traps to external destinations
-  image: ghcr.io/nokia-eda/apps/snmp-traps:v2.0.0
+  image: ghcr.io/nokia-eda/apps/snmp-traps:v3.0.0
   gitPathPrefix: /
   supportedCoreVersions:
-    - "v4.0"
+    - "v5.0"
   appInfo:
     readme: README.md
     documentation: DOCUMENTATION.md
@@ -21,7 +21,7 @@ spec:
       - st/assets/screenshot2.png
     categories:
       - "monitoring"
-    settings: settings/openapi/eda_oas_snmp.eda.nokia.com_appsettings.json
+    settings: settings-openapi/eda_oas_snmp.eda.nokia.com_appsettings.json
     ociSpecVersion: v1.0.0
   components:
     - crd:
@@ -37,10 +37,10 @@ spec:
           exportPolicy: all
           importPolicy: spec
         names:
+          kind: Destination
           listKind: DestinationList
           plural: destinations
           singular: destination
-          kind: Destination
     - crd:
         path: st/config/crd/bases/snmp.eda.nokia.com_trapgroups.yaml
         schema: st/docs/openapiv3/eda_oas_snmp.eda.nokia.com_trapgroups.json
@@ -88,13 +88,13 @@ spec:
           exportPolicy: all
           importPolicy: spec
         names:
-          kind: ClusterTrapGroup
-          listKind: ClusterTrapGroupList
           plural: clustertrapgroups
           singular: clustertrapgroup
+          kind: ClusterTrapGroup
+          listKind: ClusterTrapGroupList
     - cr:
         path: st/manifests/app_deployment.yaml
   dependencies:
     - container:
         name: snmp-traps-controller
-        image: ghcr.io/nokia-eda/apps/snmp-traps-controller:v2.0.0
+        image: image/snmp-traps-controller
