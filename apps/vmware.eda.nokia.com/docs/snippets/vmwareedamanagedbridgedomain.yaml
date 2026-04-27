@@ -1,0 +1,11 @@
+apiVersion: vmware.eda.nokia.com/v2
+kind: VmwareEDAManagedBridgeDomain
+metadata:
+  name: vmwareedamanagedbridgedomain1
+  namespace: eda-system
+spec:
+  bridgeDomainName: my-bd-name
+  dvpName: my-dvp-name
+  dvsName: my-dvs-name
+  pluginName: my-plugin-name
+

@@ -2,55 +2,83 @@
 apiVersion: core.eda.nokia.com/v1
 kind: Manifest
 metadata:
-  name: vmware-plugin
+  name: vmware
 spec:
   group: vmware.eda.nokia.com
-  version: v1
+  version: v2
   title: Vmware Plugin Operator
   description: A plugin integrating VMware vCenter with Cloud Connect
-  image: ghcr.io/nokia-eda/apps/vmware-plugin:v5.0.0
+  image: ghcr.io/nokia-eda/apps/vmware-plugin:v6.0.0
   author: Nokia
   requirements:
     - appId: connect.eda.nokia.com
-      version: "v5.0.*"
+      version: "v6.0.*"
   supportedCoreVersions:
-    - "v4.0.0"
+    - "v5.0.0"
   appInfo:
     categories:
       - "integrations"
-    documentation: docs
+    documentation: vmware/docs
     ociSpecVersion: v1.0.0
+  dependencies:
+    - file:
+        path: utils
+    - file:
+        path: common
+    - file:
+        path: vmware/intents
+    - file:
+        path: vmware/api
+    - file:
+        path: vmware/alarms/pysrc
+    - container:
+        name: vmware-plugin-container
+        image: image/vmware-plugin-container
   components:
     - crd:
-        path: vmwareplugininstance/crds/vmware.eda.nokia.com_vmwareplugininstances.yaml
+        path: vmware/crds/vmware.eda.nokia.com_vmwareplugininstances.yaml
         namespaced: false
-        schema: vmwareplugininstance/openapiv3/eda_oas_vmware.eda.nokia.com_vmwareplugininstances.json
+        schema: vmware/openapiv3/eda_oas_vmware.eda.nokia.com_vmwareplugininstances.json
         ui:
           category: Connect
           name: VMware Plugins
           panel: system_administration
+          icon: ConnectionInternal
         api:
           expose: readWrite
         kubernetes:
           exportPolicy: all
           importPolicy: all
+        conversionScript: vmware/intents/vmwareplugininstance/conversion_v2.py
         names:
+          plural: vmwareplugininstances
           singular: vmwareplugininstance
           kind: VmwarePluginInstance
           listKind: VmwarePluginInstanceList
-          plural: vmwareplugininstances
+    - crd:
+        api:
+          expose: readWrite
+        kubernetes:
+          exportPolicy: all
+          importPolicy: all
+        path: vmware/crds/vmware.eda.nokia.com_vmwareedamanagedbridgedomains.yaml
+        schema: vmware/openapiv3/eda_oas_vmware.eda.nokia.com_vmwareedamanagedbridgedomains.json
+        ui:
+          category: Connect
+          name: VMware Eda Managed BridgeDomains
+          panel: system_administration
+          icon: ResyncAction
+        names:
+          plural: vmwareedamanagedbridgedomains
+          singular: vmwareedamanagedbridgedomain
+          kind: VmwareEDAManagedBridgeDomain
+          listKind: VmwareEDAManagedBridgeDomainList
+    - cr:
+        path: vmware/alarms/alarms.yaml
+    - cr:
+        path: vmware/crs/cluster-role.yaml
     - script:
-        path: vmwareplugininstance/pysrc/vmwareplugininstance_intent.py
-        type: config
+        path: vmware/intents/vmwareplugininstance/config_intent.py
         trigger:
           kind: VmwarePluginInstance
-  dependencies:
-    - file:
-        path: vmwareplugininstance/pysrc/
-    - file:
-        path: vmwareplugininstance/utils/
-    - file:
-        path: vmwareplugininstance/common/
-    - container:
-        name: vmware-plugin-container
-        image: eda.nokia.com/nokia-eda/eda-connect-vmware-plugin:v5.0.0
+        type: config

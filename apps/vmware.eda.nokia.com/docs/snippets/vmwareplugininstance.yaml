@@ -1,0 +1,14 @@
+apiVersion: vmware.eda.nokia.com/v2
+kind: VmwarePluginInstance
+metadata:
+  name: my-vmware-plugin-instance
+  namespace: eda-system
+spec:
+  authSecretRef: my-vmware-creds
+  externalId: example-external-id
+  heartbeatIntervalSeconds: 2
+  name: vSphere-andc
+  vcsaHost: <complete this>
+  vcsaTlsVerify: false
+  vcsaCertificate: ""
+  operationalMode: Unrestricted
