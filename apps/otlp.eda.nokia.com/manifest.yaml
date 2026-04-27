@@ -7,11 +7,11 @@ spec:
   version: v1alpha1
   title: OTLP Exporter
   description: Publish EDA metrics to an OpenTelemetry receiver.
-  image: ghcr.io/nokia-eda/apps/otlp-exporter:v2.0.0
+  image: ghcr.io/nokia-eda/apps/otlp-exporter:v3.0.0
   author: Nokia
   gitPathPrefix: /
   supportedCoreVersions:
-    - "v4.0"
+    - "v5.0"
   appInfo:
     readme: README.md
     documentation: DOCUMENTATION.md
@@ -20,6 +20,7 @@ spec:
       - ote/assets/logo.png
     categories:
       - "integrations"
+    settings: settings/openapi/eda_oas_otlp.eda.nokia.com_appsettings.json
     ociSpecVersion: v1.0.0
   components:
     - crd:
@@ -35,10 +36,10 @@ spec:
           exportPolicy: all
           importPolicy: all
         names:
-          listKind: MetricExportList
           plural: metricexports
           singular: metricexport
           kind: MetricExport
+          listKind: MetricExportList
     - crd:
         path: ote/config/crd/bases/otlp.eda.nokia.com_clustermetricexports.yaml
         schema: ote/docs/openapiv3/eda_oas_otlp.eda.nokia.com_clustermetricexports.json
@@ -52,10 +53,10 @@ spec:
           exportPolicy: all
           importPolicy: all
         names:
-          listKind: ClusterMetricExportList
           plural: clustermetricexports
           singular: clustermetricexport
           kind: ClusterMetricExport
+          listKind: ClusterMetricExportList
     - crd:
         path: ote/config/crd/bases/otlp.eda.nokia.com_receivers.yaml
         schema: ote/docs/openapiv3/eda_oas_otlp.eda.nokia.com_receivers.json
@@ -69,10 +70,10 @@ spec:
           exportPolicy: all
           importPolicy: all
         names:
-          kind: Receiver
           listKind: ReceiverList
           plural: receivers
           singular: receiver
+          kind: Receiver
     - crd:
         path: ote/config/crd/bases/otlp.eda.nokia.com_clusterreceivers.yaml
         schema: ote/docs/openapiv3/eda_oas_otlp.eda.nokia.com_clusterreceivers.json
@@ -86,15 +87,17 @@ spec:
           exportPolicy: all
           importPolicy: all
         names:
+          plural: clusterreceivers
           singular: clusterreceiver
           kind: ClusterReceiver
           listKind: ClusterReceiverList
-          plural: clusterreceivers
     - cr:
         path: ote/manifests/webhooks.yaml
     - cr:
         path: ote/manifests/app_deployment.yaml
+    - cr:
+        path: alarms/alarms.yaml
   dependencies:
     - container:
         name: otlp-exporter-controller
-        image: ghcr.io/nokia-eda/apps/otlp-exporter-controller:v2.0.0
+        image: image/otlp-exporter-controller
