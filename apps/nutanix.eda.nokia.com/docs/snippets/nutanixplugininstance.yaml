@@ -1,0 +1,14 @@
+apiVersion: nutanix.eda.nokia.com/v2
+kind: NutanixPluginInstance
+metadata:
+  name: my-nutanix-plugin-instance
+  namespace: eda-system
+spec:
+  authSecretRef: my-prism-central-creds
+  heartbeatIntervalSeconds: 2
+  name: nutanix-andc
+  prismCentralHost: https://10.10.10.10:9440
+  prismCentralPollIntervalSeconds: 2
+  prismCentralTlsVerify: false
+  pluginNamespace: "eda"
+  prismCentralCertificate: ""
