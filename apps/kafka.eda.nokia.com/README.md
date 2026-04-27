@@ -3,7 +3,7 @@
 ## Description
 
 This EDA App exports network and EDA notifications to a Kafka Server.
-Users can specify which notifications are exported as well as an export mode one of: `periodic`, `on-change` or both (`periodic-on-change`).
+Users can specify which notifications are exported as well as an export mode one of: `periodic`, `onChange` or both (`periodicOnChange`).
 
 ## Getting started
 
@@ -14,7 +14,7 @@ After installing the App through the appstore, users can specify which notificat
 - Alarms
 
 ```yaml
-apiVersion: kafka.eda.nokia.com/v1alpha1
+apiVersion: kafka.eda.nokia.com/v1
 kind: ClusterProducer
 metadata:
   name: alarms
@@ -32,7 +32,7 @@ spec:
 - Interfaces statistics and states:
 
 ```yaml
-apiVersion: kafka.eda.nokia.com/v1alpha1
+apiVersion: kafka.eda.nokia.com/v1
 kind: ClusterProducer
 metadata:
   name: interfaces
@@ -48,5 +48,5 @@ spec:
         - oper-state
         - admin-state
       topic: interfaces
-      mode: on-change
+      mode: onChange
 ```

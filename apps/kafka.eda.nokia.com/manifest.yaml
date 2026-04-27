@@ -3,15 +3,14 @@ kind: Manifest
 metadata:
   name: kafka-exporter
 spec:
-  image: ghcr.io/nokia-eda/apps/kafka-exporter:v5.0.0
+  image: ghcr.io/nokia-eda/apps/kafka-exporter:v6.0.0
   group: kafka.eda.nokia.com
-  version: v1alpha1
+  version: v1
   title: Kafka Exporter
   description: This application publishes alarms and state information from the network to a kafka cluster.
   author: Nokia
   supportedCoreVersions:
-    - "v4.0"
-    - "v4.0.0-0"
+    - "v5.0"
   appInfo:
     readme: README.md
     documentation: DOCUMENTATION.md
@@ -34,11 +33,12 @@ spec:
         kubernetes:
           exportPolicy: all
           importPolicy: all
+        conversionScript: kx/api/v1alpha1/pysrc/conversion_v1.py
         names:
+          listKind: ProducerList
           plural: producers
           singular: producer
           kind: Producer
-          listKind: ProducerList
     - crd:
         path: kx/config/crd/bases/kafka.eda.nokia.com_clusterproducers.yaml
         schema: kx/docs/openapiv3/eda_oas_kafka.eda.nokia.com_clusterproducers.json
@@ -51,6 +51,7 @@ spec:
         kubernetes:
           exportPolicy: all
           importPolicy: all
+        conversionScript: kx/api/v1alpha1/pysrc/conversion_v1.py
         names:
           plural: clusterproducers
           singular: clusterproducer
@@ -60,7 +61,11 @@ spec:
         path: kx/manifests/webhooks.yaml
     - cr:
         path: kx/manifests/app_deployment.yaml
+    - cr:
+        path: alarms/alarms.yaml
   dependencies:
     - container:
         name: kafka-exporter-controller
-        image: ghcr.io/nokia-eda/apps/kafka-exporter-controller:v5.0.0
+        image: image/kafka-exporter-controller
+    - file:
+        path: kx/api/v1alpha1/pysrc
