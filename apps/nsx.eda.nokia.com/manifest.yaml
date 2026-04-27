@@ -37,10 +37,10 @@ spec:
           importPolicy: all
         conversionScript: nsx/intents/nsxplugininstance/conversion_v2.py
         names:
+          listKind: NSXPluginInstanceList
           plural: nsxplugininstances
           singular: nsxplugininstance
           kind: NSXPluginInstance
-          listKind: NSXPluginInstanceList
     - cr:
         path: nsx/alarms/alarms.yaml
     - script:
