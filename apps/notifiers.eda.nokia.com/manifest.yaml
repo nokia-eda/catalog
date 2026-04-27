@@ -8,11 +8,10 @@ spec:
   title: Notifier
   author: Nokia
   description: Notifies users using external providers
-  image: ghcr.io/nokia-eda/apps/notifier:v5.0.0
+  image: ghcr.io/nokia-eda/apps/notifier:v6.0.0
   gitPathPrefix: /
   supportedCoreVersions:
-    - "v4.0"
-    - "v4.0.0-0"
+    - "v5.0"
   appInfo:
     readme: README.md
     documentation: DOCUMENTATION.md
@@ -38,10 +37,10 @@ spec:
           exportPolicy: all
           importPolicy: spec
         names:
+          listKind: NotifierList
           plural: notifiers
           singular: notifier
           kind: Notifier
-          listKind: NotifierList
     - crd:
         path: notifier/config/crd/bases/notifiers.eda.nokia.com_providers.yaml
         schema: notifier/docs/openapiv3/eda_oas_notifiers.eda.nokia.com_providers.json
@@ -55,10 +54,10 @@ spec:
           exportPolicy: all
           importPolicy: spec
         names:
+          plural: providers
           singular: provider
           kind: Provider
           listKind: ProviderList
-          plural: providers
     - crd:
         path: notifier/config/crd/bases/notifiers.eda.nokia.com_clusternotifiers.yaml
         schema: notifier/docs/openapiv3/eda_oas_notifiers.eda.nokia.com_clusternotifiers.json
@@ -97,7 +96,9 @@ spec:
         path: notifier/manifests/webhooks.yaml
     - cr:
         path: notifier/manifests/app_deployment.yaml
+    - cr:
+        path: alarms/alarms.yaml
   dependencies:
     - container:
         name: notifier-controller
-        image: ghcr.io/nokia-eda/apps/notifier-controller:v5.0.0
+        image: image/notifier-controller
