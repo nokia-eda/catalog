@@ -6,7 +6,7 @@ This EDA App writes network and EDA data to stdout. This enables data export tha
 
 ## Getting started
 
-After installing the App through the appstore, users can specify which sets of data are written using the **Export** Custom Resource (CR) or via the UI by navigating to **Standard Out Exporter**, **Exporters**.
+After installing the App through the appstore, users can specify which sets of data are written using the **StandardOut** Custom Resource (CR) or via the UI by navigating to **Standard Out Exporter**, **StandardOut**.
 
 ## Examples
 
@@ -14,7 +14,7 @@ After installing the App through the appstore, users can specify which sets of d
 
 ```yaml
 apiVersion: stdout.eda.nokia.com/v1alpha1
-kind: Export
+kind: StandardOut
 metadata:
   name: interface-stats
 spec:
@@ -27,7 +27,7 @@ spec:
 
 ```yaml
 apiVersion: stdout.eda.nokia.com/v1alpha1
-kind: Export
+kind: ClusterStandardOut
 metadata:
   name: lldp-stats
 spec:
