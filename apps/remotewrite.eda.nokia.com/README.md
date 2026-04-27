@@ -13,7 +13,7 @@ After installing the App through the appstore, users can specify which sets of m
 - Interfaces statistics:
 
 ```yaml
-apiVersion: remotewrite.eda.nokia.com/v1alpha1
+apiVersion: remotewrite.eda.nokia.com/v1
 kind: Export
 metadata:
   name: interface-stats
@@ -26,7 +26,7 @@ spec:
 - LLDP statistics:
 
 ```yaml
-apiVersion: remotewrite.eda.nokia.com/v1alpha1
+apiVersion: remotewrite.eda.nokia.com/v1
 kind: Export
 metadata:
   name: lldp-stats

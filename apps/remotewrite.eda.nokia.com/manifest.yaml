@@ -4,13 +4,13 @@ metadata:
   name: remote-write
 spec:
   group: remotewrite.eda.nokia.com
-  version: v1alpha1
+  version: v1
   title: Remote Write
   description: This application exports metrics to Remote Server adhering to Prometheus Remote-Write Specifications v1.0.
-  image: ghcr.io/nokia-eda/apps/remote-write:v3.0.0
+  image: ghcr.io/nokia-eda/apps/remote-write:v4.0.0
   author: Nokia
   supportedCoreVersions:
-    - "v4.0"
+    - "v5.0"
   appInfo:
     readme: README.md
     documentation: DOCUMENTATION.md
@@ -35,6 +35,7 @@ spec:
         kubernetes:
           exportPolicy: all
           importPolicy: all
+        conversionScript: prw/intents/destination/conversion_v1.py
         names:
           plural: destinations
           singular: destination
@@ -52,6 +53,7 @@ spec:
         kubernetes:
           exportPolicy: all
           importPolicy: all
+        conversionScript: prw/intents/clusterdestination/conversion_v1.py
         names:
           plural: clusterdestinations
           singular: clusterdestination
@@ -69,11 +71,12 @@ spec:
         kubernetes:
           exportPolicy: all
           importPolicy: all
+        conversionScript: prw/intents/export/conversion_v1.py
         names:
-          listKind: ExportList
           plural: exports
           singular: export
           kind: Export
+          listKind: ExportList
     - crd:
         path: prw/config/crd/bases/remotewrite.eda.nokia.com_clusterexports.yaml
         schema: prw/docs/openapiv3/eda_oas_remotewrite.eda.nokia.com_clusterexports.json
@@ -86,16 +89,25 @@ spec:
         kubernetes:
           exportPolicy: all
           importPolicy: all
+        conversionScript: prw/intents/clusterexport/conversion_v1.py
         names:
-          singular: clusterexport
-          kind: ClusterExport
           listKind: ClusterExportList
           plural: clusterexports
+          singular: clusterexport
+          kind: ClusterExport
     - cr:
         path: prw/manifests/app_deployment.yaml
     - cr:
         path: prw/manifests/webhooks.yaml
+    - cr:
+        path: alarms/alarms.yaml
   dependencies:
     - container:
         name: remote-write-controller
-        image: ghcr.io/nokia-eda/apps/remote-write-controller:v3.0.0
+        image: image/remote-write-controller
+    - file:
+        path: utils
+    - file:
+        path: prw/api/v1alpha1/pysrc
+    - file:
+        path: prw/api/v1/pysrc
