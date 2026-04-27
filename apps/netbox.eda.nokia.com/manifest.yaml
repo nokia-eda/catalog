@@ -7,7 +7,7 @@ spec:
   version: v1alpha1
   title: NetBox
   description: Create EDA allocations from NetBox.
-  image: ghcr.io/nokia-eda/apps/netbox:v3.0.0
+  image: ghcr.io/nokia-eda/apps/netbox:v4.0.0
   author: Nokia
   gitPathPrefix: /
   supportedEndpoints:
@@ -17,7 +17,7 @@ spec:
     - "srl:24.*" # any release in a major
     - "sros:23.7.r1"
   supportedCoreVersions:
-    - "v4.0"
+    - "v5.0"
   appInfo:
     readme: README.md
     documentation: DOCUMENTATION.md
@@ -42,10 +42,10 @@ spec:
           exportPolicy: all
           importPolicy: all
         names:
-          listKind: AllocationList
           plural: allocations
           singular: allocation
           kind: Allocation
+          listKind: AllocationList
     - crd:
         path: nb/config/crd/bases/netbox.eda.nokia.com_instances.yaml
         schema: nb/docs/openapiv3/eda_oas_netbox.eda.nokia.com_instances.json
@@ -77,13 +77,34 @@ spec:
           singular: applyallocation
           kind: ApplyAllocation
           listKind: ApplyAllocationList
+    - crd:
+        path: nb/config/crd/bases/netbox.eda.nokia.com_applytopologies.yaml
+        schema: nb/docs/openapiv3/eda_oas_netbox.eda.nokia.com_applytopologies.json
+        namespaced: true
+        workflow: true
+        api:
+          expose: readWrite
+        ui:
+          name: Apply Topology
+        names:
+          plural: applytopologies
+          singular: applytopology
+          kind: ApplyTopology
+          listKind: ApplyTopologyList
     - cr:
         path: workflows/applyallocation/apply_allocation_flowdefinition.yaml
+    - cr:
+        path: workflows/applytopology/apply_topology_flowdefinition.yaml
     # - cr:
     #     path: nb/manifests/webhooks.yaml
     - cr:
         path: nb/manifests/deployment.yaml
+    - cr:
+        path: alarms/alarms.yaml
+  requirements:
+    - appId: topologies.eda.nokia.com
+      version: v6.0.0
   dependencies:
     - container:
         name: netbox-controller
-        image: ghcr.io/nokia-eda/apps/netbox-controller:v3.0.0
+        image: image/netbox-controller
