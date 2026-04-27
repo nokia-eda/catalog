@@ -7,11 +7,11 @@ spec:
   version: v1alpha1
   title: InfluxDB Exporter
   description: Write EDA alarms or any EDB object to an InfluxDB server.
-  image: ghcr.io/nokia-eda/influxdb-exporter:v2.0.0
+  image: ghcr.io/nokia-eda/influxdb-exporter:v3.0.0
   author: Nokia
   gitPathPrefix: /
   supportedCoreVersions:
-    - "v4.0"
+    - "v5.0"
   appInfo:
     readme: README.md
     documentation: DOCUMENTATION.md
@@ -20,6 +20,7 @@ spec:
       - influx/assets/Influxdb_logo.png
     categories:
       - "integrations"
+    settings: settings/openapi/eda_oas_influxdb.eda.nokia.com_appsettings.json
     ociSpecVersion: v1.0.0
   components:
     - crd:
@@ -35,10 +36,10 @@ spec:
           exportPolicy: all
           importPolicy: all
         names:
-          singular: export
-          kind: Export
           listKind: ExportList
           plural: exports
+          singular: export
+          kind: Export
     - crd:
         path: influx/config/crd/bases/influxdb.eda.nokia.com_clusterexports.yaml
         schema: influx/docs/openapiv3/eda_oas_influxdb.eda.nokia.com_clusterexports.json
@@ -52,10 +53,10 @@ spec:
           exportPolicy: all
           importPolicy: all
         names:
-          kind: ClusterExport
           listKind: ClusterExportList
           plural: clusterexports
           singular: clusterexport
+          kind: ClusterExport
     - crd:
         path: influx/config/crd/bases/influxdb.eda.nokia.com_servers.yaml
         schema: influx/docs/openapiv3/eda_oas_influxdb.eda.nokia.com_servers.json
@@ -86,15 +87,17 @@ spec:
           exportPolicy: all
           importPolicy: all
         names:
-          listKind: ClusterServerList
           plural: clusterservers
           singular: clusterserver
           kind: ClusterServer
+          listKind: ClusterServerList
     - cr:
         path: influx/manifests/webhooks.yaml
     - cr:
         path: influx/manifests/deployment.yaml
+    - cr:
+        path: alarms/alarms.yaml
   dependencies:
     - container:
         name: influxdb-exporter-controller
-        image: ghcr.io/nokia-eda/influxdb-exporter-controller:v2.0.0
+        image: image/influxdb-exporter-controller
