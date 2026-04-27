@@ -39,10 +39,10 @@ spec:
           importPolicy: all
         conversionScript: connect/intents/connectinterface/conversion_v2.py
         names:
+          listKind: ConnectInterfaceList
           plural: connectinterfaces
           singular: connectinterface
           kind: ConnectInterface
-          listKind: ConnectInterfaceList
     - crd:
         api:
           expose: readWrite
@@ -77,10 +77,10 @@ spec:
           importPolicy: all
         conversionScript: connect/intents/connectplugin/conversion_v2.py
         names:
-          listKind: ConnectPluginList
           plural: connectplugins
           singular: connectplugin
           kind: ConnectPlugin
+          listKind: ConnectPluginList
     - crd:
         api:
           expose: readWrite
@@ -101,10 +101,10 @@ spec:
         resourceType: Kubernetes
         conversionScript: connect/intents/connectpluginheartbeat/conversion_v2.py
         names:
-          kind: ConnectPluginHeartbeat
-          listKind: ConnectPluginHeartbeatList
           plural: connectpluginheartbeats
           singular: connectpluginheartbeat
+          kind: ConnectPluginHeartbeat
+          listKind: ConnectPluginHeartbeatList
     - cr:
         path: connect/alarms/alarms.yaml
     - cr:
