@@ -36,10 +36,10 @@ spec:
           exportPolicy: all
           importPolicy: all
         names:
-          listKind: ExportList
           plural: exports
           singular: export
           kind: Export
+          listKind: ExportList
     - crd:
         path: influx/config/crd/bases/influxdb.eda.nokia.com_clusterexports.yaml
         schema: influx/docs/openapiv3/eda_oas_influxdb.eda.nokia.com_clusterexports.json
@@ -53,10 +53,10 @@ spec:
           exportPolicy: all
           importPolicy: all
         names:
-          listKind: ClusterExportList
           plural: clusterexports
           singular: clusterexport
           kind: ClusterExport
+          listKind: ClusterExportList
     - crd:
         path: influx/config/crd/bases/influxdb.eda.nokia.com_servers.yaml
         schema: influx/docs/openapiv3/eda_oas_influxdb.eda.nokia.com_servers.json
@@ -70,10 +70,10 @@ spec:
           exportPolicy: all
           importPolicy: all
         names:
-          plural: servers
           singular: server
           kind: Server
           listKind: ServerList
+          plural: servers
     - crd:
         path: influx/config/crd/bases/influxdb.eda.nokia.com_clusterservers.yaml
         schema: influx/docs/openapiv3/eda_oas_influxdb.eda.nokia.com_clusterservers.json
@@ -87,10 +87,10 @@ spec:
           exportPolicy: all
           importPolicy: all
         names:
-          plural: clusterservers
           singular: clusterserver
           kind: ClusterServer
           listKind: ClusterServerList
+          plural: clusterservers
     - cr:
         path: influx/manifests/webhooks.yaml
     - cr:
