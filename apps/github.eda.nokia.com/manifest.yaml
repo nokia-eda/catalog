@@ -36,10 +36,10 @@ spec:
           exportPolicy: all
           importPolicy: all
         names:
+          singular: githubinstance
           kind: GitHubInstance
           listKind: GitHubInstanceList
           plural: githubinstances
-          singular: githubinstance
     - crd:
         path: gh/config/crd/bases/github.eda.nokia.com_clustergithubinstances.yaml
         schema: gh/docs/openapiv3/eda_oas_github.eda.nokia.com_clustergithubinstances.json
@@ -53,10 +53,10 @@ spec:
           exportPolicy: all
           importPolicy: all
         names:
-          listKind: ClusterGitHubInstanceList
           plural: clustergithubinstances
           singular: clustergithubinstance
           kind: ClusterGitHubInstance
+          listKind: ClusterGitHubInstanceList
     - crd:
         path: gh/config/crd/bases/github.eda.nokia.com_githubactions.yaml
         schema: gh/docs/openapiv3/eda_oas_github.eda.nokia.com_githubactions.json
@@ -87,10 +87,10 @@ spec:
           exportPolicy: all
           importPolicy: all
         names:
-          plural: clustergithubactions
-          singular: clustergithubaction
           kind: ClusterGitHubAction
           listKind: ClusterGitHubActionList
+          plural: clustergithubactions
+          singular: clustergithubaction
     - crd:
         path: gh/config/crd/bases/github.eda.nokia.com_githubissues.yaml
         schema: gh/docs/openapiv3/eda_oas_github.eda.nokia.com_githubissues.json
@@ -104,10 +104,10 @@ spec:
           exportPolicy: all
           importPolicy: all
         names:
+          listKind: GitHubIssueList
           plural: githubissues
           singular: githubissue
           kind: GitHubIssue
-          listKind: GitHubIssueList
     - crd:
         path: gh/config/crd/bases/github.eda.nokia.com_clustergithubissues.yaml
         schema: gh/docs/openapiv3/eda_oas_github.eda.nokia.com_clustergithubissues.json
@@ -121,10 +121,10 @@ spec:
           exportPolicy: all
           importPolicy: all
         names:
+          plural: clustergithubissues
           singular: clustergithubissue
           kind: ClusterGitHubIssue
           listKind: ClusterGitHubIssueList
-          plural: clustergithubissues
     - crd:
         path: gh/config/crd/bases/github.eda.nokia.com_creategithubissues.yaml
         schema: gh/docs/openapiv3/eda_oas_github.eda.nokia.com_creategithubissues.json
@@ -135,10 +135,10 @@ spec:
         ui:
           name: Create Github Issue
         names:
+          plural: creategithubissues
           singular: creategithubissue
           kind: CreateGithubIssue
           listKind: CreateGithubIssueList
-          plural: creategithubissues
     - crd:
         path: gh/config/crd/bases/github.eda.nokia.com_rungithubworkflows.yaml
         schema: gh/docs/openapiv3/eda_oas_github.eda.nokia.com_rungithubworkflows.json
