@@ -39,10 +39,10 @@ spec:
         path: components/crds/components.eda.nokia.com_monitoraggregatestates.yaml
         schema: components/openapiv3/eda_oas_components.eda.nokia.com_monitoraggregatestates.json
         names:
-          plural: monitoraggregatestates
           singular: monitoraggregatestate
           kind: MonitorAggregateState
           listKind: MonitorAggregateStateList
+          plural: monitoraggregatestates
     - script:
         path: components/intents/monitor/monitor_intent.py
         type: config
@@ -81,10 +81,10 @@ spec:
         path: components/crds/components.eda.nokia.com_volumeoverlays.yaml
         schema: components/openapiv3/eda_oas_components.eda.nokia.com_volumeoverlays.json
         names:
-          kind: VolumeOverlay
           listKind: VolumeOverlayList
           plural: volumeoverlays
           singular: volumeoverlay
+          kind: VolumeOverlay
     - script:
         path: components/intents/cpuoverlay/cpu_overlay_intent.py
         trigger:
@@ -108,10 +108,10 @@ spec:
         path: components/crds/components.eda.nokia.com_discoveries.yaml
         schema: components/openapiv3/eda_oas_components.eda.nokia.com_discoveries.json
         names:
-          kind: Discovery
-          listKind: DiscoveryList
           plural: discoveries
           singular: discovery
+          kind: Discovery
+          listKind: DiscoveryList
     - crd:
         api:
           expose: none
@@ -173,10 +173,10 @@ spec:
         path: components/crds/components.eda.nokia.com_clusterdiscoveries.yaml
         schema: components/openapiv3/eda_oas_components.eda.nokia.com_clusterdiscoveries.json
         names:
-          listKind: ClusterDiscoveryList
-          plural: clusterdiscoveries
           singular: clusterdiscovery
           kind: ClusterDiscovery
+          listKind: ClusterDiscoveryList
+          plural: clusterdiscoveries
     - script:
         path: components/intents/clusterdiscovery/clusterdiscovery_intent.py
         trigger:
@@ -214,10 +214,10 @@ spec:
           category: Components
           name: Control Modules
         names:
-          plural: controlmodules
           singular: controlmodule
           kind: ControlModule
           listKind: ControlModuleList
+          plural: controlmodules
     - crd:
         api:
           expose: read
@@ -228,10 +228,10 @@ spec:
           category: Components
           name: Interface Modules
         names:
-          singular: interfacemodule
-          kind: InterfaceModule
           listKind: InterfaceModuleList
           plural: interfacemodules
+          singular: interfacemodule
+          kind: InterfaceModule
     - crd:
         api:
           expose: read
@@ -270,10 +270,10 @@ spec:
           category: Components
           name: Fans
         names:
+          listKind: FanList
           plural: fans
           singular: fan
           kind: Fan
-          listKind: FanList
     - cr:
         path: components/alarms/alarms.yaml
   dependencies:
@@ -304,7 +304,7 @@ spec:
   gitPathPrefix: /
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   group: components.eda.nokia.com
-  image: ghcr.io/nokia-eda/apps/components:v5.0.3
+  image: ghcr.io/nokia-eda/apps/components:v5.0.4
   supportedCoreVersions:
     - "v4.0"
   supportedEndpoints:
