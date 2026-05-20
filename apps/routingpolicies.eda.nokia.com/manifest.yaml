@@ -8,7 +8,7 @@ spec:
   title: Routing Policies
   description: |
     This application provides routing policies for various Network Operating Systems.
-  image: ghcr.io/nokia-eda/apps/routingpolicies:v5.0.3
+  image: ghcr.io/nokia-eda/apps/routingpolicies:v5.0.4
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
   author: Nokia
@@ -63,20 +63,20 @@ spec:
         api:
           expose: readWrite
         names:
+          listKind: PrefixSetList
           plural: prefixsets
           singular: prefixset
           kind: PrefixSet
-          listKind: PrefixSetList
     - crd:
         path: routingpolicies/crds/routingpolicies.eda.nokia.com_prefixsetdeployments.yaml
         schema: routingpolicies/openapiv3/eda_oas_routingpolicies.eda.nokia.com_prefixsetdeployments.json
         api:
           expose: none
         names:
+          listKind: PrefixSetDeploymentList
           plural: prefixsetdeployments
           singular: prefixsetdeployment
           kind: PrefixSetDeployment
-          listKind: PrefixSetDeploymentList
     - crd:
         path: routingpolicies/crds/routingpolicies.eda.nokia.com_communitysets.yaml
         schema: routingpolicies/openapiv3/eda_oas_routingpolicies.eda.nokia.com_communitysets.json
@@ -86,20 +86,20 @@ spec:
         api:
           expose: readWrite
         names:
+          plural: communitysets
           singular: communityset
           kind: CommunitySet
           listKind: CommunitySetList
-          plural: communitysets
     - crd:
         path: routingpolicies/crds/routingpolicies.eda.nokia.com_communitysetdeployments.yaml
         schema: routingpolicies/openapiv3/eda_oas_routingpolicies.eda.nokia.com_communitysetdeployments.json
         api:
           expose: none
         names:
-          kind: CommunitySetDeployment
-          listKind: CommunitySetDeploymentList
           plural: communitysetdeployments
           singular: communitysetdeployment
+          kind: CommunitySetDeployment
+          listKind: CommunitySetDeploymentList
     - script:
         path: routingpolicies/intents/policy/policy_intent.py
         type: config
@@ -159,10 +159,10 @@ spec:
           category: Routing Policies
           name: AS Path Sets
         names:
+          plural: aspathsets
           singular: aspathset
           kind: ASPathSet
           listKind: ASPathSetList
-          plural: aspathsets
     - crd:
         path: routingpolicies/crds/routingpolicies.eda.nokia.com_aspathsetdeployments.yaml
         schema: routingpolicies/openapiv3/eda_oas_routingpolicies.eda.nokia.com_aspathsetdeployments.json
@@ -182,20 +182,20 @@ spec:
           category: Routing Policies
           name: Tag Sets
         names:
-          plural: tagsets
-          singular: tagset
           kind: TagSet
           listKind: TagSetList
+          plural: tagsets
+          singular: tagset
     - crd:
         api:
           expose: readWrite
         path: routingpolicies/crds/routingpolicies.eda.nokia.com_tagsetdeployments.yaml
         schema: routingpolicies/openapiv3/eda_oas_routingpolicies.eda.nokia.com_tagsetdeployments.json
         names:
-          listKind: TagSetDeploymentList
-          plural: tagsetdeployments
           singular: tagsetdeployment
           kind: TagSetDeployment
+          listKind: TagSetDeploymentList
+          plural: tagsetdeployments
   dependencies:
     - file:
         path: routingpolicies/intents
