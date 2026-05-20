@@ -8,7 +8,7 @@ spec:
   title: Services
   description: |
     This application provides EVPN services for various Network Operating Systems.
-  image: ghcr.io/nokia-eda/apps/services:v5.0.3
+  image: ghcr.io/nokia-eda/apps/services:v5.0.4
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
   author: Nokia
@@ -52,10 +52,10 @@ spec:
           expose: none
         conversionScript: services/intents/vlanstate/conversion_v1.py
         names:
-          kind: VLANState
-          listKind: VLANStateList
           plural: vlanstates
           singular: vlanstate
+          kind: VLANState
+          listKind: VLANStateList
     - crd:
         path: services/crds/services.eda.nokia.com_virtualnetworks.yaml
         schema: services/openapiv3/eda_oas_services.eda.nokia.com_virtualnetworks.json
@@ -77,10 +77,10 @@ spec:
           expose: none
         conversionScript: services/intents/virtualnetworkstate/conversion_v1.py
         names:
-          singular: virtualnetworkstate
           kind: VirtualNetworkState
           listKind: VirtualNetworkStateList
           plural: virtualnetworkstates
+          singular: virtualnetworkstate
     - crd:
         path: services/crds/services.eda.nokia.com_routers.yaml
         schema: services/openapiv3/eda_oas_services.eda.nokia.com_routers.json
@@ -129,10 +129,10 @@ spec:
           expose: readWrite
         conversionScript: services/intents/bridgedomain/conversion_v1.py
         names:
-          listKind: BridgeDomainList
-          plural: bridgedomains
           singular: bridgedomain
           kind: BridgeDomain
+          listKind: BridgeDomainList
+          plural: bridgedomains
     - crd:
         path: services/crds/services.eda.nokia.com_bridgedomainstates.yaml
         schema: services/openapiv3/eda_oas_services.eda.nokia.com_bridgedomainstates.json
@@ -140,10 +140,10 @@ spec:
           expose: none
         conversionScript: services/intents/bridgedomainstate/conversion_v1.py
         names:
+          listKind: BridgeDomainStateList
           plural: bridgedomainstates
           singular: bridgedomainstate
           kind: BridgeDomainState
-          listKind: BridgeDomainStateList
     - crd:
         path: services/crds/services.eda.nokia.com_bridgedomaindeployments.yaml
         schema: services/openapiv3/eda_oas_services.eda.nokia.com_bridgedomaindeployments.json
@@ -165,10 +165,10 @@ spec:
           expose: readWrite
         conversionScript: services/intents/bridgeinterface/conversion_v1.py
         names:
-          plural: bridgeinterfaces
-          singular: bridgeinterface
           kind: BridgeInterface
           listKind: BridgeInterfaceList
+          plural: bridgeinterfaces
+          singular: bridgeinterface
     - crd:
         path: services/crds/services.eda.nokia.com_bridgeinterfacestates.yaml
         schema: services/openapiv3/eda_oas_services.eda.nokia.com_bridgeinterfacestates.json
@@ -176,10 +176,10 @@ spec:
           expose: none
         conversionScript: services/intents/bridgeinterfacestate/conversion_v1.py
         names:
+          singular: bridgeinterfacestate
           kind: BridgeInterfaceState
           listKind: BridgeInterfaceStateList
           plural: bridgeinterfacestates
-          singular: bridgeinterfacestate
     - crd:
         path: services/crds/services.eda.nokia.com_routedinterfaces.yaml
         schema: services/openapiv3/eda_oas_services.eda.nokia.com_routedinterfaces.json
@@ -190,10 +190,10 @@ spec:
           expose: readWrite
         conversionScript: services/intents/routedinterface/conversion_v1.py
         names:
-          plural: routedinterfaces
           singular: routedinterface
           kind: RoutedInterface
           listKind: RoutedInterfaceList
+          plural: routedinterfaces
     - crd:
         path: services/crds/services.eda.nokia.com_routedinterfacestates.yaml
         schema: services/openapiv3/eda_oas_services.eda.nokia.com_routedinterfacestates.json
@@ -201,10 +201,10 @@ spec:
           expose: none
         conversionScript: services/intents/routedinterfacestate/conversion_v1.py
         names:
-          plural: routedinterfacestates
           singular: routedinterfacestate
           kind: RoutedInterfaceState
           listKind: RoutedInterfaceStateList
+          plural: routedinterfacestates
     - crd:
         path: services/crds/services.eda.nokia.com_irbinterfaces.yaml
         schema: services/openapiv3/eda_oas_services.eda.nokia.com_irbinterfaces.json
@@ -215,10 +215,10 @@ spec:
           expose: readWrite
         conversionScript: services/intents/irbinterface/conversion_v1.py
         names:
+          listKind: IRBInterfaceList
           plural: irbinterfaces
           singular: irbinterface
           kind: IRBInterface
-          listKind: IRBInterfaceList
     - crd:
         path: services/crds/services.eda.nokia.com_irbinterfacestates.yaml
         schema: services/openapiv3/eda_oas_services.eda.nokia.com_irbinterfacestates.json
@@ -378,10 +378,10 @@ spec:
         ui:
           name: Edge Ping
         names:
-          plural: edgepings
           singular: edgeping
           kind: EdgePing
           listKind: EdgePingList
+          plural: edgepings
     - cr:
         path: services/alarms/alarms.yaml
   dependencies:
@@ -413,14 +413,14 @@ spec:
         path: services/alarms/pysrc
   requirements:
     - appId: protocols.eda.nokia.com
-      version: v5.0.3
+      version: v5.0.4
     - appId: routingpolicies.eda.nokia.com
-      version: v5.0.3
+      version: v5.0.4
     - appId: interfaces.eda.nokia.com
-      version: v5.0.3
+      version: v5.0.4
     - appId: qos.eda.nokia.com
-      version: v5.0.3
+      version: v5.0.4
     - appId: security.eda.nokia.com
-      version: v5.0.3
+      version: v5.0.4
     - appId: filters.eda.nokia.com
-      version: v5.0.3
+      version: v5.0.4
