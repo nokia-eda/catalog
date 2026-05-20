@@ -11,7 +11,7 @@ spec:
   author: nokia
   description: This application provides resources to various management plane entities, such as gRPC, HTTP, FTP and SSH servers.
   group: management.eda.nokia.com
-  image: ghcr.io/nokia-eda/apps/management:v5.0.3
+  image: ghcr.io/nokia-eda/apps/management:v5.0.4
   supportedCoreVersions:
     - "v4.0"
   title: Management
@@ -26,10 +26,10 @@ spec:
           category: Management
           name: gRPC Servers
         names:
-          listKind: GRPCServerList
           plural: grpcservers
           singular: grpcserver
           kind: GRPCServer
+          listKind: GRPCServerList
     - crd:
         api:
           expose: readWrite
@@ -39,10 +39,10 @@ spec:
           category: Management
           name: HTTP Servers
         names:
-          plural: httpservers
           singular: httpserver
           kind: HTTPServer
           listKind: HTTPServerList
+          plural: httpservers
     - crd:
         api:
           expose: readWrite
@@ -52,10 +52,10 @@ spec:
           category: Management
           name: FTP Servers
         names:
-          plural: ftpservers
           singular: ftpserver
           kind: FTPServer
           listKind: FTPServerList
+          plural: ftpservers
     - crd:
         api:
           expose: readWrite
@@ -65,10 +65,10 @@ spec:
           category: Management
           name: SSH Servers
         names:
+          listKind: SSHServerList
           plural: sshservers
           singular: sshserver
           kind: SSHServer
-          listKind: SSHServerList
     - crd:
         path: management/crds/management.eda.nokia.com_ftpserverstates.yaml
         schema: management/openapiv3/eda_oas_management.eda.nokia.com_ftpserverstates.json
@@ -76,10 +76,10 @@ spec:
           expose: none
           # no ui section means do not present in the UI
         names:
-          plural: ftpserverstates
           singular: ftpserverstate
           kind: FTPServerState
           listKind: FTPServerStateList
+          plural: ftpserverstates
     - script:
         path: management/intents/ftpserver/ftpserver_intent.py
         trigger:
@@ -111,10 +111,10 @@ spec:
         path: management/crds/management.eda.nokia.com_sshserverstates.yaml
         schema: management/openapiv3/eda_oas_management.eda.nokia.com_sshserverstates.json
         names:
+          plural: sshserverstates
           singular: sshserverstate
           kind: SSHServerState
           listKind: SSHServerStateList
-          plural: sshserverstates
     - script:
         path: management/intents/sshserverstate/sshserverstate_intent.py
         trigger:
@@ -141,10 +141,10 @@ spec:
         path: management/crds/management.eda.nokia.com_grpcserverstates.yaml
         schema: management/openapiv3/eda_oas_management.eda.nokia.com_grpcserverstates.json
         names:
-          plural: grpcserverstates
           singular: grpcserverstate
           kind: GRPCServerState
           listKind: GRPCServerStateList
+          plural: grpcserverstates
     - script:
         path: management/intents/grpcserverstate/grpcserverstate_intent.py
         trigger:
@@ -152,11 +152,11 @@ spec:
         type: state
   requirements:
     - appId: routing.eda.nokia.com
-      version: v5.0.3
+      version: v5.0.4
     - appId: services.eda.nokia.com
-      version: v5.0.3
+      version: v5.0.4
     - appId: bootstrap.eda.nokia.com
-      version: v5.0.3
+      version: v5.0.4
   dependencies:
     - file:
         path: management/intents
