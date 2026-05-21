@@ -33,10 +33,10 @@ spec:
           exportPolicy: all
           importPolicy: all
         names:
-          plural: connectpluginactionables
           singular: connectpluginactionable
           kind: ConnectPluginActionable
           listKind: ConnectPluginActionableList
+          plural: connectpluginactionables
     - crd:
         path: eda-connect-plugin-controller/config/crd/bases/connect.eda.nokia.com_connectaudits.yaml
         schema: eda-connect-plugin-controller/openapiv3/eda_oas_connect.eda.nokia.com_connectaudits.json
@@ -59,10 +59,10 @@ spec:
         schema: eda-connect-plugin-controller/openapiv3/eda_oas_connect.eda.nokia.com_connectpluginheartbeats.json
         resourceType: Kubernetes
         names:
-          plural: connectpluginheartbeats
-          singular: connectpluginheartbeat
           kind: ConnectPluginHeartbeat
           listKind: ConnectPluginHeartbeatList
+          plural: connectpluginheartbeats
+          singular: connectpluginheartbeat
     - crd:
         path: eda-connect-plugin-controller/config/crd/bases/connect.eda.nokia.com_connectplugins.yaml
         schema: eda-connect-plugin-controller/openapiv3/eda_oas_connect.eda.nokia.com_connectplugins.json
@@ -76,10 +76,10 @@ spec:
           exportPolicy: all
           importPolicy: all
         names:
-          kind: ConnectPlugin
-          listKind: ConnectPluginList
           plural: connectplugins
           singular: connectplugin
+          kind: ConnectPlugin
+          listKind: ConnectPluginList
     - crd:
         path: eda-connect-interface-controller/config/crd/bases/connect.eda.nokia.com_connectinterfaces.yaml
         schema: eda-connect-interface-controller/openapiv3/eda_oas_connect.eda.nokia.com_connectinterfaces.json
