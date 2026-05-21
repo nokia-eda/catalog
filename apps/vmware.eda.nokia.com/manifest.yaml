@@ -8,7 +8,7 @@ spec:
   version: v1
   title: Vmware Plugin Operator
   description: A plugin integrating VMware vCenter with Cloud Connect
-  image: ghcr.io/nokia-eda/apps/vmware-plugin:v5.0.0
+  image: ghcr.io/nokia-eda/apps/vmware-plugin:v5.0.1
   author: Nokia
   requirements:
     - appId: connect.eda.nokia.com
@@ -35,10 +35,10 @@ spec:
           exportPolicy: all
           importPolicy: all
         names:
+          plural: vmwareplugininstances
           singular: vmwareplugininstance
           kind: VmwarePluginInstance
           listKind: VmwarePluginInstanceList
-          plural: vmwareplugininstances
     - script:
         path: vmwareplugininstance/pysrc/vmwareplugininstance_intent.py
         type: config
@@ -53,4 +53,4 @@ spec:
         path: vmwareplugininstance/common/
     - container:
         name: vmware-plugin-container
-        image: eda.nokia.com/nokia-eda/eda-connect-vmware-plugin:v5.0.0
+        image: eda.nokia.com/nokia-eda/eda-connect-vmware-plugin:v5.0.1
