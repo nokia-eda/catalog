@@ -14,7 +14,7 @@ spec:
   group: nsx.eda.nokia.com
   version: v1
   author: Nokia
-  image: ghcr.io/nokia-eda/apps/nsx-plugin:v5.0.0
+  image: ghcr.io/nokia-eda/apps/nsx-plugin:v5.0.1
   supportedCoreVersions:
     - "v4.0.0"
   requirements:
@@ -55,4 +55,4 @@ spec:
         path: nsx_plugin/api/v1/pysrc
     - container:
         name: nsx-plugin-container
-        image: eda.nokia.com/nokia-eda/eda-connect-nsx-plugin:v5.0.0
+        image: eda.nokia.com/nokia-eda/eda-connect-nsx-plugin:v5.0.1
