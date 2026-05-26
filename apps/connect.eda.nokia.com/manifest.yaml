@@ -15,7 +15,7 @@ spec:
     settings: connect/settings/openapi/eda_oas_connect.eda.nokia.com_appsettings.json
     ociSpecVersion: v1.0.0
   description: Cloud Connect bridges the hypervisor world with the fabric world, allowing automatic fabric configuration based on the state of the cloud environment.
-  image: ghcr.io/nokia-eda/apps/connect:v6.0.0
+  image: ghcr.io/nokia-eda/apps/connect:v6.0.1
   supportedCoreVersions:
     - "v5.0.0"
   requirements:
@@ -39,10 +39,10 @@ spec:
           importPolicy: all
         conversionScript: connect/intents/connectinterface/conversion_v2.py
         names:
-          listKind: ConnectInterfaceList
-          plural: connectinterfaces
           singular: connectinterface
           kind: ConnectInterface
+          listKind: ConnectInterfaceList
+          plural: connectinterfaces
     - crd:
         api:
           expose: readWrite
@@ -58,10 +58,10 @@ spec:
           importPolicy: all
         conversionScript: connect/intents/connectaudit/conversion_v2.py
         names:
-          kind: ConnectAudit
-          listKind: ConnectAuditList
           plural: connectaudits
           singular: connectaudit
+          kind: ConnectAudit
+          listKind: ConnectAuditList
     - crd:
         api:
           expose: readWrite
@@ -77,10 +77,10 @@ spec:
           importPolicy: all
         conversionScript: connect/intents/connectplugin/conversion_v2.py
         names:
-          plural: connectplugins
           singular: connectplugin
           kind: ConnectPlugin
           listKind: ConnectPluginList
+          plural: connectplugins
     - crd:
         api:
           expose: readWrite
