@@ -10,7 +10,7 @@ spec:
     This application provides functionality relating to authentication, authorization, and accounting.
 
     It allows the deployment of users, groups, and AAA policy, performing any alarming as necessary.
-  image: ghcr.io/nokia-eda/apps/aaa:v6.0.0
+  image: ghcr.io/nokia-eda/apps/aaa:v6.0.1
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
   author: nokia
@@ -130,10 +130,10 @@ spec:
         path: aaa/crds/aaa.eda.nokia.com_servergroupstates.yaml
         schema: aaa/openapiv3/eda_oas_aaa.eda.nokia.com_servergroupstates.json
         names:
+          singular: servergroupstate
           kind: ServerGroupState
           listKind: ServerGroupStateList
           plural: servergroupstates
-          singular: servergroupstate
     - script:
         path: aaa/intents/servergroupstate/servergroupstate_intent.py
         trigger:
