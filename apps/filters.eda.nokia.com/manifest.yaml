@@ -8,7 +8,7 @@ spec:
   title: Filters
   description: |
     This application provides resources relating to filtering for various Network Operating Systems.
-  image: ghcr.io/nokia-eda/apps/filters:v6.0.0
+  image: ghcr.io/nokia-eda/apps/filters:v6.0.1
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
   author: Nokia
@@ -44,10 +44,10 @@ spec:
           expose: readWrite
         conversionScript: filters/intents/filter/conversion_v1.py
         names:
-          plural: filters
           singular: filter
           kind: Filter
           listKind: FilterList
+          plural: filters
     - crd:
         path: filters/crds/filters.eda.nokia.com_controlplanefilters.yaml
         schema: filters/openapiv3/eda_oas_filters.eda.nokia.com_controlplanefilters.json
@@ -59,10 +59,10 @@ spec:
           expose: readWrite
         conversionScript: filters/intents/controlplanefilter/conversion_v1.py
         names:
-          plural: controlplanefilters
           singular: controlplanefilter
           kind: ControlPlaneFilter
           listKind: ControlPlaneFilterList
+          plural: controlplanefilters
     # - crd:
     #     path: filters/crds/filters.eda.nokia.com_ipfilterstates.yaml
     #     schema: filters/openapiv3/eda_oas_filters.eda.nokia.com_ipfilterstates.json
@@ -74,10 +74,10 @@ spec:
           expose: none
         conversionScript: filters/intents/filterdeployment/conversion_v1.py
         names:
+          listKind: FilterDeploymentList
           plural: filterdeployments
           singular: filterdeployment
           kind: FilterDeployment
-          listKind: FilterDeploymentList
     - crd:
         path: filters/crds/filters.eda.nokia.com_mirrorfilterdeployments.yaml
         schema: filters/openapiv3/eda_oas_filters.eda.nokia.com_mirrorfilterdeployments.json
@@ -85,10 +85,10 @@ spec:
           expose: none
         conversionScript: filters/intents/mirrorfilterdeployment/conversion_v1.py
         names:
-          listKind: MirrorFilterDeploymentList
           plural: mirrorfilterdeployments
           singular: mirrorfilterdeployment
           kind: MirrorFilterDeployment
+          listKind: MirrorFilterDeploymentList
     - crd:
         path: filters/crds/filters.eda.nokia.com_mirrorfilters.yaml
         schema: filters/openapiv3/eda_oas_filters.eda.nokia.com_mirrorfilters.json
@@ -145,10 +145,10 @@ spec:
         path: filters/crds/filters.eda.nokia.com_prefixsetdeployments.yaml
         schema: filters/openapiv3/eda_oas_filters.eda.nokia.com_prefixsetdeployments.json
         names:
-          kind: PrefixSetDeployment
-          listKind: PrefixSetDeploymentList
           plural: prefixsetdeployments
           singular: prefixsetdeployment
+          kind: PrefixSetDeployment
+          listKind: PrefixSetDeploymentList
     - script:
         path: filters/intents/prefixset/config_intent.py
         trigger:
