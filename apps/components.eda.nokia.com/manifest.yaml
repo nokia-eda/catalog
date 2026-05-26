@@ -32,10 +32,10 @@ spec:
         schema: components/openapiv3/eda_oas_components.eda.nokia.com_monitorstates.json
         conversionScript: components/intents/monitorstate/conversion_v2.py
         names:
+          listKind: MonitorStateList
           plural: monitorstates
           singular: monitorstate
           kind: MonitorState
-          listKind: MonitorStateList
     - crd:
         api:
           expose: none
@@ -43,10 +43,10 @@ spec:
         schema: components/openapiv3/eda_oas_components.eda.nokia.com_monitoraggregatestates.json
         conversionScript: components/intents/monitoraggregatestate/conversion_v2.py
         names:
+          singular: monitoraggregatestate
           kind: MonitorAggregateState
           listKind: MonitorAggregateStateList
           plural: monitoraggregatestates
-          singular: monitoraggregatestate
     - script:
         path: components/intents/monitor/monitor_intent.py
         type: config
@@ -88,10 +88,10 @@ spec:
         schema: components/openapiv3/eda_oas_components.eda.nokia.com_volumeoverlays.json
         conversionScript: components/intents/volumeoverlay/conversion_v2.py
         names:
-          listKind: VolumeOverlayList
-          plural: volumeoverlays
           singular: volumeoverlay
           kind: VolumeOverlay
+          listKind: VolumeOverlayList
+          plural: volumeoverlays
     - script:
         path: components/intents/cpuoverlay/cpu_overlay_intent.py
         trigger:
@@ -115,10 +115,10 @@ spec:
         path: components/crds/components.eda.nokia.com_discoveries.yaml
         schema: components/openapiv3/eda_oas_components.eda.nokia.com_discoveries.json
         names:
-          plural: discoveries
           singular: discovery
           kind: Discovery
           listKind: DiscoveryList
+          plural: discoveries
     - crd:
         api:
           expose: none
@@ -127,10 +127,10 @@ spec:
         schema: components/openapiv3/eda_oas_components.eda.nokia.com_discoverystates.json
         conversionScript: components/intents/discoverystate/conversion_v2.py
         names:
-          kind: DiscoveryState
-          listKind: DiscoveryStateList
           plural: discoverystates
           singular: discoverystate
+          kind: DiscoveryState
+          listKind: DiscoveryStateList
     - crd:
         api:
           expose: none
@@ -155,10 +155,10 @@ spec:
           icon: Component
         conversionScript: components/intents/component/conversion_v2.py
         names:
-          listKind: ComponentList
           plural: components
           singular: component
           kind: Component
+          listKind: ComponentList
     - script:
         path: components/intents/discovery/discovery.py
         trigger:
@@ -185,10 +185,10 @@ spec:
         schema: components/openapiv3/eda_oas_components.eda.nokia.com_clusterdiscoveries.json
         conversionScript: components/intents/clusterdiscovery/conversion_v2.py
         names:
+          plural: clusterdiscoveries
           singular: clusterdiscovery
           kind: ClusterDiscovery
           listKind: ClusterDiscoveryList
-          plural: clusterdiscoveries
     - script:
         path: components/intents/clusterdiscovery/clusterdiscovery_intent.py
         trigger:
@@ -214,10 +214,10 @@ spec:
           icon: NeNew
         conversionScript: components/intents/chassis/conversion_v2.py
         names:
-          plural: chassis
-          singular: chassis
           kind: Chassis
           listKind: ChassisList
+          plural: chassis
+          singular: chassis
     - crd:
         api:
           expose: read
@@ -246,10 +246,10 @@ spec:
           icon: LinkAggregationGroupMultiple
         conversionScript: components/intents/interfacemodule/conversion_v2.py
         names:
+          listKind: InterfaceModuleList
           plural: interfacemodules
           singular: interfacemodule
           kind: InterfaceModule
-          listKind: InterfaceModuleList
     - crd:
         api:
           expose: read
@@ -278,10 +278,10 @@ spec:
           icon: PowerSupply
         conversionScript: components/intents/powersupply/conversion_v2.py
         names:
-          kind: PowerSupply
-          listKind: PowerSupplyList
           plural: powersupplies
           singular: powersupply
+          kind: PowerSupply
+          listKind: PowerSupplyList
     - crd:
         api:
           expose: read
@@ -328,7 +328,7 @@ spec:
   gitPathPrefix: /
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   group: components.eda.nokia.com
-  image: ghcr.io/nokia-eda/apps/components:v6.0.0
+  image: ghcr.io/nokia-eda/apps/components:v6.0.1
   supportedCoreVersions:
     - "v5.0"
   supportedEndpoints:
