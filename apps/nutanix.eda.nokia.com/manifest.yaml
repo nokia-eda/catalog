@@ -27,7 +27,7 @@ spec:
         image: image/nutanix-plugin-container
   description: A plugin integrating Nutanix Prism Central with Cloud Connect
   group: nutanix.eda.nokia.com
-  image: ghcr.io/nokia-eda/apps/nutanix-plugin:v6.0.0
+  image: ghcr.io/nokia-eda/apps/nutanix-plugin:v6.0.1
   supportedCoreVersions:
     - "v5.0.0"
   requirements:
