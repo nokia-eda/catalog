@@ -51,10 +51,10 @@ spec:
           importPolicy: all
         conversionScript: vmware/intents/vmwareplugininstance/conversion_v2.py
         names:
+          listKind: VmwarePluginInstanceList
           plural: vmwareplugininstances
           singular: vmwareplugininstance
           kind: VmwarePluginInstance
-          listKind: VmwarePluginInstanceList
     - crd:
         api:
           expose: readWrite
