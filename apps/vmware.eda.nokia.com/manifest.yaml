@@ -8,7 +8,7 @@ spec:
   version: v2
   title: Vmware Plugin Operator
   description: A plugin integrating VMware vCenter with Cloud Connect
-  image: ghcr.io/nokia-eda/apps/vmware-plugin:v6.0.0
+  image: ghcr.io/nokia-eda/apps/vmware-plugin:v6.0.1
   author: Nokia
   requirements:
     - appId: connect.eda.nokia.com
