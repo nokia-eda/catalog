@@ -11,7 +11,7 @@ spec:
   author: nokia
   description: This application provides resources to various management plane entities, such as gRPC, HTTP, FTP and SSH servers.
   group: management.eda.nokia.com
-  image: ghcr.io/nokia-eda/apps/management:v6.0.0
+  image: ghcr.io/nokia-eda/apps/management:v6.0.1
   supportedCoreVersions:
     - "v5.0"
   title: Management
@@ -73,10 +73,10 @@ spec:
           icon: TerminalAction
         conversionScript: management/intents/sshserver/conversion_v1.py
         names:
+          plural: sshservers
           singular: sshserver
           kind: SSHServer
           listKind: SSHServerList
-          plural: sshservers
     - crd:
         path: management/crds/management.eda.nokia.com_ftpserverstates.yaml
         schema: management/openapiv3/eda_oas_management.eda.nokia.com_ftpserverstates.json
@@ -137,10 +137,10 @@ spec:
         schema: management/openapiv3/eda_oas_management.eda.nokia.com_httpserverstates.json
         conversionScript: management/intents/httpserverstate/conversion_v1.py
         names:
-          kind: HTTPServerState
-          listKind: HTTPServerStateList
           plural: httpserverstates
           singular: httpserverstate
+          kind: HTTPServerState
+          listKind: HTTPServerStateList
     - script:
         path: management/intents/httpserverstate/httpserverstate_intent.py
         trigger:
@@ -153,10 +153,10 @@ spec:
         schema: management/openapiv3/eda_oas_management.eda.nokia.com_grpcserverstates.json
         conversionScript: management/intents/grpcserverstate/conversion_v1.py
         names:
+          plural: grpcserverstates
           singular: grpcserverstate
           kind: GRPCServerState
           listKind: GRPCServerStateList
-          plural: grpcserverstates
     - script:
         path: management/intents/grpcserverstate/grpcserverstate_intent.py
         trigger:
@@ -164,11 +164,11 @@ spec:
         type: state
   requirements:
     - appId: routing.eda.nokia.com
-      version: v6.0.0
+      version: v6.0.1
     - appId: services.eda.nokia.com
-      version: v6.0.0
+      version: v6.0.1
     - appId: bootstrap.eda.nokia.com
-      version: v6.0.0
+      version: v6.0.1
   dependencies:
     - file:
         path: management/intents
