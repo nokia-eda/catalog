@@ -8,7 +8,7 @@ spec:
   title: Routing
   description: |
     This application provides underlay routing resources for various Network Operating Systems.
-  image: ghcr.io/nokia-eda/apps/routing:v6.0.0
+  image: ghcr.io/nokia-eda/apps/routing:v6.0.1
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
   author: Nokia
@@ -65,10 +65,10 @@ spec:
           expose: none
         conversionScript: routing/intents/defaultinterfacestate/conversion_v1.py
         names:
+          plural: defaultinterfacestates
           singular: defaultinterfacestate
           kind: DefaultInterfaceState
           listKind: DefaultInterfaceStateList
-          plural: defaultinterfacestates
     - crd:
         path: routing/crds/routing.eda.nokia.com_defaultrouters.yaml
         schema: routing/openapiv3/eda_oas_routing.eda.nokia.com_defaultrouters.json
@@ -80,10 +80,10 @@ spec:
           expose: readWrite
         conversionScript: routing/intents/defaultrouter/conversion_v1.py
         names:
+          listKind: DefaultRouterList
           plural: defaultrouters
           singular: defaultrouter
           kind: DefaultRouter
-          listKind: DefaultRouterList
     - crd:
         path: routing/crds/routing.eda.nokia.com_defaultrouterstates.yaml
         schema: routing/openapiv3/eda_oas_routing.eda.nokia.com_defaultrouterstates.json
@@ -106,10 +106,10 @@ spec:
           expose: readWrite
         conversionScript: routing/intents/drain/conversion_v1.py
         names:
-          plural: drains
-          singular: drain
           kind: Drain
           listKind: DrainList
+          plural: drains
+          singular: drain
     - crd:
         path: routing/crds/routing.eda.nokia.com_drainstates.yaml
         schema: routing/openapiv3/eda_oas_routing.eda.nokia.com_drainstates.json
@@ -210,10 +210,10 @@ spec:
             - netops
         conversionScript: routing/intents/routelookup/conversion_v1.py
         names:
+          plural: routelookups
           singular: routelookup
           kind: RouteLookup
           listKind: RouteLookupList
-          plural: routelookups
     - crd:
         api:
           expose: readWrite
@@ -229,10 +229,10 @@ spec:
             - netops
         conversionScript: routing/intents/routetrace/conversion_v1.py
         names:
+          plural: routetraces
           singular: routetrace
           kind: RouteTrace
           listKind: RouteTraceList
-          plural: routetraces
     - crd:
         api:
           expose: readWrite
@@ -248,10 +248,10 @@ spec:
             - netops
         conversionScript: routing/intents/attachmentlookup/conversion_v1.py
         names:
-          plural: attachmentlookups
-          singular: attachmentlookup
           kind: AttachmentLookup
           listKind: AttachmentLookupList
+          plural: attachmentlookups
+          singular: attachmentlookup
     - crd:
         api:
           expose: readWrite
@@ -290,4 +290,4 @@ spec:
         path: routing/api/v1/pysrc
   requirements:
     - appId: interfaces.eda.nokia.com
-      version: v6.0.0
+      version: v6.0.1
