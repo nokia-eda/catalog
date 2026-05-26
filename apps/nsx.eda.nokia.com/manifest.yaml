@@ -14,7 +14,7 @@ spec:
   group: nsx.eda.nokia.com
   version: v2
   author: Nokia
-  image: ghcr.io/nokia-eda/apps/nsx-plugin:v6.0.0
+  image: ghcr.io/nokia-eda/apps/nsx-plugin:v6.0.1
   supportedCoreVersions:
     - "v5.0.0"
   requirements:
@@ -37,10 +37,10 @@ spec:
           importPolicy: all
         conversionScript: nsx/intents/nsxplugininstance/conversion_v2.py
         names:
-          listKind: NSXPluginInstanceList
-          plural: nsxplugininstances
           singular: nsxplugininstance
           kind: NSXPluginInstance
+          listKind: NSXPluginInstanceList
+          plural: nsxplugininstances
     - cr:
         path: nsx/alarms/alarms.yaml
     - script:
