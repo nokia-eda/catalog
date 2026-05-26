@@ -30,18 +30,29 @@ spec:
         path: microsegmentation/api/v1alpha1/pysrc
   description: Micro segmentation
   group: microsegmentation.eda.nokia.com
-  image: ghcr.io/nokia-eda/apps/microsegmentation:v6.0.0
+  image: ghcr.io/nokia-eda/apps/microsegmentation:v6.0.1
   requirements:
     - appId: services.eda.nokia.com
-      version: v6.0.0
+      version: v6.0.1
     - appId: routingpolicies.eda.nokia.com
-      version: v6.0.0
+      version: v6.0.1
     - appId: interfaces.eda.nokia.com
-      version: v6.0.0
+      version: v6.0.1
   supportedCoreVersions:
     - "v5.0"
   supportedEndpoints:
+    - "srl:24.10.*"
+    - "srl:25.3.*"
+    - "srl:25.7.*"
+    - "srl:25.10.*"
     - "srl:26.3.*"
+    - "sros:24.10.r4+"
+    - "sros:25.3.r2+"
+    - "sros:25.7.*"
+    - "sros:25.10.*"
+    - "sros:26.3.*"
+    - "eos:4.33.2f:beta"
+    - "nxos:10.5.2:alpha"
   title: Micro Segmentation
   version: v1alpha1
   components:
@@ -83,14 +94,16 @@ spec:
           name: Micro Segmentation Policies
           icon: FilterAdd
         names:
-          plural: microsegmentationpolicies
-          singular: microsegmentationpolicy
           kind: MicroSegmentationPolicy
           listKind: MicroSegmentationPolicyList
+          plural: microsegmentationpolicies
+          singular: microsegmentationpolicy
     - cr:
         path: microsegmentation/resources/group-tag-pool-global.yaml
     - cr:
         path: microsegmentation/resources/group-tag-pool-local.yaml
+    - cr:
+        path: microsegmentation/resources/group-tag-no-tag.yaml
     - script:
         path: microsegmentation/intents/grouptag/config_intent.py
         trigger:
@@ -112,10 +125,10 @@ spec:
         path: microsegmentation/crds/microsegmentation.eda.nokia.com_associationpolicystates.yaml
         schema: microsegmentation/openapiv3/eda_oas_microsegmentation.eda.nokia.com_associationpolicystates.json
         names:
+          plural: associationpolicystates
           singular: associationpolicystate
           kind: AssociationPolicyState
           listKind: AssociationPolicyStateList
-          plural: associationpolicystates
     - crd:
         api:
           expose: none
