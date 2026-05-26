@@ -38,10 +38,10 @@ spec:
           icon: TrafficQos
         conversionScript: qos/intents/egresspolicy/conversion_v2.py
         names:
-          kind: EgressPolicy
-          listKind: EgressPolicyList
           plural: egresspolicys
           singular: egresspolicy
+          kind: EgressPolicy
+          listKind: EgressPolicyList
     - crd:
         api:
           expose: readWrite
@@ -88,10 +88,10 @@ spec:
           icon: TrafficCircle
         conversionScript: qos/intents/forwardingclass/conversion_v2.py
         names:
-          listKind: ForwardingClassList
           plural: forwardingclasss
           singular: forwardingclass
           kind: ForwardingClass
+          listKind: ForwardingClassList
     - crd:
         api:
           expose: readWrite
@@ -106,10 +106,10 @@ spec:
           icon: Traffic
         conversionScript: qos/intents/queue/conversion_v2.py
         names:
-          plural: queues
           singular: queue
           kind: Queue
           listKind: QueueList
+          plural: queues
     - cr:
         path: qos/resources/fc/af.yaml
     - cr:
@@ -215,7 +215,7 @@ spec:
         path: qos/api/v2/pysrc
   description: |
     This application provides resources relating to QOS for various Network Operating Systems.
-  image: ghcr.io/nokia-eda/apps/qos:v6.0.0
+  image: ghcr.io/nokia-eda/apps/qos:v6.0.1
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
   group: qos.eda.nokia.com
@@ -225,9 +225,9 @@ spec:
   version: v2
   requirements:
     - appId: interfaces.eda.nokia.com
-      version: v6.0.0
+      version: v6.0.1
     - appId: filters.eda.nokia.com
-      version: v6.0.0
+      version: v6.0.1
   supportedEndpoints:
     - "srl:24.10.*"
     - "srl:25.3.*"
