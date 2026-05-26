@@ -10,7 +10,7 @@ spec:
     This application provides interface configuration and state for various Network Operating Systems.
 
     It also supports alarming driven by interface operational state and the population of a normalized table to support queries across supported endpoints.
-  image: ghcr.io/nokia-eda/apps/interfaces:v6.0.0
+  image: ghcr.io/nokia-eda/apps/interfaces:v6.0.1
   author: Nokia
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
@@ -49,10 +49,10 @@ spec:
           exportPolicy: all # needed for connect controllers
         conversionScript: interfaces/intents/interface/conversion_v1.py
         names:
-          plural: interfaces
           singular: interface
           kind: Interface
           listKind: InterfaceList
+          plural: interfaces
     - crd:
         path: interfaces/crds/interfaces.eda.nokia.com_breakouts.yaml
         schema: interfaces/openapiv3/eda_oas_interfaces.eda.nokia.com_breakouts.json
@@ -123,10 +123,10 @@ spec:
         schema: interfaces/openapiv3/eda_oas_interfaces.eda.nokia.com_analyzealarms.json
         workflow: true
         names:
+          plural: analyzealarms
           singular: analyzealarm
           kind: AnalyzeAlarm
           listKind: AnalyzeAlarmList
-          plural: analyzealarms
   dependencies:
     - file:
         path: interfaces/intents
