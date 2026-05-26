@@ -55,10 +55,13 @@ spec:
                         description: Management interface selector
                         items:
                           type: string
+                        minItems: 1
                         type: array
                       subinterfaceIndex:
                         description: Subinterface index
                         type: integer
+                    required:
+                    - interfaceSelectors
                     type: object
                   ipMTU:
                     description: Set the management interface IP MTU.
