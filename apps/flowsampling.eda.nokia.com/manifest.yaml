@@ -11,7 +11,7 @@ spec:
   author: nokia
   description: This application provides sampling (sflow, ipfix, etc) configuration for Network Operating Systems.
   group: flowsampling.eda.nokia.com
-  image: ghcr.io/nokia-eda/apps/flowsampling:v6.0.0
+  image: ghcr.io/nokia-eda/apps/flowsampling:v6.0.1
   supportedCoreVersions:
     - "v5.0"
   title: Flow Sampling
@@ -42,10 +42,10 @@ spec:
         path: flowsampling/crds/flowsampling.eda.nokia.com_sflowstates.yaml
         schema: flowsampling/openapiv3/eda_oas_flowsampling.eda.nokia.com_sflowstates.json
         names:
+          plural: sflowstates
           singular: sflowstate
           kind: SFlowState
           listKind: SFlowStateList
-          plural: sflowstates
     - script:
         path: flowsampling/intents/sflowstate/sflowstate_intent.py
         trigger:
@@ -53,11 +53,11 @@ spec:
         type: state
   requirements:
     - appId: routing.eda.nokia.com
-      version: v6.0.0
+      version: v6.0.1
     - appId: services.eda.nokia.com
-      version: v6.0.0
+      version: v6.0.1
     - appId: bootstrap.eda.nokia.com
-      version: v6.0.0
+      version: v6.0.1
   dependencies:
     - file:
         path: flowsampling/intents
