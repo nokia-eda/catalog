@@ -30,7 +30,7 @@ spec:
         path: mpls/api/v1alpha1/pysrc
   description: MPLS
   group: mpls.eda.nokia.com
-  image: ghcr.io/nokia-eda/apps/mpls:v6.0.0
+  image: ghcr.io/nokia-eda/apps/mpls:v6.0.1
   supportedCoreVersions:
     - "v5.0"
   title: MPLS
@@ -56,10 +56,10 @@ spec:
         api:
           expose: none
         names:
+          listKind: LDPRouterStateList
           plural: ldprouterstates
           singular: ldprouterstate
           kind: LDPRouterState
-          listKind: LDPRouterStateList
     - crd:
         api:
           expose: none
@@ -104,20 +104,20 @@ spec:
           name: Label Blocks
           icon: Label
         names:
-          kind: LabelBlock
-          listKind: LabelBlockList
           plural: labelblocks
           singular: labelblock
+          kind: LabelBlock
+          listKind: LabelBlockList
     - crd:
         api:
           expose: none
         path: mpls/crds/mpls.eda.nokia.com_labelblockdeployments.yaml
         schema: mpls/openapiv3/eda_oas_mpls.eda.nokia.com_labelblockdeployments.json
         names:
-          plural: labelblockdeployments
-          singular: labelblockdeployment
           kind: LabelBlockDeployment
           listKind: LabelBlockDeploymentList
+          plural: labelblockdeployments
+          singular: labelblockdeployment
     - cr:
         path: mpls/resources/edalabelblock.yaml
     - script:
