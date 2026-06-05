@@ -11,7 +11,7 @@ spec:
   author: nokia
   description: This application provides resources to various management plane entities, such as gRPC, HTTP, FTP and SSH servers.
   group: management.eda.nokia.com
-  image: ghcr.io/nokia-eda/apps/management:v5.0.4
+  image: ghcr.io/nokia-eda/apps/management:v5.0.5
   supportedCoreVersions:
     - "v4.0"
   title: Management
@@ -26,10 +26,10 @@ spec:
           category: Management
           name: gRPC Servers
         names:
-          plural: grpcservers
-          singular: grpcserver
           kind: GRPCServer
           listKind: GRPCServerList
+          plural: grpcservers
+          singular: grpcserver
     - crd:
         api:
           expose: readWrite
@@ -52,10 +52,10 @@ spec:
           category: Management
           name: FTP Servers
         names:
-          singular: ftpserver
-          kind: FTPServer
           listKind: FTPServerList
           plural: ftpservers
+          singular: ftpserver
+          kind: FTPServer
     - crd:
         api:
           expose: readWrite
@@ -76,10 +76,10 @@ spec:
           expose: none
           # no ui section means do not present in the UI
         names:
+          plural: ftpserverstates
           singular: ftpserverstate
           kind: FTPServerState
           listKind: FTPServerStateList
-          plural: ftpserverstates
     - script:
         path: management/intents/ftpserver/ftpserver_intent.py
         trigger:
@@ -141,10 +141,10 @@ spec:
         path: management/crds/management.eda.nokia.com_grpcserverstates.yaml
         schema: management/openapiv3/eda_oas_management.eda.nokia.com_grpcserverstates.json
         names:
-          singular: grpcserverstate
-          kind: GRPCServerState
           listKind: GRPCServerStateList
           plural: grpcserverstates
+          singular: grpcserverstate
+          kind: GRPCServerState
     - script:
         path: management/intents/grpcserverstate/grpcserverstate_intent.py
         trigger:
@@ -152,11 +152,11 @@ spec:
         type: state
   requirements:
     - appId: routing.eda.nokia.com
-      version: v5.0.4
+      version: v5.0.5
     - appId: services.eda.nokia.com
-      version: v5.0.4
+      version: v5.0.5
     - appId: bootstrap.eda.nokia.com
-      version: v5.0.4
+      version: v5.0.5
   dependencies:
     - file:
         path: management/intents
