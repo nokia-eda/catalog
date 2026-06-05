@@ -8,7 +8,7 @@ spec:
   title: Protocols
   description: |
     This application provides resources related to routing protocols for various Network Operating Systems.
-  image: ghcr.io/nokia-eda/apps/protocols:v5.0.4
+  image: ghcr.io/nokia-eda/apps/protocols:v5.0.5
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
   author: Nokia
@@ -61,10 +61,10 @@ spec:
           expose: readWrite
         conversionScript: protocols/intents/defaultbgpgroup/conversion_v1.py
         names:
-          plural: defaultbgpgroups
           singular: defaultbgpgroup
           kind: DefaultBGPGroup
           listKind: DefaultBGPGroupList
+          plural: defaultbgpgroups
     - crd:
         path: protocols/crds/protocols.eda.nokia.com_defaultbgpgroupdeployments.yaml
         schema: protocols/openapiv3/eda_oas_protocols.eda.nokia.com_defaultbgpgroupdeployments.json
@@ -86,10 +86,10 @@ spec:
           expose: readWrite
         conversionScript: protocols/intents/defaultbgppeer/conversion_v1.py
         names:
-          plural: defaultbgppeers
           singular: defaultbgppeer
           kind: DefaultBGPPeer
           listKind: DefaultBGPPeerList
+          plural: defaultbgppeers
     - crd:
         path: protocols/crds/protocols.eda.nokia.com_defaultstaticroutes.yaml
         schema: protocols/openapiv3/eda_oas_protocols.eda.nokia.com_defaultstaticroutes.json
@@ -100,10 +100,10 @@ spec:
           expose: readWrite
         conversionScript: protocols/intents/defaultstaticroute/conversion_v1.py
         names:
+          listKind: DefaultStaticRouteList
           plural: defaultstaticroutes
           singular: defaultstaticroute
           kind: DefaultStaticRoute
-          listKind: DefaultStaticRouteList
     - crd:
         path: protocols/crds/protocols.eda.nokia.com_defaultaggregateroutes.yaml
         schema: protocols/openapiv3/eda_oas_protocols.eda.nokia.com_defaultaggregateroutes.json
@@ -142,10 +142,10 @@ spec:
           expose: readWrite
         conversionScript: protocols/intents/defaultroutereflectorclient/conversion_v1.py
         names:
+          plural: defaultroutereflectorclients
           singular: defaultroutereflectorclient
           kind: DefaultRouteReflectorClient
           listKind: DefaultRouteReflectorClientList
-          plural: defaultroutereflectorclients
     - crd:
         path: protocols/crds/protocols.eda.nokia.com_bgpgroups.yaml
         schema: protocols/openapiv3/eda_oas_protocols.eda.nokia.com_bgpgroups.json
@@ -156,10 +156,10 @@ spec:
           expose: readWrite
         conversionScript: protocols/intents/bgpgroup/conversion_v1.py
         names:
+          plural: bgpgroups
           singular: bgpgroup
           kind: BGPGroup
           listKind: BGPGroupList
-          plural: bgpgroups
     - crd:
         path: protocols/crds/protocols.eda.nokia.com_bgpgroupdeployments.yaml
         schema: protocols/openapiv3/eda_oas_protocols.eda.nokia.com_bgpgroupdeployments.json
@@ -178,10 +178,10 @@ spec:
           expose: none
         conversionScript: protocols/intents/bgpgroupstate/conversion_v1.py
         names:
-          kind: BGPGroupState
-          listKind: BGPGroupStateList
           plural: bgpgroupstates
           singular: bgpgroupstate
+          kind: BGPGroupState
+          listKind: BGPGroupStateList
     - crd:
         path: protocols/crds/protocols.eda.nokia.com_bgppeers.yaml
         schema: protocols/openapiv3/eda_oas_protocols.eda.nokia.com_bgppeers.json
@@ -192,10 +192,10 @@ spec:
           expose: readWrite
         conversionScript: protocols/intents/bgppeer/conversion_v1.py
         names:
-          plural: bgppeers
           singular: bgppeer
           kind: BGPPeer
           listKind: BGPPeerList
+          plural: bgppeers
     - crd:
         path: protocols/crds/protocols.eda.nokia.com_staticroutes.yaml
         schema: protocols/openapiv3/eda_oas_protocols.eda.nokia.com_staticroutes.json
@@ -206,10 +206,10 @@ spec:
           expose: readWrite
         conversionScript: protocols/intents/staticroute/conversion_v1.py
         names:
-          plural: staticroutes
           singular: staticroute
           kind: StaticRoute
           listKind: StaticRouteList
+          plural: staticroutes
     - crd:
         path: protocols/crds/protocols.eda.nokia.com_aggregateroutes.yaml
         schema: protocols/openapiv3/eda_oas_protocols.eda.nokia.com_aggregateroutes.json
@@ -245,10 +245,10 @@ spec:
           expose: readWrite
         conversionScript: protocols/intents/routereflector/conversion_v1.py
         names:
-          plural: routereflectors
-          singular: routereflector
           kind: RouteReflector
           listKind: RouteReflectorList
+          plural: routereflectors
+          singular: routereflector
     - crd:
         path: protocols/crds/protocols.eda.nokia.com_routereflectorclients.yaml
         schema: protocols/openapiv3/eda_oas_protocols.eda.nokia.com_routereflectorclients.json
@@ -259,10 +259,10 @@ spec:
           expose: readWrite
         conversionScript: protocols/intents/routereflectorclient/conversion_v1.py
         names:
+          plural: routereflectorclients
           singular: routereflectorclient
           kind: RouteReflectorClient
           listKind: RouteReflectorClientList
-          plural: routereflectorclients
     - crd:
         path: protocols/crds/protocols.eda.nokia.com_routereflectorstates.yaml
         schema: protocols/openapiv3/eda_oas_protocols.eda.nokia.com_routereflectorstates.json
@@ -317,10 +317,10 @@ spec:
           category: Default Routing
           name: Default OSPF Areas
         names:
-          plural: defaultospfareas
           singular: defaultospfarea
           kind: DefaultOSPFArea
           listKind: DefaultOSPFAreaList
+          plural: defaultospfareas
     - crd:
         api:
           expose: readWrite
@@ -340,10 +340,10 @@ spec:
           category: Default Routing
           name: Default OSPF Interfaces
         names:
-          plural: defaultospfinterfaces
           singular: defaultospfinterface
           kind: DefaultOSPFInterface
           listKind: DefaultOSPFInterfaceList
+          plural: defaultospfinterfaces
     - crd:
         api:
           expose: readWrite
@@ -353,20 +353,20 @@ spec:
           category: Overlay Routing
           name: OSPF Instances
         names:
-          listKind: OSPFInstanceList
           plural: ospfinstances
           singular: ospfinstance
           kind: OSPFInstance
+          listKind: OSPFInstanceList
     - crd:
         api:
           expose: readWrite
         path: protocols/crds/protocols.eda.nokia.com_ospfinstancedeployments.yaml
         schema: protocols/openapiv3/eda_oas_protocols.eda.nokia.com_ospfinstancedeployments.json
         names:
+          listKind: OSPFInstanceDeploymentList
           plural: ospfinstancedeployments
           singular: ospfinstancedeployment
           kind: OSPFInstanceDeployment
-          listKind: OSPFInstanceDeploymentList
     - crd:
         api:
           expose: readWrite
@@ -386,10 +386,10 @@ spec:
         path: protocols/crds/protocols.eda.nokia.com_ospfareadeployments.yaml
         schema: protocols/openapiv3/eda_oas_protocols.eda.nokia.com_ospfareadeployments.json
         names:
-          plural: ospfareadeployments
-          singular: ospfareadeployment
           kind: OSPFAreaDeployment
           listKind: OSPFAreaDeploymentList
+          plural: ospfareadeployments
+          singular: ospfareadeployment
     - crd:
         api:
           expose: readWrite
@@ -409,10 +409,10 @@ spec:
         api:
           expose: none
         names:
+          listKind: OSPFAreaStateList
           plural: ospfareastates
           singular: ospfareastate
           kind: OSPFAreaState
-          listKind: OSPFAreaStateList
     - crd:
         path: protocols/crds/protocols.eda.nokia.com_ospfinstancestates.yaml
         schema: protocols/openapiv3/eda_oas_protocols.eda.nokia.com_ospfinstancestates.json
@@ -429,10 +429,10 @@ spec:
         api:
           expose: none
         names:
+          listKind: OSPFInterfaceStateList
           plural: ospfinterfacestates
           singular: ospfinterfacestate
           kind: OSPFInterfaceState
-          listKind: OSPFInterfaceStateList
     - script:
         path: protocols/intents/defaultbgpgroup/defaultbgpgroup_intent.py
         type: config
@@ -632,8 +632,8 @@ spec:
         path: protocols/alarms/pysrc
   requirements:
     - appId: interfaces.eda.nokia.com
-      version: v5.0.4
+      version: v5.0.5
     - appId: routing.eda.nokia.com
-      version: v5.0.4
+      version: v5.0.5
     - appId: security.eda.nokia.com
-      version: v5.0.4
+      version: v5.0.5
