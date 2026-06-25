@@ -8,7 +8,7 @@ spec:
   title: Routing
   description: |
     This application provides underlay routing resources for various Network Operating Systems.
-  image: ghcr.io/nokia-eda/apps/routing:v6.0.1
+  image: ghcr.io/nokia-eda/apps/routing:v6.0.2
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
   author: Nokia
@@ -65,10 +65,10 @@ spec:
           expose: none
         conversionScript: routing/intents/defaultinterfacestate/conversion_v1.py
         names:
-          plural: defaultinterfacestates
           singular: defaultinterfacestate
           kind: DefaultInterfaceState
           listKind: DefaultInterfaceStateList
+          plural: defaultinterfacestates
     - crd:
         path: routing/crds/routing.eda.nokia.com_defaultrouters.yaml
         schema: routing/openapiv3/eda_oas_routing.eda.nokia.com_defaultrouters.json
@@ -80,10 +80,10 @@ spec:
           expose: readWrite
         conversionScript: routing/intents/defaultrouter/conversion_v1.py
         names:
-          listKind: DefaultRouterList
           plural: defaultrouters
           singular: defaultrouter
           kind: DefaultRouter
+          listKind: DefaultRouterList
     - crd:
         path: routing/crds/routing.eda.nokia.com_defaultrouterstates.yaml
         schema: routing/openapiv3/eda_oas_routing.eda.nokia.com_defaultrouterstates.json
@@ -91,10 +91,10 @@ spec:
           expose: none
         conversionScript: routing/intents/defaultrouterstate/conversion_v1.py
         names:
+          listKind: DefaultRouterStateList
           plural: defaultrouterstates
           singular: defaultrouterstate
           kind: DefaultRouterState
-          listKind: DefaultRouterStateList
     - crd:
         path: routing/crds/routing.eda.nokia.com_drains.yaml
         schema: routing/openapiv3/eda_oas_routing.eda.nokia.com_drains.json
@@ -106,10 +106,10 @@ spec:
           expose: readWrite
         conversionScript: routing/intents/drain/conversion_v1.py
         names:
-          kind: Drain
-          listKind: DrainList
           plural: drains
           singular: drain
+          kind: Drain
+          listKind: DrainList
     - crd:
         path: routing/crds/routing.eda.nokia.com_drainstates.yaml
         schema: routing/openapiv3/eda_oas_routing.eda.nokia.com_drainstates.json
@@ -263,10 +263,10 @@ spec:
           name: System Ping
         conversionScript: routing/intents/systemping/conversion_v1.py
         names:
-          plural: systempings
-          singular: systemping
           kind: SystemPing
           listKind: SystemPingList
+          plural: systempings
+          singular: systemping
     - cr:
         path: routing/alarms/alarms.yaml
   dependencies:
@@ -290,4 +290,4 @@ spec:
         path: routing/api/v1/pysrc
   requirements:
     - appId: interfaces.eda.nokia.com
-      version: v6.0.1
+      version: v6.0.2
