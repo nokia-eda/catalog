@@ -8,7 +8,7 @@ spec:
   title: Fabrics
   description: |
     This application provides automation resources relating to datacenter fabrics.
-  image: ghcr.io/nokia-eda/apps/fabrics:v6.0.1
+  image: ghcr.io/nokia-eda/apps/fabrics:v6.0.2
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
   author: Nokia
@@ -121,10 +121,10 @@ spec:
           name: ISL Ping
         conversionScript: fabrics/intents/islping/conversion_v1.py
         names:
-          kind: IslPing
-          listKind: IslPingList
           plural: islpings
           singular: islping
+          kind: IslPing
+          listKind: IslPingList
     - crd:
         api:
           expose: none
@@ -135,10 +135,10 @@ spec:
         ui:
           name: Fabric Topology
         names:
-          listKind: FabricTopologyList
           plural: fabrictopologies
           singular: fabrictopology
           kind: FabricTopology
+          listKind: FabricTopologyList
     - cr:
         path: fabrics/workflows/islping/core_v1_flowdefinition.yaml
     # - cr:
@@ -232,14 +232,14 @@ spec:
         path: fabrics/api/v1/pysrc
   requirements:
     - appId: protocols.eda.nokia.com
-      version: v6.0.1
+      version: v6.0.2
     - appId: routingpolicies.eda.nokia.com
-      version: v6.0.1
+      version: v6.0.2
     - appId: routing.eda.nokia.com
-      version: v6.0.1
+      version: v6.0.2
     - appId: interfaces.eda.nokia.com
-      version: v6.0.1
+      version: v6.0.2
     - appId: qos.eda.nokia.com
-      version: v6.0.1
+      version: v6.0.2
     - appId: security.eda.nokia.com
-      version: v6.0.1
+      version: v6.0.2
