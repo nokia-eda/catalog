@@ -23,10 +23,10 @@ spec:
           name: Deploy Image
         conversionScript: operatingsystem/intents/deployimage/conversion_v1.py
         names:
+          listKind: DeployImageList
           plural: deployimages
           singular: deployimage
           kind: DeployImage
-          listKind: DeployImageList
   dependencies:
     - file:
         path: operatingsystem/api
@@ -37,7 +37,7 @@ spec:
   gitPathPrefix: /
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   group: os.eda.nokia.com
-  image: ghcr.io/nokia-eda/apps/operatingsystem:v6.0.1
+  image: ghcr.io/nokia-eda/apps/operatingsystem:v6.0.2
   supportedCoreVersions:
     - "v5.0"
   supportedEndpoints:
