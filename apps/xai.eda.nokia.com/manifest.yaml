@@ -12,7 +12,7 @@ spec:
   author: nokia
   description: This application installs the xAI Provider.
   group: xai.eda.nokia.com
-  image: ghcr.io/nokia-eda/apps/xai:v6.0.1
+  image: ghcr.io/nokia-eda/apps/xai:v6.0.2
   supportedCoreVersions:
     - "v5.0"
   title: xAI
