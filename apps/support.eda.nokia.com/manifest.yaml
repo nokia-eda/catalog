@@ -20,7 +20,7 @@ spec:
         path: support/api/v1/pysrc
   description: This application provides resources that can be used to identify and troubleshoot targets.
   group: support.eda.nokia.com
-  image: ghcr.io/nokia-eda/apps/support:v6.0.1
+  image: ghcr.io/nokia-eda/apps/support:v6.0.2
   supportedCoreVersions:
     - "v5.0"
   title: Support
@@ -40,10 +40,10 @@ spec:
             - main
         conversionScript: support/intents/locator/conversion_v1.py
         names:
+          listKind: LocatorList
           plural: locators
           singular: locator
           kind: Locator
-          listKind: LocatorList
     - cr:
         path: support/workflows/locator/core_v1_flowdefinition.yaml
   supportedEndpoints:
