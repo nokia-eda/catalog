@@ -30,7 +30,7 @@ spec:
         path: mpls/api/v1alpha1/pysrc
   description: MPLS
   group: mpls.eda.nokia.com
-  image: ghcr.io/nokia-eda/apps/mpls:v6.0.1
+  image: ghcr.io/nokia-eda/apps/mpls:v6.0.2
   supportedCoreVersions:
     - "v5.0"
   title: MPLS
@@ -46,30 +46,30 @@ spec:
           name: Default LDP Routers
           icon: Router
         names:
+          listKind: DefaultLDPRouterList
           plural: defaultldprouters
           singular: defaultldprouter
           kind: DefaultLDPRouter
-          listKind: DefaultLDPRouterList
     - crd:
         path: mpls/crds/mpls.eda.nokia.com_ldprouterstates.yaml
         schema: mpls/openapiv3/eda_oas_mpls.eda.nokia.com_ldprouterstates.json
         api:
           expose: none
         names:
-          listKind: LDPRouterStateList
           plural: ldprouterstates
           singular: ldprouterstate
           kind: LDPRouterState
+          listKind: LDPRouterStateList
     - crd:
         api:
           expose: none
         path: mpls/crds/mpls.eda.nokia.com_defaultldprouterdeployments.yaml
         schema: mpls/openapiv3/eda_oas_mpls.eda.nokia.com_defaultldprouterdeployments.json
         names:
-          plural: defaultldprouterdeployments
           singular: defaultldprouterdeployment
           kind: DefaultLDPRouterDeployment
           listKind: DefaultLDPRouterDeploymentList
+          plural: defaultldprouterdeployments
     - crd:
         api:
           expose: readWrite
@@ -90,10 +90,10 @@ spec:
         api:
           expose: none
         names:
+          listKind: LDPInterfaceStateList
           plural: ldpinterfacestates
           singular: ldpinterfacestate
           kind: LDPInterfaceState
-          listKind: LDPInterfaceStateList
     - crd:
         api:
           expose: readWrite
@@ -114,10 +114,10 @@ spec:
         path: mpls/crds/mpls.eda.nokia.com_labelblockdeployments.yaml
         schema: mpls/openapiv3/eda_oas_mpls.eda.nokia.com_labelblockdeployments.json
         names:
-          kind: LabelBlockDeployment
-          listKind: LabelBlockDeploymentList
           plural: labelblockdeployments
           singular: labelblockdeployment
+          kind: LabelBlockDeployment
+          listKind: LabelBlockDeploymentList
     - cr:
         path: mpls/resources/edalabelblock.yaml
     - script:
