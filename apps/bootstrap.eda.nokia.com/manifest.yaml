@@ -10,7 +10,7 @@ spec:
     This application provides device bootstrap for various Network Operating Systems.
 
     It generates initial device configuration for Zero Touch Provisioning (ZTP).
-  image: ghcr.io/nokia-eda/apps/bootstrap:v6.0.1
+  image: ghcr.io/nokia-eda/apps/bootstrap:v6.0.2
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
   author: Nokia
@@ -47,10 +47,10 @@ spec:
           expose: readWrite
         conversionScript: bootstrap/intents/init/conversion_v1.py
         names:
-          listKind: InitList
-          plural: inits
           singular: init
           kind: Init
+          listKind: InitList
+          plural: inits
     - crd:
         path: bootstrap/crds/bootstrap.eda.nokia.com_managementrouters.yaml
         schema: bootstrap/openapiv3/eda_oas_bootstrap.eda.nokia.com_managementrouters.json
@@ -62,20 +62,20 @@ spec:
           expose: readWrite
         conversionScript: bootstrap/intents/managementrouter/conversion_v1.py
         names:
-          listKind: ManagementRouterList
           plural: managementrouters
           singular: managementrouter
           kind: ManagementRouter
+          listKind: ManagementRouterList
     - crd:
         path: bootstrap/crds/bootstrap.eda.nokia.com_managementrouterstates.yaml
         schema: bootstrap/openapiv3/eda_oas_bootstrap.eda.nokia.com_managementrouterstates.json
         api:
           expose: none
         names:
-          plural: managementrouterstates
           singular: managementrouterstate
           kind: ManagementRouterState
           listKind: ManagementRouterStateList
+          plural: managementrouterstates
     - cr:
         path: bootstrap/resources/init-base.yaml
     - script:
@@ -107,10 +107,10 @@ spec:
           name: Rotate Certificates
         conversionScript: bootstrap/intents/rotatecertificate/conversion_v1.py
         names:
+          listKind: RotateCertificateList
           plural: rotatecertificates
           singular: rotatecertificate
           kind: RotateCertificate
-          listKind: RotateCertificateList
     - crd:
         api:
           expose: read
@@ -131,10 +131,10 @@ spec:
         path: bootstrap/crds/bootstrap.eda.nokia.com_satellitestates.yaml
         schema: bootstrap/openapiv3/eda_oas_bootstrap.eda.nokia.com_satellitestates.json
         names:
+          plural: satellitestates
           singular: satellitestate
           kind: SatelliteState
           listKind: SatelliteStateList
-          plural: satellitestates
     - script:
         path: bootstrap/intents/satellitestate/state_intent.py
         trigger:
@@ -142,9 +142,9 @@ spec:
         type: state
   requirements:
     - appId: aaa.eda.nokia.com
-      version: v6.0.1
+      version: v6.0.2
     - appId: interfaces.eda.nokia.com
-      version: v6.0.1
+      version: v6.0.2
   dependencies:
     - file:
         path: bootstrap/intents
