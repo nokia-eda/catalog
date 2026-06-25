@@ -30,14 +30,14 @@ spec:
         path: microsegmentation/api/v1alpha1/pysrc
   description: Micro segmentation
   group: microsegmentation.eda.nokia.com
-  image: ghcr.io/nokia-eda/apps/microsegmentation:v6.0.1
+  image: ghcr.io/nokia-eda/apps/microsegmentation:v6.0.2
   requirements:
     - appId: services.eda.nokia.com
-      version: v6.0.1
+      version: v6.0.2
     - appId: routingpolicies.eda.nokia.com
-      version: v6.0.1
+      version: v6.0.2
     - appId: interfaces.eda.nokia.com
-      version: v6.0.1
+      version: v6.0.2
   supportedCoreVersions:
     - "v5.0"
   supportedEndpoints:
@@ -66,10 +66,10 @@ spec:
           name: Group Tags
           icon: Tag
         names:
+          listKind: GroupTagList
           plural: grouptags
           singular: grouptag
           kind: GroupTag
-          listKind: GroupTagList
     - crd:
         api:
           expose: readWrite
@@ -80,10 +80,10 @@ spec:
           name: Group Tag Association Policies
           icon: ProfileAssign
         names:
-          plural: associationpolicies
-          singular: associationpolicy
           kind: AssociationPolicy
           listKind: AssociationPolicyList
+          plural: associationpolicies
+          singular: associationpolicy
     - crd:
         api:
           expose: readWrite
@@ -135,20 +135,20 @@ spec:
         path: microsegmentation/crds/microsegmentation.eda.nokia.com_microsegmentationpolicystates.yaml
         schema: microsegmentation/openapiv3/eda_oas_microsegmentation.eda.nokia.com_microsegmentationpolicystates.json
         names:
-          plural: microsegmentationpolicystates
-          singular: microsegmentationpolicystate
           kind: MicroSegmentationPolicyState
           listKind: MicroSegmentationPolicyStateList
+          plural: microsegmentationpolicystates
+          singular: microsegmentationpolicystate
     - crd:
         api:
           expose: none
         path: microsegmentation/crds/microsegmentation.eda.nokia.com_grouptagstates.yaml
         schema: microsegmentation/openapiv3/eda_oas_microsegmentation.eda.nokia.com_grouptagstates.json
         names:
-          listKind: GroupTagStateList
           plural: grouptagstates
           singular: grouptagstate
           kind: GroupTagState
+          listKind: GroupTagStateList
     - script:
         path: microsegmentation/intents/grouptagstate/state_intent.py
         trigger:
