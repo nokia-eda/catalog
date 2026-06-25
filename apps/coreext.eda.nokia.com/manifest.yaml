@@ -20,7 +20,7 @@ spec:
         path: coreext/api/v1alpha1/pysrc
   description: This application contains extensions to EDA core
   group: coreext.eda.nokia.com
-  image: ghcr.io/nokia-eda/apps/coreext:v6.0.1
+  image: ghcr.io/nokia-eda/apps/coreext:v6.0.2
   supportedCoreVersions:
     - "v5.0"
   title: Core Extensions
