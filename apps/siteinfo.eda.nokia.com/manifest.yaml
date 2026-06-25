@@ -7,7 +7,7 @@ spec:
   version: v1
   title: Site Information
   description: "This application provides resources describing the environment at a given site. \n\nThis includes managing DNS, host and domain names, banners and MOTD messages, and other site-specific information.\n"
-  image: ghcr.io/nokia-eda/apps/siteinfo:v6.0.1
+  image: ghcr.io/nokia-eda/apps/siteinfo:v6.0.2
   author: Nokia
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
@@ -43,10 +43,10 @@ spec:
           icon: TextOutline
         conversionScript: siteinfo/intents/banner/conversion_v1.py
         names:
-          listKind: BannerList
           plural: banners
           singular: banner
           kind: Banner
+          listKind: BannerList
     - crd:
         path: siteinfo/crds/siteinfo.eda.nokia.com_bannerstates.yaml
         schema: siteinfo/openapiv3/eda_oas_siteinfo.eda.nokia.com_bannerstates.json
@@ -77,10 +77,10 @@ spec:
           icon: Port
         conversionScript: siteinfo/intents/defaultmtu/conversion_v1.py
         names:
-          listKind: DefaultMTUList
           plural: defaultmtus
           singular: defaultmtu
           kind: DefaultMTU
+          listKind: DefaultMTUList
     - script:
         path: siteinfo/intents/defaultmtu/defaultmtu_intent.py
         type: config
@@ -97,10 +97,10 @@ spec:
           icon: Traffic
         conversionScript: siteinfo/intents/systemloadbalancer/conversion_v1.py
         names:
+          plural: systemloadbalancers
           singular: systemloadbalancer
           kind: SystemLoadBalancer
           listKind: SystemLoadBalancerList
-          plural: systemloadbalancers
     - crd:
         path: siteinfo/crds/siteinfo.eda.nokia.com_systemloadbalancerstates.yaml
         schema: siteinfo/openapiv3/eda_oas_siteinfo.eda.nokia.com_systemloadbalancerstates.json
@@ -108,10 +108,10 @@ spec:
           expose: none
         conversionScript: siteinfo/intents/systemloadbalancerstate/conversion_v1.py
         names:
+          plural: systemloadbalancerstates
           singular: systemloadbalancerstate
           kind: SystemLoadBalancerState
           listKind: SystemLoadBalancerStateList
-          plural: systemloadbalancerstates
     - script:
         path: siteinfo/intents/systemloadbalancer/systemloadbalancer_intent.py
         type: config
@@ -132,10 +132,10 @@ spec:
           name: DNS Clients
           icon: FindCircle
         names:
+          listKind: DNSClientList
           plural: dnsclients
           singular: dnsclient
           kind: DNSClient
-          listKind: DNSClientList
     - script:
         path: siteinfo/intents/dnsclient/dnsclient_intent.py
         trigger:
@@ -147,10 +147,10 @@ spec:
         path: siteinfo/crds/siteinfo.eda.nokia.com_dnsclientstates.yaml
         schema: siteinfo/openapiv3/eda_oas_siteinfo.eda.nokia.com_dnsclientstates.json
         names:
-          plural: dnsclientstates
           singular: dnsclientstate
           kind: DNSClientState
           listKind: DNSClientStateList
+          plural: dnsclientstates
     - script:
         path: siteinfo/intents/dnsclientstate/dnsclientstate_intent.py
         trigger:
