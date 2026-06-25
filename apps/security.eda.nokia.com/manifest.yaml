@@ -8,7 +8,7 @@ spec:
   title: Security
   description: |
     This application provides resources related to security for various Network Operating Systems.
-  image: ghcr.io/nokia-eda/apps/security:v6.0.1
+  image: ghcr.io/nokia-eda/apps/security:v6.0.2
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
   author: Nokia
@@ -59,10 +59,10 @@ spec:
           expose: readWrite
         conversionScript: security/intents/keychaindeployment/conversion_v1.py
         names:
-          plural: keychaindeployments
-          singular: keychaindeployment
           kind: KeychainDeployment
           listKind: KeychainDeploymentList
+          plural: keychaindeployments
+          singular: keychaindeployment
     - script:
         path: security/intents/keychain/keychain_intent.py
         type: config
@@ -88,4 +88,4 @@ spec:
         path: security/api/v1/pysrc
   requirements:
     - appId: interfaces.eda.nokia.com
-      version: v6.0.1
+      version: v6.0.2
