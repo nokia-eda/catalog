@@ -21,10 +21,10 @@ spec:
           icon: HealthPercent
         conversionScript: components/intents/monitor/conversion_v2.py
         names:
-          kind: Monitor
           listKind: MonitorList
           plural: monitors
           singular: monitor
+          kind: Monitor
     - crd:
         api:
           expose: none
@@ -32,10 +32,10 @@ spec:
         schema: components/openapiv3/eda_oas_components.eda.nokia.com_monitorstates.json
         conversionScript: components/intents/monitorstate/conversion_v2.py
         names:
-          listKind: MonitorStateList
-          plural: monitorstates
           singular: monitorstate
           kind: MonitorState
+          listKind: MonitorStateList
+          plural: monitorstates
     - crd:
         api:
           expose: none
@@ -88,10 +88,10 @@ spec:
         schema: components/openapiv3/eda_oas_components.eda.nokia.com_volumeoverlays.json
         conversionScript: components/intents/volumeoverlay/conversion_v2.py
         names:
+          plural: volumeoverlays
           singular: volumeoverlay
           kind: VolumeOverlay
           listKind: VolumeOverlayList
-          plural: volumeoverlays
     - script:
         path: components/intents/cpuoverlay/cpu_overlay_intent.py
         trigger:
@@ -115,10 +115,10 @@ spec:
         path: components/crds/components.eda.nokia.com_discoveries.yaml
         schema: components/openapiv3/eda_oas_components.eda.nokia.com_discoveries.json
         names:
+          plural: discoveries
           singular: discovery
           kind: Discovery
           listKind: DiscoveryList
-          plural: discoveries
     - crd:
         api:
           expose: none
@@ -139,10 +139,10 @@ spec:
         schema: components/openapiv3/eda_oas_components.eda.nokia.com_discoveryaggregatestates.json
         conversionScript: components/intents/discoveryaggregatestate/conversion_v2.py
         names:
-          plural: discoveryaggregatestates
           singular: discoveryaggregatestate
           kind: DiscoveryAggregateState
           listKind: DiscoveryAggregateStateList
+          plural: discoveryaggregatestates
     - crd:
         api:
           expose: read
@@ -262,10 +262,10 @@ spec:
           icon: Hub
         conversionScript: components/intents/fabricmodule/conversion_v2.py
         names:
-          plural: fabricmodules
           singular: fabricmodule
           kind: FabricModule
           listKind: FabricModuleList
+          plural: fabricmodules
     - crd:
         api:
           expose: read
@@ -328,7 +328,7 @@ spec:
   gitPathPrefix: /
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   group: components.eda.nokia.com
-  image: ghcr.io/nokia-eda/apps/components:v6.0.1
+  image: ghcr.io/nokia-eda/apps/components:v6.0.2
   supportedCoreVersions:
     - "v5.0"
   supportedEndpoints:
