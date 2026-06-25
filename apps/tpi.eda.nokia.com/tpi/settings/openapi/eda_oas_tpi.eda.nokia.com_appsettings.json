@@ -1,0 +1,81 @@
+{
+  "description": "AppSettings is the Schema for the appsettings API.",
+  "type": "object",
+  "properties": {
+    "apiVersion": {
+      "description": "APIVersion defines the versioned schema of this representation of an object.\nServers should convert recognized schemas to the latest internal value, and\nmay reject unrecognized values.\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+      "type": "string"
+    },
+    "kind": {
+      "description": "Kind is a string value representing the REST resource this object represents.\nServers may infer this from the endpoint the client submits requests to.\nCannot be updated.\nIn CamelCase.\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+      "type": "string"
+    },
+    "metadata": {
+      "type": "object"
+    },
+    "spec": {
+      "description": "AppSettingsSpec defines the desired state of AppSettings.",
+      "type": "object",
+      "title": "Specification",
+      "properties": {
+        "cpu": {
+          "description": "CPU allocation for the tpi-manager container.\nThis value is used for both container requests and limits.",
+          "title": "tpi-manager CPU",
+          "default": "500m",
+          "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "string"
+            }
+          ],
+          "x-eda-nokia-com": {
+            "ui-order-priority": 100
+          }
+        },
+        "memory": {
+          "description": "Memory allocation for the tpi-manager container.\nThis value is used for both container requests and limits.\nYou may need to raise this on systems with a high amount of CRDs.",
+          "title": "tpi-manager memory",
+          "default": "1Gi",
+          "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "string"
+            }
+          ],
+          "x-eda-nokia-com": {
+            "ui-order-priority": 200
+          }
+        },
+        "tpiReconciliationTimeout": {
+          "description": "Timeout for each TPI reconciliation (download + checksum).",
+          "type": "string",
+          "format": "duration",
+          "title": "TPI reconciliation timeout",
+          "default": "2m",
+          "x-eda-nokia-com": {
+            "ui-order-priority": 300
+          }
+        },
+        "tpiStorageReconciliationTimeout": {
+          "description": "Timeout for each TPIStorage reconciliation (reachability probe).",
+          "type": "string",
+          "format": "duration",
+          "title": "TPIStorage reconciliation timeout",
+          "default": "2m",
+          "x-eda-nokia-com": {
+            "ui-order-priority": 600
+          }
+        }
+      },
+      "x-eda-nokia-com": {
+        "ui-order-priority": 30
+      }
+    }
+  }
+}

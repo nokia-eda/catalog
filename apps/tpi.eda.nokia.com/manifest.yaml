@@ -1,0 +1,132 @@
+apiVersion: core.eda.nokia.com/v1
+kind: Manifest
+metadata:
+  name: tpi
+spec:
+  appInfo:
+    categories:
+      - integrations
+    documentation: tpi/docs
+    settings: tpi/settings/openapi/eda_oas_tpi.eda.nokia.com_appsettings.json
+    ociSpecVersion: v1.0.0
+  author: nokia
+  description: Import and export EDA objects via TPI (xlsx-based batch processing)
+  group: tpi.eda.nokia.com
+  image: ghcr.io/nokia-eda/apps/tpi:v1.0.0
+  supportedCoreVersions:
+    - v5.0
+  title: TPI
+  version: v1
+  components:
+    - cr:
+        path: tpi/workflows/tpiexport.yaml
+    - cr:
+        path: tpi/workflows/tpiimport.yaml
+    - cr:
+        path: tpi/workflows/tpiimportdryrun.yaml
+    - cr:
+        path: tpi/tpi-manager.yaml
+    - crd:
+        api:
+          expose: readWrite
+        path: tpi/crds/tpi.eda.nokia.com_tpiexports.yaml
+        schema: tpi/openapiv3/eda_oas_tpi.eda.nokia.com_tpiexports.json
+        workflow: true
+        ui:
+          name: TPI Export
+        names:
+          plural: tpiexports
+          singular: tpiexport
+          kind: TPIExport
+          listKind: TPIExportList
+    - crd:
+        api:
+          expose: readWrite
+        path: tpi/crds/tpi.eda.nokia.com_tpiimports.yaml
+        schema: tpi/openapiv3/eda_oas_tpi.eda.nokia.com_tpiimports.json
+        workflow: true
+        ui:
+          name: TPI Import
+        names:
+          singular: tpiimport
+          kind: TPIImport
+          listKind: TPIImportList
+          plural: tpiimports
+    - crd:
+        api:
+          expose: readWrite
+        path: tpi/crds/tpi.eda.nokia.com_tpifilters.yaml
+        schema: tpi/openapiv3/eda_oas_tpi.eda.nokia.com_tpifilters.json
+        kubernetes:
+          importPolicy: all
+          exportPolicy: all
+        ui:
+          category: TPI
+          name: TPI Filter
+        names:
+          plural: tpifilters
+          singular: tpifilter
+          kind: TPIFilter
+          listKind: TPIFilterList
+    - crd:
+        api:
+          expose: readWrite
+        path: tpi/crds/tpi.eda.nokia.com_tpis.yaml
+        schema: tpi/openapiv3/eda_oas_tpi.eda.nokia.com_tpis.json
+        kubernetes:
+          importPolicy: all
+          exportPolicy: all
+        ui:
+          category: TPI
+          name: TPI
+        names:
+          plural: tpis
+          singular: tpi
+          kind: TPI
+          listKind: TPIList
+    - crd:
+        api:
+          expose: readWrite
+        path: tpi/crds/tpi.eda.nokia.com_tpistorages.yaml
+        schema: tpi/openapiv3/eda_oas_tpi.eda.nokia.com_tpistorages.json
+        kubernetes:
+          importPolicy: all
+          exportPolicy: all
+        ui:
+          category: TPI
+          name: TPI Storage
+        names:
+          singular: tpistorage
+          kind: TPIStorage
+          listKind: TPIStorageList
+          plural: tpistorages
+    - crd:
+        api:
+          expose: readWrite
+        path: tpi/crds/tpi.eda.nokia.com_tpiimportdryruns.yaml
+        schema: tpi/openapiv3/eda_oas_tpi.eda.nokia.com_tpiimportdryruns.json
+        workflow: true
+        ui:
+          name: TPI Import Dry Run
+        names:
+          plural: tpiimportdryruns
+          singular: tpiimportdryrun
+          kind: TPIImportDryRun
+          listKind: TPIImportDryRunList
+  dependencies:
+    - file:
+        path: tpi/api/v1/pysrc
+    - file:
+        path: tpi/api
+    - container:
+        name: tpiimport
+        image: image/tpiimport
+    - container:
+        name: tpiimportdryrun
+        image: image/tpiimportdryrun
+    - container:
+        name: tpiexport
+        image: image/tpiexport
+    - container:
+        name: tpi-manager
+        image: image/tpi-manager
