@@ -10,7 +10,7 @@ spec:
     This application provides functionality relating to authentication, authorization, and accounting.
 
     It allows the deployment of users, groups, and AAA policy, performing any alarming as necessary.
-  image: ghcr.io/nokia-eda/apps/aaa:v6.0.1
+  image: ghcr.io/nokia-eda/apps/aaa:v6.0.2
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
   author: nokia
@@ -52,10 +52,10 @@ spec:
         schema: aaa/openapiv3/eda_oas_aaa.eda.nokia.com_nodegroupdeployments.json
         conversionScript: aaa/intents/nodegroupdeployment/conversion_v1.py
         names:
-          plural: nodegroupdeployments
           singular: nodegroupdeployment
           kind: NodeGroupDeployment
           listKind: NodeGroupDeploymentList
+          plural: nodegroupdeployments
     - crd:
         path: aaa/crds/aaa.eda.nokia.com_nodegroups.yaml
         schema: aaa/openapiv3/eda_oas_aaa.eda.nokia.com_nodegroups.json
@@ -115,10 +115,10 @@ spec:
           name: Server Groups
           icon: DatabaseAuthentication
         names:
-          plural: servergroups
           singular: servergroup
           kind: ServerGroup
           listKind: ServerGroupList
+          plural: servergroups
     - script:
         path: aaa/intents/servergroup/servergroup_intent.py
         trigger:
@@ -130,10 +130,10 @@ spec:
         path: aaa/crds/aaa.eda.nokia.com_servergroupstates.yaml
         schema: aaa/openapiv3/eda_oas_aaa.eda.nokia.com_servergroupstates.json
         names:
+          plural: servergroupstates
           singular: servergroupstate
           kind: ServerGroupState
           listKind: ServerGroupStateList
-          plural: servergroupstates
     - script:
         path: aaa/intents/servergroupstate/servergroupstate_intent.py
         trigger:
@@ -149,10 +149,10 @@ spec:
           name: Authentication Policies
           icon: Security
         names:
-          plural: authenticationpolicies
-          singular: authenticationpolicy
           kind: AuthenticationPolicy
           listKind: AuthenticationPolicyList
+          plural: authenticationpolicies
+          singular: authenticationpolicy
     - script:
         path: aaa/intents/authenticationpolicy/authenticationpolicy_intent.py
         trigger:
@@ -194,3 +194,7 @@ spec:
         path: aaa/alarms/pysrc
     - file:
         path: aaa/intents/common/common.py
+    - file:
+        path: routing/
+    - file:
+        path: bootstrap/

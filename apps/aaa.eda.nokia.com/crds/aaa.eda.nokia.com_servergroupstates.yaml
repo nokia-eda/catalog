@@ -43,6 +43,10 @@ spec:
                 items:
                   type: string
                 type: array
+              nodeGroups:
+                items:
+                  type: string
+                type: array
               nodes:
                 items:
                   properties:
@@ -52,6 +56,8 @@ spec:
                       type: string
                   type: object
                 type: array
+              routerKind:
+                type: string
               serverType:
                 type: string
             type: object
