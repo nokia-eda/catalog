@@ -22,10 +22,10 @@ spec:
           icon: CloudUpgrade
         conversionScript: oam/intents/mirror/conversion_v1.py
         names:
-          kind: Mirror
-          listKind: MirrorList
           plural: mirrors
           singular: mirror
+          kind: Mirror
+          listKind: MirrorList
     - crd:
         namespaced: true
         path: oam/crds/oam.eda.nokia.com_mirrorstates.yaml
@@ -81,10 +81,10 @@ spec:
           expose: readWrite
         conversionScript: oam/intents/threshold/conversion_v1.py
         names:
+          plural: thresholds
           singular: threshold
           kind: Threshold
           listKind: ThresholdList
-          plural: thresholds
     - script:
         path: oam/intents/threshold/threshold_intent.py
         type: state
@@ -138,21 +138,21 @@ spec:
         path: oam/api/v1/pysrc
   requirements:
     - appId: services.eda.nokia.com
-      version: v6.0.1
+      version: v6.0.2
     - appId: filters.eda.nokia.com
-      version: v6.0.1
+      version: v6.0.2
     - appId: interfaces.eda.nokia.com
-      version: v6.0.1
+      version: v6.0.2
     - appId: qos.eda.nokia.com
-      version: v6.0.1
+      version: v6.0.2
     - appId: topologies.eda.nokia.com
-      version: v6.0.1
+      version: v6.0.2
   description: |
     This application provides the ping workflow, along with mirroring services for interfaces, subinterfaces and ipfilters.
   gitPathPrefix: /
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   group: oam.eda.nokia.com
-  image: ghcr.io/nokia-eda/apps/oam:v6.0.1
+  image: ghcr.io/nokia-eda/apps/oam:v6.0.2
   supportedCoreVersions:
     - "v5.0"
   supportedEndpoints:
