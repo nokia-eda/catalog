@@ -8,7 +8,7 @@ spec:
   title: Services
   description: |
     This application provides EVPN services for various Network Operating Systems.
-  image: ghcr.io/nokia-eda/apps/services:v6.0.1
+  image: ghcr.io/nokia-eda/apps/services:v6.0.2
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
   author: Nokia
@@ -44,10 +44,10 @@ spec:
           expose: readWrite
         conversionScript: services/intents/vlan/conversion_v2.py
         names:
-          listKind: VLANList
           plural: vlans
           singular: vlan
           kind: VLAN
+          listKind: VLANList
     - crd:
         path: services/crds/services.eda.nokia.com_vlanstates.yaml
         schema: services/openapiv3/eda_oas_services.eda.nokia.com_vlanstates.json
@@ -69,10 +69,10 @@ spec:
           expose: readWrite
         conversionScript: services/intents/virtualnetwork/conversion_v2.py
         names:
-          kind: VirtualNetwork
           listKind: VirtualNetworkList
           plural: virtualnetworks
           singular: virtualnetwork
+          kind: VirtualNetwork
     - crd:
         path: services/crds/services.eda.nokia.com_virtualnetworkstates.yaml
         schema: services/openapiv3/eda_oas_services.eda.nokia.com_virtualnetworkstates.json
@@ -142,10 +142,10 @@ spec:
         api:
           expose: none
         names:
+          listKind: BridgeDomainStateList
           plural: bridgedomainstates
           singular: bridgedomainstate
           kind: BridgeDomainState
-          listKind: BridgeDomainStateList
     - crd:
         path: services/crds/services.eda.nokia.com_bridgedomaindeployments.yaml
         schema: services/openapiv3/eda_oas_services.eda.nokia.com_bridgedomaindeployments.json
@@ -193,10 +193,10 @@ spec:
           expose: readWrite
         conversionScript: services/intents/routedinterface/conversion_v2.py
         names:
-          kind: RoutedInterface
-          listKind: RoutedInterfaceList
           plural: routedinterfaces
           singular: routedinterface
+          kind: RoutedInterface
+          listKind: RoutedInterfaceList
     - crd:
         path: services/crds/services.eda.nokia.com_routedinterfacestates.yaml
         schema: services/openapiv3/eda_oas_services.eda.nokia.com_routedinterfacestates.json
@@ -254,10 +254,10 @@ spec:
           expose: none
         conversionScript: services/intents/stateconfig/conversion_v2.py
         names:
+          singular: stateconfig
           kind: StateConfig
           listKind: StateConfigList
           plural: stateconfigs
-          singular: stateconfig
     - script:
         path: services/intents/stateconfig/stateconfig_intent.py
         type: state
@@ -381,10 +381,10 @@ spec:
         ui:
           name: Edge Ping
         names:
-          kind: EdgePing
-          listKind: EdgePingList
           plural: edgepings
           singular: edgeping
+          kind: EdgePing
+          listKind: EdgePingList
     - cr:
         path: services/alarms/alarms.yaml
     - crd:
@@ -411,10 +411,10 @@ spec:
           name: Bridge Domain Interconnect
           icon: ConnectionLt2P
         names:
-          listKind: BridgeDomainInterconnectList
           plural: bridgedomaininterconnects
           singular: bridgedomaininterconnect
           kind: BridgeDomainInterconnect
+          listKind: BridgeDomainInterconnectList
     - script:
         path: services/intents/bridgedomaininterconnect/config_intent.py
         trigger:
@@ -441,10 +441,10 @@ spec:
         path: services/crds/services.eda.nokia.com_routerinterconnectstates.yaml
         schema: services/openapiv3/eda_oas_services.eda.nokia.com_routerinterconnectstates.json
         names:
-          listKind: RouterInterconnectStateList
           plural: routerinterconnectstates
           singular: routerinterconnectstate
           kind: RouterInterconnectState
+          listKind: RouterInterconnectStateList
     - script:
         path: services/intents/bridgedomaininterconnectstate/state_intent.py
         trigger:
@@ -484,14 +484,14 @@ spec:
         path: services/api/v2/pysrc
   requirements:
     - appId: protocols.eda.nokia.com
-      version: v6.0.1
+      version: v6.0.2
     - appId: routingpolicies.eda.nokia.com
-      version: v6.0.1
+      version: v6.0.2
     - appId: interfaces.eda.nokia.com
-      version: v6.0.1
+      version: v6.0.2
     - appId: qos.eda.nokia.com
-      version: v6.0.1
+      version: v6.0.2
     - appId: security.eda.nokia.com
-      version: v6.0.1
+      version: v6.0.2
     - appId: filters.eda.nokia.com
-      version: v6.0.1
+      version: v6.0.2
