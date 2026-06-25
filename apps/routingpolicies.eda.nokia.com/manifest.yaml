@@ -8,7 +8,7 @@ spec:
   title: Routing Policies
   description: |
     This application provides routing policies for various Network Operating Systems.
-  image: ghcr.io/nokia-eda/apps/routingpolicies:v6.0.1
+  image: ghcr.io/nokia-eda/apps/routingpolicies:v6.0.2
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
   author: Nokia
@@ -81,10 +81,10 @@ spec:
           expose: none
         conversionScript: routingpolicies/intents/prefixsetdeployment/conversion_v1.py
         names:
-          kind: PrefixSetDeployment
-          listKind: PrefixSetDeploymentList
           plural: prefixsetdeployments
           singular: prefixsetdeployment
+          kind: PrefixSetDeployment
+          listKind: PrefixSetDeploymentList
     - crd:
         path: routingpolicies/crds/routingpolicies.eda.nokia.com_communitysets.yaml
         schema: routingpolicies/openapiv3/eda_oas_routingpolicies.eda.nokia.com_communitysets.json
@@ -172,10 +172,10 @@ spec:
           icon: Path
         conversionScript: routingpolicies/intents/aspathset/conversion_v1.py
         names:
-          listKind: ASPathSetList
           plural: aspathsets
           singular: aspathset
           kind: ASPathSet
+          listKind: ASPathSetList
     - crd:
         path: routingpolicies/crds/routingpolicies.eda.nokia.com_aspathsetdeployments.yaml
         schema: routingpolicies/openapiv3/eda_oas_routingpolicies.eda.nokia.com_aspathsetdeployments.json
@@ -198,10 +198,10 @@ spec:
           icon: Tag
         conversionScript: routingpolicies/intents/tagset/conversion_v1.py
         names:
-          kind: TagSet
-          listKind: TagSetList
           plural: tagsets
           singular: tagset
+          kind: TagSet
+          listKind: TagSetList
     - crd:
         api:
           expose: readWrite
