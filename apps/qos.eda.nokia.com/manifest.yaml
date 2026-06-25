@@ -54,10 +54,10 @@ spec:
           icon: PolicyCheck
         conversionScript: qos/intents/policydeployment/conversion_v2.py
         names:
-          plural: policydeployments
-          singular: policydeployment
           kind: PolicyDeployment
           listKind: PolicyDeploymentList
+          plural: policydeployments
+          singular: policydeployment
     - crd:
         api:
           expose: readWrite
@@ -106,10 +106,10 @@ spec:
           icon: Traffic
         conversionScript: qos/intents/queue/conversion_v2.py
         names:
+          plural: queues
           singular: queue
           kind: Queue
           listKind: QueueList
-          plural: queues
     - cr:
         path: qos/resources/fc/af.yaml
     - cr:
@@ -215,7 +215,7 @@ spec:
         path: qos/api/v2/pysrc
   description: |
     This application provides resources relating to QOS for various Network Operating Systems.
-  image: ghcr.io/nokia-eda/apps/qos:v6.0.1
+  image: ghcr.io/nokia-eda/apps/qos:v6.0.2
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
   group: qos.eda.nokia.com
@@ -225,9 +225,9 @@ spec:
   version: v2
   requirements:
     - appId: interfaces.eda.nokia.com
-      version: v6.0.1
+      version: v6.0.2
     - appId: filters.eda.nokia.com
-      version: v6.0.1
+      version: v6.0.2
   supportedEndpoints:
     - "srl:24.10.*"
     - "srl:25.3.*"
