@@ -11,7 +11,7 @@ spec:
   author: nokia
   description: This application provides resources to various management plane entities, such as gRPC, HTTP, FTP and SSH servers.
   group: management.eda.nokia.com
-  image: ghcr.io/nokia-eda/apps/management:v6.0.1
+  image: ghcr.io/nokia-eda/apps/management:v6.0.2
   supportedCoreVersions:
     - "v5.0"
   title: Management
@@ -28,10 +28,10 @@ spec:
           icon: FunctionControlPoint
         conversionScript: management/intents/grpcserver/conversion_v1.py
         names:
-          kind: GRPCServer
-          listKind: GRPCServerList
           plural: grpcservers
           singular: grpcserver
+          kind: GRPCServer
+          listKind: GRPCServerList
     - crd:
         api:
           expose: readWrite
@@ -43,10 +43,10 @@ spec:
           icon: Http
         conversionScript: management/intents/httpserver/conversion_v1.py
         names:
-          plural: httpservers
-          singular: httpserver
           kind: HTTPServer
           listKind: HTTPServerList
+          plural: httpservers
+          singular: httpserver
     - crd:
         api:
           expose: readWrite
@@ -58,10 +58,10 @@ spec:
           icon: FileCopy
         conversionScript: management/intents/ftpserver/conversion_v1.py
         names:
-          kind: FTPServer
-          listKind: FTPServerList
           plural: ftpservers
           singular: ftpserver
+          kind: FTPServer
+          listKind: FTPServerList
     - crd:
         api:
           expose: readWrite
@@ -153,10 +153,10 @@ spec:
         schema: management/openapiv3/eda_oas_management.eda.nokia.com_grpcserverstates.json
         conversionScript: management/intents/grpcserverstate/conversion_v1.py
         names:
-          plural: grpcserverstates
-          singular: grpcserverstate
           kind: GRPCServerState
           listKind: GRPCServerStateList
+          plural: grpcserverstates
+          singular: grpcserverstate
     - script:
         path: management/intents/grpcserverstate/grpcserverstate_intent.py
         trigger:
@@ -164,11 +164,11 @@ spec:
         type: state
   requirements:
     - appId: routing.eda.nokia.com
-      version: v6.0.1
+      version: v6.0.2
     - appId: services.eda.nokia.com
-      version: v6.0.1
+      version: v6.0.2
     - appId: bootstrap.eda.nokia.com
-      version: v6.0.1
+      version: v6.0.2
   dependencies:
     - file:
         path: management/intents
