@@ -7,7 +7,7 @@ spec:
   version: v1alpha1
   title: Gitlab
   description: Creates Gitlab pipelines and issues.
-  image: ghcr.io/nokia-eda/apps/gitlab:v2.0.0
+  image: ghcr.io/nokia-eda/apps/gitlab:v2.0.1
   author: Nokia
   gitPathPrefix: /
   supportedCoreVersions:
@@ -21,6 +21,7 @@ spec:
     categories:
       - "integrations"
     ociSpecVersion: v1.0.0
+    appImageDigest: sha256:45d9fc3ca10503d19828e681b2d2c8cdd3650ef9e7c02d6a0d0980bde364fb67
   components:
     - crd:
         path: gl/config/crd/bases/gitlab.eda.nokia.com_gitlabinstances.yaml
@@ -35,14 +36,14 @@ spec:
           exportPolicy: all
           importPolicy: all
         names:
+          kind: GitlabInstance
           listKind: GitlabInstanceList
           plural: gitlabinstances
           singular: gitlabinstance
-          kind: GitlabInstance
     - crd:
         path: gl/config/crd/bases/gitlab.eda.nokia.com_clustergitlabinstances.yaml
         schema: gl/docs/openapiv3/eda_oas_gitlab.eda.nokia.com_clustergitlabinstances.json
-        namespaced: true
+        namespaced: false
         api:
           expose: readWrite
         ui:
@@ -52,10 +53,10 @@ spec:
           exportPolicy: all
           importPolicy: all
         names:
-          plural: clustergitlabinstances
-          singular: clustergitlabinstance
           kind: ClusterGitlabInstance
           listKind: ClusterGitlabInstanceList
+          plural: clustergitlabinstances
+          singular: clustergitlabinstance
     - crd:
         path: gl/config/crd/bases/gitlab.eda.nokia.com_gitlabpipelines.yaml
         schema: gl/docs/openapiv3/eda_oas_gitlab.eda.nokia.com_gitlabpipelines.json
@@ -69,14 +70,14 @@ spec:
           exportPolicy: all
           importPolicy: all
         names:
-          plural: gitlabpipelines
-          singular: gitlabpipeline
           kind: GitlabPipeline
           listKind: GitlabPipelineList
+          plural: gitlabpipelines
+          singular: gitlabpipeline
     - crd:
         path: gl/config/crd/bases/gitlab.eda.nokia.com_clustergitlabpipelines.yaml
         schema: gl/docs/openapiv3/eda_oas_gitlab.eda.nokia.com_clustergitlabpipelines.json
-        namespaced: true
+        namespaced: false
         api:
           expose: readWrite
         ui:
@@ -103,14 +104,14 @@ spec:
           exportPolicy: all
           importPolicy: all
         names:
-          plural: gitlabissues
-          singular: gitlabissue
           kind: GitlabIssue
           listKind: GitlabIssueList
+          plural: gitlabissues
+          singular: gitlabissue
     - crd:
         path: gl/config/crd/bases/gitlab.eda.nokia.com_clustergitlabissues.yaml
         schema: gl/docs/openapiv3/eda_oas_gitlab.eda.nokia.com_clustergitlabissues.json
-        namespaced: true
+        namespaced: false
         api:
           expose: readWrite
         ui:
@@ -120,10 +121,10 @@ spec:
           exportPolicy: all
           importPolicy: all
         names:
-          plural: clustergitlabissues
-          singular: clustergitlabissue
           kind: ClusterGitlabIssue
           listKind: ClusterGitlabIssueList
+          plural: clustergitlabissues
+          singular: clustergitlabissue
     - crd:
         path: gl/config/crd/bases/gitlab.eda.nokia.com_creategitlabissues.yaml
         schema: gl/docs/openapiv3/eda_oas_gitlab.eda.nokia.com_creategitlabissues.json
@@ -148,10 +149,10 @@ spec:
         ui:
           name: Run Gitlab Pipeline
         names:
-          plural: rungitlabpipelines
-          singular: rungitlabpipeline
           kind: RunGitlabPipeline
           listKind: RunGitlabPipelineList
+          plural: rungitlabpipelines
+          singular: rungitlabpipeline
     - cr:
         path: gl/manifests/webhooks.yaml
     - cr:
