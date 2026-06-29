@@ -7,7 +7,7 @@ spec:
   version: v1alpha1
   title: GitHub
   description: Creates GitHub workflows and issues.
-  image: ghcr.io/nokia-eda/apps/github:v2.0.0
+  image: ghcr.io/nokia-eda/apps/github:v2.0.1
   author: Nokia
   gitPathPrefix: /
   supportedCoreVersions:
@@ -22,6 +22,7 @@ spec:
       - "integrations"
     settings: settings/openapi/eda_oas_github.eda.nokia.com_appsettings.json
     ociSpecVersion: v1.0.0
+    appImageDigest: sha256:0f4807c3e30b28807e70f284abd19206afc2048225b3c2db39a97dd13d69bc57
   components:
     - crd:
         path: gh/config/crd/bases/github.eda.nokia.com_githubinstances.yaml
@@ -36,14 +37,14 @@ spec:
           exportPolicy: all
           importPolicy: all
         names:
-          singular: githubinstance
           kind: GitHubInstance
           listKind: GitHubInstanceList
           plural: githubinstances
+          singular: githubinstance
     - crd:
         path: gh/config/crd/bases/github.eda.nokia.com_clustergithubinstances.yaml
         schema: gh/docs/openapiv3/eda_oas_github.eda.nokia.com_clustergithubinstances.json
-        namespaced: true
+        namespaced: false
         api:
           expose: readWrite
         ui:
@@ -53,10 +54,10 @@ spec:
           exportPolicy: all
           importPolicy: all
         names:
-          plural: clustergithubinstances
-          singular: clustergithubinstance
           kind: ClusterGitHubInstance
           listKind: ClusterGitHubInstanceList
+          plural: clustergithubinstances
+          singular: clustergithubinstance
     - crd:
         path: gh/config/crd/bases/github.eda.nokia.com_githubactions.yaml
         schema: gh/docs/openapiv3/eda_oas_github.eda.nokia.com_githubactions.json
@@ -70,14 +71,14 @@ spec:
           exportPolicy: all
           importPolicy: all
         names:
-          plural: githubactions
-          singular: githubaction
           kind: GitHubAction
           listKind: GitHubActionList
+          plural: githubactions
+          singular: githubaction
     - crd:
         path: gh/config/crd/bases/github.eda.nokia.com_clustergithubactions.yaml
         schema: gh/docs/openapiv3/eda_oas_github.eda.nokia.com_clustergithubactions.json
-        namespaced: true
+        namespaced: false
         api:
           expose: readWrite
         ui:
@@ -104,14 +105,14 @@ spec:
           exportPolicy: all
           importPolicy: all
         names:
+          kind: GitHubIssue
           listKind: GitHubIssueList
           plural: githubissues
           singular: githubissue
-          kind: GitHubIssue
     - crd:
         path: gh/config/crd/bases/github.eda.nokia.com_clustergithubissues.yaml
         schema: gh/docs/openapiv3/eda_oas_github.eda.nokia.com_clustergithubissues.json
-        namespaced: true
+        namespaced: false
         api:
           expose: readWrite
         ui:
@@ -121,10 +122,10 @@ spec:
           exportPolicy: all
           importPolicy: all
         names:
-          plural: clustergithubissues
-          singular: clustergithubissue
           kind: ClusterGitHubIssue
           listKind: ClusterGitHubIssueList
+          plural: clustergithubissues
+          singular: clustergithubissue
     - crd:
         path: gh/config/crd/bases/github.eda.nokia.com_creategithubissues.yaml
         schema: gh/docs/openapiv3/eda_oas_github.eda.nokia.com_creategithubissues.json
@@ -135,10 +136,10 @@ spec:
         ui:
           name: Create Github Issue
         names:
-          plural: creategithubissues
-          singular: creategithubissue
           kind: CreateGithubIssue
           listKind: CreateGithubIssueList
+          plural: creategithubissues
+          singular: creategithubissue
     - crd:
         path: gh/config/crd/bases/github.eda.nokia.com_rungithubworkflows.yaml
         schema: gh/docs/openapiv3/eda_oas_github.eda.nokia.com_rungithubworkflows.json
@@ -149,10 +150,10 @@ spec:
         ui:
           name: Run Github Workflow
         names:
-          plural: rungithubworkflows
-          singular: rungithubworkflow
           kind: RunGithubWorkflow
           listKind: RunGithubWorkflowList
+          plural: rungithubworkflows
+          singular: rungithubworkflow
     - cr:
         path: gh/manifests/webhooks.yaml
     - cr:
