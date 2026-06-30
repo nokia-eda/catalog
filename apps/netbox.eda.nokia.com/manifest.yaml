@@ -7,7 +7,7 @@ spec:
   version: v1alpha1
   title: NetBox
   description: Create EDA allocations from NetBox.
-  image: ghcr.io/nokia-eda/apps/netbox:v4.0.1
+  image: ghcr.io/nokia-eda/apps/netbox:v4.0.2
   author: Nokia
   gitPathPrefix: /
   supportedEndpoints:
@@ -28,6 +28,7 @@ spec:
       - "integrations"
     settings: settings/openapi/eda_oas_netbox.eda.nokia.com_appsettings.json
     ociSpecVersion: v1.0.0
+    appImageDigest: sha256:5c43ec52c88d142e1f9ffd397db5be34088f02fdb320bd0556cb3daa3a00264d
   components:
     - crd:
         path: nb/config/crd/bases/netbox.eda.nokia.com_allocations.yaml
@@ -59,10 +60,10 @@ spec:
           exportPolicy: all
           importPolicy: all
         names:
+          kind: Instance
           listKind: InstanceList
           plural: instances
           singular: instance
-          kind: Instance
     - crd:
         path: nb/config/crd/bases/netbox.eda.nokia.com_applyallocations.yaml
         schema: nb/docs/openapiv3/eda_oas_netbox.eda.nokia.com_applyallocations.json
@@ -73,10 +74,10 @@ spec:
         ui:
           name: Apply Allocation
         names:
-          plural: applyallocations
-          singular: applyallocation
           kind: ApplyAllocation
           listKind: ApplyAllocationList
+          plural: applyallocations
+          singular: applyallocation
     - crd:
         path: nb/config/crd/bases/netbox.eda.nokia.com_applytopologies.yaml
         schema: nb/docs/openapiv3/eda_oas_netbox.eda.nokia.com_applytopologies.json
@@ -87,10 +88,10 @@ spec:
         ui:
           name: Apply Topology
         names:
-          plural: applytopologies
-          singular: applytopology
           kind: ApplyTopology
           listKind: ApplyTopologyList
+          plural: applytopologies
+          singular: applytopology
     - cr:
         path: workflows/applyallocation/apply_allocation_flowdefinition.yaml
     - cr:
@@ -103,7 +104,7 @@ spec:
         path: alarms/alarms.yaml
   requirements:
     - appId: topologies.eda.nokia.com
-      version: v6.0.1
+      version: v6.0.2
   dependencies:
     - container:
         name: netbox-controller
