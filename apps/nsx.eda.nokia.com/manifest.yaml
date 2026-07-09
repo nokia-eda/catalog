@@ -14,7 +14,7 @@ spec:
   group: nsx.eda.nokia.com
   version: v1
   author: Nokia
-  image: ghcr.io/nokia-eda/apps/nsx-plugin:v5.0.1
+  image: ghcr.io/nokia-eda/apps/nsx-plugin:v5.0.2
   supportedCoreVersions:
     - "v4.0.0"
   requirements:
@@ -35,10 +35,10 @@ spec:
           exportPolicy: all
           importPolicy: all
         names:
+          kind: NSXPluginInstance
           listKind: NSXPluginInstanceList
           plural: nsxplugininstances
           singular: nsxplugininstance
-          kind: NSXPluginInstance
     - script:
         path: nsx_plugin/intents/nsxplugininstance/config_intent.py
         trigger:
@@ -55,4 +55,4 @@ spec:
         path: nsx_plugin/api/v1/pysrc
     - container:
         name: nsx-plugin-container
-        image: eda.nokia.com/nokia-eda/eda-connect-nsx-plugin:v5.0.1
+        image: eda.nokia.com/nokia-eda/eda-connect-nsx-plugin:v5.0.2
