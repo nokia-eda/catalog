@@ -8,7 +8,7 @@ spec:
   title: Services
   description: |
     This application provides EVPN services for various Network Operating Systems.
-  image: ghcr.io/nokia-eda/apps/services:v5.0.5
+  image: ghcr.io/nokia-eda/apps/services:v5.0.6
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
   author: Nokia
@@ -41,10 +41,10 @@ spec:
           expose: readWrite
         conversionScript: services/intents/vlan/conversion_v1.py
         names:
-          plural: vlans
           singular: vlan
           kind: VLAN
           listKind: VLANList
+          plural: vlans
     - crd:
         path: services/crds/services.eda.nokia.com_vlanstates.yaml
         schema: services/openapiv3/eda_oas_services.eda.nokia.com_vlanstates.json
@@ -102,10 +102,10 @@ spec:
           expose: none
         conversionScript: services/intents/routerstate/conversion_v1.py
         names:
+          singular: routerstate
           kind: RouterState
           listKind: RouterStateList
           plural: routerstates
-          singular: routerstate
     - crd:
         path: services/crds/services.eda.nokia.com_routerdeployments.yaml
         schema: services/openapiv3/eda_oas_services.eda.nokia.com_routerdeployments.json
@@ -129,10 +129,10 @@ spec:
           expose: readWrite
         conversionScript: services/intents/bridgedomain/conversion_v1.py
         names:
+          plural: bridgedomains
           singular: bridgedomain
           kind: BridgeDomain
           listKind: BridgeDomainList
-          plural: bridgedomains
     - crd:
         path: services/crds/services.eda.nokia.com_bridgedomainstates.yaml
         schema: services/openapiv3/eda_oas_services.eda.nokia.com_bridgedomainstates.json
@@ -140,10 +140,10 @@ spec:
           expose: none
         conversionScript: services/intents/bridgedomainstate/conversion_v1.py
         names:
-          plural: bridgedomainstates
           singular: bridgedomainstate
           kind: BridgeDomainState
           listKind: BridgeDomainStateList
+          plural: bridgedomainstates
     - crd:
         path: services/crds/services.eda.nokia.com_bridgedomaindeployments.yaml
         schema: services/openapiv3/eda_oas_services.eda.nokia.com_bridgedomaindeployments.json
@@ -151,10 +151,10 @@ spec:
           expose: none
         conversionScript: services/intents/bridgedomaindeployment/conversion_v1.py
         names:
-          kind: BridgeDomainDeployment
-          listKind: BridgeDomainDeploymentList
           plural: bridgedomaindeployments
           singular: bridgedomaindeployment
+          kind: BridgeDomainDeployment
+          listKind: BridgeDomainDeploymentList
     - crd:
         path: services/crds/services.eda.nokia.com_bridgeinterfaces.yaml
         schema: services/openapiv3/eda_oas_services.eda.nokia.com_bridgeinterfaces.json
@@ -190,10 +190,10 @@ spec:
           expose: readWrite
         conversionScript: services/intents/routedinterface/conversion_v1.py
         names:
+          listKind: RoutedInterfaceList
           plural: routedinterfaces
           singular: routedinterface
           kind: RoutedInterface
-          listKind: RoutedInterfaceList
     - crd:
         path: services/crds/services.eda.nokia.com_routedinterfacestates.yaml
         schema: services/openapiv3/eda_oas_services.eda.nokia.com_routedinterfacestates.json
@@ -201,10 +201,10 @@ spec:
           expose: none
         conversionScript: services/intents/routedinterfacestate/conversion_v1.py
         names:
-          plural: routedinterfacestates
           singular: routedinterfacestate
           kind: RoutedInterfaceState
           listKind: RoutedInterfaceStateList
+          plural: routedinterfacestates
     - crd:
         path: services/crds/services.eda.nokia.com_irbinterfaces.yaml
         schema: services/openapiv3/eda_oas_services.eda.nokia.com_irbinterfaces.json
@@ -226,10 +226,10 @@ spec:
           expose: none
         conversionScript: services/intents/irbinterfacestate/conversion_v1.py
         names:
-          listKind: IRBInterfaceStateList
           plural: irbinterfacestates
           singular: irbinterfacestate
           kind: IRBInterfaceState
+          listKind: IRBInterfaceStateList
     - crd:
         path: services/crds/services.eda.nokia.com_dhcprelays.yaml
         schema: services/openapiv3/eda_oas_services.eda.nokia.com_dhcprelays.json
@@ -251,10 +251,10 @@ spec:
           expose: none
         conversionScript: services/intents/stateconfig/conversion_v1.py
         names:
+          kind: StateConfig
           listKind: StateConfigList
           plural: stateconfigs
           singular: stateconfig
-          kind: StateConfig
     - script:
         path: services/intents/stateconfig/stateconfig_intent.py
         type: state
@@ -378,10 +378,10 @@ spec:
         ui:
           name: Edge Ping
         names:
-          plural: edgepings
-          singular: edgeping
           kind: EdgePing
           listKind: EdgePingList
+          plural: edgepings
+          singular: edgeping
     - cr:
         path: services/alarms/alarms.yaml
   dependencies:
@@ -413,14 +413,14 @@ spec:
         path: services/alarms/pysrc
   requirements:
     - appId: protocols.eda.nokia.com
-      version: v5.0.5
+      version: v5.0.6
     - appId: routingpolicies.eda.nokia.com
-      version: v5.0.5
+      version: v5.0.6
     - appId: interfaces.eda.nokia.com
-      version: v5.0.5
+      version: v5.0.6
     - appId: qos.eda.nokia.com
-      version: v5.0.5
+      version: v5.0.6
     - appId: security.eda.nokia.com
-      version: v5.0.5
+      version: v5.0.6
     - appId: filters.eda.nokia.com
-      version: v5.0.5
+      version: v5.0.6
