@@ -8,7 +8,7 @@ spec:
   title: Topologies
   description: |
     This application provides physical topology support
-  image: ghcr.io/nokia-eda/apps/topologies:v5.0.5
+  image: ghcr.io/nokia-eda/apps/topologies:v5.0.6
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
   author: Nokia
@@ -38,10 +38,10 @@ spec:
         api:
           expose: none
         names:
-          kind: TopoLinkMonitor
-          listKind: TopoLinkMonitorList
           plural: topolinkmonitors
           singular: topolinkmonitor
+          kind: TopoLinkMonitor
+          listKind: TopoLinkMonitorList
     - crd:
         path: topologies/crds/topologies.eda.nokia.com_topolinkstates.yaml
         schema: topologies/openapiv3/eda_oas_topologies.eda.nokia.com_topolinkstates.json
@@ -74,10 +74,10 @@ spec:
         kubernetes:
           exportPolicy: all
         names:
+          plural: topologygroupings
           singular: topologygrouping
           kind: TopologyGrouping
           listKind: TopologyGroupingList
-          plural: topologygroupings
     - crd:
         path: topologies/crds/topologies.eda.nokia.com_deviationoverlays.yaml
         schema: topologies/openapiv3/eda_oas_topologies.eda.nokia.com_deviationoverlays.json
@@ -191,4 +191,4 @@ spec:
         path: topologies/alarms/pysrc
   requirements:
     - appId: interfaces.eda.nokia.com
-      version: v5.0.5
+      version: v5.0.6
