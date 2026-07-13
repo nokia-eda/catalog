@@ -8,7 +8,7 @@ spec:
   title: AIFabrics
   description: |
     This application provides automation resources relating to datacenter AI fabrics.
-  image: ghcr.io/nokia-eda/apps/aifabrics:v5.0.5
+  image: ghcr.io/nokia-eda/apps/aifabrics:v5.0.6
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
   author: Nokia
@@ -40,20 +40,20 @@ spec:
         api:
           expose: readWrite
         names:
-          kind: Backend
-          listKind: BackendList
           plural: backends
           singular: backend
+          kind: Backend
+          listKind: BackendList
     - crd:
         path: aifabrics/crds/aifabrics.eda.nokia.com_backendstates.yaml
         schema: aifabrics/openapiv3/eda_oas_aifabrics.eda.nokia.com_backendstates.json
         api:
           expose: none
         names:
-          listKind: BackendStateList
           plural: backendstates
           singular: backendstate
           kind: BackendState
+          listKind: BackendStateList
     - script:
         path: aifabrics/intents/backend/backend_intent.py
         type: config
@@ -94,14 +94,14 @@ spec:
         path: interfaces/
   requirements:
     - appId: fabrics.eda.nokia.com
-      version: v5.0.5
+      version: v5.0.6
     - appId: protocols.eda.nokia.com
-      version: v5.0.5
+      version: v5.0.6
     - appId: qos.eda.nokia.com
-      version: v5.0.5
+      version: v5.0.6
     - appId: services.eda.nokia.com
-      version: v5.0.5
+      version: v5.0.6
     - appId: routingpolicies.eda.nokia.com
-      version: v5.0.5
+      version: v5.0.6
     - appId: interfaces.eda.nokia.com
-      version: v5.0.5
+      version: v5.0.6
