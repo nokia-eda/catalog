@@ -29,10 +29,10 @@ spec:
         path: oam/crds/oam.eda.nokia.com_mirrorstates.yaml
         schema: oam/openapiv3/eda_oas_oam.eda.nokia.com_mirrorstates.json
         names:
+          plural: mirrorstates
           singular: mirrorstate
           kind: MirrorState
           listKind: MirrorStateList
-          plural: mirrorstates
     - script:
         path: oam/intents/mirror/mirror_intent.py
         trigger:
@@ -61,10 +61,10 @@ spec:
         ui:
           name: Ping
         names:
-          listKind: PingList
           plural: pings
           singular: ping
           kind: Ping
+          listKind: PingList
     - crd:
         path: oam/crds/oam.eda.nokia.com_thresholds.yaml
         schema: oam/openapiv3/eda_oas_oam.eda.nokia.com_thresholds.json
@@ -74,10 +74,10 @@ spec:
         api:
           expose: readWrite
         names:
+          kind: Threshold
           listKind: ThresholdList
           plural: thresholds
           singular: threshold
-          kind: Threshold
     - script:
         path: oam/intents/threshold/threshold_intent.py
         type: state
@@ -96,10 +96,10 @@ spec:
           matchTags:
             - main
         names:
-          plural: techsupports
           singular: techsupport
           kind: TechSupport
           listKind: TechSupportList
+          plural: techsupports
   dependencies:
     - file:
         path: oam/intents
@@ -125,21 +125,21 @@ spec:
         path: topologies/
   requirements:
     - appId: services.eda.nokia.com
-      version: v5.0.5
+      version: v5.0.6
     - appId: filters.eda.nokia.com
-      version: v5.0.5
+      version: v5.0.6
     - appId: interfaces.eda.nokia.com
-      version: v5.0.5
+      version: v5.0.6
     - appId: qos.eda.nokia.com
-      version: v5.0.5
+      version: v5.0.6
     - appId: topologies.eda.nokia.com
-      version: v5.0.5
+      version: v5.0.6
   description: |
     This application provides the ping workflow, along with mirroring services for interfaces, subinterfaces and ipfilters.
   gitPathPrefix: /
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   group: oam.eda.nokia.com
-  image: ghcr.io/nokia-eda/apps/oam:v5.0.5
+  image: ghcr.io/nokia-eda/apps/oam:v5.0.6
   supportedCoreVersions:
     - "v4.0"
   supportedEndpoints:
