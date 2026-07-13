@@ -29,20 +29,20 @@ spec:
         path: components/crds/components.eda.nokia.com_monitorstates.yaml
         schema: components/openapiv3/eda_oas_components.eda.nokia.com_monitorstates.json
         names:
-          listKind: MonitorStateList
           plural: monitorstates
           singular: monitorstate
           kind: MonitorState
+          listKind: MonitorStateList
     - crd:
         api:
           expose: none
         path: components/crds/components.eda.nokia.com_monitoraggregatestates.yaml
         schema: components/openapiv3/eda_oas_components.eda.nokia.com_monitoraggregatestates.json
         names:
-          listKind: MonitorAggregateStateList
           plural: monitoraggregatestates
           singular: monitoraggregatestate
           kind: MonitorAggregateState
+          listKind: MonitorAggregateStateList
     - script:
         path: components/intents/monitor/monitor_intent.py
         type: config
@@ -63,10 +63,10 @@ spec:
         path: components/crds/components.eda.nokia.com_cpuoverlays.yaml
         schema: components/openapiv3/eda_oas_components.eda.nokia.com_cpuoverlays.json
         names:
-          plural: cpuoverlays
-          singular: cpuoverlay
           kind: CPUOverlay
           listKind: CPUOverlayList
+          plural: cpuoverlays
+          singular: cpuoverlay
     - crd:
         namespaced: false
         path: components/crds/components.eda.nokia.com_memoryoverlays.yaml
@@ -130,10 +130,10 @@ spec:
         path: components/crds/components.eda.nokia.com_discoveryaggregatestates.yaml
         schema: components/openapiv3/eda_oas_components.eda.nokia.com_discoveryaggregatestates.json
         names:
+          kind: DiscoveryAggregateState
           listKind: DiscoveryAggregateStateList
           plural: discoveryaggregatestates
           singular: discoveryaggregatestate
-          kind: DiscoveryAggregateState
     - crd:
         api:
           expose: read
@@ -200,10 +200,10 @@ spec:
           category: Components
           name: Chassis
         names:
-          kind: Chassis
-          listKind: ChassisList
           plural: chassis
           singular: chassis
+          kind: Chassis
+          listKind: ChassisList
     - crd:
         api:
           expose: read
@@ -214,10 +214,10 @@ spec:
           category: Components
           name: Control Modules
         names:
-          plural: controlmodules
-          singular: controlmodule
           kind: ControlModule
           listKind: ControlModuleList
+          plural: controlmodules
+          singular: controlmodule
     - crd:
         api:
           expose: read
@@ -256,10 +256,10 @@ spec:
           category: Components
           name: Power Supplies
         names:
+          listKind: PowerSupplyList
           plural: powersupplies
           singular: powersupply
           kind: PowerSupply
-          listKind: PowerSupplyList
     - crd:
         api:
           expose: read
@@ -270,10 +270,10 @@ spec:
           category: Components
           name: Fans
         names:
-          plural: fans
           singular: fan
           kind: Fan
           listKind: FanList
+          plural: fans
     - cr:
         path: components/alarms/alarms.yaml
   dependencies:
@@ -304,7 +304,7 @@ spec:
   gitPathPrefix: /
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   group: components.eda.nokia.com
-  image: ghcr.io/nokia-eda/apps/components:v5.0.5
+  image: ghcr.io/nokia-eda/apps/components:v5.0.6
   supportedCoreVersions:
     - "v4.0"
   supportedEndpoints:
