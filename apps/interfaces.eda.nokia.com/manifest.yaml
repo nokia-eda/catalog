@@ -10,7 +10,7 @@ spec:
     This application provides interface configuration and state for various Network Operating Systems.
 
     It also supports alarming driven by interface operational state and the population of a normalized table to support queries across supported endpoints.
-  image: ghcr.io/nokia-eda/apps/interfaces:v5.0.5
+  image: ghcr.io/nokia-eda/apps/interfaces:v5.0.6
   author: Nokia
   gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
   gitPathPrefix: /
@@ -71,10 +71,10 @@ spec:
           expose: none
           # no ui section means do not present in the UI
         names:
-          plural: interfacestates
           singular: interfacestate
           kind: InterfaceState
           listKind: InterfaceStateList
+          plural: interfacestates
     - script:
         path: interfaces/intents/breakout/breakout_intent.py
         type: config
