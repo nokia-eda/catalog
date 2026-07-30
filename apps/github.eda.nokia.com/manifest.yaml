@@ -35,10 +35,10 @@ spec:
           exportPolicy: all
           importPolicy: all
         names:
-          listKind: GitHubInstanceList
           plural: githubinstances
           singular: githubinstance
           kind: GitHubInstance
+          listKind: GitHubInstanceList
     - crd:
         path: gh/config/crd/bases/github.eda.nokia.com_clustergithubinstances.yaml
         schema: gh/docs/openapiv3/eda_oas_github.eda.nokia.com_clustergithubinstances.json
@@ -52,10 +52,10 @@ spec:
           exportPolicy: all
           importPolicy: all
         names:
-          listKind: ClusterGitHubInstanceList
           plural: clustergithubinstances
           singular: clustergithubinstance
           kind: ClusterGitHubInstance
+          listKind: ClusterGitHubInstanceList
     - crd:
         path: gh/config/crd/bases/github.eda.nokia.com_githubactions.yaml
         schema: gh/docs/openapiv3/eda_oas_github.eda.nokia.com_githubactions.json
@@ -120,10 +120,10 @@ spec:
           exportPolicy: all
           importPolicy: all
         names:
+          listKind: ClusterGitHubIssueList
           plural: clustergithubissues
           singular: clustergithubissue
           kind: ClusterGitHubIssue
-          listKind: ClusterGitHubIssueList
     - crd:
         path: gh/config/crd/bases/github.eda.nokia.com_creategithubissues.yaml
         schema: gh/docs/openapiv3/eda_oas_github.eda.nokia.com_creategithubissues.json
