@@ -21,14 +21,13 @@ spec:
   appInfo:
     readme: README.md
     documentation: DOCUMENTATION.md
+    settings: settings/openapi/eda_oas_netbox.eda.nokia.com_appsettings.json
     license: LICENSE
     screenshots:
       - nb/assets/netbox-logo.png
     categories:
       - "integrations"
-    settings: settings/openapi/eda_oas_netbox.eda.nokia.com_appsettings.json
     ociSpecVersion: v1.0.0
-    appImageDigest: sha256:5c43ec52c88d142e1f9ffd397db5be34088f02fdb320bd0556cb3daa3a00264d
   components:
     - crd:
         path: nb/config/crd/bases/netbox.eda.nokia.com_allocations.yaml
@@ -43,10 +42,10 @@ spec:
           exportPolicy: all
           importPolicy: all
         names:
-          kind: Allocation
-          listKind: AllocationList
           plural: allocations
           singular: allocation
+          kind: Allocation
+          listKind: AllocationList
     - crd:
         path: nb/config/crd/bases/netbox.eda.nokia.com_instances.yaml
         schema: nb/docs/openapiv3/eda_oas_netbox.eda.nokia.com_instances.json
@@ -60,10 +59,10 @@ spec:
           exportPolicy: all
           importPolicy: all
         names:
-          kind: Instance
-          listKind: InstanceList
           plural: instances
           singular: instance
+          kind: Instance
+          listKind: InstanceList
     - crd:
         path: nb/config/crd/bases/netbox.eda.nokia.com_applyallocations.yaml
         schema: nb/docs/openapiv3/eda_oas_netbox.eda.nokia.com_applyallocations.json
@@ -88,10 +87,10 @@ spec:
         ui:
           name: Apply Topology
         names:
-          kind: ApplyTopology
-          listKind: ApplyTopologyList
           plural: applytopologies
           singular: applytopology
+          kind: ApplyTopology
+          listKind: ApplyTopologyList
     - cr:
         path: workflows/applyallocation/apply_allocation_flowdefinition.yaml
     - cr:
