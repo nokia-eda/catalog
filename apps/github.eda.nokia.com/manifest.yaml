@@ -15,6 +15,7 @@ spec:
   appInfo:
     readme: README.md
     documentation: DOCUMENTATION.md
+    settings: settings/openapi/eda_oas_github.eda.nokia.com_appsettings.json
     license: LICENSE
     screenshots:
       - gh/assets/github-logo.png
@@ -35,10 +36,10 @@ spec:
           exportPolicy: all
           importPolicy: all
         names:
-          plural: githubinstances
           singular: githubinstance
           kind: GitHubInstance
           listKind: GitHubInstanceList
+          plural: githubinstances
     - crd:
         path: gh/config/crd/bases/github.eda.nokia.com_clustergithubinstances.yaml
         schema: gh/docs/openapiv3/eda_oas_github.eda.nokia.com_clustergithubinstances.json
@@ -69,10 +70,10 @@ spec:
           exportPolicy: all
           importPolicy: all
         names:
-          plural: githubactions
-          singular: githubaction
           kind: GitHubAction
           listKind: GitHubActionList
+          plural: githubactions
+          singular: githubaction
     - crd:
         path: gh/config/crd/bases/github.eda.nokia.com_clustergithubactions.yaml
         schema: gh/docs/openapiv3/eda_oas_github.eda.nokia.com_clustergithubactions.json
@@ -103,10 +104,10 @@ spec:
           exportPolicy: all
           importPolicy: all
         names:
-          plural: githubissues
-          singular: githubissue
           kind: GitHubIssue
           listKind: GitHubIssueList
+          plural: githubissues
+          singular: githubissue
     - crd:
         path: gh/config/crd/bases/github.eda.nokia.com_clustergithubissues.yaml
         schema: gh/docs/openapiv3/eda_oas_github.eda.nokia.com_clustergithubissues.json
@@ -134,10 +135,10 @@ spec:
         ui:
           name: Create Github Issue
         names:
-          listKind: CreateGithubIssueList
           plural: creategithubissues
           singular: creategithubissue
           kind: CreateGithubIssue
+          listKind: CreateGithubIssueList
     - crd:
         path: gh/config/crd/bases/github.eda.nokia.com_rungithubworkflows.yaml
         schema: gh/docs/openapiv3/eda_oas_github.eda.nokia.com_rungithubworkflows.json
