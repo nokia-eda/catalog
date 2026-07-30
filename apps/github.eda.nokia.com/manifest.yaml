@@ -20,9 +20,7 @@ spec:
       - gh/assets/github-logo.png
     categories:
       - "integrations"
-    settings: settings/openapi/eda_oas_github.eda.nokia.com_appsettings.json
     ociSpecVersion: v1.0.0
-    appImageDigest: sha256:0f4807c3e30b28807e70f284abd19206afc2048225b3c2db39a97dd13d69bc57
   components:
     - crd:
         path: gh/config/crd/bases/github.eda.nokia.com_githubinstances.yaml
@@ -37,10 +35,10 @@ spec:
           exportPolicy: all
           importPolicy: all
         names:
-          kind: GitHubInstance
           listKind: GitHubInstanceList
           plural: githubinstances
           singular: githubinstance
+          kind: GitHubInstance
     - crd:
         path: gh/config/crd/bases/github.eda.nokia.com_clustergithubinstances.yaml
         schema: gh/docs/openapiv3/eda_oas_github.eda.nokia.com_clustergithubinstances.json
@@ -54,10 +52,10 @@ spec:
           exportPolicy: all
           importPolicy: all
         names:
-          kind: ClusterGitHubInstance
           listKind: ClusterGitHubInstanceList
           plural: clustergithubinstances
           singular: clustergithubinstance
+          kind: ClusterGitHubInstance
     - crd:
         path: gh/config/crd/bases/github.eda.nokia.com_githubactions.yaml
         schema: gh/docs/openapiv3/eda_oas_github.eda.nokia.com_githubactions.json
@@ -71,10 +69,10 @@ spec:
           exportPolicy: all
           importPolicy: all
         names:
-          kind: GitHubAction
-          listKind: GitHubActionList
           plural: githubactions
           singular: githubaction
+          kind: GitHubAction
+          listKind: GitHubActionList
     - crd:
         path: gh/config/crd/bases/github.eda.nokia.com_clustergithubactions.yaml
         schema: gh/docs/openapiv3/eda_oas_github.eda.nokia.com_clustergithubactions.json
@@ -88,10 +86,10 @@ spec:
           exportPolicy: all
           importPolicy: all
         names:
-          kind: ClusterGitHubAction
-          listKind: ClusterGitHubActionList
           plural: clustergithubactions
           singular: clustergithubaction
+          kind: ClusterGitHubAction
+          listKind: ClusterGitHubActionList
     - crd:
         path: gh/config/crd/bases/github.eda.nokia.com_githubissues.yaml
         schema: gh/docs/openapiv3/eda_oas_github.eda.nokia.com_githubissues.json
@@ -105,10 +103,10 @@ spec:
           exportPolicy: all
           importPolicy: all
         names:
-          kind: GitHubIssue
-          listKind: GitHubIssueList
           plural: githubissues
           singular: githubissue
+          kind: GitHubIssue
+          listKind: GitHubIssueList
     - crd:
         path: gh/config/crd/bases/github.eda.nokia.com_clustergithubissues.yaml
         schema: gh/docs/openapiv3/eda_oas_github.eda.nokia.com_clustergithubissues.json
@@ -122,10 +120,10 @@ spec:
           exportPolicy: all
           importPolicy: all
         names:
-          kind: ClusterGitHubIssue
-          listKind: ClusterGitHubIssueList
           plural: clustergithubissues
           singular: clustergithubissue
+          kind: ClusterGitHubIssue
+          listKind: ClusterGitHubIssueList
     - crd:
         path: gh/config/crd/bases/github.eda.nokia.com_creategithubissues.yaml
         schema: gh/docs/openapiv3/eda_oas_github.eda.nokia.com_creategithubissues.json
@@ -136,10 +134,10 @@ spec:
         ui:
           name: Create Github Issue
         names:
-          kind: CreateGithubIssue
           listKind: CreateGithubIssueList
           plural: creategithubissues
           singular: creategithubissue
+          kind: CreateGithubIssue
     - crd:
         path: gh/config/crd/bases/github.eda.nokia.com_rungithubworkflows.yaml
         schema: gh/docs/openapiv3/eda_oas_github.eda.nokia.com_rungithubworkflows.json
@@ -150,10 +148,10 @@ spec:
         ui:
           name: Run Github Workflow
         names:
-          kind: RunGithubWorkflow
-          listKind: RunGithubWorkflowList
           plural: rungithubworkflows
           singular: rungithubworkflow
+          kind: RunGithubWorkflow
+          listKind: RunGithubWorkflowList
     - cr:
         path: gh/manifests/webhooks.yaml
     - cr:
