@@ -57,6 +57,28 @@ spec:
               instanceName:
                 description: Netbox instance reference
                 type: string
+              netboxClientTimeoutMinutes:
+                default: 5
+                description: |-
+                  NetboxClientTimeoutMinutes is the HTTP client timeout in minutes for calls to
+                  the netbox controller — the createNetTopology POST (which synchronously fetches
+                  from external NetBox and builds the topology payload) and the cleanup DELETE.
+                  Defaults to 5 minutes. Bounded by the same 24-hour job TTL ceiling.
+                format: int32
+                maximum: 1440
+                minimum: 1
+                type: integer
+              networkTopologyTimeoutMinutes:
+                default: 5
+                description: |-
+                  NetworkTopologyTimeoutMinutes is the maximum time in minutes to wait for the
+                  NetworkTopology workflow to reach Success or Failed. Defaults to 5 minutes.
+                  The platform flow engine's 24-hour job TTL is the effective ceiling; values
+                  above 1440 are rejected.
+                format: int32
+                maximum: 1440
+                minimum: 1
+                type: integer
               siteName:
                 description: |-
                   Site name to sync Devices and Cables from.
